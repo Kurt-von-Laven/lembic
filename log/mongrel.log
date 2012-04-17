@@ -1,0 +1,38 @@
+** Daemonized, any open files are closed.  Look at log/mongrel.pid and log/mongrel.log for info.
+** Starting Mongrel listening at 0.0.0.0:12009
+** Starting Rails with development environment...
+/home2/carbonli/rails_apps/lembic/config/environment.rb:45: warning: already initialized constant RAILS_ENV
+NOTE: SourceIndex.new(hash) is deprecated; From /usr/lib64/ruby/gems/1.8/gems/rails-2.3.11/lib/rails/vendor_gem_source_index.rb:100:in `new'.
+** Rails loaded.
+** Loading any Rails specific GemPlugins
+NOTE: Gem::SourceIndex.from_installed_gems is deprecated with no replacement. It will be removed on or after 2011-10-01.
+Gem::SourceIndex.from_installed_gems called from /usr/lib64/ruby/gems/1.8/gems/gem_plugin-0.2.3/lib/gem_plugin.rb:109
+.
+NOTE: from_installed_gems(arg) is deprecated. From /usr/lib64/ruby/site_ruby/1.8/rubygems/deprecate.rb:62:in `send'
+NOTE: Gem::SourceIndex.from_gems_in is deprecated with no replacement. It will be removed on or after 2011-10-01.
+Gem::SourceIndex.from_gems_in called from /usr/lib64/ruby/site_ruby/1.8/rubygems/source_index.rb:50
+.
+** Signals ready.  TERM => stop.  USR2 => restart.  INT => stop (no restart).
+** Rails signals registered.  HUP => reload (without restart).  It might not work well.
+** Mongrel 1.1.5 available at 0.0.0.0:12009
+** Writing PID file to log/mongrel.pid
+** TERM signal received.
+** Daemonized, any open files are closed.  Look at log/mongrel.pid and log/mongrel.log for info.
+** Starting Mongrel listening at 0.0.0.0:12009
+** Starting Rails with development environment...
+/home2/carbonli/rails_apps/lembic/config/environment.rb:45: warning: already initialized constant RAILS_ENV
+NOTE: SourceIndex.new(hash) is deprecated; From /usr/lib64/ruby/gems/1.8/gems/rails-2.3.11/lib/rails/vendor_gem_source_index.rb:100:in `new'.
+** Rails loaded.
+** Loading any Rails specific GemPlugins
+NOTE: Gem::SourceIndex.from_installed_gems is deprecated with no replacement. It will be removed on or after 2011-10-01.
+Gem::SourceIndex.from_installed_gems called from /usr/lib64/ruby/gems/1.8/gems/gem_plugin-0.2.3/lib/gem_plugin.rb:109
+.
+NOTE: from_installed_gems(arg) is deprecated. From /usr/lib64/ruby/site_ruby/1.8/rubygems/deprecate.rb:62:in `send'
+NOTE: Gem::SourceIndex.from_gems_in is deprecated with no replacement. It will be removed on or after 2011-10-01.
+Gem::SourceIndex.from_gems_in called from /usr/lib64/ruby/site_ruby/1.8/rubygems/source_index.rb:50
+.
+** Signals ready.  TERM => stop.  USR2 => restart.  INT => stop (no restart).
+** Rails signals registered.  HUP => reload (without restart).  It might not work well.
+** Mongrel 1.1.5 available at 0.0.0.0:12009
+** Writing PID file to log/mongrel.pid
+** TERM signal received.

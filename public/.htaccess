@@ -1,5 +1,0 @@
-Options -MultiViews
-PassengerResolveSymlinksInDocumentRoot on
-RailsEnv development
-RailsBaseURI /
-SetEnv GEM_HOME /home2/carbonli/ruby/gems

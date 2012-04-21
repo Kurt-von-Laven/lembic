@@ -1,4 +1,5 @@
 class PagesController < ApplicationController
-  def home
+  def home	
+	@variables = Variable.find(:all)
   end
 end

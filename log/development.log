@@ -231,3 +231,34 @@ Served asset /application.css - 304 Not Modified (2ms)
 
 Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-04-20 19:27:12 -0700
 Served asset /jquery.js - 304 Not Modified (2ms)
+
+
+Started GET "/pages/home" for 127.0.0.1 at 2012-04-20 19:41:43 -0700
+Processing by PagesController#home as HTML
+  [1m[36mVariable Load (0.4ms)[0m  [1mSELECT `variables`.* FROM `variables` [0m
+  Rendered pages/home.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 121ms (Views: 22.7ms | ActiveRecord: 24.7ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-04-20 19:41:43 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/pages.css?body=1" for 127.0.0.1 at 2012-04-20 19:41:43 -0700
+Served asset /pages.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-04-20 19:41:43 -0700
+Served asset /application.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-04-20 19:41:43 -0700
+Served asset /jquery.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/pages.js?body=1" for 127.0.0.1 at 2012-04-20 19:41:43 -0700
+Served asset /pages.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-04-20 19:41:43 -0700
+Served asset /application.js - 304 Not Modified (5ms)

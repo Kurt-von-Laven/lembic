@@ -1,2 +1,19 @@
 <h1>Pages#home</h1>
+
 <p>Find me in app/views/pages/home.html.erb</p>
+
+<table>
+<tr>
+<th>Variable</th>
+<th>Value</th>
+</tr>
+
+<% for variable in @variables %>
+<tr>
+<td><%= variable.name %></td>
+<td><%= variable.value %></td>
+</tr>
+
+<% end %>
+</table>
+

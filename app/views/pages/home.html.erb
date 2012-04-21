@@ -2,6 +2,18 @@
 
 <p>Find me in app/views/pages/home.html.erb</p>
 
+<%= form_for(:var) do |f| %>
+	<%= f.label :name %>
+	<%= f.text_field :name %>
+	
+	<%= f.label :value %>
+	<%= f.text_field :value %>
+
+	<%= f.submit "Create my variable", class: "btn btn-large btn-primary" %>
+<% end %>
+
+
+<h1> Current Variables </h1>
 <table>
 <tr>
 <th>Variable</th>

@@ -1,7 +1,9 @@
 Lembic::Application.routes.draw do
-  get "pages/home"
+  get "pages/home" => "pages#home"
 
-  get "page/new"
+  get "page/new" => "pages#new"
+
+	post "pages/home"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

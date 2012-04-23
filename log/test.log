@@ -1,0 +1,24 @@
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+Processing by PagesController#home as HTML
+Mysql2::Error: Table 'lembic_test.variables' doesn't exist: SHOW FULL FIELDS FROM `variables`
+Completed 500 Internal Server Error in 21ms
+  [1m[35m (0.3ms)[0m  ROLLBACK
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+Processing by PagesController#home as HTML
+Mysql2::Error: Table 'lembic_test.variables' doesn't exist: SHOW FULL FIELDS FROM `variables`
+Completed 500 Internal Server Error in 4ms
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+Processing by PagesController#home as HTML
+Mysql2::Error: Table 'lembic_test.variables' doesn't exist: SHOW FULL FIELDS FROM `variables`
+Completed 500 Internal Server Error in 4ms
+  [1m[35m (0.3ms)[0m  ROLLBACK
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+Processing by PagesController#home as HTML
+  [1m[35mVariable Load (0.2ms)[0m  SELECT `variables`.* FROM `variables` 
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO `variables` (`name`, `value`) VALUES (NULL, NULL)
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  Rendered pages/home.html.erb within layouts/application (4.0ms)
+Completed 200 OK in 126ms (Views: 110.3ms | ActiveRecord: 3.4ms)
+  [1m[35m (2.5ms)[0m  ROLLBACK

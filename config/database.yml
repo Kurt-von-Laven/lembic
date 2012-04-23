@@ -12,7 +12,7 @@ development:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: test_2
+  database: carbonli_lembic_development
   pool: 5
   username: root
   password:

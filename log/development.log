@@ -1083,3 +1083,317 @@ Served asset /application.js - 304 Not Modified (0ms)
 
 Started GET "/assets/pages.js?body=1" for 127.0.0.1 at 2012-04-20 20:34:25 -0700
 Served asset /pages.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/rails.png" for 127.0.0.1 at 2012-04-22 15:07:10 -0700
+
+Mysql2::Error (Can't connect to local MySQL server through socket '/tmp/mysql.sock' (2)):
+  mysql2 (0.3.11) lib/mysql2/client.rb:44:in `connect'
+  mysql2 (0.3.11) lib/mysql2/client.rb:44:in `initialize'
+  activerecord (3.2.3) lib/active_record/connection_adapters/mysql2_adapter.rb:16:in `new'
+  activerecord (3.2.3) lib/active_record/connection_adapters/mysql2_adapter.rb:16:in `mysql2_connection'
+  activerecord (3.2.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:303:in `new_connection'
+  activerecord (3.2.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:313:in `checkout_new_connection'
+  activerecord (3.2.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:237:in `block (2 levels) in checkout'
+  activerecord (3.2.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:232:in `loop'
+  activerecord (3.2.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:232:in `block in checkout'
+  /Users/rebeccapoulson/.rvm/rubies/ruby-1.9.3-p194/lib/ruby/1.9.1/monitor.rb:211:in `mon_synchronize'
+  activerecord (3.2.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:229:in `checkout'
+  activerecord (3.2.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:95:in `connection'
+  activerecord (3.2.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:398:in `retrieve_connection'
+  activerecord (3.2.3) lib/active_record/connection_adapters/abstract/connection_specification.rb:168:in `retrieve_connection'
+  activerecord (3.2.3) lib/active_record/connection_adapters/abstract/connection_specification.rb:142:in `connection'
+  activerecord (3.2.3) lib/active_record/query_cache.rb:67:in `rescue in call'
+  activerecord (3.2.3) lib/active_record/query_cache.rb:61:in `call'
+  activerecord (3.2.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:467:in `call'
+  actionpack (3.2.3) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+  activesupport (3.2.3) lib/active_support/callbacks.rb:405:in `_run__2933601532314379154__call__1586222042957030242__callbacks'
+  activesupport (3.2.3) lib/active_support/callbacks.rb:405:in `__run_callback'
+  activesupport (3.2.3) lib/active_support/callbacks.rb:385:in `_run_call_callbacks'
+  activesupport (3.2.3) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (3.2.3) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (3.2.3) lib/action_dispatch/middleware/reloader.rb:65:in `call'
+  actionpack (3.2.3) lib/action_dispatch/middleware/remote_ip.rb:31:in `call'
+  actionpack (3.2.3) lib/action_dispatch/middleware/debug_exceptions.rb:16:in `call'
+  actionpack (3.2.3) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.3) lib/rails/rack/logger.rb:26:in `call_app'
+  railties (3.2.3) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.3) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.1) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.1) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.3) lib/action_dispatch/middleware/static.rb:62:in `call'
+  railties (3.2.3) lib/rails/engine.rb:479:in `call'
+  railties (3.2.3) lib/rails/application.rb:220:in `call'
+  rack (1.4.1) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.4.1) lib/rack/handler/webrick.rb:59:in `service'
+  /Users/rebeccapoulson/.rvm/rubies/ruby-1.9.3-p194/lib/ruby/1.9.1/webrick/httpserver.rb:138:in `service'
+  /Users/rebeccapoulson/.rvm/rubies/ruby-1.9.3-p194/lib/ruby/1.9.1/webrick/httpserver.rb:94:in `run'
+  /Users/rebeccapoulson/.rvm/rubies/ruby-1.9.3-p194/lib/ruby/1.9.1/webrick/server.rb:191:in `block in start_thread'
+
+
+  Rendered /Users/rebeccapoulson/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.7ms)
+  Rendered /Users/rebeccapoulson/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (6.7ms)
+  Rendered /Users/rebeccapoulson/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (20.9ms)
+
+
+Started GET "/pages/home" for 127.0.0.1 at 2012-04-22 15:07:16 -0700
+
+Mysql2::Error (Can't connect to local MySQL server through socket '/tmp/mysql.sock' (2)):
+  mysql2 (0.3.11) lib/mysql2/client.rb:44:in `connect'
+  mysql2 (0.3.11) lib/mysql2/client.rb:44:in `initialize'
+  activerecord (3.2.3) lib/active_record/connection_adapters/mysql2_adapter.rb:16:in `new'
+  activerecord (3.2.3) lib/active_record/connection_adapters/mysql2_adapter.rb:16:in `mysql2_connection'
+  activerecord (3.2.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:303:in `new_connection'
+  activerecord (3.2.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:313:in `checkout_new_connection'
+  activerecord (3.2.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:237:in `block (2 levels) in checkout'
+  activerecord (3.2.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:232:in `loop'
+  activerecord (3.2.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:232:in `block in checkout'
+  /Users/rebeccapoulson/.rvm/rubies/ruby-1.9.3-p194/lib/ruby/1.9.1/monitor.rb:211:in `mon_synchronize'
+  activerecord (3.2.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:229:in `checkout'
+  activerecord (3.2.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:95:in `connection'
+  activerecord (3.2.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:398:in `retrieve_connection'
+  activerecord (3.2.3) lib/active_record/connection_adapters/abstract/connection_specification.rb:168:in `retrieve_connection'
+  activerecord (3.2.3) lib/active_record/connection_adapters/abstract/connection_specification.rb:142:in `connection'
+  activerecord (3.2.3) lib/active_record/query_cache.rb:67:in `rescue in call'
+  activerecord (3.2.3) lib/active_record/query_cache.rb:61:in `call'
+  activerecord (3.2.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:467:in `call'
+  actionpack (3.2.3) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+  activesupport (3.2.3) lib/active_support/callbacks.rb:405:in `_run__2933601532314379154__call__1586222042957030242__callbacks'
+  activesupport (3.2.3) lib/active_support/callbacks.rb:405:in `__run_callback'
+  activesupport (3.2.3) lib/active_support/callbacks.rb:385:in `_run_call_callbacks'
+  activesupport (3.2.3) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (3.2.3) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (3.2.3) lib/action_dispatch/middleware/reloader.rb:65:in `call'
+  actionpack (3.2.3) lib/action_dispatch/middleware/remote_ip.rb:31:in `call'
+  actionpack (3.2.3) lib/action_dispatch/middleware/debug_exceptions.rb:16:in `call'
+  actionpack (3.2.3) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.3) lib/rails/rack/logger.rb:26:in `call_app'
+  railties (3.2.3) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.3) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.1) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.1) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.3) lib/action_dispatch/middleware/static.rb:62:in `call'
+  railties (3.2.3) lib/rails/engine.rb:479:in `call'
+  railties (3.2.3) lib/rails/application.rb:220:in `call'
+  rack (1.4.1) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.4.1) lib/rack/handler/webrick.rb:59:in `service'
+  /Users/rebeccapoulson/.rvm/rubies/ruby-1.9.3-p194/lib/ruby/1.9.1/webrick/httpserver.rb:138:in `service'
+  /Users/rebeccapoulson/.rvm/rubies/ruby-1.9.3-p194/lib/ruby/1.9.1/webrick/httpserver.rb:94:in `run'
+  /Users/rebeccapoulson/.rvm/rubies/ruby-1.9.3-p194/lib/ruby/1.9.1/webrick/server.rb:191:in `block in start_thread'
+
+
+  Rendered /Users/rebeccapoulson/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.7ms)
+  Rendered /Users/rebeccapoulson/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (0.7ms)
+  Rendered /Users/rebeccapoulson/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (7.4ms)
+
+
+Started GET "/pages/home" for 127.0.0.1 at 2012-04-22 15:07:40 -0700
+Processing by PagesController#home as HTML
+  [1m[36mVariable Load (0.2ms)[0m  [1mSELECT `variables`.* FROM `variables` [0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO `variables` (`created_at`, `name`, `updated_at`, `value`) VALUES ('2012-04-22 22:07:40', NULL, '2012-04-22 22:07:40', NULL)[0m
+  [1m[35m (0.6ms)[0m  COMMIT
+  Rendered pages/home.html.erb within layouts/application (75.4ms)
+Completed 200 OK in 384ms (Views: 236.0ms | ActiveRecord: 35.9ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-04-22 15:07:40 -0700
+Served asset /application.css - 200 OK (2ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-04-22 15:07:40 -0700
+Served asset /jquery.js - 200 OK (1ms)
+
+
+Started GET "/assets/pages.css?body=1" for 127.0.0.1 at 2012-04-22 15:07:40 -0700
+Served asset /pages.css - 200 OK (2ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-04-22 15:07:40 -0700
+Served asset /jquery_ujs.js - 200 OK (3ms)
+
+
+Started GET "/assets/pages.js?body=1" for 127.0.0.1 at 2012-04-22 15:07:40 -0700
+Served asset /pages.js - 200 OK (1ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-04-22 15:07:40 -0700
+Served asset /application.js - 200 OK (5ms)
+
+
+Started POST "/pages/home" for 127.0.0.1 at 2012-04-22 15:08:40 -0700
+Processing by PagesController#home as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"xEnO6oN8DT+wNDzq2h/rUBZf1YPa15BqJOZx1erVUB0=", "var"=>{"name"=>"fas", "value"=>"sdf"}, "commit"=>"Create my variable"}
+  [1m[36mVariable Load (0.3ms)[0m  [1mSELECT `variables`.* FROM `variables` [0m
+  [1m[35m (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `variables` (`created_at`, `name`, `updated_at`, `value`) VALUES ('2012-04-22 22:08:40', 'fas', '2012-04-22 22:08:40', 'sdf')[0m
+  [1m[35m (0.3ms)[0m  COMMIT
+  Rendered pages/home.html.erb within layouts/application (17.3ms)
+Completed 200 OK in 24ms (Views: 21.6ms | ActiveRecord: 0.8ms)
+
+
+Started POST "/pages/home" for 127.0.0.1 at 2012-04-22 15:08:46 -0700
+Processing by PagesController#home as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"xEnO6oN8DT+wNDzq2h/rUBZf1YPa15BqJOZx1erVUB0=", "var"=>{"name"=>"fasdsf", "value"=>"sdfsdf"}, "commit"=>"Create my variable"}
+  [1m[36mVariable Load (0.3ms)[0m  [1mSELECT `variables`.* FROM `variables` [0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (3.7ms)[0m  [1mINSERT INTO `variables` (`created_at`, `name`, `updated_at`, `value`) VALUES ('2012-04-22 22:08:46', 'fasdsf', '2012-04-22 22:08:46', 'sdfsdf')[0m
+  [1m[35m (0.3ms)[0m  COMMIT
+  Rendered pages/home.html.erb within layouts/application (2.1ms)
+Completed 200 OK in 12ms (Views: 5.8ms | ActiveRecord: 4.4ms)
+
+
+Started POST "/pages/home" for 127.0.0.1 at 2012-04-22 15:08:49 -0700
+Processing by PagesController#home as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"xEnO6oN8DT+wNDzq2h/rUBZf1YPa15BqJOZx1erVUB0=", "var"=>{"name"=>"fasdsf", "value"=>"sdfsdf"}, "commit"=>"Create my variable"}
+  [1m[36mVariable Load (0.3ms)[0m  [1mSELECT `variables`.* FROM `variables` [0m
+  [1m[35m (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `variables` (`created_at`, `name`, `updated_at`, `value`) VALUES ('2012-04-22 22:08:49', 'fasdsf', '2012-04-22 22:08:49', 'sdfsdf')[0m
+  [1m[35m (0.3ms)[0m  COMMIT
+  Rendered pages/home.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 7ms (Views: 4.8ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/pages/home" for 127.0.0.1 at 2012-04-22 15:59:30 -0700
+Processing by PagesController#home as HTML
+  [1m[36mVariable Load (0.2ms)[0m  [1mSELECT `variables`.* FROM `variables` [0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO `variables` (`created_at`, `name`, `updated_at`, `value`) VALUES ('2012-04-22 22:59:30', NULL, '2012-04-22 22:59:30', NULL)[0m
+  [1m[35m (0.5ms)[0m  COMMIT
+  Rendered pages/home.html.erb within layouts/application (7.5ms)
+Completed 200 OK in 79ms (Views: 26.3ms | ActiveRecord: 5.8ms)
+
+
+Started GET "/assets/pages.css?body=1" for 127.0.0.1 at 2012-04-22 15:59:30 -0700
+Served asset /pages.css - 304 Not Modified (4ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-04-22 15:59:30 -0700
+Served asset /application.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-04-22 15:59:30 -0700
+Served asset /jquery.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-04-22 15:59:30 -0700
+Served asset /application.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-04-22 15:59:30 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/pages.js?body=1" for 127.0.0.1 at 2012-04-22 15:59:30 -0700
+Served asset /pages.js - 304 Not Modified (1ms)
+
+
+Started POST "/pages/home" for 127.0.0.1 at 2012-04-22 15:59:38 -0700
+Processing by PagesController#home as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"xEnO6oN8DT+wNDzq2h/rUBZf1YPa15BqJOZx1erVUB0=", "var"=>{"name"=>"sdf", "value"=>"sdf"}, "commit"=>"Create my variable"}
+  [1m[36mVariable Load (0.2ms)[0m  [1mSELECT `variables`.* FROM `variables` [0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `variables` (`created_at`, `name`, `updated_at`, `value`) VALUES ('2012-04-22 22:59:38', 'sdf', '2012-04-22 22:59:38', 'sdf')[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+  Rendered pages/home.html.erb within layouts/application (1.6ms)
+Completed 200 OK in 8ms (Views: 5.1ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-04-22 15:59:38 -0700
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/pages.css?body=1" for 127.0.0.1 at 2012-04-22 15:59:38 -0700
+Served asset /pages.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-04-22 15:59:38 -0700
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/pages.js?body=1" for 127.0.0.1 at 2012-04-22 15:59:38 -0700
+Served asset /pages.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-04-22 15:59:38 -0700
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-04-22 15:59:38 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started POST "/pages/home" for 127.0.0.1 at 2012-04-22 15:59:39 -0700
+Processing by PagesController#home as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"xEnO6oN8DT+wNDzq2h/rUBZf1YPa15BqJOZx1erVUB0=", "var"=>{"name"=>"sdf", "value"=>"sdf"}, "commit"=>"Create my variable"}
+  [1m[36mVariable Load (0.2ms)[0m  [1mSELECT `variables`.* FROM `variables` [0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `variables` (`created_at`, `name`, `updated_at`, `value`) VALUES ('2012-04-22 22:59:39', 'sdf', '2012-04-22 22:59:39', 'sdf')[0m
+  [1m[35m (0.3ms)[0m  COMMIT
+  Rendered pages/home.html.erb within layouts/application (18.1ms)
+Completed 200 OK in 25ms (Views: 21.8ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-04-22 15:59:39 -0700
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-04-22 15:59:39 -0700
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/pages.css?body=1" for 127.0.0.1 at 2012-04-22 15:59:39 -0700
+Served asset /pages.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-04-22 15:59:39 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/pages.js?body=1" for 127.0.0.1 at 2012-04-22 15:59:39 -0700
+Served asset /pages.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-04-22 15:59:39 -0700
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started POST "/pages/home" for 127.0.0.1 at 2012-04-22 15:59:44 -0700
+Processing by PagesController#home as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"xEnO6oN8DT+wNDzq2h/rUBZf1YPa15BqJOZx1erVUB0=", "var"=>{"name"=>"sdf", "value"=>"sdf"}, "commit"=>"Create my variable"}
+  [1m[36mVariable Load (0.2ms)[0m  [1mSELECT `variables`.* FROM `variables` [0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `variables` (`created_at`, `name`, `updated_at`, `value`) VALUES ('2012-04-22 22:59:44', 'sdf', '2012-04-22 22:59:44', 'sdf')[0m
+  [1m[35m (0.3ms)[0m  COMMIT
+  Rendered pages/home.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 8ms (Views: 5.4ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-04-22 15:59:44 -0700
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-04-22 15:59:44 -0700
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-04-22 15:59:44 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-04-22 15:59:44 -0700
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/pages.css?body=1" for 127.0.0.1 at 2012-04-22 15:59:44 -0700
+Served asset /pages.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/pages.js?body=1" for 127.0.0.1 at 2012-04-22 15:59:44 -0700
+Served asset /pages.js - 304 Not Modified (0ms)

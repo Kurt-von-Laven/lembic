@@ -16,7 +16,7 @@ development:
   pool: 5
   username: carbonli_lembic
   password: 931451CA15963A4DC6A438A9394EE12A4FF75BD1
-  socket: /tmp/mysql.sock
+  host: localhost
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -29,7 +29,7 @@ test:
   pool: 5
   username: carbonli_lembic
   password: 931451CA15963A4DC6A438A9394EE12A4FF75BD1
-  socket: /tmp/mysql.sock
+  host: localhost
 
 production:
   adapter: mysql2
@@ -39,4 +39,4 @@ production:
   pool: 5
   username: carbonli_lembic
   password: 931451CA15963A4DC6A438A9394EE12A4FF75BD1
-  socket: /tmp/mysql.sock
+  host: localhost

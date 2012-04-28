@@ -1,6 +1,5 @@
 Lembic::Application.routes.draw do
-	root to: 'pages#home'
-
+	root :to => 'pages#home'
 	post "pages/home"
 
   # The priority is based upon order of creation:

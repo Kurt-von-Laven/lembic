@@ -15,7 +15,7 @@ development:
   database: carbonli_lembic_development
   pool: 5
   username: carbonli_lembic
-  password: 931451CA15963A4DC6A438A9394EE12A4FF75BD1
+  password: ?S$2%{%ouGtX
   host: localhost
   port: 3306
 
@@ -29,7 +29,7 @@ test:
   database: carbonli_lembic_test
   pool: 5
   username: carbonli_lembic
-  password: 931451CA15963A4DC6A438A9394EE12A4FF75BD1
+  password: ?S$2%{%ouGtX
   host: localhost
   port: 3306
 
@@ -40,6 +40,6 @@ production:
   database: carbonli_lembic_production
   pool: 5
   username: carbonli_lembic
-  password: 931451CA15963A4DC6A438A9394EE12A4FF75BD1
+  password: ?S$2%{%ouGtX
   host: localhost
   port: 3306

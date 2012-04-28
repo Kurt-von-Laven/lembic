@@ -17,6 +17,7 @@ development:
   username: carbonli_lembic
   password: 931451CA15963A4DC6A438A9394EE12A4FF75BD1
   host: localhost
+  port: 3306
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -30,6 +31,7 @@ test:
   username: carbonli_lembic
   password: 931451CA15963A4DC6A438A9394EE12A4FF75BD1
   host: localhost
+  port: 3306
 
 production:
   adapter: mysql2
@@ -40,3 +42,4 @@ production:
   username: carbonli_lembic
   password: 931451CA15963A4DC6A438A9394EE12A4FF75BD1
   host: localhost
+  port: 3306

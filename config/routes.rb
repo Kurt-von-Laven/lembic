@@ -1,7 +1,5 @@
 Lembic::Application.routes.draw do
-  get "pages/home" => "pages#home"
-
-  get "page/new" => "pages#new"
+	root to: 'pages#home'
 
 	post "pages/home"
 

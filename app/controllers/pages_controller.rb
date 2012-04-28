@@ -1,8 +1,8 @@
 class PagesController < ApplicationController
-  def home	
-	@variables = Variable.find(:all)
+  def home
 	@var = Variable.new(params[:var])
       @var.save
+	@variables = Variable.find(:all)
 	render 'home'
   end
 end

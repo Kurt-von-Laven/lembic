@@ -2651,3 +2651,42 @@ Served asset /pages.js - 200 OK (4ms)
 
 Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-04-28 21:55:04 -0700
 Served asset /application.js - 200 OK (12ms)
+
+
+Started GET "/" for 127.0.0.1 at 2012-04-29 12:13:28 -0700
+Processing by PagesController#home as HTML
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36mVariable Load (0.5ms)[0m  [1mSELECT `variables`.* FROM `variables` [0m
+  Rendered pages/home.html.erb within layouts/application (14.2ms)
+Compiled pages.css  (118ms)  (pid 4120)
+Compiled application.css  (130ms)  (pid 4120)
+Compiled jquery.js  (3ms)  (pid 4120)
+Compiled jquery_ujs.js  (1ms)  (pid 4120)
+Compiled pages.js  (287ms)  (pid 4120)
+Compiled application.js  (718ms)  (pid 4120)
+Completed 200 OK in 1448ms (Views: 1113.7ms | ActiveRecord: 41.5ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-04-29 12:13:31 -0700
+Served asset /application.css - 200 OK (37ms)
+
+
+Started GET "/assets/pages.css?body=1" for 127.0.0.1 at 2012-04-29 12:13:31 -0700
+Served asset /pages.css - 200 OK (2ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-04-29 12:13:31 -0700
+Served asset /jquery.js - 200 OK (4ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-04-29 12:13:31 -0700
+Served asset /application.js - 200 OK (25ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-04-29 12:13:31 -0700
+Served asset /jquery_ujs.js - 200 OK (3ms)
+
+
+Started GET "/assets/pages.js?body=1" for 127.0.0.1 at 2012-04-29 12:13:31 -0700
+Served asset /pages.js - 200 OK (2ms)

@@ -2651,3 +2651,9 @@ Served asset /pages.js - 200 OK (4ms)
 
 Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-04-28 21:55:04 -0700
 Served asset /application.js - 200 OK (12ms)
+  [1m[36m (20.4ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+Migrating to CreateVariables (20120421020715)
+  [1m[35m (1.9ms)[0m  SELECT `schema_migrations`.`version` FROM `schema_migrations` 
+  [1m[36m (47.5ms)[0m  [1mDROP TABLE `variables`[0m
+  [1m[35m (4.4ms)[0m  CREATE TABLE `variables` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255), `value` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (2.2ms)[0m  [1mSELECT version FROM `schema_migrations`[0m

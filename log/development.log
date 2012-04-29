@@ -2184,3 +2184,170 @@ Migrating to CreateVariables (20120421020715)
   [1m[36m (2.2ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
 Migrating to CreateVariables (20120421020715)
   [1m[35m (0.1ms)[0m  SELECT `schema_migrations`.`version` FROM `schema_migrations` 
+  [1m[36m (153.5ms)[0m  [1mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (178.7ms)[0m  CREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)
+  [1m[36m (0.5ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+Migrating to CreateVariables (20120421020715)
+  [1m[35m (105.6ms)[0m  CREATE TABLE `variables` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255), `value` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (61.9ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20120421020715')[0m
+  [1m[35m (0.4ms)[0m  SELECT `schema_migrations`.`version` FROM `schema_migrations` 
+  [1m[36m (0.4ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+Migrating to CreateVariables (20120421020715)
+  [1m[35m (0.6ms)[0m  SELECT `schema_migrations`.`version` FROM `schema_migrations` 
+
+
+Started GET "/" for 127.0.0.1 at 2012-04-28 17:34:15 -0700
+Processing by PagesController#home as HTML
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (15.8ms)[0m  ROLLBACK
+  [1m[36mVariable Load (0.4ms)[0m  [1mSELECT `variables`.* FROM `variables` [0m
+  Rendered pages/home.html.erb within layouts/application (12.7ms)
+Compiled jquery.js  (38ms)  (pid 25961)
+Compiled jquery_ujs.js  (1ms)  (pid 25961)
+Compiled application.js  (201ms)  (pid 25961)
+Completed 200 OK in 763ms (Views: 498.0ms | ActiveRecord: 23.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-04-28 17:34:17 -0700
+Served asset /application.css - 200 OK (20ms)
+
+
+Started GET "/assets/pages.css?body=1" for 127.0.0.1 at 2012-04-28 17:34:17 -0700
+Served asset /pages.css - 200 OK (5ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-04-28 17:34:17 -0700
+Served asset /jquery_ujs.js - 200 OK (48ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-04-28 17:34:17 -0700
+Served asset /jquery.js - 200 OK (7ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-04-28 17:34:17 -0700
+Served asset /application.js - 200 OK (23ms)
+
+
+Started GET "/assets/pages.js?body=1" for 127.0.0.1 at 2012-04-28 17:34:17 -0700
+Served asset /pages.js - 200 OK (12ms)
+
+
+Started POST "/" for 127.0.0.1 at 2012-04-28 17:34:27 -0700
+Processing by PagesController#home as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ViaV575mXFiXRw6Andzoyy81lUBV5/dK74unkTiDsQU=", "var"=>{"name"=>"that's right", "value"=>"mother fuckers"}, "commit"=>"Create my variable"}
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (15.0ms)[0m  [1mINSERT INTO `variables` (`created_at`, `name`, `updated_at`, `value`) VALUES ('2012-04-29 00:34:27', 'that\'s right', '2012-04-29 00:34:27', 'mother fuckers')[0m
+  [1m[35m (0.7ms)[0m  COMMIT
+  [1m[36mVariable Load (0.4ms)[0m  [1mSELECT `variables`.* FROM `variables` [0m
+  Rendered pages/home.html.erb within layouts/application (4.2ms)
+Completed 200 OK in 98ms (Views: 16.9ms | ActiveRecord: 16.3ms)
+
+
+Started POST "/" for 127.0.0.1 at 2012-04-28 17:34:35 -0700
+Processing by PagesController#home as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ViaV575mXFiXRw6Andzoyy81lUBV5/dK74unkTiDsQU=", "var"=>{"name"=>"it", "value"=>"just works (TM)"}, "commit"=>"Create my variable"}
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `variables` (`created_at`, `name`, `updated_at`, `value`) VALUES ('2012-04-29 00:34:35', 'it', '2012-04-29 00:34:35', 'just works (TM)')[0m
+  [1m[35m (0.6ms)[0m  COMMIT
+  [1m[36mVariable Load (0.4ms)[0m  [1mSELECT `variables`.* FROM `variables` [0m
+  Rendered pages/home.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 18ms (Views: 12.6ms | ActiveRecord: 1.5ms)
+
+
+Started POST "/" for 127.0.0.1 at 2012-04-28 17:34:38 -0700
+Processing by PagesController#home as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ViaV575mXFiXRw6Andzoyy81lUBV5/dK74unkTiDsQU=", "var"=>{"name"=>"it", "value"=>"just works (TM)"}, "commit"=>"Create my variable"}
+  [1m[35m (0.5ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO `variables` (`created_at`, `name`, `updated_at`, `value`) VALUES ('2012-04-29 00:34:38', 'it', '2012-04-29 00:34:38', 'just works (TM)')[0m
+  [1m[35m (1.3ms)[0m  COMMIT
+  [1m[36mVariable Load (0.6ms)[0m  [1mSELECT `variables`.* FROM `variables` [0m
+  Rendered pages/home.html.erb within layouts/application (3.7ms)
+Completed 200 OK in 22ms (Views: 15.7ms | ActiveRecord: 2.8ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-04-28 17:34:39 -0700
+Served asset /application.css - 304 Not Modified (7ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-04-28 17:34:39 -0700
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-04-28 17:34:39 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/pages.css?body=1" for 127.0.0.1 at 2012-04-28 17:34:39 -0700
+Served asset /pages.css - 304 Not Modified (8ms)
+
+
+Started GET "/assets/pages.js?body=1" for 127.0.0.1 at 2012-04-28 17:34:39 -0700
+Served asset /pages.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-04-28 17:34:39 -0700
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2012-04-28 17:34:48 -0700
+Processing by PagesController#home as HTML
+  [1m[35m (0.4ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35mVariable Load (0.4ms)[0m  SELECT `variables`.* FROM `variables` 
+  Rendered pages/home.html.erb within layouts/application (3.5ms)
+Completed 200 OK in 20ms (Views: 13.8ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-04-28 17:34:48 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-04-28 17:34:48 -0700
+Served asset /application.css - 304 Not Modified (13ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-04-28 17:34:48 -0700
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/pages.css?body=1" for 127.0.0.1 at 2012-04-28 17:34:48 -0700
+Served asset /pages.css - 200 OK (1ms)
+
+
+Started GET "/assets/pages.js?body=1" for 127.0.0.1 at 2012-04-28 17:34:48 -0700
+Served asset /pages.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-04-28 17:34:48 -0700
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started POST "/" for 127.0.0.1 at 2012-04-28 17:34:56 -0700
+Processing by PagesController#home as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"of8uFo+5Mt5VYidEhW1FFdYPdNvUyfzOI9vUfYLucaI=", "var"=>{"name"=>"IT'S STILL THERE", "value"=>"BITCHESS!!!!!"}, "commit"=>"Create my variable"}
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO `variables` (`created_at`, `name`, `updated_at`, `value`) VALUES ('2012-04-29 00:34:56', 'IT\'S STILL THERE', '2012-04-29 00:34:56', 'BITCHESS!!!!!')
+  [1m[36m (0.6ms)[0m  [1mCOMMIT[0m
+  [1m[35mVariable Load (0.4ms)[0m  SELECT `variables`.* FROM `variables` 
+  Rendered pages/home.html.erb within layouts/application (4.5ms)
+Completed 200 OK in 24ms (Views: 17.4ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-04-28 17:34:56 -0700
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/pages.js?body=1" for 127.0.0.1 at 2012-04-28 17:34:57 -0700
+Served asset /pages.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-04-28 17:34:57 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-04-28 17:34:57 -0700
+Served asset /application.css - 304 Not Modified (4ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-04-28 17:34:57 -0700
+Served asset /application.js - 304 Not Modified (1ms)

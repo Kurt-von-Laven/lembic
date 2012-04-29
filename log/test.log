@@ -47,3 +47,10 @@ Processing by PagesController#home as HTML
   Rendered pages/home.html.erb within layouts/application (87.4ms)
 Completed 200 OK in 723ms (Views: 161.5ms | ActiveRecord: 228.6ms)
   [1m[36m (8.1ms)[0m  [1mROLLBACK[0m
+  [1m[36m (96.4ms)[0m  [1mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (197.6ms)[0m  CREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)
+  [1m[36m (1.3ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+Migrating to CreateVariables (20120421020715)
+  [1m[35m (77.0ms)[0m  CREATE TABLE `variables` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255), `value` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (9.4ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20120421020715')[0m
+  [1m[35m (4.0ms)[0m  SELECT `schema_migrations`.`version` FROM `schema_migrations` 

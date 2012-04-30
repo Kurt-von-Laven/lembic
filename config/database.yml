@@ -14,10 +14,6 @@ development:
   reconnect: false
   database: ../db/development.sqlite3
   pool: 5
-  username: carbonli_lembic
-  password: ?S$2%{%ouGtX
-  host: localhost
-  port: 3306
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -28,10 +24,6 @@ test:
   reconnect: false
   database: ../db/test.sqlite3
   pool: 5
-  username: carbonli_lembic
-  password: ?S$2%{%ouGtX
-  host: localhost
-  port: 3306
 
 production:
   adapter: sqlite3
@@ -39,7 +31,3 @@ production:
   reconnect: false
   database: ../db/production.sqlite3
   pool: 5
-  username: carbonli_lembic
-  password: ?S$2%{%ouGtX
-  host: localhost
-  port: 3306

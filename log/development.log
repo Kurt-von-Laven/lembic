@@ -3424,3 +3424,70 @@ Migrating to CreateVariables (20120421020715)
   [1m[35m (0.3ms)[0m  select sqlite_version(*)
   [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
   [1m[35m (0.0ms)[0m  PRAGMA index_list("variables")
+
+
+Started GET "/" for 127.0.0.1 at 2012-04-29 22:46:37 -0700
+Processing by PagesController#home as HTML
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36mVariable Load (0.2ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered pages/home.html.erb within layouts/application (13.2ms)
+Compiled application.js  (13ms)  (pid 49916)
+Completed 200 OK in 236ms (Views: 87.2ms | ActiveRecord: 4.5ms)
+
+
+Started GET "/assets/pages.css?body=1" for 127.0.0.1 at 2012-04-29 22:46:38 -0700
+Served asset /pages.css - 304 Not Modified (13ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-04-29 22:46:38 -0700
+Served asset /application.css - 304 Not Modified (13ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-04-29 22:46:38 -0700
+Served asset /jquery.js - 304 Not Modified (5ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-04-29 22:46:38 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/pages.js?body=1" for 127.0.0.1 at 2012-04-29 22:46:38 -0700
+Served asset /pages.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-04-29 22:46:38 -0700
+Served asset /application.js - 304 Not Modified (12ms)
+
+
+Started GET "/" for 127.0.0.1 at 2012-04-29 23:41:56 -0700
+Processing by PagesController#home as HTML
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36mVariable Load (0.3ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered pages/home.html.erb within layouts/application (12.9ms)
+Completed 200 OK in 520ms (Views: 285.5ms | ActiveRecord: 8.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-04-29 23:41:58 -0700
+Served asset /application.css - 200 OK (7ms)
+
+
+Started GET "/assets/pages.css?body=1" for 127.0.0.1 at 2012-04-29 23:41:58 -0700
+Served asset /pages.css - 200 OK (2ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-04-29 23:41:58 -0700
+Served asset /jquery.js - 200 OK (11ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-04-29 23:41:58 -0700
+Served asset /jquery_ujs.js - 200 OK (30ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-04-29 23:41:58 -0700
+Served asset /application.js - 200 OK (8ms)
+
+
+Started GET "/assets/pages.js?body=1" for 127.0.0.1 at 2012-04-29 23:41:58 -0700
+Served asset /pages.js - 200 OK (3ms)

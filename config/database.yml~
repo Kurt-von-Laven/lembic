@@ -12,7 +12,7 @@ development:
   adapter: sqlite3
   encoding: utf8
   reconnect: false
-  database: ../db/development.sqlite3
+  database: db/../../db/development.sqlite3
   pool: 5
   username: carbonli_lembic
   password: ?S$2%{%ouGtX
@@ -26,7 +26,7 @@ test:
   adapter: sqlite3
   encoding: utf8
   reconnect: false
-  database: ../db/test.sqlite3
+  database: db/test.sqlite3
   pool: 5
   username: carbonli_lembic
   password: ?S$2%{%ouGtX
@@ -37,7 +37,7 @@ production:
   adapter: sqlite3
   encoding: utf8
   reconnect: false
-  database: ../db/production.sqlite3
+  database: db/production.sqlite3
   pool: 5
   username: carbonli_lembic
   password: ?S$2%{%ouGtX

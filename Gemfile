@@ -6,6 +6,8 @@ gem 'rails', '3.2.3'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'mysql'
+gem 'sqlite3'
+
 gem 'passenger'
 gem 'bundler'
 gem 'rake'

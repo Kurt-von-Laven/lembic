@@ -5,9 +5,12 @@ gem 'rails', '3.2.3'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
+<<<<<<< HEAD
 gem 'mysql'
 gem 'sqlite3'
 
+=======
+>>>>>>> 8c13fe55fe97aef2f4bd1e4836f00a94bcd7fde1
 gem 'passenger'
 gem 'bundler'
 gem 'rake'

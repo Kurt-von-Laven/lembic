@@ -4,7 +4,11 @@ class Variable < ActiveRecord::Base
   # type is an integer in range X to X, inclusive.  The mapping is as follows:
   #
   #
-	validates_uniqueness_of :name, :scope => :workflow_id
-	validates(:name, presence: true)
-	validates(:type, presence: true)
+  
+  belongs_to :workflow
+  
+  validates_uniqueness_of :name, :scope => :workflow_id
+  validates(:name, presence: true)
+  validates(:type, presence: true)
+  validates_associated :workflow
 end

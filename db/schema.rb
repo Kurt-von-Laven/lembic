@@ -22,4 +22,11 @@ ActiveRecord::Schema.define(:version => 20120501031111) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "variables_editors", :force => true do |t|
+    t.string   "type"
+    t.string   "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
 end

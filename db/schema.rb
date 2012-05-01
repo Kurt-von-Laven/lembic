@@ -11,7 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120501031111) do
+ActiveRecord::Schema.define(:version => 20120501054742) do
+
+  create_table "users", :force => true do |t|
+    t.string   "email",        :null => false
+    t.string   "first_name",   :null => false
+    t.string   "last_name",    :null => false
+    t.string   "organization"
+    t.string   "pwd_hash",     :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
 
   create_table "variables", :force => true do |t|
     t.string   "name",        :limit => 64, :null => false
@@ -31,11 +41,19 @@ ActiveRecord::Schema.define(:version => 20120501031111) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "variables_editors", :force => true do |t|
-    t.string   "type"
-    t.string   "value"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+  create_table "workflows", :force => true do |t|
+    t.string   "name",        :limit => 64, :null => false
+    t.string   "description",               :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  create_table "workflows_users", :force => true do |t|
+    t.integer  "workflow_id", :null => false
+    t.integer  "user_id",     :null => false
+    t.integer  "permissions", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
 end

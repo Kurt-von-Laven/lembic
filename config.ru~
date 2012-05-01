@@ -1,0 +1,9 @@
+# This file is used by Rack-based servers to start the application.
+
+ENV['GEM_HOME'] = "#{ENV['HOME']}/.gems"  
+ENV['GEM_PATH'] = "#{ENV['HOME']}/.gems:"
+require 'rubygems'
+Gem.clear_paths
+
+require ::File.expand_path('../config/environment',  __FILE__)
+run Lembic::Application

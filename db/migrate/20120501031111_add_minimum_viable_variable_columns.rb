@@ -8,7 +8,7 @@ class AddMinimumViableVariableColumns < ActiveRecord::Migration
       t.integer :type, :null => false
       t.boolean :array, :null => false
       t.boolean :const, :null => false
-      t.timestamps, :null => false
+      t.timestamps :null => false
     end
   end
 

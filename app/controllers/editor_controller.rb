@@ -1,8 +1,11 @@
 class EditorController < ApplicationController
   def home
-    @var = Variable.new(params[:var])
-    @var.save
-    @variables = Variable.find(:all)
-    render 'home'
   end
+
+	def variableeditor
+        @new_var = Variable.new(params[:var])
+        @new_var.save
+        @variables = Variable.find(:all)
+        render 'variableeditor'
+	end
 end

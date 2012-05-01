@@ -1,31 +1,4 @@
-<h1>Editor#home</h1>
+<h1> Welcome to Lembic! </h1>
 
-<p>Find me in app/views/editor/home.html.erb</p>
-
-<%= form_for(:var) do |f| %>
-	<%= f.label :name %>
-	<%= f.text_field :name %>
-	
-	<%= f.label :value %>
-	<%= f.text_field :value %>
-
-	<%= f.submit "Create my variable", class: "btn btn-large btn-primary" %>
-<% end %>
-
-
-<h1> Current Variables </h1>
-<table>
-<tr>
-<th>Variable</th>
-<th>Value</th>
-</tr>
-
-<% for variable in @variables %>
-<tr>
-<td><%= variable.name %></td>
-<td><%= variable.value %></td>
-</tr>
-
-<% end %>
-</table>
+<p><%= link_to "Variable Editor", variable_editor_path %></p>
 

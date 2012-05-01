@@ -1,10 +1,10 @@
 <h1> Variable Editor </h1>
 <%= form_for(:new_var) do |f| %>
-  <%= f.check_box_tag(:const) %>
-  <%= f.label_tag(:const, "Is this a constant?") %>
+  <%= check_box_tag(:const) %>
+  <%= label_tag(:const, "Is this a constant?") %>
   
-  <%= f.check_box_tag(:array) %>
-  <%= f.label_tag(:array, "Is this an array?") %>
+  <%= check_box_tag(:array) %>
+  <%= label_tag(:array, "Is this an array?") %>
   
   <%= f.select :type, [['Categorical', 'categorical'],['Integer', 'integer'],['Float', 'real'], ['Date', 'date']] %>
   
@@ -12,9 +12,6 @@
   <%= f.text_field :name %>
   <%= f.label :description %>
   <%= f.text_field :description %>
-  
-  <%= f.label :value %>
-  <%= f.text_field :value %>
   
   <%= f.submit "Create my variable", class: "btn btn-large btn-primary" %>
 <% end %>
@@ -29,7 +26,6 @@
     <th>Type</th>
     <th>Name</th>
     <th>Description</th>
-    <th>Value</th>
   </tr>
 
 
@@ -41,7 +37,6 @@
       <td><%= variable.type %></td>
       <td><%= variable.name %></td>
       <td><%= variable.description %></td>
-      <td><%= variable.value %></td>
     </tr>
   <% end %>
 

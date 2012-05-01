@@ -3735,3 +3735,181 @@ Migrating to AddMinimumViableVariableColumns (20120501031111)
   [1m[36m (0.2ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
   [1m[35m (0.0ms)[0m  PRAGMA index_list("variables")
   [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("variables_editors")[0m
+
+
+Started GET "/variableeditor" for 127.0.0.1 at 2012-04-30 21:38:20 -0700
+Processing by EditorController#variableeditor as HTML
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mVariable Exists (0.3ms)[0m  SELECT 1 FROM "variables" WHERE ("variables"."name" = '' AND "variables"."workflow_id" IS NULL) LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35mVariable Load (0.3ms)[0m  SELECT "variables".* FROM "variables" 
+  Rendered editor/variableeditor.html.erb within layouts/application (50.3ms)
+Completed 500 Internal Server Error in 282ms
+
+ActionView::Template::Error (undefined method `check_box_tag' for #<ActionView::Helpers::FormBuilder:0x4e2fd70>):
+    1: <h1> Variable Editor </h1>
+    2: <%= form_for(:new_var) do |f| %>
+    3:   <%= f.check_box_tag(:const) %>
+    4:   <%= f.label_tag(:const, "Is this a constant?") %>
+    5:   
+    6:   <%= f.check_box_tag(:array) %>
+  app/views/editor/variableeditor.html.erb:3:in `block in _app_views_editor_variableeditor_html_erb___783665691_40948090'
+  app/views/editor/variableeditor.html.erb:2:in `_app_views_editor_variableeditor_html_erb___783665691_40948090'
+  app/controllers/editor_controller.rb:10:in `variableeditor'
+
+
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (47.0ms)
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (2.1ms)
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (69.4ms)
+
+
+Started GET "/variableeditor" for 127.0.0.1 at 2012-04-30 21:39:34 -0700
+Processing by EditorController#variableeditor as HTML
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mVariable Exists (0.2ms)[0m  SELECT 1 FROM "variables" WHERE ("variables"."name" = '' AND "variables"."workflow_id" IS NULL) LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35mVariable Load (0.2ms)[0m  SELECT "variables".* FROM "variables" 
+  Rendered editor/variableeditor.html.erb within layouts/application (35.9ms)
+Completed 500 Internal Server Error in 48ms
+
+ActionView::Template::Error (undefined method `label_tag' for #<ActionView::Helpers::FormBuilder:0x4642d38>):
+    1: <h1> Variable Editor </h1>
+    2: <%= form_for(:new_var) do |f| %>
+    3:   <%= check_box_tag(:const) %>
+    4:   <%= f.label_tag(:const, "Is this a constant?") %>
+    5:   
+    6:   <%= f.check_box_tag(:array) %>
+    7:   <%= f.label_tag(:array, "Is this an array?") %>
+  app/views/editor/variableeditor.html.erb:4:in `block in _app_views_editor_variableeditor_html_erb___783665691_36773380'
+  app/views/editor/variableeditor.html.erb:2:in `_app_views_editor_variableeditor_html_erb___783665691_36773380'
+  app/controllers/editor_controller.rb:10:in `variableeditor'
+
+
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (12.1ms)
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (4.4ms)
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (42.5ms)
+
+
+Started GET "/variableeditor" for 127.0.0.1 at 2012-04-30 21:39:50 -0700
+Processing by EditorController#variableeditor as HTML
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mVariable Exists (0.8ms)[0m  SELECT 1 FROM "variables" WHERE ("variables"."name" = '' AND "variables"."workflow_id" IS NULL) LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35mVariable Load (0.2ms)[0m  SELECT "variables".* FROM "variables" 
+  Rendered editor/variableeditor.html.erb within layouts/application (81.3ms)
+Completed 500 Internal Server Error in 115ms
+
+ActionView::Template::Error (undefined method `check_box_tag' for #<ActionView::Helpers::FormBuilder:0x4e64e30>):
+    3:   <%= check_box_tag(:const) %>
+    4:   <%= label_tag(:const, "Is this a constant?") %>
+    5:   
+    6:   <%= f.check_box_tag(:array) %>
+    7:   <%= f.label_tag(:array, "Is this an array?") %>
+    8:   
+    9:   <%= f.select :type, [['Categorical', 'categorical'],['Integer', 'integer'],['Float', 'real'], ['Date', 'date']] %>
+  app/views/editor/variableeditor.html.erb:6:in `block in _app_views_editor_variableeditor_html_erb___783665691_41084330'
+  app/views/editor/variableeditor.html.erb:2:in `_app_views_editor_variableeditor_html_erb___783665691_41084330'
+  app/controllers/editor_controller.rb:10:in `variableeditor'
+
+
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (10.2ms)
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (2.6ms)
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (36.1ms)
+
+
+Started GET "/variableeditor" for 127.0.0.1 at 2012-04-30 21:40:05 -0700
+Processing by EditorController#variableeditor as HTML
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mVariable Exists (0.2ms)[0m  SELECT 1 FROM "variables" WHERE ("variables"."name" = '' AND "variables"."workflow_id" IS NULL) LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35mVariable Load (0.2ms)[0m  SELECT "variables".* FROM "variables" 
+  Rendered editor/variableeditor.html.erb within layouts/application (83.7ms)
+Completed 500 Internal Server Error in 95ms
+
+ActionView::Template::Error (undefined method `label_tag' for #<ActionView::Helpers::FormBuilder:0x54d25d8>):
+    4:   <%= label_tag(:const, "Is this a constant?") %>
+    5:   
+    6:   <%= check_box_tag(:array) %>
+    7:   <%= f.label_tag(:array, "Is this an array?") %>
+    8:   
+    9:   <%= f.select :type, [['Categorical', 'categorical'],['Integer', 'integer'],['Float', 'real'], ['Date', 'date']] %>
+    10:   
+  app/views/editor/variableeditor.html.erb:7:in `block in _app_views_editor_variableeditor_html_erb___783665691_44451430'
+  app/views/editor/variableeditor.html.erb:2:in `_app_views_editor_variableeditor_html_erb___783665691_44451430'
+  app/controllers/editor_controller.rb:10:in `variableeditor'
+
+
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (11.9ms)
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (2.2ms)
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (33.7ms)
+
+
+Started GET "/variableeditor" for 127.0.0.1 at 2012-04-30 21:40:09 -0700
+Processing by EditorController#variableeditor as HTML
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mVariable Exists (0.3ms)[0m  SELECT 1 FROM "variables" WHERE ("variables"."name" = '' AND "variables"."workflow_id" IS NULL) LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35mVariable Load (0.3ms)[0m  SELECT "variables".* FROM "variables" 
+  Rendered editor/variableeditor.html.erb within layouts/application (10.4ms)
+Completed 500 Internal Server Error in 25ms
+
+ActionView::Template::Error (undefined method `value' for #<Variable:0x4e1437c>):
+    14:   <%= f.text_field :description %>
+    15:   
+    16:   <%= f.label :value %>
+    17:   <%= f.text_field :value %>
+    18:   
+    19:   <%= f.submit "Create my variable", class: "btn btn-large btn-primary" %>
+    20: <% end %>
+  app/views/editor/variableeditor.html.erb:17:in `block in _app_views_editor_variableeditor_html_erb___783665691_40982720'
+  app/views/editor/variableeditor.html.erb:2:in `_app_views_editor_variableeditor_html_erb___783665691_40982720'
+  app/controllers/editor_controller.rb:10:in `variableeditor'
+
+
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (13.2ms)
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (2.3ms)
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (36.1ms)
+
+
+Started GET "/variableeditor" for 127.0.0.1 at 2012-04-30 21:42:53 -0700
+Processing by EditorController#variableeditor as HTML
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mVariable Exists (0.2ms)[0m  SELECT 1 FROM "variables" WHERE ("variables"."name" = '' AND "variables"."workflow_id" IS NULL) LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35mVariable Load (0.2ms)[0m  SELECT "variables".* FROM "variables" 
+  Rendered editor/variableeditor.html.erb within layouts/application (9.3ms)
+Compiled application.css  (6ms)  (pid 11189)
+Compiled application.js  (21ms)  (pid 11189)
+Completed 200 OK in 210ms (Views: 203.8ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/assets/editor.css?body=1" for 127.0.0.1 at 2012-04-30 21:42:54 -0700
+Served asset /editor.css - 304 Not Modified (5ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-04-30 21:42:54 -0700
+Served asset /application.css - 304 Not Modified (18ms)
+
+
+Started GET "/assets/variables.css?body=1" for 127.0.0.1 at 2012-04-30 21:42:54 -0700
+Served asset /variables.css - 304 Not Modified (3ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-04-30 21:42:54 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (18ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-04-30 21:42:54 -0700
+Served asset /editor.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-04-30 21:42:54 -0700
+Served asset /jquery.js - 304 Not Modified (11ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-04-30 21:42:54 -0700
+Served asset /variables.js - 304 Not Modified (5ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-04-30 21:42:54 -0700
+Served asset /application.js - 304 Not Modified (27ms)

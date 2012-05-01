@@ -20,27 +20,29 @@
 <% end %>
 
 <h1> Current Variables </h1>
+
 <table>
-<tr>
-<th>Constant?</th>
-<th>Array?</th>
-<th>Type? </th>
-<th>Name?</th>
-<th>Description?</th>
-<th>Value?</th>
-</tr>
+
+  <tr>
+    <th>Constant?</th>
+    <th>Array?</th>
+    <th>Type? </th>
+    <th>Name?</th>
+    <th>Description?</th>
+    <th>Value?</th>
+  </tr>
 
 
 
-<% for variable in @variables %>
-<tr>
-<td><%= variable.const %></td>
-<td><%= variable.array %></td>
-<td><%= variable.type %></td>
-<td><%= variable.name %></td>
-<td><%= variable.description %></td>
-<td><%= variable.value %></td>
-</tr>
+  <% for variable in @variables %>
+    <tr>
+      <td><%= variable.const %></td>
+      <td><%= variable.array %></td>
+      <td><%= variable.type %></td>
+      <td><%= variable.name %></td>
+      <td><%= variable.description %></td>
+      <td><%= variable.value %></td>
+    </tr>
+  <% end %>
 
-<% end %>
 </table>

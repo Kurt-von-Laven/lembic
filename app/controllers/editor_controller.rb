@@ -4,9 +4,14 @@ class EditorController < ApplicationController
   end
   
   def variableeditor
-    @new_var = Variable.new(params[:var])
-    @new_var.save
+    new_variable(params[:new_var])
     @variables = Variable.find(:all)
     render 'variableeditor'
   end
+  
+  def new_variable(var)
+    var[:workflow_id] = 1 # TODO: Grab the workflow ID out of the session state.
+    Variable.new(var)
+  end
+  
 end

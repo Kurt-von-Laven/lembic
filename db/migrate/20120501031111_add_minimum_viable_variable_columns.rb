@@ -4,7 +4,7 @@ class AddMinimumViableVariableColumns < ActiveRecord::Migration
     create_table :variables do |t|
       t.string :name, :limit => 64, :null => false
       t.string :description, :null => false
-      t.integer :workflow_id :null => false
+      t.integer :workflow_id, :null => false
       t.integer :type, :null => false
       t.boolean :array, :null => false
       t.boolean :const, :null => false

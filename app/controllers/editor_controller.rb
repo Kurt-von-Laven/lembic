@@ -1,4 +1,7 @@
 class EditorController < ApplicationController
+  
+  DEFAULT_OPTIONS = {'workflow_id' => 1, 'array' => false, 'const' => false} # TODO: Grab the workflow ID out of the session state.
+  
   def home
     # No changes
   end
@@ -11,9 +14,13 @@ class EditorController < ApplicationController
     render 'variableeditor'
   end
   
-  def new_variable(vari)
-    vari['workflow_id'] = 1 # TODO: Grab the workflow ID out of the session state.
-    Variable.new(vari)
+  def new_variable(var)
+    w = Workflow.first_or_create({'name' => 'Sample Workflow', 'description' => 'This record should be removed eventually and is just for test purposes.'})
+    merged_var = DEFAULT_OPTIONS.merge(var)
+    puts "WHAT IS GOING ON???"
+    puts merged_var.inspect
+    v = Variable.new(merged_var)
+    puts v.save
   end
   
 end

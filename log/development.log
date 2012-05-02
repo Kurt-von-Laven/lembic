@@ -6427,3 +6427,409 @@ NoMethodError (undefined method `permissions' for #<Workflow:0x4640060>):
   Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (7.3ms)
   Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (2.2ms)
   Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (34.0ms)
+
+
+Started GET "/variableeditor" for 127.0.0.1 at 2012-05-02 14:35:47 -0700
+Processing by EditorController#variableeditor as HTML
+  [1m[36mVariable Load (0.2ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/variableeditor.html.erb within layouts/application (17.8ms)
+Completed 200 OK in 165ms (Views: 105.1ms | ActiveRecord: 4.5ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-02 14:35:48 -0700
+Served asset /application.css - 304 Not Modified (47ms)
+
+
+Started GET "/assets/editor.css?body=1" for 127.0.0.1 at 2012-05-02 14:35:48 -0700
+Served asset /editor.css - 200 OK (10ms)
+
+
+Started GET "/assets/variables.css?body=1" for 127.0.0.1 at 2012-05-02 14:35:48 -0700
+Served asset /variables.css - 200 OK (3ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-02 14:35:48 -0700
+Served asset /jquery.js - 304 Not Modified (6ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 14:35:48 -0700
+Served asset /editor.js - 304 Not Modified (6ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 14:35:48 -0700
+Served asset /variables.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-02 14:35:48 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 14:35:48 -0700
+Served asset /application.js - 304 Not Modified (12ms)
+
+
+Started GET "/variableeditor" for 127.0.0.1 at 2012-05-02 14:35:50 -0700
+Processing by EditorController#variableeditor as HTML
+  [1m[35mVariable Load (0.3ms)[0m  SELECT "variables".* FROM "variables" 
+  Rendered editor/variableeditor.html.erb within layouts/application (3.5ms)
+Completed 200 OK in 128ms (Views: 126.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-02 14:35:50 -0700
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.css?body=1" for 127.0.0.1 at 2012-05-02 14:35:50 -0700
+Served asset /variables.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/editor.css?body=1" for 127.0.0.1 at 2012-05-02 14:35:50 -0700
+Served asset /editor.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-02 14:35:50 -0700
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-02 14:35:51 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 14:35:51 -0700
+Served asset /editor.js - 200 OK (0ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 14:35:51 -0700
+Served asset /variables.js - 200 OK (1ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 14:35:51 -0700
+Served asset /application.js - 200 OK (1ms)
+
+
+Started POST "/variableeditor" for 127.0.0.1 at 2012-05-02 14:35:59 -0700
+Processing by EditorController#variableeditor as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uxj9PKTw4uN8qwp7sXUxFTsSmLeHxuWl5nVbSpfYks=", "const"=>"1", "new_var"=>{"type"=>"integer", "name"=>"Internet?", "description"=>"What a joke!"}, "commit"=>"Create my variable"}
+  [1m[36mWorkflow Load (0.2ms)[0m  [1mSELECT "workflows".* FROM "workflows" LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mWorkflow Exists (0.2ms)[0m  [1mSELECT 1 FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  rollback transaction
+Completed 500 Internal Server Error in 99ms
+
+NoMethodError (undefined method `permissions' for #<Workflow:0x4e70370>):
+  app/controllers/editor_controller.rb:18:in `new_variable'
+  app/controllers/editor_controller.rb:11:in `variableeditor'
+
+
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (6.6ms)
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.9ms)
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (32.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2012-05-02 14:38:34 -0700
+Processing by EditorController#home as HTML
+  Rendered editor/home.html.erb within layouts/application (1.2ms)
+Completed 200 OK in 14ms (Views: 13.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-02 14:38:34 -0700
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.css?body=1" for 127.0.0.1 at 2012-05-02 14:38:34 -0700
+Served asset /variables.css - 200 OK (1ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-02 14:38:34 -0700
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/editor.css?body=1" for 127.0.0.1 at 2012-05-02 14:38:34 -0700
+Served asset /editor.css - 200 OK (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-02 14:38:34 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 14:38:34 -0700
+Served asset /editor.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 14:38:34 -0700
+Served asset /variables.js - 200 OK (3ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 14:38:34 -0700
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started GET "/variableeditor" for 127.0.0.1 at 2012-05-02 14:45:53 -0700
+Processing by EditorController#variableeditor as HTML
+  [1m[36mVariable Load (0.3ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/variableeditor.html.erb within layouts/application (17.3ms)
+Completed 200 OK in 154ms (Views: 98.9ms | ActiveRecord: 4.8ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-02 14:45:54 -0700
+Served asset /application.css - 304 Not Modified (65ms)
+
+
+Started GET "/assets/editor.css?body=1" for 127.0.0.1 at 2012-05-02 14:45:55 -0700
+Served asset /editor.css - 200 OK (8ms)
+
+
+Started GET "/assets/variables.css?body=1" for 127.0.0.1 at 2012-05-02 14:45:55 -0700
+Served asset /variables.css - 200 OK (4ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 14:45:55 -0700
+Served asset /editor.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-02 14:45:55 -0700
+Served asset /jquery.js - 304 Not Modified (7ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 14:45:55 -0700
+Served asset /application.js - 304 Not Modified (30ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-02 14:45:55 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (7ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 14:45:55 -0700
+Served asset /variables.js - 304 Not Modified (6ms)
+
+
+Started POST "/variableeditor" for 127.0.0.1 at 2012-05-02 14:46:03 -0700
+Processing by EditorController#variableeditor as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uxj9PKTw4uN8qwp7sXUxFTsSmLeHxuWl5nVbSpfYks=", "array"=>"1", "new_var"=>{"type"=>"real", "name"=>"Sweet", "description"=>"It's Tasty"}, "commit"=>"Create my variable"}
+Completed 500 Internal Server Error in 57ms
+
+ActiveRecord::StatementInvalid (Could not find table 'permissions'):
+  app/controllers/editor_controller.rb:18:in `new_variable'
+  app/controllers/editor_controller.rb:11:in `variableeditor'
+
+
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (8.0ms)
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.8ms)
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (25.6ms)
+
+
+Started GET "/variableeditor" for 127.0.0.1 at 2012-05-02 14:48:03 -0700
+Processing by EditorController#variableeditor as HTML
+  [1m[35mVariable Load (0.2ms)[0m  SELECT "variables".* FROM "variables" 
+  Rendered editor/variableeditor.html.erb within layouts/application (2.6ms)
+Completed 200 OK in 14ms (Views: 13.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-02 14:48:03 -0700
+Served asset /application.css - 304 Not Modified (4ms)
+
+
+Started GET "/assets/editor.css?body=1" for 127.0.0.1 at 2012-05-02 14:48:03 -0700
+Served asset /editor.css - 200 OK (0ms)
+
+
+Started GET "/assets/variables.css?body=1" for 127.0.0.1 at 2012-05-02 14:48:03 -0700
+Served asset /variables.css - 200 OK (16ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-02 14:48:03 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 14:48:03 -0700
+Served asset /editor.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 14:48:03 -0700
+Served asset /variables.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 14:48:03 -0700
+Served asset /application.js - 304 Not Modified (5ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-02 14:48:03 -0700
+Served asset /jquery.js - 200 OK (0ms)
+
+
+Started POST "/variableeditor" for 127.0.0.1 at 2012-05-02 14:48:09 -0700
+Processing by EditorController#variableeditor as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uxj9PKTw4uN8qwp7sXUxFTsSmLeHxuWl5nVbSpfYks=", "array"=>"1", "new_var"=>{"type"=>"real", "name"=>"Biotech", "description"=>"Unqualified"}, "commit"=>"Create my variable"}
+Completed 500 Internal Server Error in 1ms
+
+ActiveRecord::StatementInvalid (Could not find table 'permissions'):
+  app/controllers/editor_controller.rb:18:in `new_variable'
+  app/controllers/editor_controller.rb:11:in `variableeditor'
+
+
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (5.6ms)
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.8ms)
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (21.9ms)
+  [1m[36m (0.4ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+  [1m[35m (0.2ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations" 
+  [1m[36m (0.2ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Migrating to CreatePermissions (20120501054742)
+  [1m[35m (0.1ms)[0m  select sqlite_version(*)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (1.0ms)[0m  DROP TABLE "workflows_users"
+  [1m[36m (0.2ms)[0m  [1mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = '20120501054742'[0m
+  [1m[35m (1.9ms)[0m  commit transaction
+Migrating to CreateWorkflows (20120501045403)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  DROP TABLE "workflows"
+  [1m[36m (0.2ms)[0m  [1mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = '20120501045403'[0m
+  [1m[35m (4.5ms)[0m  commit transaction
+Migrating to CreateUsers (20120501044220)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.7ms)[0m  DROP TABLE "users"
+  [1m[36m (0.2ms)[0m  [1mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = '20120501044220'[0m
+  [1m[35m (1.7ms)[0m  commit transaction
+Migrating to AddMinimumViableVariableColumns (20120501031111)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  DROP TABLE "variables"
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "variables" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "value" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.2ms)[0m  DELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = '20120501031111'
+  [1m[36m (2.2ms)[0m  [1mcommit transaction[0m
+Migrating to CreateVariablesEditors (20120430223409)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.6ms)[0m  [1mDROP TABLE "variables_editors"[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = '20120430223409'
+  [1m[36m (1.9ms)[0m  [1mcommit transaction[0m
+Migrating to CreateVariables (20120421020715)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (1.1ms)[0m  [1mDROP TABLE "variables"[0m
+  [1m[35m (0.4ms)[0m  DELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = '20120421020715'
+  [1m[36m (2.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.5ms)[0m  select sqlite_version(*)
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+  [1m[36m (0.2ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Migrating to CreateVariables (20120421020715)
+  [1m[35m (0.1ms)[0m  select sqlite_version(*)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.8ms)[0m  CREATE TABLE "variables" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "value" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20120421020715')[0m
+  [1m[35m (2.2ms)[0m  commit transaction
+Migrating to CreateVariablesEditors (20120430223409)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.7ms)[0m  CREATE TABLE "variables_editors" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "type" varchar(255), "value" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20120430223409')[0m
+  [1m[35m (3.1ms)[0m  commit transaction
+Migrating to AddMinimumViableVariableColumns (20120501031111)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.9ms)[0m  DROP TABLE "variables"
+  [1m[36m (0.5ms)[0m  [1mCREATE TABLE "variables" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(64) NOT NULL, "description" varchar(255) NOT NULL, "workflow_id" integer NOT NULL, "type" integer NOT NULL, "array" boolean NOT NULL, "const" boolean NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20120501031111')
+  [1m[36m (2.0ms)[0m  [1mcommit transaction[0m
+Migrating to CreateUsers (20120501044220)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.7ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar(255) NOT NULL, "first_name" varchar(255) NOT NULL, "last_name" varchar(255) NOT NULL, "organization" varchar(255), "pwd_hash" varchar(255) NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20120501044220')
+  [1m[36m (2.4ms)[0m  [1mcommit transaction[0m
+Migrating to CreateWorkflows (20120501045403)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.7ms)[0m  [1mCREATE TABLE "workflows" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(64) NOT NULL, "description" varchar(255) NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20120501045403')
+  [1m[36m (1.6ms)[0m  [1mcommit transaction[0m
+Migrating to CreatePermissions (20120501054742)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.7ms)[0m  [1mCREATE TABLE "workflows_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "workflow_id" integer NOT NULL, "user_id" integer NOT NULL, "permissions" integer NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20120501054742')
+  [1m[36m (2.3ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.6ms)[0m  select sqlite_version(*)
+  [1m[36m (0.2ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("users")
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("variables")[0m
+  [1m[35m (0.2ms)[0m  PRAGMA index_list("variables_editors")
+  [1m[36m (0.1ms)[0m  [1mPRAGMA index_list("workflows")[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("workflows_users")
+  [1m[36m (0.2ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+  [1m[35m (0.1ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations" 
+  [1m[36m (0.2ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Migrating to CreatePermissions (20120501054742)
+  [1m[35m (0.1ms)[0m  select sqlite_version(*)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  DROP TABLE "permissions"
+SQLite3::SQLException: no such table: permissions: DROP TABLE "permissions"
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[36m (0.2ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+  [1m[35m (0.2ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations" 
+  [1m[36m (0.5ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Migrating to CreatePermissions (20120501054742)
+  [1m[35m (0.1ms)[0m  select sqlite_version(*)
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.8ms)[0m  DROP TABLE "workflows_users"
+  [1m[36m (0.2ms)[0m  [1mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = '20120501054742'[0m
+  [1m[35m (2.0ms)[0m  commit transaction
+Migrating to CreateWorkflows (20120501045403)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  DROP TABLE "workflows"
+  [1m[36m (0.2ms)[0m  [1mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = '20120501045403'[0m
+  [1m[35m (3.0ms)[0m  commit transaction
+Migrating to CreateUsers (20120501044220)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.7ms)[0m  DROP TABLE "users"
+  [1m[36m (0.4ms)[0m  [1mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = '20120501044220'[0m
+  [1m[35m (2.3ms)[0m  commit transaction
+Migrating to AddMinimumViableVariableColumns (20120501031111)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.7ms)[0m  DROP TABLE "variables"
+  [1m[36m (0.8ms)[0m  [1mCREATE TABLE "variables" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "value" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.2ms)[0m  DELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = '20120501031111'
+  [1m[36m (2.4ms)[0m  [1mcommit transaction[0m
+Migrating to CreateVariablesEditors (20120430223409)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.7ms)[0m  [1mDROP TABLE "variables_editors"[0m
+  [1m[35m (0.2ms)[0m  DELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = '20120430223409'
+  [1m[36m (2.0ms)[0m  [1mcommit transaction[0m
+Migrating to CreateVariables (20120421020715)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (1.0ms)[0m  [1mDROP TABLE "variables"[0m
+  [1m[35m (0.2ms)[0m  DELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = '20120421020715'
+  [1m[36m (1.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.5ms)[0m  select sqlite_version(*)
+  [1m[36m (0.2ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+  [1m[36m (0.2ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Migrating to CreateVariables (20120421020715)
+  [1m[35m (0.1ms)[0m  select sqlite_version(*)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (1.0ms)[0m  CREATE TABLE "variables" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "value" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20120421020715')[0m
+  [1m[35m (1.6ms)[0m  commit transaction
+Migrating to CreateVariablesEditors (20120430223409)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  CREATE TABLE "variables_editors" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "type" varchar(255), "value" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20120430223409')[0m
+  [1m[35m (3.9ms)[0m  commit transaction
+Migrating to AddMinimumViableVariableColumns (20120501031111)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.7ms)[0m  DROP TABLE "variables"
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "variables" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(64) NOT NULL, "description" varchar(255) NOT NULL, "workflow_id" integer NOT NULL, "type" integer NOT NULL, "array" boolean NOT NULL, "const" boolean NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.4ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20120501031111')
+  [1m[36m (1.9ms)[0m  [1mcommit transaction[0m
+Migrating to CreateUsers (20120501044220)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.7ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar(255) NOT NULL, "first_name" varchar(255) NOT NULL, "last_name" varchar(255) NOT NULL, "organization" varchar(255), "pwd_hash" varchar(255) NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20120501044220')
+  [1m[36m (2.2ms)[0m  [1mcommit transaction[0m
+Migrating to CreateWorkflows (20120501045403)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.8ms)[0m  [1mCREATE TABLE "workflows" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(64) NOT NULL, "description" varchar(255) NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20120501045403')
+  [1m[36m (1.9ms)[0m  [1mcommit transaction[0m
+Migrating to CreatePermissions (20120501054742)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.8ms)[0m  [1mCREATE TABLE "permissions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "workflow_id" integer NOT NULL, "user_id" integer NOT NULL, "permissions" integer NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.6ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20120501054742')
+  [1m[36m (1.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.5ms)[0m  select sqlite_version(*)
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("permissions")
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("users")[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("variables")
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("variables_editors")[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("workflows")

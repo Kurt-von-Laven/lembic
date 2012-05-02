@@ -13,6 +13,14 @@
 
 ActiveRecord::Schema.define(:version => 20120501054742) do
 
+  create_table "permissions", :force => true do |t|
+    t.integer  "workflow_id", :null => false
+    t.integer  "user_id",     :null => false
+    t.integer  "permissions", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "users", :force => true do |t|
     t.string   "email",        :null => false
     t.string   "first_name",   :null => false
@@ -46,14 +54,6 @@ ActiveRecord::Schema.define(:version => 20120501054742) do
     t.string   "description",               :null => false
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
-  end
-
-  create_table "workflows_users", :force => true do |t|
-    t.integer  "workflow_id", :null => false
-    t.integer  "user_id",     :null => false
-    t.integer  "permissions", :null => false
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
   end
 
 end

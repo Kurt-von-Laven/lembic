@@ -15,6 +15,8 @@ class EditorController < ApplicationController
   end
   
   def new_variable(var)
+    p = Permission.first_or_create({'user_id' => 1, 'workflow_id' => 1, 'permissions' => 4})
+    # u = User.first_or_create('')
     w = Workflow.first_or_create({'name' => 'Sample Workflow', 'description' => 'This record should be removed eventually and is just for test purposes.'})
     merged_var = DEFAULT_OPTIONS.merge(var)
     puts "WHAT IS GOING ON???"

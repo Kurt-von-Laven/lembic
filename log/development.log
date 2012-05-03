@@ -6833,3 +6833,3095 @@ Migrating to CreatePermissions (20120501054742)
   [1m[35m (0.0ms)[0m  PRAGMA index_list("variables")
   [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("variables_editors")[0m
   [1m[35m (0.0ms)[0m  PRAGMA index_list("workflows")
+  [1m[36m (0.2ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Migrating to CreateVariables (20120421020715)
+Migrating to CreateVariablesEditors (20120430223409)
+Migrating to AddMinimumViableVariableColumns (20120501031111)
+Migrating to CreateUsers (20120501044220)
+Migrating to CreateWorkflows (20120501045403)
+Migrating to CreatePermissions (20120501054742)
+  [1m[35m (0.8ms)[0m  select sqlite_version(*)
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("permissions")
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("users")[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("variables")
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("variables_editors")[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("workflows")
+
+
+Started GET "/variableeditor" for 127.0.0.1 at 2012-05-02 14:53:43 -0700
+Processing by EditorController#variableeditor as HTML
+  [1m[36mVariable Load (0.2ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/variableeditor.html.erb within layouts/application (17.6ms)
+Completed 200 OK in 231ms (Views: 175.0ms | ActiveRecord: 4.1ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-02 14:53:44 -0700
+Served asset /application.css - 304 Not Modified (10ms)
+
+
+Started GET "/assets/editor.css?body=1" for 127.0.0.1 at 2012-05-02 14:53:44 -0700
+Served asset /editor.css - 200 OK (34ms)
+
+
+Started GET "/assets/variables.css?body=1" for 127.0.0.1 at 2012-05-02 14:53:45 -0700
+Served asset /variables.css - 200 OK (25ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-02 14:53:45 -0700
+Served asset /jquery.js - 200 OK (5ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-02 14:53:45 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 14:53:45 -0700
+Served asset /variables.js - 304 Not Modified (5ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 14:53:45 -0700
+Served asset /editor.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 14:53:45 -0700
+Served asset /application.js - 304 Not Modified (11ms)
+
+
+Started POST "/variableeditor" for 127.0.0.1 at 2012-05-02 14:53:51 -0700
+Processing by EditorController#variableeditor as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uxj9PKTw4uN8qwp7sXUxFTsSmLeHxuWl5nVbSpfYks=", "array"=>"1", "new_var"=>{"type"=>"real", "name"=>"consumer", "description"=>"behvaior"}, "commit"=>"Create my variable"}
+  [1m[35mPermission Load (0.4ms)[0m  SELECT "permissions".* FROM "permissions" LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mPermission Exists (0.2ms)[0m  SELECT 1 FROM "permissions" WHERE ("permissions"."user_id" = 1 AND "permissions"."workflow_id" = 1) LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mrollback transaction[0m
+  [1m[35mWorkflow Load (0.1ms)[0m  SELECT "workflows".* FROM "workflows" LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mWorkflow Exists (0.2ms)[0m  SELECT 1 FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+Completed 500 Internal Server Error in 141ms
+
+NoMethodError (undefined method `permissions' for #<Workflow:0x4e619c4>):
+  app/controllers/editor_controller.rb:20:in `new_variable'
+  app/controllers/editor_controller.rb:11:in `variableeditor'
+
+
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (7.5ms)
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (2.5ms)
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (32.9ms)
+
+
+Started GET "/variableeditor" for 127.0.0.1 at 2012-05-02 14:57:20 -0700
+Processing by EditorController#variableeditor as HTML
+  [1m[35mVariable Load (0.2ms)[0m  SELECT "variables".* FROM "variables" 
+  Rendered editor/variableeditor.html.erb within layouts/application (3.1ms)
+Completed 200 OK in 15ms (Views: 12.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-02 14:57:20 -0700
+Served asset /application.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/editor.css?body=1" for 127.0.0.1 at 2012-05-02 14:57:20 -0700
+Served asset /editor.css - 200 OK (0ms)
+
+
+Started GET "/assets/variables.css?body=1" for 127.0.0.1 at 2012-05-02 14:57:20 -0700
+Served asset /variables.css - 200 OK (4ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-02 14:57:20 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 14:57:20 -0700
+Served asset /variables.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 14:57:20 -0700
+Served asset /editor.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-02 14:57:20 -0700
+Served asset /jquery.js - 200 OK (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 14:57:20 -0700
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started POST "/variableeditor" for 127.0.0.1 at 2012-05-02 14:57:28 -0700
+Processing by EditorController#variableeditor as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uxj9PKTw4uN8qwp7sXUxFTsSmLeHxuWl5nVbSpfYks=", "const"=>"1", "new_var"=>{"type"=>"real", "name"=>"Young", "description"=>"Entrepreneurs"}, "commit"=>"Create my variable"}
+  [1m[36mPermission Load (0.2ms)[0m  [1mSELECT "permissions".* FROM "permissions" LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mPermission Exists (0.1ms)[0m  [1mSELECT 1 FROM "permissions" WHERE ("permissions"."user_id" = 1 AND "permissions"."workflow_id" = 1) LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36mWorkflow Load (0.2ms)[0m  [1mSELECT "workflows".* FROM "workflows" LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mWorkflow Exists (0.1ms)[0m  [1mSELECT 1 FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+Completed 500 Internal Server Error in 9ms
+
+NoMethodError (undefined method `permissions' for #<Workflow:0x560a928>):
+  app/controllers/editor_controller.rb:20:in `new_variable'
+  app/controllers/editor_controller.rb:11:in `variableeditor'
+
+
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (6.9ms)
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.9ms)
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (22.3ms)
+
+
+Started POST "/variableeditor" for 127.0.0.1 at 2012-05-02 14:59:25 -0700
+Processing by EditorController#variableeditor as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uxj9PKTw4uN8qwp7sXUxFTsSmLeHxuWl5nVbSpfYks=", "const"=>"1", "new_var"=>{"type"=>"real", "name"=>"Young", "description"=>"Entrepreneurs"}, "commit"=>"Create my variable"}
+  [1m[36mPermission Load (0.2ms)[0m  [1mSELECT "permissions".* FROM "permissions" LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mPermission Exists (0.2ms)[0m  [1mSELECT 1 FROM "permissions" WHERE ("permissions"."user_id" = 1 AND "permissions"."workflow_id" = 1) LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT 1 FROM "users" WHERE "users"."email" = 'qweoui@adsfqw.com' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+Completed 500 Internal Server Error in 233ms
+
+NoMethodError (undefined method `permissions' for #<User:0x4d75a60>):
+  app/controllers/editor_controller.rb:19:in `new_variable'
+  app/controllers/editor_controller.rb:11:in `variableeditor'
+
+
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (7.9ms)
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (2.3ms)
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (30.0ms)
+
+
+Started GET "/variableeditor" for 127.0.0.1 at 2012-05-02 15:04:53 -0700
+Processing by EditorController#variableeditor as HTML
+  [1m[36mVariable Load (0.2ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/variableeditor.html.erb within layouts/application (18.1ms)
+Completed 200 OK in 167ms (Views: 107.9ms | ActiveRecord: 4.7ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-02 15:04:54 -0700
+Served asset /application.css - 304 Not Modified (10ms)
+
+
+Started GET "/assets/variables.css?body=1" for 127.0.0.1 at 2012-05-02 15:04:54 -0700
+Served asset /variables.css - 200 OK (2ms)
+
+
+Started GET "/assets/editor.css?body=1" for 127.0.0.1 at 2012-05-02 15:04:54 -0700
+Served asset /editor.css - 200 OK (3ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-02 15:04:54 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (6ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-02 15:04:54 -0700
+Served asset /jquery.js - 304 Not Modified (22ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 15:04:55 -0700
+Served asset /editor.js - 304 Not Modified (18ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 15:04:55 -0700
+Served asset /variables.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 15:04:55 -0700
+Served asset /application.js - 304 Not Modified (17ms)
+
+
+Started POST "/variableeditor" for 127.0.0.1 at 2012-05-02 15:05:00 -0700
+Processing by EditorController#variableeditor as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uxj9PKTw4uN8qwp7sXUxFTsSmLeHxuWl5nVbSpfYks=", "array"=>"1", "new_var"=>{"type"=>"real", "name"=>"Nobody", "description"=>"Wants"}, "commit"=>"Create my variable"}
+  [1m[35mPermission Load (0.2ms)[0m  SELECT "permissions".* FROM "permissions" 
+Completed 500 Internal Server Error in 64ms
+
+NoMethodError (undefined method `first_or_create' for []:Array):
+  app/controllers/editor_controller.rb:18:in `new_variable'
+  app/controllers/editor_controller.rb:11:in `variableeditor'
+
+
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (5.9ms)
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (2.3ms)
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (31.8ms)
+
+
+Started GET "/variableeditor" for 127.0.0.1 at 2012-05-02 15:06:19 -0700
+Processing by EditorController#variableeditor as HTML
+  [1m[36mVariable Load (0.2ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/variableeditor.html.erb within layouts/application (18.1ms)
+Completed 200 OK in 159ms (Views: 105.4ms | ActiveRecord: 3.9ms)
+
+
+Started GET "/assets/variables.css?body=1" for 127.0.0.1 at 2012-05-02 15:06:20 -0700
+Served asset /variables.css - 200 OK (12ms)
+
+
+Started GET "/assets/editor.css?body=1" for 127.0.0.1 at 2012-05-02 15:06:20 -0700
+Served asset /editor.css - 200 OK (3ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-02 15:06:20 -0700
+Served asset /application.css - 304 Not Modified (7ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-02 15:06:20 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 15:06:20 -0700
+Served asset /editor.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 15:06:20 -0700
+Served asset /variables.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-02 15:06:20 -0700
+Served asset /jquery.js - 304 Not Modified (10ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 15:06:20 -0700
+Served asset /application.js - 304 Not Modified (15ms)
+
+
+Started POST "/variableeditor" for 127.0.0.1 at 2012-05-02 15:06:28 -0700
+Processing by EditorController#variableeditor as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uxj9PKTw4uN8qwp7sXUxFTsSmLeHxuWl5nVbSpfYks=", "array"=>"1", "new_var"=>{"type"=>"date", "name"=>"Where", "description"=>"Is the Wave?"}, "commit"=>"Create my variable"}
+  [1m[35mPermission Load (0.3ms)[0m  SELECT "permissions".* FROM "permissions" WHERE "permissions"."user_id" = 1 LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mPermission Exists (0.3ms)[0m  SELECT 1 FROM "permissions" WHERE ("permissions"."user_id" = 1 AND "permissions"."workflow_id" = 1) LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."first_name" = 'Michael' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mUser Exists (0.2ms)[0m  SELECT 1 FROM "users" WHERE "users"."email" = 'qweoui@adsfqw.com' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+Completed 500 Internal Server Error in 215ms
+
+NoMethodError (undefined method `permissions' for #<User:0x4e7bd24>):
+  app/controllers/editor_controller.rb:19:in `new_variable'
+  app/controllers/editor_controller.rb:11:in `variableeditor'
+
+
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (8.8ms)
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (2.3ms)
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (27.4ms)
+
+
+Started GET "/variableeditor" for 127.0.0.1 at 2012-05-02 15:09:11 -0700
+Processing by EditorController#variableeditor as HTML
+  [1m[36mVariable Load (0.2ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/variableeditor.html.erb within layouts/application (20.5ms)
+Completed 200 OK in 171ms (Views: 107.0ms | ActiveRecord: 5.1ms)
+
+
+Started GET "/assets/editor.css?body=1" for 127.0.0.1 at 2012-05-02 15:09:12 -0700
+Served asset /editor.css - 200 OK (34ms)
+
+
+Started GET "/assets/variables.css?body=1" for 127.0.0.1 at 2012-05-02 15:09:12 -0700
+Served asset /variables.css - 200 OK (6ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-02 15:09:12 -0700
+Served asset /application.css - 304 Not Modified (11ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 15:09:12 -0700
+Served asset /editor.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-02 15:09:12 -0700
+Served asset /jquery.js - 304 Not Modified (18ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-02 15:09:12 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (7ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 15:09:12 -0700
+Served asset /variables.js - 304 Not Modified (9ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 15:09:12 -0700
+Served asset /application.js - 304 Not Modified (16ms)
+
+
+Started POST "/variableeditor" for 127.0.0.1 at 2012-05-02 15:09:18 -0700
+Processing by EditorController#variableeditor as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uxj9PKTw4uN8qwp7sXUxFTsSmLeHxuWl5nVbSpfYks=", "const"=>"1", "new_var"=>{"type"=>"date", "name"=>"Word", "description"=>"Out"}, "commit"=>"Create my variable"}
+  [1m[35mPermission Load (0.4ms)[0m  SELECT "permissions".* FROM "permissions" WHERE "permissions"."user_id" = 1 LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mPermission Exists (0.3ms)[0m  SELECT 1 FROM "permissions" WHERE ("permissions"."user_id" = 1 AND "permissions"."workflow_id" = 1) LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."first_name" = 'Michael' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mUser Exists (0.2ms)[0m  SELECT 1 FROM "users" WHERE "users"."email" = 'qweoui@adsfqw.com' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+Completed 500 Internal Server Error in 133ms
+
+NoMethodError (undefined method `permissions' for #<User:0x4e8a6d0>):
+  app/controllers/editor_controller.rb:19:in `new_variable'
+  app/controllers/editor_controller.rb:11:in `variableeditor'
+
+
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (7.6ms)
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (4.2ms)
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (43.0ms)
+
+
+Started GET "/variableeditor" for 127.0.0.1 at 2012-05-02 15:23:17 -0700
+Processing by EditorController#variableeditor as HTML
+  [1m[36mVariable Load (0.2ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/variableeditor.html.erb within layouts/application (21.1ms)
+Completed 200 OK in 167ms (Views: 109.2ms | ActiveRecord: 4.4ms)
+
+
+Started GET "/assets/variables.css?body=1" for 127.0.0.1 at 2012-05-02 15:23:18 -0700
+Served asset /variables.css - 200 OK (4ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-02 15:23:18 -0700
+Served asset /application.css - 304 Not Modified (9ms)
+
+
+Started GET "/assets/editor.css?body=1" for 127.0.0.1 at 2012-05-02 15:23:18 -0700
+Served asset /editor.css - 200 OK (2ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-02 15:23:21 -0700
+Served asset /jquery.js - 304 Not Modified (18ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 15:23:21 -0700
+Served asset /editor.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-02 15:23:21 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 15:23:21 -0700
+Served asset /application.js - 304 Not Modified (17ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 15:23:21 -0700
+Served asset /variables.js - 304 Not Modified (3ms)
+
+
+Started POST "/variableeditor" for 127.0.0.1 at 2012-05-02 15:23:27 -0700
+Processing by EditorController#variableeditor as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uxj9PKTw4uN8qwp7sXUxFTsSmLeHxuWl5nVbSpfYks=", "array"=>"1", "new_var"=>{"type"=>"integer", "name"=>"Great", "description"=>"Sales"}, "commit"=>"Create my variable"}
+  [1m[35mPermission Load (0.4ms)[0m  SELECT "permissions".* FROM "permissions" WHERE "permissions"."user_id" = 1 LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mPermission Exists (0.2ms)[0m  SELECT 1 FROM "permissions" WHERE ("permissions"."user_id" = 1 AND "permissions"."workflow_id" = 1) LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."first_name" = 'Michael' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mUser Exists (0.2ms)[0m  SELECT 1 FROM "users" WHERE "users"."email" = 'qweoui@adsfqw.com' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35mWorkflow Load (0.2ms)[0m  SELECT "workflows".* FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mWorkflow Exists (0.2ms)[0m  SELECT 1 FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+Completed 500 Internal Server Error in 251ms
+
+NoMethodError (undefined method `permissions' for #<Workflow:0x5706f34>):
+  app/controllers/editor_controller.rb:21:in `new_variable'
+  app/controllers/editor_controller.rb:11:in `variableeditor'
+
+
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (8.2ms)
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (2.5ms)
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (39.0ms)
+
+
+Started GET "/variableeditor" for 127.0.0.1 at 2012-05-02 15:24:58 -0700
+Processing by EditorController#variableeditor as HTML
+  [1m[36mVariable Load (0.2ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/variableeditor.html.erb within layouts/application (19.3ms)
+Completed 200 OK in 156ms (Views: 100.7ms | ActiveRecord: 5.7ms)
+
+
+Started GET "/assets/editor.css?body=1" for 127.0.0.1 at 2012-05-02 15:24:59 -0700
+Served asset /editor.css - 200 OK (4ms)
+
+
+Started GET "/assets/variables.css?body=1" for 127.0.0.1 at 2012-05-02 15:24:59 -0700
+Served asset /variables.css - 200 OK (7ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-02 15:24:59 -0700
+Served asset /application.css - 304 Not Modified (7ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-02 15:24:59 -0700
+Served asset /jquery.js - 200 OK (15ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 15:24:59 -0700
+Served asset /editor.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 15:24:59 -0700
+Served asset /variables.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-02 15:24:59 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 15:25:00 -0700
+Served asset /application.js - 304 Not Modified (12ms)
+
+
+Started POST "/variableeditor" for 127.0.0.1 at 2012-05-02 15:25:06 -0700
+Processing by EditorController#variableeditor as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uxj9PKTw4uN8qwp7sXUxFTsSmLeHxuWl5nVbSpfYks=", "const"=>"1", "new_var"=>{"type"=>"integer", "name"=>"No", "description"=>"It Won't"}, "commit"=>"Create my variable"}
+  [1m[35mPermission Load (0.2ms)[0m  SELECT "permissions".* FROM "permissions" WHERE "permissions"."user_id" = 1 LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mPermission Exists (0.2ms)[0m  SELECT 1 FROM "permissions" WHERE ("permissions"."user_id" = 1 AND "permissions"."workflow_id" = 1) LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."first_name" = 'Michael' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mUser Exists (0.4ms)[0m  SELECT 1 FROM "users" WHERE "users"."email" = 'qweoui@adsfqw.com' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35mWorkflow Load (0.2ms)[0m  SELECT "workflows".* FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mWorkflow Exists (0.2ms)[0m  SELECT 1 FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+Completed 500 Internal Server Error in 209ms
+
+NoMethodError (undefined method `permissions' for #<Workflow:0x4689ad0>):
+  app/controllers/editor_controller.rb:21:in `new_variable'
+  app/controllers/editor_controller.rb:11:in `variableeditor'
+
+
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (7.1ms)
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (2.4ms)
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (25.8ms)
+
+
+Started GET "/variableeditor" for 127.0.0.1 at 2012-05-02 15:26:14 -0700
+Processing by EditorController#variableeditor as HTML
+  [1m[36mVariable Load (0.3ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/variableeditor.html.erb within layouts/application (18.4ms)
+Completed 200 OK in 174ms (Views: 104.5ms | ActiveRecord: 6.6ms)
+
+
+Started GET "/assets/variables.css?body=1" for 127.0.0.1 at 2012-05-02 15:26:15 -0700
+Served asset /variables.css - 200 OK (30ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-02 15:26:15 -0700
+Served asset /application.css - 304 Not Modified (19ms)
+
+
+Started GET "/assets/editor.css?body=1" for 127.0.0.1 at 2012-05-02 15:26:15 -0700
+Served asset /editor.css - 200 OK (4ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-02 15:26:15 -0700
+Served asset /jquery.js - 304 Not Modified (18ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 15:26:15 -0700
+Served asset /editor.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-02 15:26:15 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 15:26:15 -0700
+Served asset /variables.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 15:26:15 -0700
+Served asset /application.js - 304 Not Modified (12ms)
+
+
+Started POST "/variableeditor" for 127.0.0.1 at 2012-05-02 15:26:22 -0700
+Processing by EditorController#variableeditor as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uxj9PKTw4uN8qwp7sXUxFTsSmLeHxuWl5nVbSpfYks=", "const"=>"1", "new_var"=>{"type"=>"date", "name"=>"Money", "description"=>"Is"}, "commit"=>"Create my variable"}
+  [1m[35mPermission Load (0.4ms)[0m  SELECT "permissions".* FROM "permissions" WHERE "permissions"."user_id" = 1 LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mPermission Exists (0.2ms)[0m  SELECT 1 FROM "permissions" WHERE ("permissions"."user_id" = 1 AND "permissions"."workflow_id" = 1) LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."first_name" = 'Michael' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mUser Exists (0.2ms)[0m  SELECT 1 FROM "users" WHERE "users"."email" = 'qweoui@adsfqw.com' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35mWorkflow Load (0.2ms)[0m  SELECT "workflows".* FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mWorkflow Exists (0.2ms)[0m  SELECT 1 FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mVariable Exists (0.2ms)[0m  [1mSELECT 1 FROM "variables" WHERE ("variables"."name" = 'Money' AND "variables"."workflow_id" = 1) LIMIT 1[0m
+  [1m[35mWorkflow Load (0.2ms)[0m  SELECT "workflows".* FROM "workflows" WHERE "workflows"."id" = 1 LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35mVariable Load (0.3ms)[0m  SELECT "variables".* FROM "variables" 
+  Rendered editor/variableeditor.html.erb within layouts/application (4.1ms)
+Completed 200 OK in 304ms (Views: 17.2ms | ActiveRecord: 3.9ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-02 15:26:23 -0700
+Served asset /application.css - 304 Not Modified (16ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 15:26:23 -0700
+Served asset /editor.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-02 15:26:23 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-02 15:26:23 -0700
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 15:26:23 -0700
+Served asset /variables.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 15:26:23 -0700
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/variableeditor" for 127.0.0.1 at 2012-05-02 15:26:25 -0700
+Processing by EditorController#variableeditor as HTML
+  [1m[36mVariable Load (0.2ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/variableeditor.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 16ms (Views: 15.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-02 15:26:25 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-02 15:26:26 -0700
+Served asset /application.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-02 15:26:26 -0700
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 15:26:26 -0700
+Served asset /editor.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 15:26:26 -0700
+Served asset /variables.js - 304 Not Modified (5ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 15:26:26 -0700
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started GET "/variableeditor" for 127.0.0.1 at 2012-05-02 16:05:36 -0700
+Processing by EditorController#variableeditor as HTML
+  [1m[36mVariable Load (0.3ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/variableeditor.html.erb within layouts/application (15.1ms)
+Completed 200 OK in 132ms (Views: 86.5ms | ActiveRecord: 3.6ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-02 16:05:37 -0700
+Served asset /application.css - 304 Not Modified (23ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-02 16:05:37 -0700
+Served asset /jquery.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-02 16:05:37 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 16:05:37 -0700
+Served asset /variables.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 16:05:37 -0700
+Served asset /editor.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 16:05:37 -0700
+Served asset /application.js - 304 Not Modified (10ms)
+
+
+Started POST "/variableeditor" for 127.0.0.1 at 2012-05-02 16:05:42 -0700
+Processing by EditorController#variableeditor as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uxj9PKTw4uN8qwp7sXUxFTsSmLeHxuWl5nVbSpfYks=", "array"=>"1", "new_var"=>{"type"=>"categorical", "name"=>"No", "description"=>"Day"}, "commit"=>"Create my variable"}
+  [1m[35mPermission Load (0.2ms)[0m  SELECT "permissions".* FROM "permissions" WHERE "permissions"."user_id" = 1 LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mPermission Exists (0.2ms)[0m  SELECT 1 FROM "permissions" WHERE ("permissions"."user_id" = 1 AND "permissions"."workflow_id" = 1) LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."first_name" = 'Michael' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mUser Exists (0.2ms)[0m  SELECT 1 FROM "users" WHERE "users"."email" = 'qweoui@adsfqw.com' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35mWorkflow Load (0.2ms)[0m  SELECT "workflows".* FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mWorkflow Exists (0.2ms)[0m  SELECT 1 FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mVariable Exists (0.2ms)[0m  [1mSELECT 1 FROM "variables" WHERE ("variables"."name" = 'No' AND "variables"."workflow_id" = 1) LIMIT 1[0m
+  [1m[35mWorkflow Load (0.1ms)[0m  SELECT "workflows".* FROM "workflows" WHERE "workflows"."id" = 1 LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35mVariable Load (0.2ms)[0m  SELECT "variables".* FROM "variables" 
+  Rendered editor/variableeditor.html.erb within layouts/application (2.8ms)
+Completed 200 OK in 259ms (Views: 11.1ms | ActiveRecord: 3.5ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-02 16:05:42 -0700
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-02 16:05:42 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 16:05:43 -0700
+Served asset /editor.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-02 16:05:43 -0700
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 16:05:43 -0700
+Served asset /variables.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 16:05:43 -0700
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/variableeditor" for 127.0.0.1 at 2012-05-02 16:05:57 -0700
+Processing by EditorController#variableeditor as HTML
+  [1m[36mVariable Load (0.2ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/variableeditor.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 14ms (Views: 13.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-02 16:05:57 -0700
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-02 16:05:57 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-02 16:05:57 -0700
+Served asset /application.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 16:05:57 -0700
+Served asset /editor.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 16:05:57 -0700
+Served asset /variables.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 16:05:57 -0700
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2012-05-02 16:06:57 -0700
+Processing by EditorController#home as HTML
+  Rendered editor/home.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 15ms (Views: 13.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/variables.css?body=1" for 127.0.0.1 at 2012-05-02 16:06:57 -0700
+Served asset /variables.css - 200 OK (3ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-02 16:06:57 -0700
+Served asset /application.css - 304 Not Modified (3ms)
+
+
+Started GET "/assets/editor.css?body=1" for 127.0.0.1 at 2012-05-02 16:06:57 -0700
+Served asset /editor.css - 200 OK (2ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-02 16:06:57 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (9ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-02 16:06:57 -0700
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 16:06:57 -0700
+Served asset /editor.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 16:06:57 -0700
+Served asset /variables.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 16:06:57 -0700
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/variableeditor" for 127.0.0.1 at 2012-05-02 16:08:34 -0700
+
+ActionController::RoutingError (undefined local variable or method `now' for EditorController:Class):
+  app/controllers/editor_controller.rb:3:in `<class:EditorController>'
+  app/controllers/editor_controller.rb:1:in `<top (required)>'
+
+
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (4.3ms)
+
+
+Started GET "/variableeditor" for 127.0.0.1 at 2012-05-02 16:09:02 -0700
+Processing by EditorController#variableeditor as HTML
+  [1m[36mVariable Load (0.1ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/variableeditor.html.erb within layouts/application (15.8ms)
+Completed 200 OK in 132ms (Views: 87.5ms | ActiveRecord: 3.5ms)
+
+
+Started GET "/assets/editor.css?body=1" for 127.0.0.1 at 2012-05-02 16:09:02 -0700
+Served asset /editor.css - 200 OK (2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-02 16:09:03 -0700
+Served asset /application.css - 200 OK (6ms)
+
+
+Started GET "/assets/variables.css?body=1" for 127.0.0.1 at 2012-05-02 16:09:03 -0700
+Served asset /variables.css - 200 OK (2ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-02 16:09:03 -0700
+Served asset /jquery_ujs.js - 200 OK (2ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-02 16:09:03 -0700
+Served asset /jquery.js - 200 OK (31ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 16:09:03 -0700
+Served asset /application.js - 200 OK (20ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 16:09:03 -0700
+Served asset /editor.js - 200 OK (35ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 16:09:03 -0700
+Served asset /variables.js - 200 OK (2ms)
+
+
+Started POST "/variableeditor" for 127.0.0.1 at 2012-05-02 16:09:08 -0700
+Processing by EditorController#variableeditor as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uxj9PKTw4uN8qwp7sXUxFTsSmLeHxuWl5nVbSpfYks=", "array"=>"1", "new_var"=>{"type"=>"integer", "name"=>"No", "description"=>"Day"}, "commit"=>"Create my variable"}
+  [1m[35mPermission Load (0.2ms)[0m  SELECT "permissions".* FROM "permissions" WHERE "permissions"."user_id" = 1 LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mPermission Exists (0.2ms)[0m  SELECT 1 FROM "permissions" WHERE ("permissions"."user_id" = 1 AND "permissions"."workflow_id" = 1) LIMIT 1
+  [1m[36mSQL (7.3ms)[0m  [1mINSERT INTO "permissions" ("created_at", "permissions", "updated_at", "user_id", "workflow_id") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", Wed, 02 May 2012 23:09:08 UTC +00:00], ["permissions", 4], ["updated_at", Wed, 02 May 2012 23:09:08 UTC +00:00], ["user_id", 1], ["workflow_id", 1]]
+  [1m[35m (2.2ms)[0m  commit transaction
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."first_name" = 'Michael' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT 1 FROM "users" WHERE "users"."email" = 'qweoui@adsfqw.com' LIMIT 1[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO "users" ("created_at", "email", "first_name", "last_name", "organization", "pwd_hash", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["created_at", Wed, 02 May 2012 23:09:08 UTC +00:00], ["email", "qweoui@adsfqw.com"], ["first_name", "Michael"], ["last_name", "Jones"], ["organization", "City Team"], ["pwd_hash", "21ad42ef24123589abcd"], ["updated_at", Wed, 02 May 2012 23:09:08 UTC +00:00]]
+  [1m[36m (1.6ms)[0m  [1mcommit transaction[0m
+  [1m[35mWorkflow Load (0.2ms)[0m  SELECT "workflows".* FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mWorkflow Exists (0.2ms)[0m  SELECT 1 FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1
+  [1m[36mSQL (0.7ms)[0m  [1mINSERT INTO "workflows" ("created_at", "description", "name", "updated_at") VALUES (?, ?, ?, ?)[0m  [["created_at", Wed, 02 May 2012 23:09:08 UTC +00:00], ["description", "This record should be removed eventually and is just for test purposes."], ["name", "Sample Workflow"], ["updated_at", Wed, 02 May 2012 23:09:08 UTC +00:00]]
+  [1m[35m (2.6ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mVariable Exists (0.3ms)[0m  SELECT 1 FROM "variables" WHERE ("variables"."name" = 'No' AND "variables"."workflow_id" = 1) LIMIT 1
+  [1m[36mWorkflow Load (0.1ms)[0m  [1mSELECT "workflows".* FROM "workflows" WHERE "workflows"."id" = 1 LIMIT 1[0m
+  [1m[35mWorkflow Exists (0.1ms)[0m  SELECT 1 FROM "workflows" WHERE ("workflows"."name" = 'Sample Workflow' AND "workflows"."id" != 1) LIMIT 1
+  [1m[36mVariable Load (0.1ms)[0m  [1mSELECT "variables".* FROM "variables" WHERE "variables"."workflow_id" = 1[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36mVariable Load (0.3ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/variableeditor.html.erb within layouts/application (2.8ms)
+Completed 200 OK in 312ms (Views: 12.2ms | ActiveRecord: 19.0ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 16:09:08 -0700
+Served asset /variables.js - 304 Not Modified (5ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 16:09:08 -0700
+Served asset /editor.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 16:09:08 -0700
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started GET "/variableeditor" for 127.0.0.1 at 2012-05-02 16:09:10 -0700
+Processing by EditorController#variableeditor as HTML
+  [1m[35mVariable Load (0.2ms)[0m  SELECT "variables".* FROM "variables" 
+  Rendered editor/variableeditor.html.erb within layouts/application (2.5ms)
+Completed 200 OK in 19ms (Views: 18.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 16:09:10 -0700
+Served asset /variables.js - 304 Not Modified (9ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 16:09:10 -0700
+Served asset /editor.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 16:09:10 -0700
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/variableeditor" for 127.0.0.1 at 2012-05-02 16:18:30 -0700
+Processing by EditorController#variableeditor as HTML
+  [1m[36mVariable Load (0.2ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/variableeditor.html.erb within layouts/application (22.1ms)
+Completed 200 OK in 176ms (Views: 109.9ms | ActiveRecord: 4.8ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 16:18:31 -0700
+Served asset /application.js - 304 Not Modified (66ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 16:18:31 -0700
+Served asset /variables.js - 304 Not Modified (23ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 16:18:31 -0700
+Served asset /editor.js - 304 Not Modified (2ms)
+
+
+Started POST "/variableeditor" for 127.0.0.1 at 2012-05-02 16:18:37 -0700
+Processing by EditorController#variableeditor as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uxj9PKTw4uN8qwp7sXUxFTsSmLeHxuWl5nVbSpfYks=", "const"=>"1", "new_var"=>{"type"=>"categorical", "name"=>"No Other", "description"=>"Hope"}, "commit"=>"Create my variable"}
+  [1m[35mPermission Load (0.3ms)[0m  SELECT "permissions".* FROM "permissions" WHERE "permissions"."user_id" = 1 LIMIT 1
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."first_name" = 'Michael' LIMIT 1[0m
+  [1m[35mWorkflow Load (0.2ms)[0m  SELECT "workflows".* FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mVariable Exists (0.3ms)[0m  SELECT 1 FROM "variables" WHERE ("variables"."name" = 'No Other' AND "variables"."workflow_id" = 1) LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35mVariable Load (0.2ms)[0m  SELECT "variables".* FROM "variables" 
+  Rendered editor/variableeditor.html.erb within layouts/application (4.9ms)
+Completed 200 OK in 279ms (Views: 19.4ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 16:18:38 -0700
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 16:18:38 -0700
+Served asset /editor.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 16:18:38 -0700
+Served asset /variables.js - 200 OK (0ms)
+
+
+Started GET "/variableeditor" for 127.0.0.1 at 2012-05-02 16:22:03 -0700
+Processing by EditorController#variableeditor as HTML
+  [1m[36mVariable Load (0.2ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/variableeditor.html.erb within layouts/application (21.3ms)
+Completed 200 OK in 174ms (Views: 115.1ms | ActiveRecord: 4.8ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 16:22:04 -0700
+Served asset /variables.js - 304 Not Modified (14ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 16:22:04 -0700
+Served asset /application.js - 304 Not Modified (19ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 16:22:04 -0700
+Served asset /editor.js - 304 Not Modified (2ms)
+
+
+Started POST "/variableeditor" for 127.0.0.1 at 2012-05-02 16:22:08 -0700
+Processing by EditorController#variableeditor as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uxj9PKTw4uN8qwp7sXUxFTsSmLeHxuWl5nVbSpfYks=", "const"=>"1", "new_var"=>{"type"=>"2", "name"=>"This", "description"=>"Is"}, "commit"=>"Create my variable"}
+  [1m[35mPermission Load (0.2ms)[0m  SELECT "permissions".* FROM "permissions" WHERE "permissions"."user_id" = 1 LIMIT 1
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."first_name" = 'Michael' LIMIT 1[0m
+  [1m[35mWorkflow Load (0.2ms)[0m  SELECT "workflows".* FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mVariable Exists (0.2ms)[0m  SELECT 1 FROM "variables" WHERE ("variables"."name" = 'This' AND "variables"."workflow_id" = 1) LIMIT 1
+  [1m[36mWorkflow Load (0.2ms)[0m  [1mSELECT "workflows".* FROM "workflows" WHERE "workflows"."id" = 1 LIMIT 1[0m
+  [1m[35mWorkflow Exists (0.2ms)[0m  SELECT 1 FROM "workflows" WHERE ("workflows"."name" = 'Sample Workflow' AND "workflows"."id" != 1) LIMIT 1
+  [1m[36mVariable Load (0.4ms)[0m  [1mSELECT "variables".* FROM "variables" WHERE "variables"."workflow_id" = 1[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36mVariable Load (0.4ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/variableeditor.html.erb within layouts/application (4.8ms)
+Completed 200 OK in 318ms (Views: 17.2ms | ActiveRecord: 3.3ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 16:22:09 -0700
+Served asset /editor.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 16:22:09 -0700
+Served asset /variables.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 16:22:09 -0700
+Served asset /application.js - 304 Not Modified (6ms)
+
+
+Started GET "/variableeditor" for 127.0.0.1 at 2012-05-02 16:23:55 -0700
+Processing by EditorController#variableeditor as HTML
+  [1m[36mVariable Load (0.2ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/variableeditor.html.erb within layouts/application (20.1ms)
+Completed 200 OK in 162ms (Views: 106.7ms | ActiveRecord: 4.7ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 16:23:56 -0700
+Served asset /variables.js - 304 Not Modified (8ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 16:23:56 -0700
+Served asset /application.js - 304 Not Modified (12ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 16:23:56 -0700
+Served asset /editor.js - 304 Not Modified (5ms)
+
+
+Started POST "/variableeditor" for 127.0.0.1 at 2012-05-02 16:24:01 -0700
+Processing by EditorController#variableeditor as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uxj9PKTw4uN8qwp7sXUxFTsSmLeHxuWl5nVbSpfYks=", "const"=>"1", "new_var"=>{"type"=>"3", "name"=>"Reload", "description"=>"Shotgun"}, "commit"=>"Create my variable"}
+  [1m[35mPermission Load (0.2ms)[0m  SELECT "permissions".* FROM "permissions" WHERE "permissions"."user_id" = 1 LIMIT 1
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."first_name" = 'Michael' LIMIT 1[0m
+  [1m[35mWorkflow Load (0.2ms)[0m  SELECT "workflows".* FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1
+Completed 500 Internal Server Error in 142ms
+
+NoMethodError (undefined method `to_i!' for nil:NilClass):
+  app/controllers/editor_controller.rb:25:in `new_variable'
+  app/controllers/editor_controller.rb:11:in `variableeditor'
+
+
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (6.0ms)
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (2.5ms)
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (35.5ms)
+
+
+Started POST "/variableeditor" for 127.0.0.1 at 2012-05-02 16:24:18 -0700
+Processing by EditorController#variableeditor as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uxj9PKTw4uN8qwp7sXUxFTsSmLeHxuWl5nVbSpfYks=", "const"=>"1", "new_var"=>{"type"=>"3", "name"=>"Reload", "description"=>"Shotgun"}, "commit"=>"Create my variable"}
+  [1m[36mPermission Load (0.2ms)[0m  [1mSELECT "permissions".* FROM "permissions" WHERE "permissions"."user_id" = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."first_name" = 'Michael' LIMIT 1
+  [1m[36mWorkflow Load (0.2ms)[0m  [1mSELECT "workflows".* FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1[0m
+Completed 500 Internal Server Error in 178ms
+
+NoMethodError (undefined method `to_i!' for "3":String):
+  app/controllers/editor_controller.rb:25:in `new_variable'
+  app/controllers/editor_controller.rb:11:in `variableeditor'
+
+
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (5.5ms)
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (2.1ms)
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (27.1ms)
+
+
+Started POST "/variableeditor" for 127.0.0.1 at 2012-05-02 16:24:39 -0700
+Processing by EditorController#variableeditor as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uxj9PKTw4uN8qwp7sXUxFTsSmLeHxuWl5nVbSpfYks=", "const"=>"1", "new_var"=>{"type"=>"3", "name"=>"Reload", "description"=>"Shotgun"}, "commit"=>"Create my variable"}
+  [1m[36mPermission Load (0.2ms)[0m  [1mSELECT "permissions".* FROM "permissions" WHERE "permissions"."user_id" = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.3ms)[0m  SELECT "users".* FROM "users" WHERE "users"."first_name" = 'Michael' LIMIT 1
+  [1m[36mWorkflow Load (0.2ms)[0m  [1mSELECT "workflows".* FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36mVariable Exists (0.6ms)[0m  [1mSELECT 1 FROM "variables" WHERE ("variables"."name" = 'Reload' AND "variables"."workflow_id" = 1) LIMIT 1[0m
+  [1m[35mWorkflow Load (0.2ms)[0m  SELECT "workflows".* FROM "workflows" WHERE "workflows"."id" = 1 LIMIT 1
+  [1m[36mWorkflow Exists (0.4ms)[0m  [1mSELECT 1 FROM "workflows" WHERE ("workflows"."name" = 'Sample Workflow' AND "workflows"."id" != 1) LIMIT 1[0m
+  [1m[35mVariable Load (0.2ms)[0m  SELECT "variables".* FROM "variables" WHERE "variables"."workflow_id" = 1
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35mVariable Load (0.3ms)[0m  SELECT "variables".* FROM "variables" 
+  Rendered editor/variableeditor.html.erb within layouts/application (11.9ms)
+Completed 200 OK in 464ms (Views: 111.0ms | ActiveRecord: 8.5ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-02 16:24:41 -0700
+Served asset /application.css - 200 OK (32ms)
+
+
+Started GET "/assets/editor.css?body=1" for 127.0.0.1 at 2012-05-02 16:24:41 -0700
+Served asset /editor.css - 200 OK (3ms)
+
+
+Started GET "/assets/variables.css?body=1" for 127.0.0.1 at 2012-05-02 16:24:41 -0700
+Served asset /variables.css - 200 OK (5ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 16:24:41 -0700
+Served asset /editor.js - 200 OK (5ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-02 16:24:41 -0700
+Served asset /jquery.js - 200 OK (7ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-02 16:24:41 -0700
+Served asset /jquery_ujs.js - 200 OK (5ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 16:24:41 -0700
+Served asset /application.js - 200 OK (26ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 16:24:41 -0700
+Served asset /variables.js - 200 OK (3ms)
+
+
+Started POST "/variableeditor" for 127.0.0.1 at 2012-05-02 16:25:21 -0700
+Processing by EditorController#variableeditor as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uxj9PKTw4uN8qwp7sXUxFTsSmLeHxuWl5nVbSpfYks=", "const"=>"1", "new_var"=>{"type"=>"3", "name"=>"Reload", "description"=>"Shotgun"}, "commit"=>"Create my variable"}
+  [1m[36mPermission Load (0.3ms)[0m  [1mSELECT "permissions".* FROM "permissions" WHERE "permissions"."user_id" = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.3ms)[0m  SELECT "users".* FROM "users" WHERE "users"."first_name" = 'Michael' LIMIT 1
+  [1m[36mWorkflow Load (0.2ms)[0m  [1mSELECT "workflows".* FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mVariable Exists (0.3ms)[0m  [1mSELECT 1 FROM "variables" WHERE ("variables"."name" = 'Reload' AND "variables"."workflow_id" = 1) LIMIT 1[0m
+  [1m[35mWorkflow Load (0.1ms)[0m  SELECT "workflows".* FROM "workflows" WHERE "workflows"."id" = 1 LIMIT 1
+  [1m[36mWorkflow Exists (0.1ms)[0m  [1mSELECT 1 FROM "workflows" WHERE ("workflows"."name" = 'Sample Workflow' AND "workflows"."id" != 1) LIMIT 1[0m
+  [1m[35mVariable Load (0.1ms)[0m  SELECT "variables".* FROM "variables" WHERE "variables"."workflow_id" = 1
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35mVariable Load (0.3ms)[0m  SELECT "variables".* FROM "variables" 
+  Rendered editor/variableeditor.html.erb within layouts/application (39.8ms)
+Completed 200 OK in 70ms (Views: 51.9ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/assets/editor.css?body=1" for 127.0.0.1 at 2012-05-02 16:25:21 -0700
+Served asset /editor.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.css?body=1" for 127.0.0.1 at 2012-05-02 16:25:21 -0700
+Served asset /variables.css - 304 Not Modified (5ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-02 16:25:21 -0700
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-02 16:25:21 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-02 16:25:21 -0700
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 16:25:21 -0700
+Served asset /variables.js - 200 OK (6ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 16:25:21 -0700
+Served asset /editor.js - 200 OK (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 16:25:21 -0700
+Served asset /application.js - 200 OK (2ms)
+
+
+Started POST "/variableeditor" for 127.0.0.1 at 2012-05-02 16:25:38 -0700
+Processing by EditorController#variableeditor as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uxj9PKTw4uN8qwp7sXUxFTsSmLeHxuWl5nVbSpfYks=", "const"=>"1", "new_var"=>{"type"=>"3", "name"=>"Reload", "description"=>"Shotgun"}, "commit"=>"Create my variable"}
+  [1m[36mPermission Load (0.3ms)[0m  [1mSELECT "permissions".* FROM "permissions" WHERE "permissions"."user_id" = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.3ms)[0m  SELECT "users".* FROM "users" WHERE "users"."first_name" = 'Michael' LIMIT 1
+  [1m[36mWorkflow Load (0.2ms)[0m  [1mSELECT "workflows".* FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mVariable Exists (0.3ms)[0m  [1mSELECT 1 FROM "variables" WHERE ("variables"."name" = 'Reload' AND "variables"."workflow_id" = 1) LIMIT 1[0m
+  [1m[35mWorkflow Load (0.2ms)[0m  SELECT "workflows".* FROM "workflows" WHERE "workflows"."id" = 1 LIMIT 1
+  [1m[36mWorkflow Exists (0.2ms)[0m  [1mSELECT 1 FROM "workflows" WHERE ("workflows"."name" = 'Sample Workflow' AND "workflows"."id" != 1) LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36mVariable Load (0.2ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/variableeditor.html.erb within layouts/application (51.5ms)
+Completed 200 OK in 480ms (Views: 111.9ms | ActiveRecord: 8.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-02 16:25:40 -0700
+Served asset /application.css - 304 Not Modified (7ms)
+
+
+Started GET "/assets/variables.css?body=1" for 127.0.0.1 at 2012-05-02 16:25:40 -0700
+Served asset /variables.css - 304 Not Modified (3ms)
+
+
+Started GET "/assets/editor.css?body=1" for 127.0.0.1 at 2012-05-02 16:25:40 -0700
+Served asset /editor.css - 304 Not Modified (3ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 16:25:41 -0700
+Served asset /variables.js - 200 OK (14ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-02 16:25:41 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (7ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-02 16:25:41 -0700
+Served asset /jquery.js - 304 Not Modified (9ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 16:25:41 -0700
+Served asset /editor.js - 200 OK (2ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 16:25:41 -0700
+Served asset /application.js - 200 OK (15ms)
+
+
+Started GET "/variableeditor" for 127.0.0.1 at 2012-05-02 16:26:05 -0700
+Processing by EditorController#variableeditor as HTML
+  [1m[36mVariable Load (0.3ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/variableeditor.html.erb within layouts/application (19.3ms)
+Completed 200 OK in 164ms (Views: 108.7ms | ActiveRecord: 4.9ms)
+
+
+Started GET "/assets/editor.css?body=1" for 127.0.0.1 at 2012-05-02 16:26:06 -0700
+Served asset /editor.css - 304 Not Modified (9ms)
+
+
+Started GET "/assets/variables.css?body=1" for 127.0.0.1 at 2012-05-02 16:26:06 -0700
+Served asset /variables.css - 304 Not Modified (4ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-02 16:26:06 -0700
+Served asset /application.css - 304 Not Modified (13ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-02 16:26:06 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-02 16:26:06 -0700
+Served asset /jquery.js - 304 Not Modified (5ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 16:26:06 -0700
+Served asset /variables.js - 304 Not Modified (8ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 16:26:06 -0700
+Served asset /editor.js - 304 Not Modified (5ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 16:26:06 -0700
+Served asset /application.js - 304 Not Modified (12ms)
+
+
+Started POST "/variableeditor" for 127.0.0.1 at 2012-05-02 16:26:12 -0700
+Processing by EditorController#variableeditor as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uxj9PKTw4uN8qwp7sXUxFTsSmLeHxuWl5nVbSpfYks=", "const"=>"1", "new_var"=>{"type"=>"2", "name"=>"Reload", "description"=>"Shotgun"}, "commit"=>"Create my variable"}
+  [1m[35mPermission Load (0.5ms)[0m  SELECT "permissions".* FROM "permissions" WHERE "permissions"."user_id" = 1 LIMIT 1
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."first_name" = 'Michael' LIMIT 1[0m
+  [1m[35mWorkflow Load (0.2ms)[0m  SELECT "workflows".* FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mVariable Exists (0.3ms)[0m  SELECT 1 FROM "variables" WHERE ("variables"."name" = 'Reload' AND "variables"."workflow_id" = 1) LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35mVariable Load (0.3ms)[0m  SELECT "variables".* FROM "variables" 
+  Rendered editor/variableeditor.html.erb within layouts/application (3.4ms)
+Completed 200 OK in 253ms (Views: 18.2ms | ActiveRecord: 3.5ms)
+
+
+Started GET "/assets/variables.css?body=1" for 127.0.0.1 at 2012-05-02 16:26:12 -0700
+Served asset /variables.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-02 16:26:12 -0700
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/editor.css?body=1" for 127.0.0.1 at 2012-05-02 16:26:12 -0700
+Served asset /editor.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-02 16:26:12 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 16:26:12 -0700
+Served asset /editor.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-02 16:26:12 -0700
+Served asset /application.css - 304 Not Modified (4ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 16:26:13 -0700
+Served asset /application.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 16:26:13 -0700
+Served asset /variables.js - 304 Not Modified (0ms)
+
+
+Started GET "/variableeditor" for 127.0.0.1 at 2012-05-02 16:29:59 -0700
+Processing by EditorController#variableeditor as HTML
+  [1m[36mVariable Load (0.3ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/variableeditor.html.erb within layouts/application (18.9ms)
+Completed 200 OK in 172ms (Views: 111.3ms | ActiveRecord: 5.3ms)
+
+
+Started GET "/assets/editor.css?body=1" for 127.0.0.1 at 2012-05-02 16:30:00 -0700
+Served asset /editor.css - 304 Not Modified (4ms)
+
+
+Started GET "/assets/variables.css?body=1" for 127.0.0.1 at 2012-05-02 16:30:00 -0700
+Served asset /variables.css - 304 Not Modified (5ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-02 16:30:00 -0700
+Served asset /application.css - 304 Not Modified (9ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-02 16:30:01 -0700
+Served asset /jquery.js - 304 Not Modified (6ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 16:30:01 -0700
+Served asset /variables.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-02 16:30:01 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (9ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 16:30:01 -0700
+Served asset /editor.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 16:30:01 -0700
+Served asset /application.js - 304 Not Modified (14ms)
+
+
+Started POST "/variableeditor" for 127.0.0.1 at 2012-05-02 16:30:06 -0700
+Processing by EditorController#variableeditor as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uxj9PKTw4uN8qwp7sXUxFTsSmLeHxuWl5nVbSpfYks=", "const"=>"1", "array"=>"1", "new_var"=>{"type"=>"3", "name"=>"Is", "description"=>"This"}, "commit"=>"Create my variable"}
+  [1m[35mPermission Load (0.3ms)[0m  SELECT "permissions".* FROM "permissions" WHERE "permissions"."user_id" = 1 LIMIT 1
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."first_name" = 'Michael' LIMIT 1[0m
+  [1m[35mWorkflow Load (0.3ms)[0m  SELECT "workflows".* FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mVariable Exists (0.2ms)[0m  SELECT 1 FROM "variables" WHERE ("variables"."name" = 'Is' AND "variables"."workflow_id" = 1) LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35mVariable Load (0.2ms)[0m  SELECT "variables".* FROM "variables" 
+  Rendered editor/variableeditor.html.erb within layouts/application (48.6ms)
+Completed 200 OK in 302ms (Views: 63.6ms | ActiveRecord: 3.4ms)
+
+
+Started GET "/assets/variables.css?body=1" for 127.0.0.1 at 2012-05-02 16:30:06 -0700
+Served asset /variables.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/editor.css?body=1" for 127.0.0.1 at 2012-05-02 16:30:06 -0700
+Served asset /editor.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-02 16:30:06 -0700
+Served asset /application.css - 304 Not Modified (5ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-02 16:30:06 -0700
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-02 16:30:06 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 16:30:06 -0700
+Served asset /editor.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 16:30:06 -0700
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 16:30:06 -0700
+Served asset /variables.js - 304 Not Modified (0ms)
+
+
+Started GET "/variableeditor" for 127.0.0.1 at 2012-05-02 16:32:11 -0700
+Processing by EditorController#variableeditor as HTML
+  [1m[36mVariable Load (0.2ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/variableeditor.html.erb within layouts/application (27.1ms)
+Completed 200 OK in 189ms (Views: 128.2ms | ActiveRecord: 4.9ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-02 16:32:12 -0700
+Served asset /application.css - 304 Not Modified (11ms)
+
+
+Started GET "/assets/variables.css?body=1" for 127.0.0.1 at 2012-05-02 16:32:12 -0700
+Served asset /variables.css - 304 Not Modified (11ms)
+
+
+Started GET "/assets/editor.css?body=1" for 127.0.0.1 at 2012-05-02 16:32:12 -0700
+Served asset /editor.css - 304 Not Modified (3ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 16:32:12 -0700
+Served asset /editor.js - 304 Not Modified (7ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-02 16:32:12 -0700
+Served asset /jquery.js - 304 Not Modified (6ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-02 16:32:12 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (10ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 16:32:12 -0700
+Served asset /variables.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 16:32:12 -0700
+Served asset /application.js - 304 Not Modified (18ms)
+
+
+Started POST "/variableeditor" for 127.0.0.1 at 2012-05-02 16:32:18 -0700
+Processing by EditorController#variableeditor as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uxj9PKTw4uN8qwp7sXUxFTsSmLeHxuWl5nVbSpfYks=", "array"=>"1", "new_var"=>{"type"=>"2", "name"=>"If", "description"=>"I'm not"}, "commit"=>"Create my variable"}
+  [1m[35mPermission Load (0.2ms)[0m  SELECT "permissions".* FROM "permissions" WHERE "permissions"."user_id" = 1 LIMIT 1
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."first_name" = 'Michael' LIMIT 1[0m
+  [1m[35mWorkflow Load (0.3ms)[0m  SELECT "workflows".* FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mVariable Exists (0.3ms)[0m  SELECT 1 FROM "variables" WHERE ("variables"."name" = 'If' AND "variables"."workflow_id" = 1) LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35mVariable Load (0.2ms)[0m  SELECT "variables".* FROM "variables" 
+  Rendered editor/variableeditor.html.erb within layouts/application (3.5ms)
+Completed 200 OK in 269ms (Views: 56.8ms | ActiveRecord: 3.6ms)
+
+
+Started GET "/assets/editor.css?body=1" for 127.0.0.1 at 2012-05-02 16:32:18 -0700
+Served asset /editor.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-02 16:32:18 -0700
+Served asset /application.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-02 16:32:18 -0700
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.css?body=1" for 127.0.0.1 at 2012-05-02 16:32:18 -0700
+Served asset /variables.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-02 16:32:18 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 16:32:18 -0700
+Served asset /application.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 16:32:18 -0700
+Served asset /editor.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 16:32:18 -0700
+Served asset /variables.js - 304 Not Modified (0ms)
+
+
+Started GET "/variableeditor" for 127.0.0.1 at 2012-05-02 16:33:57 -0700
+Processing by EditorController#variableeditor as HTML
+  [1m[36mVariable Load (0.2ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/variableeditor.html.erb within layouts/application (20.8ms)
+Completed 200 OK in 169ms (Views: 113.6ms | ActiveRecord: 5.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-02 16:33:58 -0700
+Served asset /application.css - 304 Not Modified (29ms)
+
+
+Started GET "/assets/variables.css?body=1" for 127.0.0.1 at 2012-05-02 16:33:58 -0700
+Served asset /variables.css - 304 Not Modified (5ms)
+
+
+Started GET "/assets/editor.css?body=1" for 127.0.0.1 at 2012-05-02 16:33:58 -0700
+Served asset /editor.css - 304 Not Modified (3ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-02 16:33:58 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-02 16:33:58 -0700
+Served asset /jquery.js - 304 Not Modified (7ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 16:33:58 -0700
+Served asset /editor.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 16:33:59 -0700
+Served asset /application.js - 304 Not Modified (16ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 16:33:59 -0700
+Served asset /variables.js - 304 Not Modified (3ms)
+
+
+Started POST "/variableeditor" for 127.0.0.1 at 2012-05-02 16:34:05 -0700
+Processing by EditorController#variableeditor as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uxj9PKTw4uN8qwp7sXUxFTsSmLeHxuWl5nVbSpfYks=", "array"=>"1", "new_var"=>{"type"=>"3", "name"=>"Galileo", "description"=>"Figaro"}, "commit"=>"Create my variable"}
+  [1m[35mPermission Load (0.3ms)[0m  SELECT "permissions".* FROM "permissions" WHERE "permissions"."user_id" = 1 LIMIT 1
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."first_name" = 'Michael' LIMIT 1[0m
+  [1m[35mWorkflow Load (0.3ms)[0m  SELECT "workflows".* FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mVariable Exists (0.2ms)[0m  SELECT 1 FROM "variables" WHERE ("variables"."name" = 'Galileo' AND "variables"."workflow_id" = 1) LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mrollback transaction[0m
+  [1m[35mVariable Load (0.2ms)[0m  SELECT "variables".* FROM "variables" 
+  Rendered editor/variableeditor.html.erb within layouts/application (59.6ms)
+Completed 200 OK in 281ms (Views: 72.6ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/assets/editor.css?body=1" for 127.0.0.1 at 2012-05-02 16:34:05 -0700
+Served asset /editor.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-02 16:34:05 -0700
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-02 16:34:05 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.css?body=1" for 127.0.0.1 at 2012-05-02 16:34:05 -0700
+Served asset /variables.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-02 16:34:05 -0700
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 16:34:05 -0700
+Served asset /editor.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 16:34:05 -0700
+Served asset /variables.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 16:34:05 -0700
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started GET "/variableeditor" for 127.0.0.1 at 2012-05-02 16:37:06 -0700
+Processing by EditorController#variableeditor as HTML
+  [1m[36mVariable Load (0.2ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/variableeditor.html.erb within layouts/application (21.1ms)
+Completed 200 OK in 180ms (Views: 117.4ms | ActiveRecord: 4.8ms)
+
+
+Started GET "/assets/editor.css?body=1" for 127.0.0.1 at 2012-05-02 16:37:07 -0700
+Served asset /editor.css - 304 Not Modified (7ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-02 16:37:07 -0700
+Served asset /application.css - 304 Not Modified (7ms)
+
+
+Started GET "/assets/variables.css?body=1" for 127.0.0.1 at 2012-05-02 16:37:07 -0700
+Served asset /variables.css - 304 Not Modified (5ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-02 16:37:08 -0700
+Served asset /jquery.js - 304 Not Modified (17ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-02 16:37:08 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 16:37:08 -0700
+Served asset /editor.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 16:37:08 -0700
+Served asset /variables.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 16:37:08 -0700
+Served asset /application.js - 304 Not Modified (11ms)
+
+
+Started POST "/variableeditor" for 127.0.0.1 at 2012-05-02 16:37:12 -0700
+Processing by EditorController#variableeditor as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uxj9PKTw4uN8qwp7sXUxFTsSmLeHxuWl5nVbSpfYks=", "const"=>"1", "new_var"=>{"type"=>"0", "name"=>"Vis", "description"=>"Milna"}, "commit"=>"Create my variable"}
+  [1m[35mPermission Load (0.3ms)[0m  SELECT "permissions".* FROM "permissions" WHERE "permissions"."user_id" = 1 LIMIT 1
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."first_name" = 'Michael' LIMIT 1[0m
+  [1m[35mWorkflow Load (0.2ms)[0m  SELECT "workflows".* FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mVariable Exists (0.7ms)[0m  SELECT 1 FROM "variables" WHERE ("variables"."name" = 'Vis' AND "variables"."workflow_id" = 1) LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35mVariable Load (0.2ms)[0m  SELECT "variables".* FROM "variables" 
+  Rendered editor/variableeditor.html.erb within layouts/application (4.3ms)
+Completed 200 OK in 229ms (Views: 15.7ms | ActiveRecord: 3.3ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-02 16:37:12 -0700
+Served asset /application.css - 304 Not Modified (15ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-02 16:37:12 -0700
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.css?body=1" for 127.0.0.1 at 2012-05-02 16:37:12 -0700
+Served asset /variables.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-02 16:37:12 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/editor.css?body=1" for 127.0.0.1 at 2012-05-02 16:37:12 -0700
+Served asset /editor.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 16:37:12 -0700
+Served asset /editor.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 16:37:12 -0700
+Served asset /variables.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 16:37:12 -0700
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/variableeditor" for 127.0.0.1 at 2012-05-02 16:38:55 -0700
+Processing by EditorController#variableeditor as HTML
+  [1m[36mVariable Load (0.4ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/variableeditor.html.erb within layouts/application (21.2ms)
+Completed 200 OK in 188ms (Views: 124.9ms | ActiveRecord: 6.3ms)
+
+
+Started GET "/assets/editor.css?body=1" for 127.0.0.1 at 2012-05-02 16:38:56 -0700
+Served asset /editor.css - 304 Not Modified (13ms)
+
+
+Started GET "/assets/variables.css?body=1" for 127.0.0.1 at 2012-05-02 16:38:56 -0700
+Served asset /variables.css - 304 Not Modified (33ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-02 16:38:56 -0700
+Served asset /application.css - 304 Not Modified (15ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 16:38:57 -0700
+Served asset /editor.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-02 16:38:57 -0700
+Served asset /jquery.js - 304 Not Modified (5ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-02 16:38:57 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (14ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 16:38:57 -0700
+Served asset /variables.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 16:38:57 -0700
+Served asset /application.js - 304 Not Modified (15ms)
+
+
+Started POST "/variableeditor" for 127.0.0.1 at 2012-05-02 16:39:00 -0700
+Processing by EditorController#variableeditor as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uxj9PKTw4uN8qwp7sXUxFTsSmLeHxuWl5nVbSpfYks=", "new_var"=>{"type"=>"3", "name"=>"Just", "description"=>"Wanna"}, "commit"=>"Create my variable"}
+  [1m[35mPermission Load (0.2ms)[0m  SELECT "permissions".* FROM "permissions" WHERE "permissions"."user_id" = 1 LIMIT 1
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."first_name" = 'Michael' LIMIT 1[0m
+  [1m[35mWorkflow Load (0.2ms)[0m  SELECT "workflows".* FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mVariable Exists (0.2ms)[0m  SELECT 1 FROM "variables" WHERE ("variables"."name" = 'Just' AND "variables"."workflow_id" = 1) LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35mVariable Load (0.2ms)[0m  SELECT "variables".* FROM "variables" 
+  Rendered editor/variableeditor.html.erb within layouts/application (48.4ms)
+Completed 200 OK in 291ms (Views: 60.9ms | ActiveRecord: 2.7ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-02 16:39:01 -0700
+Served asset /application.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/editor.css?body=1" for 127.0.0.1 at 2012-05-02 16:39:01 -0700
+Served asset /editor.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-02 16:39:01 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.css?body=1" for 127.0.0.1 at 2012-05-02 16:39:01 -0700
+Served asset /variables.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-02 16:39:01 -0700
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 16:39:01 -0700
+Served asset /editor.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 16:39:01 -0700
+Served asset /application.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 16:39:01 -0700
+Served asset /variables.js - 304 Not Modified (1ms)
+
+
+Started GET "/variableeditor" for 127.0.0.1 at 2012-05-02 16:41:07 -0700
+Processing by EditorController#variableeditor as HTML
+  [1m[36mVariable Load (0.2ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/variableeditor.html.erb within layouts/application (23.2ms)
+Completed 200 OK in 179ms (Views: 114.6ms | ActiveRecord: 4.8ms)
+
+
+Started GET "/assets/variables.css?body=1" for 127.0.0.1 at 2012-05-02 16:41:08 -0700
+Served asset /variables.css - 304 Not Modified (3ms)
+
+
+Started GET "/assets/editor.css?body=1" for 127.0.0.1 at 2012-05-02 16:41:08 -0700
+Served asset /editor.css - 304 Not Modified (3ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-02 16:41:09 -0700
+Served asset /application.css - 304 Not Modified (11ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 16:41:09 -0700
+Served asset /editor.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-02 16:41:09 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (17ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-02 16:41:09 -0700
+Served asset /jquery.js - 304 Not Modified (10ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 16:41:09 -0700
+Served asset /variables.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 16:41:09 -0700
+Served asset /application.js - 304 Not Modified (24ms)
+
+
+Started POST "/variableeditor" for 127.0.0.1 at 2012-05-02 16:41:14 -0700
+Processing by EditorController#variableeditor as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uxj9PKTw4uN8qwp7sXUxFTsSmLeHxuWl5nVbSpfYks=", "const"=>"1", "new_var"=>{"type"=>"2", "name"=>"just", "description"=>"matter"}, "commit"=>"Create my variable"}
+  [1m[35mPermission Load (0.2ms)[0m  SELECT "permissions".* FROM "permissions" WHERE "permissions"."user_id" = 1 LIMIT 1
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."first_name" = 'Michael' LIMIT 1[0m
+  [1m[35mWorkflow Load (0.4ms)[0m  SELECT "workflows".* FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36mVariable Load (0.3ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/variableeditor.html.erb within layouts/application (7.0ms)
+Completed 200 OK in 252ms (Views: 22.6ms | ActiveRecord: 3.5ms)
+
+
+Started GET "/assets/variables.css?body=1" for 127.0.0.1 at 2012-05-02 16:41:14 -0700
+Served asset /variables.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/editor.css?body=1" for 127.0.0.1 at 2012-05-02 16:41:14 -0700
+Served asset /editor.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-02 16:41:14 -0700
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-02 16:41:14 -0700
+Served asset /application.css - 304 Not Modified (3ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-02 16:41:14 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 16:41:14 -0700
+Served asset /application.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 16:41:14 -0700
+Served asset /editor.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 16:41:14 -0700
+Served asset /variables.js - 304 Not Modified (1ms)
+
+
+Started POST "/variableeditor" for 127.0.0.1 at 2012-05-02 16:41:48 -0700
+Processing by EditorController#variableeditor as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uxj9PKTw4uN8qwp7sXUxFTsSmLeHxuWl5nVbSpfYks=", "array"=>"1", "new_var"=>{"type"=>"2", "name"=>"What", "description"=>"Is"}, "commit"=>"Create my variable"}
+  [1m[35mPermission Load (0.2ms)[0m  SELECT "permissions".* FROM "permissions" WHERE "permissions"."user_id" = 1 LIMIT 1
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."first_name" = 'Michael' LIMIT 1[0m
+  [1m[35mWorkflow Load (0.2ms)[0m  SELECT "workflows".* FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36mVariable Load (0.2ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/variableeditor.html.erb within layouts/application (4.5ms)
+Completed 200 OK in 34ms (Views: 19.8ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/assets/editor.css?body=1" for 127.0.0.1 at 2012-05-02 16:41:49 -0700
+Served asset /editor.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-02 16:41:49 -0700
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.css?body=1" for 127.0.0.1 at 2012-05-02 16:41:49 -0700
+Served asset /variables.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-02 16:41:49 -0700
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-02 16:41:49 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 16:41:49 -0700
+Served asset /editor.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 16:41:49 -0700
+Served asset /variables.js - 304 Not Modified (50ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 16:41:49 -0700
+Served asset /application.js - 200 OK (2ms)
+
+
+Started GET "/variableeditor" for 127.0.0.1 at 2012-05-02 16:42:40 -0700
+Processing by EditorController#variableeditor as HTML
+  [1m[36mVariable Load (0.2ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/variableeditor.html.erb within layouts/application (22.1ms)
+Completed 200 OK in 176ms (Views: 109.8ms | ActiveRecord: 4.3ms)
+
+
+Started GET "/assets/variables.css?body=1" for 127.0.0.1 at 2012-05-02 16:42:41 -0700
+Served asset /variables.css - 304 Not Modified (7ms)
+
+
+Started GET "/assets/editor.css?body=1" for 127.0.0.1 at 2012-05-02 16:42:41 -0700
+Served asset /editor.css - 304 Not Modified (3ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-02 16:42:41 -0700
+Served asset /application.css - 304 Not Modified (11ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 16:42:41 -0700
+Served asset /variables.js - 304 Not Modified (5ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 16:42:41 -0700
+Served asset /editor.js - 304 Not Modified (5ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-02 16:42:41 -0700
+Served asset /jquery.js - 304 Not Modified (12ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-02 16:42:41 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 16:42:41 -0700
+Served asset /application.js - 304 Not Modified (28ms)
+
+
+Started POST "/variableeditor" for 127.0.0.1 at 2012-05-02 16:42:46 -0700
+Processing by EditorController#variableeditor as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uxj9PKTw4uN8qwp7sXUxFTsSmLeHxuWl5nVbSpfYks=", "array"=>"1", "new_var"=>{"type"=>"2", "name"=>"Testing", "description"=>"One"}, "commit"=>"Create my variable"}
+  [1m[35mPermission Load (0.3ms)[0m  SELECT "permissions".* FROM "permissions" WHERE "permissions"."user_id" = 1 LIMIT 1
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."first_name" = 'Michael' LIMIT 1[0m
+  [1m[35mWorkflow Load (0.2ms)[0m  SELECT "workflows".* FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36mVariable Load (0.2ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/variableeditor.html.erb within layouts/application (3.9ms)
+Completed 200 OK in 210ms (Views: 21.8ms | ActiveRecord: 2.6ms)
+
+
+Started GET "/assets/variables.css?body=1" for 127.0.0.1 at 2012-05-02 16:42:47 -0700
+Served asset /variables.css - 304 Not Modified (9ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-02 16:42:47 -0700
+Served asset /application.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/editor.css?body=1" for 127.0.0.1 at 2012-05-02 16:42:47 -0700
+Served asset /editor.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-02 16:42:47 -0700
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 16:42:47 -0700
+Served asset /editor.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-02 16:42:47 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 16:42:47 -0700
+Served asset /variables.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 16:42:47 -0700
+Served asset /application.js - 304 Not Modified (1ms)
+  [1m[36m (0.3ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+  [1m[35m (0.3ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations" 
+  [1m[36m (0.2ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Migrating to CreatePermissions (20120501054742)
+  [1m[35m (0.1ms)[0m  select sqlite_version(*)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (1.1ms)[0m  DROP TABLE "permissions"
+  [1m[36m (0.2ms)[0m  [1mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = '20120501054742'[0m
+  [1m[35m (2.5ms)[0m  commit transaction
+Migrating to CreateWorkflows (20120501045403)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (1.0ms)[0m  DROP TABLE "workflows"
+  [1m[36m (0.2ms)[0m  [1mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = '20120501045403'[0m
+  [1m[35m (2.1ms)[0m  commit transaction
+Migrating to CreateUsers (20120501044220)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.7ms)[0m  DROP TABLE "users"
+  [1m[36m (0.2ms)[0m  [1mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = '20120501044220'[0m
+  [1m[35m (2.3ms)[0m  commit transaction
+Migrating to AddMinimumViableVariableColumns (20120501031111)
+  [1m[36m (0.3ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.8ms)[0m  DROP TABLE "variables"
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "variables" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "value" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.2ms)[0m  DELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = '20120501031111'
+  [1m[36m (2.4ms)[0m  [1mcommit transaction[0m
+Migrating to CreateVariablesEditors (20120430223409)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.7ms)[0m  [1mDROP TABLE "variables_editors"[0m
+  [1m[35m (0.2ms)[0m  DELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = '20120430223409'
+  [1m[36m (2.5ms)[0m  [1mcommit transaction[0m
+Migrating to CreateVariables (20120421020715)
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36m (0.8ms)[0m  [1mDROP TABLE "variables"[0m
+  [1m[35m (0.2ms)[0m  DELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = '20120421020715'
+  [1m[36m (2.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.5ms)[0m  select sqlite_version(*)
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+  [1m[36m (0.2ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Migrating to CreateVariables (20120421020715)
+  [1m[35m (0.1ms)[0m  select sqlite_version(*)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.9ms)[0m  CREATE TABLE "variables" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "value" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20120421020715')[0m
+  [1m[35m (2.2ms)[0m  commit transaction
+Migrating to CreateVariablesEditors (20120430223409)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.8ms)[0m  CREATE TABLE "variables_editors" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "type" varchar(255), "value" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20120430223409')[0m
+  [1m[35m (3.1ms)[0m  commit transaction
+Migrating to AddMinimumViableVariableColumns (20120501031111)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.7ms)[0m  DROP TABLE "variables"
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "variables" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(64) NOT NULL, "description" varchar(255) NOT NULL, "workflow_id" integer NOT NULL, "type" integer NOT NULL, "array" integer NOT NULL, "const" integer NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20120501031111')
+  [1m[36m (3.7ms)[0m  [1mcommit transaction[0m
+Migrating to CreateUsers (20120501044220)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.7ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar(255) NOT NULL, "first_name" varchar(255) NOT NULL, "last_name" varchar(255) NOT NULL, "organization" varchar(255), "pwd_hash" varchar(255) NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20120501044220')
+  [1m[36m (2.0ms)[0m  [1mcommit transaction[0m
+Migrating to CreateWorkflows (20120501045403)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.8ms)[0m  [1mCREATE TABLE "workflows" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(64) NOT NULL, "description" varchar(255) NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20120501045403')
+  [1m[36m (2.6ms)[0m  [1mcommit transaction[0m
+Migrating to CreatePermissions (20120501054742)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.7ms)[0m  [1mCREATE TABLE "permissions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "workflow_id" integer NOT NULL, "user_id" integer NOT NULL, "permissions" integer NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20120501054742')
+  [1m[36m (2.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.8ms)[0m  select sqlite_version(*)
+  [1m[36m (0.2ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("permissions")
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("users")[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("variables")
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("variables_editors")[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("workflows")
+
+
+Started GET "/variableeditor" for 127.0.0.1 at 2012-05-02 16:46:23 -0700
+Processing by EditorController#variableeditor as HTML
+  [1m[36mVariable Load (0.2ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/variableeditor.html.erb within layouts/application (23.2ms)
+Completed 200 OK in 186ms (Views: 118.2ms | ActiveRecord: 4.9ms)
+
+
+Started GET "/assets/variables.css?body=1" for 127.0.0.1 at 2012-05-02 16:46:24 -0700
+Served asset /variables.css - 304 Not Modified (4ms)
+
+
+Started GET "/assets/editor.css?body=1" for 127.0.0.1 at 2012-05-02 16:46:24 -0700
+Served asset /editor.css - 304 Not Modified (4ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-02 16:46:24 -0700
+Served asset /application.css - 304 Not Modified (9ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 16:46:24 -0700
+Served asset /editor.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-02 16:46:24 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (14ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-02 16:46:24 -0700
+Served asset /jquery.js - 304 Not Modified (5ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 16:46:24 -0700
+Served asset /variables.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 16:46:24 -0700
+Served asset /application.js - 304 Not Modified (23ms)
+
+
+Started POST "/variableeditor" for 127.0.0.1 at 2012-05-02 16:46:30 -0700
+Processing by EditorController#variableeditor as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uxj9PKTw4uN8qwp7sXUxFTsSmLeHxuWl5nVbSpfYks=", "const"=>"1", "new_var"=>{"type"=>"2", "name"=>"Test", "description"=>"This"}, "commit"=>"Create my variable"}
+  [1m[35mPermission Load (0.3ms)[0m  SELECT "permissions".* FROM "permissions" WHERE "permissions"."user_id" = 1 LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mPermission Exists (0.2ms)[0m  SELECT 1 FROM "permissions" WHERE ("permissions"."user_id" = 1 AND "permissions"."workflow_id" = 1) LIMIT 1
+  [1m[36mSQL (8.0ms)[0m  [1mINSERT INTO "permissions" ("created_at", "permissions", "updated_at", "user_id", "workflow_id") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", Wed, 02 May 2012 23:46:30 UTC +00:00], ["permissions", 4], ["updated_at", Wed, 02 May 2012 23:46:30 UTC +00:00], ["user_id", 1], ["workflow_id", 1]]
+  [1m[35m (2.6ms)[0m  commit transaction
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."first_name" = 'Michael' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT 1 FROM "users" WHERE "users"."email" = 'qweoui@adsfqw.com' LIMIT 1[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "users" ("created_at", "email", "first_name", "last_name", "organization", "pwd_hash", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["created_at", Wed, 02 May 2012 23:46:30 UTC +00:00], ["email", "qweoui@adsfqw.com"], ["first_name", "Michael"], ["last_name", "Jones"], ["organization", "City Team"], ["pwd_hash", "21ad42ef24123589abcd"], ["updated_at", Wed, 02 May 2012 23:46:30 UTC +00:00]]
+  [1m[36m (2.1ms)[0m  [1mcommit transaction[0m
+  [1m[35mWorkflow Load (0.2ms)[0m  SELECT "workflows".* FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mWorkflow Exists (0.2ms)[0m  SELECT 1 FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1
+  [1m[36mSQL (0.8ms)[0m  [1mINSERT INTO "workflows" ("created_at", "description", "name", "updated_at") VALUES (?, ?, ?, ?)[0m  [["created_at", Wed, 02 May 2012 23:46:30 UTC +00:00], ["description", "This record should be removed eventually and is just for test purposes."], ["name", "Sample Workflow"], ["updated_at", Wed, 02 May 2012 23:46:30 UTC +00:00]]
+  [1m[35m (2.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.9ms)[0m  INSERT INTO "variables" ("array", "const", "created_at", "description", "name", "type", "updated_at", "workflow_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["array", 0], ["const", 0], ["created_at", Wed, 02 May 2012 23:46:30 UTC +00:00], ["description", "This"], ["name", "Test"], ["type", 2], ["updated_at", Wed, 02 May 2012 23:46:30 UTC +00:00], ["workflow_id", 1]]
+  [1m[36m (2.7ms)[0m  [1mcommit transaction[0m
+  [1m[35mVariable Load (0.3ms)[0m  SELECT "variables".* FROM "variables" 
+Completed 500 Internal Server Error in 272ms
+
+ActiveRecord::SubclassNotFound (The single-table inheritance mechanism failed to locate the subclass: '2'. This error is raised because the column 'type' is reserved for storing the class in case of inheritance. Please rename this column if you didn't intend it to be used for storing the inheritance class or overwrite Variable.inheritance_column to use another column for that information.):
+  app/controllers/editor_controller.rb:13:in `variableeditor'
+
+
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (9.1ms)
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (2.7ms)
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (43.2ms)
+  [1m[36m (0.4ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+  [1m[35m (0.2ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations" 
+  [1m[36m (0.2ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Migrating to CreatePermissions (20120501054742)
+  [1m[35m (0.2ms)[0m  select sqlite_version(*)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (78.8ms)[0m  DROP TABLE "permissions"
+  [1m[36m (0.3ms)[0m  [1mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = '20120501054742'[0m
+  [1m[35m (2.4ms)[0m  commit transaction
+Migrating to CreateWorkflows (20120501045403)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.7ms)[0m  DROP TABLE "workflows"
+  [1m[36m (0.5ms)[0m  [1mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = '20120501045403'[0m
+  [1m[35m (2.1ms)[0m  commit transaction
+Migrating to CreateUsers (20120501044220)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  DROP TABLE "users"
+  [1m[36m (0.2ms)[0m  [1mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = '20120501044220'[0m
+  [1m[35m (2.0ms)[0m  commit transaction
+Migrating to AddMinimumViableVariableColumns (20120501031111)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.9ms)[0m  DROP TABLE "variables"
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "variables" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "value" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.2ms)[0m  DELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = '20120501031111'
+  [1m[36m (2.1ms)[0m  [1mcommit transaction[0m
+Migrating to CreateVariablesEditors (20120430223409)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.7ms)[0m  [1mDROP TABLE "variables_editors"[0m
+  [1m[35m (0.2ms)[0m  DELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = '20120430223409'
+  [1m[36m (2.2ms)[0m  [1mcommit transaction[0m
+Migrating to CreateVariables (20120421020715)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (1.0ms)[0m  [1mDROP TABLE "variables"[0m
+  [1m[35m (0.4ms)[0m  DELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = '20120421020715'
+  [1m[36m (2.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.4ms)[0m  select sqlite_version(*)
+  [1m[36m (0.3ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+
+
+Started GET "/variableeditor" for 127.0.0.1 at 2012-05-02 16:47:53 -0700
+Processing by EditorController#variableeditor as HTML
+Completed 500 Internal Server Error in 61ms
+
+ActiveRecord::StatementInvalid (Could not find table 'variables'):
+  app/controllers/editor_controller.rb:13:in `variableeditor'
+
+
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (7.8ms)
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (2.3ms)
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (33.9ms)
+
+
+Started GET "/variableeditor" for 127.0.0.1 at 2012-05-02 16:47:56 -0700
+Processing by EditorController#variableeditor as HTML
+Completed 500 Internal Server Error in 1ms
+
+ActiveRecord::StatementInvalid (Could not find table 'variables'):
+  app/controllers/editor_controller.rb:13:in `variableeditor'
+
+
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (8.7ms)
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (2.3ms)
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (28.0ms)
+  [1m[36m (0.2ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+  [1m[35m (0.6ms)[0m  select sqlite_version(*)
+  [1m[36m (0.2ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+  [1m[36m (0.2ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Migrating to CreateVariables (20120421020715)
+  [1m[35m (0.1ms)[0m  select sqlite_version(*)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (1.1ms)[0m  CREATE TABLE "variables" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "value" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20120421020715')[0m
+  [1m[35m (2.8ms)[0m  commit transaction
+Migrating to CreateVariablesEditors (20120430223409)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.8ms)[0m  CREATE TABLE "variables_editors" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "type" varchar(255), "value" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20120430223409')[0m
+  [1m[35m (5.4ms)[0m  commit transaction
+Migrating to AddMinimumViableVariableColumns (20120501031111)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.7ms)[0m  DROP TABLE "variables"
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "variables" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(64) NOT NULL, "description" varchar(255) NOT NULL, "workflow_id" integer NOT NULL, "variable_type" integer NOT NULL, "array" integer NOT NULL, "const" integer NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20120501031111')
+  [1m[36m (2.6ms)[0m  [1mcommit transaction[0m
+Migrating to CreateUsers (20120501044220)
+  [1m[35m (0.3ms)[0m  begin transaction
+  [1m[36m (0.8ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar(255) NOT NULL, "first_name" varchar(255) NOT NULL, "last_name" varchar(255) NOT NULL, "organization" varchar(255), "pwd_hash" varchar(255) NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20120501044220')
+  [1m[36m (2.6ms)[0m  [1mcommit transaction[0m
+Migrating to CreateWorkflows (20120501045403)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (1.0ms)[0m  [1mCREATE TABLE "workflows" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(64) NOT NULL, "description" varchar(255) NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20120501045403')
+  [1m[36m (2.0ms)[0m  [1mcommit transaction[0m
+Migrating to CreatePermissions (20120501054742)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.8ms)[0m  [1mCREATE TABLE "permissions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "workflow_id" integer NOT NULL, "user_id" integer NOT NULL, "permissions" integer NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20120501054742')
+  [1m[36m (2.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.6ms)[0m  select sqlite_version(*)
+  [1m[36m (0.2ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("permissions")
+  [1m[36m (0.1ms)[0m  [1mPRAGMA index_list("users")[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("variables")
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("variables_editors")[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("workflows")
+
+
+Started GET "/variableeditor" for 127.0.0.1 at 2012-05-02 16:48:24 -0700
+Processing by EditorController#variableeditor as HTML
+  [1m[36mVariable Load (0.2ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/variableeditor.html.erb within layouts/application (21.3ms)
+Completed 200 OK in 188ms (Views: 122.5ms | ActiveRecord: 5.8ms)
+
+
+Started GET "/assets/editor.css?body=1" for 127.0.0.1 at 2012-05-02 16:48:25 -0700
+Served asset /editor.css - 200 OK (12ms)
+
+
+Started GET "/assets/variables.css?body=1" for 127.0.0.1 at 2012-05-02 16:48:25 -0700
+Served asset /variables.css - 200 OK (3ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-02 16:48:25 -0700
+Served asset /application.css - 200 OK (13ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-02 16:48:25 -0700
+Served asset /jquery_ujs.js - 200 OK (15ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-02 16:48:25 -0700
+Served asset /jquery.js - 200 OK (7ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 16:48:26 -0700
+Served asset /editor.js - 304 Not Modified (15ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 16:48:26 -0700
+Served asset /application.js - 304 Not Modified (13ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 16:48:26 -0700
+Served asset /variables.js - 304 Not Modified (76ms)
+
+
+Started POST "/variableeditor" for 127.0.0.1 at 2012-05-02 16:48:29 -0700
+Processing by EditorController#variableeditor as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uxj9PKTw4uN8qwp7sXUxFTsSmLeHxuWl5nVbSpfYks=", "array"=>"1", "new_var"=>{"variable_type"=>"2", "name"=>"Test", "description"=>"One"}, "commit"=>"Create my variable"}
+  [1m[35mPermission Load (0.2ms)[0m  SELECT "permissions".* FROM "permissions" WHERE "permissions"."user_id" = 1 LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mPermission Exists (0.2ms)[0m  SELECT 1 FROM "permissions" WHERE ("permissions"."user_id" = 1 AND "permissions"."workflow_id" = 1) LIMIT 1
+  [1m[36mSQL (7.8ms)[0m  [1mINSERT INTO "permissions" ("created_at", "permissions", "updated_at", "user_id", "workflow_id") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", Wed, 02 May 2012 23:48:29 UTC +00:00], ["permissions", 4], ["updated_at", Wed, 02 May 2012 23:48:29 UTC +00:00], ["user_id", 1], ["workflow_id", 1]]
+  [1m[35m (2.8ms)[0m  commit transaction
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."first_name" = 'Michael' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT 1 FROM "users" WHERE "users"."email" = 'qweoui@adsfqw.com' LIMIT 1[0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO "users" ("created_at", "email", "first_name", "last_name", "organization", "pwd_hash", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["created_at", Wed, 02 May 2012 23:48:29 UTC +00:00], ["email", "qweoui@adsfqw.com"], ["first_name", "Michael"], ["last_name", "Jones"], ["organization", "City Team"], ["pwd_hash", "21ad42ef24123589abcd"], ["updated_at", Wed, 02 May 2012 23:48:29 UTC +00:00]]
+  [1m[36m (2.3ms)[0m  [1mcommit transaction[0m
+  [1m[35mWorkflow Load (0.2ms)[0m  SELECT "workflows".* FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mWorkflow Exists (0.3ms)[0m  SELECT 1 FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1
+  [1m[36mSQL (0.9ms)[0m  [1mINSERT INTO "workflows" ("created_at", "description", "name", "updated_at") VALUES (?, ?, ?, ?)[0m  [["created_at", Wed, 02 May 2012 23:48:29 UTC +00:00], ["description", "This record should be removed eventually and is just for test purposes."], ["name", "Sample Workflow"], ["updated_at", Wed, 02 May 2012 23:48:29 UTC +00:00]]
+  [1m[35m (2.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.9ms)[0m  INSERT INTO "variables" ("array", "const", "created_at", "description", "name", "updated_at", "variable_type", "workflow_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["array", 0], ["const", 0], ["created_at", Wed, 02 May 2012 23:48:29 UTC +00:00], ["description", "One"], ["name", "Test"], ["updated_at", Wed, 02 May 2012 23:48:29 UTC +00:00], ["variable_type", 2], ["workflow_id", 1]]
+  [1m[36m (8.5ms)[0m  [1mcommit transaction[0m
+  [1m[35mVariable Load (0.3ms)[0m  SELECT "variables".* FROM "variables" 
+  Rendered editor/variableeditor.html.erb within layouts/application (43.3ms)
+Completed 500 Internal Server Error in 316ms
+
+ActionView::Template::Error (undefined method `type' for #<Variable:0x4e0b088>):
+    34:     <tr>
+    35:       <td><%= variable.const %></td>
+    36:       <td><%= variable.array %></td>
+    37:       <td><%= variable.type %></td>
+    38:       <td><%= variable.name %></td>
+    39:       <td><%= variable.description %></td>
+    40:     </tr>
+  app/views/editor/variableeditor.html.erb:37:in `block in _app_views_editor_variableeditor_html_erb__649550549_882530'
+  app/views/editor/variableeditor.html.erb:33:in `each'
+  app/views/editor/variableeditor.html.erb:33:in `_app_views_editor_variableeditor_html_erb__649550549_882530'
+  app/controllers/editor_controller.rb:14:in `variableeditor'
+
+
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (8.4ms)
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (2.6ms)
+  Rendered /Users/Kurt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (40.6ms)
+
+
+Started POST "/variableeditor" for 127.0.0.1 at 2012-05-02 16:48:47 -0700
+Processing by EditorController#variableeditor as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uxj9PKTw4uN8qwp7sXUxFTsSmLeHxuWl5nVbSpfYks=", "array"=>"1", "new_var"=>{"variable_type"=>"2", "name"=>"Test", "description"=>"One"}, "commit"=>"Create my variable"}
+  [1m[36mPermission Load (0.3ms)[0m  [1mSELECT "permissions".* FROM "permissions" WHERE "permissions"."user_id" = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.5ms)[0m  SELECT "users".* FROM "users" WHERE "users"."first_name" = 'Michael' LIMIT 1
+  [1m[36mWorkflow Load (0.3ms)[0m  [1mSELECT "workflows".* FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (1.1ms)[0m  [1mINSERT INTO "variables" ("array", "const", "created_at", "description", "name", "updated_at", "variable_type", "workflow_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["array", 0], ["const", 0], ["created_at", Wed, 02 May 2012 23:48:47 UTC +00:00], ["description", "One"], ["name", "Test"], ["updated_at", Wed, 02 May 2012 23:48:47 UTC +00:00], ["variable_type", 2], ["workflow_id", 1]]
+  [1m[35m (2.4ms)[0m  commit transaction
+  [1m[36mVariable Load (0.8ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/variableeditor.html.erb within layouts/application (9.8ms)
+Completed 200 OK in 62ms (Views: 43.1ms | ActiveRecord: 5.4ms)
+
+
+Started GET "/assets/variables.css?body=1" for 127.0.0.1 at 2012-05-02 16:48:48 -0700
+Served asset /variables.css - 200 OK (3ms)
+
+
+Started GET "/assets/editor.css?body=1" for 127.0.0.1 at 2012-05-02 16:48:48 -0700
+Served asset /editor.css - 200 OK (0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-02 16:48:48 -0700
+Served asset /application.css - 200 OK (3ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-02 16:48:48 -0700
+Served asset /jquery.js - 200 OK (0ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 16:48:48 -0700
+Served asset /editor.js - 200 OK (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-02 16:48:48 -0700
+Served asset /jquery_ujs.js - 200 OK (0ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 16:48:48 -0700
+Served asset /variables.js - 200 OK (4ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 16:48:48 -0700
+Served asset /application.js - 200 OK (1ms)
+
+
+Started GET "/variableeditor" for 127.0.0.1 at 2012-05-02 16:50:00 -0700
+Processing by EditorController#variableeditor as HTML
+  [1m[36mVariable Load (0.2ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/variableeditor.html.erb within layouts/application (24.7ms)
+Completed 200 OK in 216ms (Views: 129.4ms | ActiveRecord: 5.1ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 16:50:01 -0700
+Served asset /editor.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 16:50:01 -0700
+Served asset /application.js - 304 Not Modified (30ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 16:50:01 -0700
+Served asset /variables.js - 304 Not Modified (5ms)
+
+
+Started POST "/variableeditor" for 127.0.0.1 at 2012-05-02 16:50:05 -0700
+Processing by EditorController#variableeditor as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uxj9PKTw4uN8qwp7sXUxFTsSmLeHxuWl5nVbSpfYks=", "array"=>"1", "new_var"=>{"variable_type"=>"2", "name"=>"Test", "description"=>"Ing"}, "commit"=>"Create my variable"}
+  [1m[35mPermission Load (0.2ms)[0m  SELECT "permissions".* FROM "permissions" WHERE "permissions"."user_id" = 1 LIMIT 1
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."first_name" = 'Michael' LIMIT 1[0m
+  [1m[35mWorkflow Load (0.2ms)[0m  SELECT "workflows".* FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (8.0ms)[0m  INSERT INTO "variables" ("array", "const", "created_at", "description", "name", "updated_at", "variable_type", "workflow_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["array", 0], ["const", 0], ["created_at", Wed, 02 May 2012 23:50:05 UTC +00:00], ["description", "Ing"], ["name", "Test"], ["updated_at", Wed, 02 May 2012 23:50:05 UTC +00:00], ["variable_type", 2], ["workflow_id", 1]]
+  [1m[36m (2.3ms)[0m  [1mcommit transaction[0m
+  [1m[35mVariable Load (0.4ms)[0m  SELECT "variables".* FROM "variables" 
+  Rendered editor/variableeditor.html.erb within layouts/application (4.7ms)
+Completed 200 OK in 195ms (Views: 23.6ms | ActiveRecord: 13.4ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 16:50:06 -0700
+Served asset /editor.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 16:50:06 -0700
+Served asset /variables.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 16:50:06 -0700
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started GET "/variableeditor" for 127.0.0.1 at 2012-05-02 16:50:43 -0700
+Processing by EditorController#variableeditor as HTML
+  [1m[36mVariable Load (0.2ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/variableeditor.html.erb within layouts/application (34.9ms)
+Completed 200 OK in 235ms (Views: 142.3ms | ActiveRecord: 5.2ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 16:50:44 -0700
+Served asset /editor.js - 304 Not Modified (43ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 16:50:44 -0700
+Served asset /application.js - 304 Not Modified (30ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 16:50:44 -0700
+Served asset /variables.js - 304 Not Modified (2ms)
+
+
+Started POST "/variableeditor" for 127.0.0.1 at 2012-05-02 16:50:52 -0700
+Processing by EditorController#variableeditor as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uxj9PKTw4uN8qwp7sXUxFTsSmLeHxuWl5nVbSpfYks=", "const"=>"1", "new_var"=>{"variable_type"=>"2", "name"=>"VARI", "description"=>"ABLE"}, "commit"=>"Create my variable"}
+  [1m[35mPermission Load (0.2ms)[0m  SELECT "permissions".* FROM "permissions" WHERE "permissions"."user_id" = 1 LIMIT 1
+  [1m[36mUser Load (1.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."first_name" = 'Michael' LIMIT 1[0m
+  [1m[35mWorkflow Load (0.3ms)[0m  SELECT "workflows".* FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (10.4ms)[0m  INSERT INTO "variables" ("array", "const", "created_at", "description", "name", "updated_at", "variable_type", "workflow_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["array", 0], ["const", 0], ["created_at", Wed, 02 May 2012 23:50:52 UTC +00:00], ["description", "ABLE"], ["name", "VARI"], ["updated_at", Wed, 02 May 2012 23:50:52 UTC +00:00], ["variable_type", 2], ["workflow_id", 1]]
+  [1m[36m (99.5ms)[0m  [1mcommit transaction[0m
+  [1m[35mVariable Load (0.4ms)[0m  SELECT "variables".* FROM "variables" 
+  Rendered editor/variableeditor.html.erb within layouts/application (4.9ms)
+Completed 200 OK in 374ms (Views: 41.3ms | ActiveRecord: 113.6ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 16:50:53 -0700
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 16:50:53 -0700
+Served asset /editor.js - 304 Not Modified (5ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 16:50:53 -0700
+Served asset /variables.js - 304 Not Modified (1ms)
+
+
+Started POST "/variableeditor" for 127.0.0.1 at 2012-05-02 16:51:05 -0700
+Processing by EditorController#variableeditor as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uxj9PKTw4uN8qwp7sXUxFTsSmLeHxuWl5nVbSpfYks=", "const"=>"1", "array"=>"1", "new_var"=>{"variable_type"=>"2", "name"=>"Armed", "description"=>"And"}, "commit"=>"Create my variable"}
+  [1m[36mPermission Load (0.3ms)[0m  [1mSELECT "permissions".* FROM "permissions" WHERE "permissions"."user_id" = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."first_name" = 'Michael' LIMIT 1
+  [1m[36mWorkflow Load (0.2ms)[0m  [1mSELECT "workflows".* FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1[0m
+  [1m[35m (1.1ms)[0m  begin transaction
+  [1m[36mSQL (0.8ms)[0m  [1mINSERT INTO "variables" ("array", "const", "created_at", "description", "name", "updated_at", "variable_type", "workflow_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["array", 0], ["const", 0], ["created_at", Wed, 02 May 2012 23:51:05 UTC +00:00], ["description", "And"], ["name", "Armed"], ["updated_at", Wed, 02 May 2012 23:51:05 UTC +00:00], ["variable_type", 2], ["workflow_id", 1]]
+  [1m[35m (3.4ms)[0m  commit transaction
+  [1m[36mVariable Load (0.3ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/variableeditor.html.erb within layouts/application (5.6ms)
+Completed 200 OK in 36ms (Views: 19.2ms | ActiveRecord: 6.3ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 16:51:05 -0700
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 16:51:06 -0700
+Served asset /editor.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 16:51:06 -0700
+Served asset /variables.js - 304 Not Modified (1ms)
+
+
+Started POST "/variableeditor" for 127.0.0.1 at 2012-05-02 16:52:44 -0700
+Processing by EditorController#variableeditor as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uxj9PKTw4uN8qwp7sXUxFTsSmLeHxuWl5nVbSpfYks=", "const"=>"1", "new_var"=>{"variable_type"=>"0", "name"=>"Whether", "description"=>"We"}, "commit"=>"Create my variable"}
+  [1m[35mPermission Load (0.4ms)[0m  SELECT "permissions".* FROM "permissions" WHERE "permissions"."user_id" = 1 LIMIT 1
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."first_name" = 'Michael' LIMIT 1[0m
+  [1m[35mWorkflow Load (0.2ms)[0m  SELECT "workflows".* FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.8ms)[0m  INSERT INTO "variables" ("array", "const", "created_at", "description", "name", "updated_at", "variable_type", "workflow_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["array", 0], ["const", 0], ["created_at", Wed, 02 May 2012 23:52:44 UTC +00:00], ["description", "We"], ["name", "Whether"], ["updated_at", Wed, 02 May 2012 23:52:44 UTC +00:00], ["variable_type", 0], ["workflow_id", 1]]
+  [1m[36m (453.3ms)[0m  [1mcommit transaction[0m
+  [1m[35mVariable Load (0.3ms)[0m  SELECT "variables".* FROM "variables" 
+  Rendered editor/variableeditor.html.erb within layouts/application (51.9ms)
+Completed 200 OK in 525ms (Views: 62.7ms | ActiveRecord: 455.2ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 16:52:45 -0700
+Served asset /editor.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 16:52:45 -0700
+Served asset /application.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 16:52:45 -0700
+Served asset /variables.js - 304 Not Modified (0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2012-05-02 16:53:38 -0700
+Processing by EditorController#home as HTML
+  Rendered editor/home.html.erb within layouts/application (8.7ms)
+Completed 200 OK in 116ms (Views: 115.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 16:53:40 -0700
+Served asset /application.js - 304 Not Modified (18ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 16:53:40 -0700
+Served asset /editor.js - 304 Not Modified (5ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 16:53:40 -0700
+Served asset /variables.js - 304 Not Modified (3ms)
+
+
+Started GET "/variableeditor" for 127.0.0.1 at 2012-05-02 16:53:41 -0700
+Processing by EditorController#variableeditor as HTML
+  [1m[36mVariable Load (0.2ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/variableeditor.html.erb within layouts/application (22.0ms)
+Completed 200 OK in 137ms (Views: 46.3ms | ActiveRecord: 4.7ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 16:53:42 -0700
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 16:53:42 -0700
+Served asset /editor.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 16:53:42 -0700
+Served asset /variables.js - 304 Not Modified (0ms)
+
+
+Started POST "/variableeditor" for 127.0.0.1 at 2012-05-02 16:53:47 -0700
+Processing by EditorController#variableeditor as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uxj9PKTw4uN8qwp7sXUxFTsSmLeHxuWl5nVbSpfYks=", "array"=>"1", "new_var"=>{"variable_type"=>"2", "name"=>"Justice", "description"=>"Is"}, "commit"=>"Create my variable"}
+  [1m[35mPermission Load (0.3ms)[0m  SELECT "permissions".* FROM "permissions" WHERE "permissions"."user_id" = 1 LIMIT 1
+  [1m[36mUser Load (11.9ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."first_name" = 'Michael' LIMIT 1[0m
+  [1m[35mWorkflow Load (0.2ms)[0m  SELECT "workflows".* FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1
+  [1m[36m (0.4ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (19.9ms)[0m  INSERT INTO "variables" ("array", "const", "created_at", "description", "name", "updated_at", "variable_type", "workflow_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["array", 0], ["const", 0], ["created_at", Wed, 02 May 2012 23:53:47 UTC +00:00], ["description", "Is"], ["name", "Justice"], ["updated_at", Wed, 02 May 2012 23:53:47 UTC +00:00], ["variable_type", 2], ["workflow_id", 1]]
+  [1m[36m (453.4ms)[0m  [1mcommit transaction[0m
+  [1m[35mVariable Load (0.3ms)[0m  SELECT "variables".* FROM "variables" 
+  Rendered editor/variableeditor.html.erb within layouts/application (5.7ms)
+Completed 200 OK in 846ms (Views: 31.1ms | ActiveRecord: 488.3ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 16:53:48 -0700
+Served asset /editor.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 16:53:48 -0700
+Served asset /variables.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 16:53:48 -0700
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started GET "/variableeditor" for 127.0.0.1 at 2012-05-02 16:54:22 -0700
+Processing by EditorController#variableeditor as HTML
+  [1m[36mVariable Load (0.3ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/variableeditor.html.erb within layouts/application (44.8ms)
+Completed 200 OK in 317ms (Views: 189.5ms | ActiveRecord: 9.1ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 16:54:24 -0700
+Served asset /editor.js - 304 Not Modified (5ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 16:54:24 -0700
+Served asset /variables.js - 304 Not Modified (5ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 16:54:24 -0700
+Served asset /application.js - 304 Not Modified (21ms)
+
+
+Started POST "/variableeditor" for 127.0.0.1 at 2012-05-02 16:54:29 -0700
+Processing by EditorController#variableeditor as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uxj9PKTw4uN8qwp7sXUxFTsSmLeHxuWl5nVbSpfYks=", "const"=>"1", "new_var"=>{"variable_type"=>"2", "name"=>"Check", "description"=>"Box"}, "commit"=>"Create my variable"}
+  [1m[35mPermission Load (0.8ms)[0m  SELECT "permissions".* FROM "permissions" WHERE "permissions"."user_id" = 1 LIMIT 1
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."first_name" = 'Michael' LIMIT 1[0m
+  [1m[35mWorkflow Load (0.2ms)[0m  SELECT "workflows".* FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (11.4ms)[0m  INSERT INTO "variables" ("array", "const", "created_at", "description", "name", "updated_at", "variable_type", "workflow_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["array", 0], ["const", 0], ["created_at", Wed, 02 May 2012 23:54:29 UTC +00:00], ["description", "Box"], ["name", "Check"], ["updated_at", Wed, 02 May 2012 23:54:29 UTC +00:00], ["variable_type", 2], ["workflow_id", 1]]
+  [1m[36m (4.6ms)[0m  [1mcommit transaction[0m
+  [1m[35mVariable Load (0.4ms)[0m  SELECT "variables".* FROM "variables" 
+  Rendered editor/variableeditor.html.erb within layouts/application (6.2ms)
+Completed 200 OK in 228ms (Views: 22.5ms | ActiveRecord: 19.7ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 16:54:29 -0700
+Served asset /editor.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 16:54:29 -0700
+Served asset /application.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 16:54:29 -0700
+Served asset /variables.js - 304 Not Modified (0ms)
+
+
+Started POST "/variableeditor" for 127.0.0.1 at 2012-05-02 17:04:20 -0700
+Processing by EditorController#variableeditor as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uxj9PKTw4uN8qwp7sXUxFTsSmLeHxuWl5nVbSpfYks=", "array"=>"1", "new_var"=>{"variable_type"=>"1", "name"=>"Test", "description"=>"One"}, "commit"=>"Create my variable"}
+  [1m[36mPermission Load (0.2ms)[0m  [1mSELECT "permissions".* FROM "permissions" WHERE "permissions"."user_id" = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."first_name" = 'Michael' LIMIT 1
+  [1m[36mWorkflow Load (0.1ms)[0m  [1mSELECT "workflows".* FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (39.0ms)[0m  [1mINSERT INTO "variables" ("array", "const", "created_at", "description", "name", "updated_at", "variable_type", "workflow_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["array", 0], ["const", 0], ["created_at", Thu, 03 May 2012 00:04:21 UTC +00:00], ["description", "One"], ["name", "Test"], ["updated_at", Thu, 03 May 2012 00:04:21 UTC +00:00], ["variable_type", 1], ["workflow_id", 1]]
+  [1m[35m (2.3ms)[0m  commit transaction
+  [1m[36mVariable Load (0.4ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/variableeditor.html.erb within layouts/application (21.1ms)
+Completed 200 OK in 299ms (Views: 72.2ms | ActiveRecord: 47.0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 17:04:22 -0700
+Served asset /application.js - 304 Not Modified (48ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 17:04:22 -0700
+Served asset /editor.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 17:04:22 -0700
+Served asset /variables.js - 304 Not Modified (4ms)
+
+
+Started GET "/variableeditor" for 127.0.0.1 at 2012-05-02 17:07:34 -0700
+Processing by EditorController#variableeditor as HTML
+  [1m[35mVariable Load (0.3ms)[0m  SELECT "variables".* FROM "variables" 
+  Rendered editor/variableeditor.html.erb within layouts/application (4.2ms)
+Completed 200 OK in 16ms (Views: 13.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 17:07:35 -0700
+Served asset /variables.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 17:07:35 -0700
+Served asset /editor.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 17:07:35 -0700
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started POST "/variableeditor" for 127.0.0.1 at 2012-05-02 17:07:58 -0700
+Processing by EditorController#variableeditor as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uxj9PKTw4uN8qwp7sXUxFTsSmLeHxuWl5nVbSpfYks=", "const"=>"1", "new_var"=>{"variable_type"=>"2", "name"=>"Write", "description"=>"UP"}, "commit"=>"Create my variable"}
+  [1m[36mPermission Load (0.3ms)[0m  [1mSELECT "permissions".* FROM "permissions" WHERE "permissions"."user_id" = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."first_name" = 'Michael' LIMIT 1
+  [1m[36mWorkflow Load (0.2ms)[0m  [1mSELECT "workflows".* FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (45.4ms)[0m  [1mINSERT INTO "variables" ("array", "const", "created_at", "description", "name", "updated_at", "variable_type", "workflow_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["array", 0], ["const", 0], ["created_at", Thu, 03 May 2012 00:07:59 UTC +00:00], ["description", "UP"], ["name", "Write"], ["updated_at", Thu, 03 May 2012 00:07:59 UTC +00:00], ["variable_type", 2], ["workflow_id", 1]]
+  [1m[35m (2.0ms)[0m  commit transaction
+  [1m[36mVariable Load (0.4ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/variableeditor.html.erb within layouts/application (20.9ms)
+Completed 200 OK in 308ms (Views: 72.0ms | ActiveRecord: 54.0ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 17:07:59 -0700
+Served asset /editor.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 17:07:59 -0700
+Served asset /application.js - 304 Not Modified (48ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 17:07:59 -0700
+Served asset /variables.js - 304 Not Modified (3ms)
+
+
+Started GET "/variableeditor" for 127.0.0.1 at 2012-05-02 17:08:55 -0700
+Processing by EditorController#variableeditor as HTML
+  [1m[36mVariable Load (0.2ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/variableeditor.html.erb within layouts/application (17.1ms)
+Completed 200 OK in 164ms (Views: 99.1ms | ActiveRecord: 4.4ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 17:08:56 -0700
+Served asset /application.js - 304 Not Modified (25ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 17:08:56 -0700
+Served asset /editor.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 17:08:56 -0700
+Served asset /variables.js - 304 Not Modified (3ms)
+
+
+Started POST "/variableeditor" for 127.0.0.1 at 2012-05-02 17:09:02 -0700
+Processing by EditorController#variableeditor as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uxj9PKTw4uN8qwp7sXUxFTsSmLeHxuWl5nVbSpfYks=", "const"=>"1", "new_var"=>{"variable_type"=>"2", "name"=>"Fury", "description"=>"us"}, "commit"=>"Create my variable"}
+  [1m[35mPermission Load (0.2ms)[0m  SELECT "permissions".* FROM "permissions" WHERE "permissions"."user_id" = 1 LIMIT 1
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."first_name" = 'Michael' LIMIT 1[0m
+  [1m[35mWorkflow Load (0.2ms)[0m  SELECT "workflows".* FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (6.8ms)[0m  INSERT INTO "variables" ("array", "const", "created_at", "description", "name", "updated_at", "variable_type", "workflow_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["array", 0], ["const", 0], ["created_at", Thu, 03 May 2012 00:09:02 UTC +00:00], ["description", "us"], ["name", "Fury"], ["updated_at", Thu, 03 May 2012 00:09:02 UTC +00:00], ["variable_type", 2], ["workflow_id", 1]]
+  [1m[36m (2.7ms)[0m  [1mcommit transaction[0m
+  [1m[35mVariable Load (0.4ms)[0m  SELECT "variables".* FROM "variables" 
+  Rendered editor/variableeditor.html.erb within layouts/application (9.4ms)
+Completed 200 OK in 162ms (Views: 19.4ms | ActiveRecord: 11.5ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 17:09:03 -0700
+Served asset /application.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 17:09:03 -0700
+Served asset /editor.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 17:09:03 -0700
+Served asset /variables.js - 304 Not Modified (0ms)
+
+
+Started GET "/variableeditor" for 127.0.0.1 at 2012-05-02 17:11:18 -0700
+Processing by EditorController#variableeditor as HTML
+  [1m[36mVariable Load (0.2ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/variableeditor.html.erb within layouts/application (17.7ms)
+Completed 200 OK in 154ms (Views: 92.4ms | ActiveRecord: 4.5ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 17:11:19 -0700
+Served asset /variables.js - 304 Not Modified (11ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 17:11:19 -0700
+Served asset /editor.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 17:11:19 -0700
+Served asset /application.js - 304 Not Modified (20ms)
+
+
+Started POST "/variableeditor" for 127.0.0.1 at 2012-05-02 17:11:38 -0700
+Processing by EditorController#variableeditor as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uxj9PKTw4uN8qwp7sXUxFTsSmLeHxuWl5nVbSpfYks=", "array"=>"1", "new_var"=>{"variable_type"=>"2", "name"=>"njunj", "description"=>"mkimkim"}, "commit"=>"Create my variable"}
+  [1m[35mPermission Load (0.2ms)[0m  SELECT "permissions".* FROM "permissions" WHERE "permissions"."user_id" = 1 LIMIT 1
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."first_name" = 'Michael' LIMIT 1[0m
+  [1m[35mWorkflow Load (0.2ms)[0m  SELECT "workflows".* FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (6.8ms)[0m  INSERT INTO "variables" ("array", "const", "created_at", "description", "name", "updated_at", "variable_type", "workflow_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["array", 0], ["const", 0], ["created_at", Thu, 03 May 2012 00:11:38 UTC +00:00], ["description", "mkimkim"], ["name", "njunj"], ["updated_at", Thu, 03 May 2012 00:11:38 UTC +00:00], ["variable_type", 2], ["workflow_id", 1]]
+  [1m[36m (1.9ms)[0m  [1mcommit transaction[0m
+  [1m[35mVariable Load (0.4ms)[0m  SELECT "variables".* FROM "variables" 
+  Rendered editor/variableeditor.html.erb within layouts/application (6.9ms)
+Completed 200 OK in 152ms (Views: 18.5ms | ActiveRecord: 10.9ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 17:11:38 -0700
+Served asset /editor.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 17:11:38 -0700
+Served asset /variables.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 17:11:38 -0700
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started POST "/variableeditor" for 127.0.0.1 at 2012-05-02 17:12:18 -0700
+Processing by EditorController#variableeditor as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uxj9PKTw4uN8qwp7sXUxFTsSmLeHxuWl5nVbSpfYks=", "const"=>"1", "array"=>"1", "new_var"=>{"variable_type"=>"3", "name"=>"bgbt", "description"=>"vgtgv"}, "commit"=>"Create my variable"}
+  [1m[36mPermission Load (0.2ms)[0m  [1mSELECT "permissions".* FROM "permissions" WHERE "permissions"."user_id" = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."first_name" = 'Michael' LIMIT 1
+  [1m[36mWorkflow Load (0.2ms)[0m  [1mSELECT "workflows".* FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.7ms)[0m  [1mINSERT INTO "variables" ("array", "const", "created_at", "description", "name", "updated_at", "variable_type", "workflow_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["array", 0], ["const", 0], ["created_at", Thu, 03 May 2012 00:12:18 UTC +00:00], ["description", "vgtgv"], ["name", "bgbt"], ["updated_at", Thu, 03 May 2012 00:12:18 UTC +00:00], ["variable_type", 3], ["workflow_id", 1]]
+  [1m[35m (2.2ms)[0m  commit transaction
+  [1m[36mVariable Load (0.4ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/variableeditor.html.erb within layouts/application (5.8ms)
+Completed 200 OK in 66ms (Views: 51.8ms | ActiveRecord: 3.8ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 17:12:18 -0700
+Served asset /variables.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 17:12:18 -0700
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 17:12:18 -0700
+Served asset /editor.js - 304 Not Modified (0ms)
+
+
+Started POST "/variableeditor" for 127.0.0.1 at 2012-05-02 17:23:26 -0700
+Processing by EditorController#variableeditor as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uxj9PKTw4uN8qwp7sXUxFTsSmLeHxuWl5nVbSpfYks=", "array"=>"1", "new_var"=>{"variable_type"=>"2", "name"=>"Yet", "description"=>"Curse"}, "commit"=>"Create my variable"}
+  [1m[36mPermission Load (0.2ms)[0m  [1mSELECT "permissions".* FROM "permissions" WHERE "permissions"."user_id" = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."first_name" = 'Michael' LIMIT 1
+  [1m[36mWorkflow Load (0.2ms)[0m  [1mSELECT "workflows".* FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (50.7ms)[0m  [1mINSERT INTO "variables" ("array", "const", "created_at", "description", "name", "updated_at", "variable_type", "workflow_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["array", 0], ["const", 0], ["created_at", Thu, 03 May 2012 00:23:27 UTC +00:00], ["description", "Curse"], ["name", "Yet"], ["updated_at", Thu, 03 May 2012 00:23:27 UTC +00:00], ["variable_type", 2], ["workflow_id", 1]]
+  [1m[35m (6.1ms)[0m  commit transaction
+  [1m[36mVariable Load (0.3ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/variableeditor.html.erb within layouts/application (20.9ms)
+Completed 200 OK in 358ms (Views: 70.9ms | ActiveRecord: 63.8ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 17:23:28 -0700
+Served asset /variables.js - 304 Not Modified (10ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 17:23:28 -0700
+Served asset /editor.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 17:23:28 -0700
+Served asset /application.js - 304 Not Modified (69ms)
+
+
+Started POST "/variableeditor" for 127.0.0.1 at 2012-05-02 17:24:49 -0700
+Processing by EditorController#variableeditor as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uxj9PKTw4uN8qwp7sXUxFTsSmLeHxuWl5nVbSpfYks=", "const"=>"1", "new_var"=>{"variable_type"=>"1", "name"=>"Greatly", "description"=>"Appreciated"}, "commit"=>"Create my variable"}
+  [1m[35mPermission Load (0.2ms)[0m  SELECT "permissions".* FROM "permissions" WHERE "permissions"."user_id" = 1 LIMIT 1
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."first_name" = 'Michael' LIMIT 1[0m
+  [1m[35mWorkflow Load (0.2ms)[0m  SELECT "workflows".* FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO "variables" ("array", "const", "created_at", "description", "name", "updated_at", "variable_type", "workflow_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["array", 0], ["const", 0], ["created_at", Thu, 03 May 2012 00:24:49 UTC +00:00], ["description", "Appreciated"], ["name", "Greatly"], ["updated_at", Thu, 03 May 2012 00:24:49 UTC +00:00], ["variable_type", 1], ["workflow_id", 1]]
+  [1m[36m (1.8ms)[0m  [1mcommit transaction[0m
+  [1m[35mVariable Load (0.3ms)[0m  SELECT "variables".* FROM "variables" 
+  Rendered editor/variableeditor.html.erb within layouts/application (5.3ms)
+Completed 200 OK in 27ms (Views: 16.2ms | ActiveRecord: 3.5ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 17:24:49 -0700
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 17:24:49 -0700
+Served asset /editor.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 17:24:49 -0700
+Served asset /variables.js - 304 Not Modified (1ms)
+
+
+Started GET "/variableeditor" for 127.0.0.1 at 2012-05-02 17:45:35 -0700
+Processing by EditorController#variableeditor as HTML
+  [1m[36mVariable Load (0.2ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/variableeditor.html.erb within layouts/application (18.9ms)
+Completed 200 OK in 161ms (Views: 102.0ms | ActiveRecord: 3.7ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 17:45:36 -0700
+Served asset /variables.js - 304 Not Modified (48ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 17:45:36 -0700
+Served asset /editor.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 17:45:36 -0700
+Served asset /application.js - 304 Not Modified (13ms)
+
+
+Started POST "/variableeditor" for 127.0.0.1 at 2012-05-02 17:45:42 -0700
+Processing by EditorController#variableeditor as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uxj9PKTw4uN8qwp7sXUxFTsSmLeHxuWl5nVbSpfYks=", "const"=>"1", "new_var"=>{"variable_type"=>"2", "name"=>"qwe", "description"=>"adsf"}, "commit"=>"Create my variable"}
+  [1m[35mPermission Load (0.4ms)[0m  SELECT "permissions".* FROM "permissions" WHERE "permissions"."user_id" = 1 LIMIT 1
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."first_name" = 'Michael' LIMIT 1[0m
+  [1m[35mWorkflow Load (0.2ms)[0m  SELECT "workflows".* FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (10.2ms)[0m  INSERT INTO "variables" ("array", "const", "created_at", "description", "name", "updated_at", "variable_type", "workflow_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["array", 0], ["const", 0], ["created_at", Thu, 03 May 2012 00:45:42 UTC +00:00], ["description", "adsf"], ["name", "qwe"], ["updated_at", Thu, 03 May 2012 00:45:42 UTC +00:00], ["variable_type", 2], ["workflow_id", 1]]
+  [1m[36m (6.7ms)[0m  [1mcommit transaction[0m
+  [1m[35mVariable Load (2.8ms)[0m  SELECT "variables".* FROM "variables" 
+  Rendered editor/variableeditor.html.erb within layouts/application (4.4ms)
+Completed 200 OK in 186ms (Views: 15.6ms | ActiveRecord: 21.7ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 17:45:42 -0700
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 17:45:42 -0700
+Served asset /variables.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 17:45:42 -0700
+Served asset /editor.js - 304 Not Modified (0ms)
+
+
+Started GET "/variableeditor" for 127.0.0.1 at 2012-05-02 17:55:20 -0700
+Processing by EditorController#variableeditor as HTML
+  [1m[36mVariable Load (0.2ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/variableeditor.html.erb within layouts/application (18.5ms)
+Completed 200 OK in 159ms (Views: 99.4ms | ActiveRecord: 3.8ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 17:55:21 -0700
+Served asset /variables.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 17:55:21 -0700
+Served asset /application.js - 304 Not Modified (29ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 17:55:21 -0700
+Served asset /editor.js - 304 Not Modified (2ms)
+
+
+Started POST "/variableeditor" for 127.0.0.1 at 2012-05-02 17:55:25 -0700
+Processing by EditorController#variableeditor as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uxj9PKTw4uN8qwp7sXUxFTsSmLeHxuWl5nVbSpfYks=", "new_var"=>{"const"=>"1", "array"=>"0", "variable_type"=>"2", "name"=>"Wifi", "description"=>"Is"}, "commit"=>"Create my variable"}
+  [1m[35mPermission Load (0.2ms)[0m  SELECT "permissions".* FROM "permissions" WHERE "permissions"."user_id" = 1 LIMIT 1
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."first_name" = 'Michael' LIMIT 1[0m
+  [1m[35mWorkflow Load (0.2ms)[0m  SELECT "workflows".* FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (6.6ms)[0m  INSERT INTO "variables" ("array", "const", "created_at", "description", "name", "updated_at", "variable_type", "workflow_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["array", 1], ["const", 1], ["created_at", Thu, 03 May 2012 00:55:25 UTC +00:00], ["description", "Is"], ["name", "Wifi"], ["updated_at", Thu, 03 May 2012 00:55:25 UTC +00:00], ["variable_type", 2], ["workflow_id", 1]]
+  [1m[36m (2.2ms)[0m  [1mcommit transaction[0m
+  [1m[35mVariable Load (0.4ms)[0m  SELECT "variables".* FROM "variables" 
+  Rendered editor/variableeditor.html.erb within layouts/application (6.8ms)
+Completed 200 OK in 157ms (Views: 22.3ms | ActiveRecord: 11.0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 17:55:25 -0700
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 17:55:25 -0700
+Served asset /variables.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 17:55:25 -0700
+Served asset /editor.js - 304 Not Modified (0ms)
+
+
+Started POST "/variableeditor" for 127.0.0.1 at 2012-05-02 17:55:32 -0700
+Processing by EditorController#variableeditor as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uxj9PKTw4uN8qwp7sXUxFTsSmLeHxuWl5nVbSpfYks=", "new_var"=>{"const"=>"0", "array"=>"1", "variable_type"=>"2", "name"=>"Victory", "description"=>"Hah"}, "commit"=>"Create my variable"}
+  [1m[36mPermission Load (0.2ms)[0m  [1mSELECT "permissions".* FROM "permissions" WHERE "permissions"."user_id" = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."first_name" = 'Michael' LIMIT 1
+  [1m[36mWorkflow Load (0.2ms)[0m  [1mSELECT "workflows".* FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO "variables" ("array", "const", "created_at", "description", "name", "updated_at", "variable_type", "workflow_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["array", 1], ["const", 1], ["created_at", Thu, 03 May 2012 00:55:32 UTC +00:00], ["description", "Hah"], ["name", "Victory"], ["updated_at", Thu, 03 May 2012 00:55:32 UTC +00:00], ["variable_type", 2], ["workflow_id", 1]]
+  [1m[35m (2.4ms)[0m  commit transaction
+  [1m[36mVariable Load (0.3ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/variableeditor.html.erb within layouts/application (5.8ms)
+Completed 200 OK in 66ms (Views: 52.0ms | ActiveRecord: 4.1ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 17:55:32 -0700
+Served asset /variables.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 17:55:32 -0700
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 17:55:32 -0700
+Served asset /editor.js - 304 Not Modified (0ms)
+
+
+Started POST "/variableeditor" for 127.0.0.1 at 2012-05-02 17:55:42 -0700
+Processing by EditorController#variableeditor as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uxj9PKTw4uN8qwp7sXUxFTsSmLeHxuWl5nVbSpfYks=", "new_var"=>{"const"=>"0", "array"=>"0", "variable_type"=>"3", "name"=>"asdf", "description"=>"asdf"}, "commit"=>"Create my variable"}
+  [1m[35mPermission Load (0.2ms)[0m  SELECT "permissions".* FROM "permissions" WHERE "permissions"."user_id" = 1 LIMIT 1
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."first_name" = 'Michael' LIMIT 1[0m
+  [1m[35mWorkflow Load (0.1ms)[0m  SELECT "workflows".* FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO "variables" ("array", "const", "created_at", "description", "name", "updated_at", "variable_type", "workflow_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["array", 1], ["const", 1], ["created_at", Thu, 03 May 2012 00:55:42 UTC +00:00], ["description", "asdf"], ["name", "asdf"], ["updated_at", Thu, 03 May 2012 00:55:42 UTC +00:00], ["variable_type", 3], ["workflow_id", 1]]
+  [1m[36m (2.3ms)[0m  [1mcommit transaction[0m
+  [1m[35mVariable Load (0.3ms)[0m  SELECT "variables".* FROM "variables" 
+  Rendered editor/variableeditor.html.erb within layouts/application (6.8ms)
+Completed 200 OK in 27ms (Views: 15.5ms | ActiveRecord: 3.9ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 17:55:42 -0700
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 17:55:42 -0700
+Served asset /editor.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 17:55:42 -0700
+Served asset /variables.js - 304 Not Modified (0ms)
+
+
+Started GET "/variableeditor" for 127.0.0.1 at 2012-05-02 18:00:07 -0700
+Processing by EditorController#variableeditor as HTML
+  [1m[36mVariable Load (0.3ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/variableeditor.html.erb within layouts/application (25.1ms)
+Completed 200 OK in 188ms (Views: 116.7ms | ActiveRecord: 5.7ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 18:00:08 -0700
+Served asset /variables.js - 304 Not Modified (11ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 18:00:08 -0700
+Served asset /application.js - 304 Not Modified (17ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 18:00:08 -0700
+Served asset /editor.js - 304 Not Modified (4ms)
+
+
+Started POST "/variableeditor" for 127.0.0.1 at 2012-05-02 18:00:16 -0700
+Processing by EditorController#variableeditor as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uxj9PKTw4uN8qwp7sXUxFTsSmLeHxuWl5nVbSpfYks=", "new_var"=>{"const"=>"0", "array"=>"1", "variable_type"=>"2", "name"=>"Lyra", "description"=>"Potato"}, "commit"=>"Create my variable"}
+  [1m[35mPermission Load (0.2ms)[0m  SELECT "permissions".* FROM "permissions" WHERE "permissions"."user_id" = 1 LIMIT 1
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."first_name" = 'Michael' LIMIT 1[0m
+  [1m[35mWorkflow Load (0.2ms)[0m  SELECT "workflows".* FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (7.0ms)[0m  INSERT INTO "variables" ("array", "const", "created_at", "description", "name", "updated_at", "variable_type", "workflow_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["array", 1], ["const", 1], ["created_at", Thu, 03 May 2012 01:00:16 UTC +00:00], ["description", "Potato"], ["name", "Lyra"], ["updated_at", Thu, 03 May 2012 01:00:16 UTC +00:00], ["variable_type", 2], ["workflow_id", 1]]
+  [1m[36m (2.1ms)[0m  [1mcommit transaction[0m
+  [1m[35mVariable Load (0.4ms)[0m  SELECT "variables".* FROM "variables" 
+  Rendered editor/variableeditor.html.erb within layouts/application (7.0ms)
+Completed 200 OK in 192ms (Views: 28.7ms | ActiveRecord: 11.8ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 18:00:16 -0700
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 18:00:16 -0700
+Served asset /editor.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 18:00:16 -0700
+Served asset /variables.js - 304 Not Modified (0ms)
+
+
+Started GET "/variableeditor" for 127.0.0.1 at 2012-05-02 18:03:53 -0700
+Processing by EditorController#variableeditor as HTML
+  [1m[36mVariable Load (0.4ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/variableeditor.html.erb within layouts/application (21.7ms)
+Completed 200 OK in 191ms (Views: 112.0ms | ActiveRecord: 5.5ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 18:03:54 -0700
+Served asset /variables.js - 304 Not Modified (17ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 18:03:54 -0700
+Served asset /editor.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 18:03:54 -0700
+Served asset /application.js - 304 Not Modified (14ms)
+
+
+Started POST "/variableeditor" for 127.0.0.1 at 2012-05-02 18:03:58 -0700
+Processing by EditorController#variableeditor as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uxj9PKTw4uN8qwp7sXUxFTsSmLeHxuWl5nVbSpfYks=", "new_var"=>{"const"=>"0", "array"=>"1", "variable_type"=>"3", "name"=>"Test", "description"=>"Two"}, "commit"=>"Create my variable"}
+  [1m[35mPermission Load (0.2ms)[0m  SELECT "permissions".* FROM "permissions" WHERE "permissions"."user_id" = 1 LIMIT 1
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."first_name" = 'Michael' LIMIT 1[0m
+  [1m[35mWorkflow Load (0.2ms)[0m  SELECT "workflows".* FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (11.9ms)[0m  INSERT INTO "variables" ("array", "const", "created_at", "description", "name", "updated_at", "variable_type", "workflow_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["array", 1], ["const", 0], ["created_at", Thu, 03 May 2012 01:03:58 UTC +00:00], ["description", "Two"], ["name", "Test"], ["updated_at", Thu, 03 May 2012 01:03:58 UTC +00:00], ["variable_type", 3], ["workflow_id", 1]]
+  [1m[36m (2.4ms)[0m  [1mcommit transaction[0m
+  [1m[35mVariable Load (0.8ms)[0m  SELECT "variables".* FROM "variables" 
+  Rendered editor/variableeditor.html.erb within layouts/application (6.6ms)
+Completed 200 OK in 195ms (Views: 26.3ms | ActiveRecord: 17.2ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 18:03:58 -0700
+Served asset /application.js - 304 Not Modified (5ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 18:03:58 -0700
+Served asset /editor.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 18:03:58 -0700
+Served asset /variables.js - 304 Not Modified (1ms)
+
+
+Started POST "/variableeditor" for 127.0.0.1 at 2012-05-02 18:04:44 -0700
+Processing by EditorController#variableeditor as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uxj9PKTw4uN8qwp7sXUxFTsSmLeHxuWl5nVbSpfYks=", "new_var"=>{"const"=>"1", "array"=>"0", "variable_type"=>"2", "name"=>"it ", "description"=>"works"}, "commit"=>"Create my variable"}
+  [1m[36mPermission Load (0.4ms)[0m  [1mSELECT "permissions".* FROM "permissions" WHERE "permissions"."user_id" = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.4ms)[0m  SELECT "users".* FROM "users" WHERE "users"."first_name" = 'Michael' LIMIT 1
+  [1m[36mWorkflow Load (0.2ms)[0m  [1mSELECT "workflows".* FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "variables" ("array", "const", "created_at", "description", "name", "updated_at", "variable_type", "workflow_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["array", 0], ["const", 1], ["created_at", Thu, 03 May 2012 01:04:44 UTC +00:00], ["description", "works"], ["name", "it "], ["updated_at", Thu, 03 May 2012 01:04:44 UTC +00:00], ["variable_type", 2], ["workflow_id", 1]]
+  [1m[35m (2.3ms)[0m  commit transaction
+  [1m[36mVariable Load (0.6ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/variableeditor.html.erb within layouts/application (51.3ms)
+Completed 200 OK in 84ms (Views: 65.2ms | ActiveRecord: 5.1ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 18:04:45 -0700
+Served asset /application.js - 304 Not Modified (12ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 18:04:45 -0700
+Served asset /editor.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 18:04:45 -0700
+Served asset /variables.js - 304 Not Modified (0ms)
+
+
+Started POST "/variableeditor" for 127.0.0.1 at 2012-05-02 18:04:54 -0700
+Processing by EditorController#variableeditor as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uxj9PKTw4uN8qwp7sXUxFTsSmLeHxuWl5nVbSpfYks=", "new_var"=>{"const"=>"1", "array"=>"1", "variable_type"=>"1", "name"=>"claim", "description"=>"victory"}, "commit"=>"Create my variable"}
+  [1m[35mPermission Load (0.2ms)[0m  SELECT "permissions".* FROM "permissions" WHERE "permissions"."user_id" = 1 LIMIT 1
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."first_name" = 'Michael' LIMIT 1[0m
+  [1m[35mWorkflow Load (0.3ms)[0m  SELECT "workflows".* FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO "variables" ("array", "const", "created_at", "description", "name", "updated_at", "variable_type", "workflow_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["array", 1], ["const", 1], ["created_at", Thu, 03 May 2012 01:04:54 UTC +00:00], ["description", "victory"], ["name", "claim"], ["updated_at", Thu, 03 May 2012 01:04:54 UTC +00:00], ["variable_type", 1], ["workflow_id", 1]]
+  [1m[36m (2.1ms)[0m  [1mcommit transaction[0m
+  [1m[35mVariable Load (0.4ms)[0m  SELECT "variables".* FROM "variables" 
+  Rendered editor/variableeditor.html.erb within layouts/application (6.6ms)
+Completed 200 OK in 31ms (Views: 18.3ms | ActiveRecord: 4.1ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 18:04:54 -0700
+Served asset /application.js - 304 Not Modified (11ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 18:04:54 -0700
+Served asset /variables.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 18:04:54 -0700
+Served asset /editor.js - 304 Not Modified (0ms)
+
+
+Started POST "/variableeditor" for 127.0.0.1 at 2012-05-02 18:05:01 -0700
+Processing by EditorController#variableeditor as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uxj9PKTw4uN8qwp7sXUxFTsSmLeHxuWl5nVbSpfYks=", "new_var"=>{"const"=>"0", "array"=>"0", "variable_type"=>"3", "name"=>"BWAHAHA", "description"=>"IT"}, "commit"=>"Create my variable"}
+  [1m[36mPermission Load (0.3ms)[0m  [1mSELECT "permissions".* FROM "permissions" WHERE "permissions"."user_id" = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."first_name" = 'Michael' LIMIT 1
+  [1m[36mWorkflow Load (0.2ms)[0m  [1mSELECT "workflows".* FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.7ms)[0m  [1mINSERT INTO "variables" ("array", "const", "created_at", "description", "name", "updated_at", "variable_type", "workflow_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["array", 0], ["const", 0], ["created_at", Thu, 03 May 2012 01:05:01 UTC +00:00], ["description", "IT"], ["name", "BWAHAHA"], ["updated_at", Thu, 03 May 2012 01:05:01 UTC +00:00], ["variable_type", 3], ["workflow_id", 1]]
+  [1m[35m (2.6ms)[0m  commit transaction
+  [1m[36mVariable Load (0.5ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/variableeditor.html.erb within layouts/application (7.6ms)
+Completed 200 OK in 42ms (Views: 22.9ms | ActiveRecord: 4.5ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 18:05:01 -0700
+Served asset /editor.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 18:05:01 -0700
+Served asset /application.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 18:05:01 -0700
+Served asset /variables.js - 304 Not Modified (0ms)
+
+
+Started GET "/variableeditor" for 127.0.0.1 at 2012-05-02 18:05:51 -0700
+Processing by EditorController#variableeditor as HTML
+  [1m[36mVariable Load (0.5ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/variableeditor.html.erb within layouts/application (27.0ms)
+Completed 200 OK in 284ms (Views: 125.8ms | ActiveRecord: 6.0ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 18:05:52 -0700
+Served asset /editor.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 18:05:52 -0700
+Served asset /variables.js - 304 Not Modified (6ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 18:05:52 -0700
+Served asset /application.js - 304 Not Modified (31ms)
+
+
+Started POST "/variableeditor" for 127.0.0.1 at 2012-05-02 18:05:58 -0700
+Processing by EditorController#variableeditor as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uxj9PKTw4uN8qwp7sXUxFTsSmLeHxuWl5nVbSpfYks=", "new_var"=>{"const"=>"1", "array"=>"0", "variable_type"=>"3", "name"=>"i'm", "description"=>"pleased"}, "commit"=>"Create my variable"}
+  [1m[35mPermission Load (0.3ms)[0m  SELECT "permissions".* FROM "permissions" WHERE "permissions"."user_id" = 1 LIMIT 1
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."first_name" = 'Michael' LIMIT 1[0m
+  [1m[35mWorkflow Load (0.2ms)[0m  SELECT "workflows".* FROM "workflows" WHERE "workflows"."name" = 'Sample Workflow' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (10.3ms)[0m  INSERT INTO "variables" ("array", "const", "created_at", "description", "name", "updated_at", "variable_type", "workflow_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["array", 0], ["const", 1], ["created_at", Thu, 03 May 2012 01:05:58 UTC +00:00], ["description", "pleased"], ["name", "i'm"], ["updated_at", Thu, 03 May 2012 01:05:58 UTC +00:00], ["variable_type", 3], ["workflow_id", 1]]
+  [1m[36m (2.3ms)[0m  [1mcommit transaction[0m
+  [1m[35mVariable Load (0.4ms)[0m  SELECT "variables".* FROM "variables" 
+  Rendered editor/variableeditor.html.erb within layouts/application (9.9ms)
+Completed 200 OK in 178ms (Views: 28.5ms | ActiveRecord: 15.2ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-02 18:05:58 -0700
+Served asset /variables.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-02 18:05:58 -0700
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-02 18:05:58 -0700
+Served asset /editor.js - 304 Not Modified (0ms)

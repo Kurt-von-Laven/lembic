@@ -1,6 +1,6 @@
 class EditorController < ApplicationController
   
-  DEFAULT_OPTIONS = {'workflow_id' => 1, 'array' => false, 'const' => false} # TODO: Grab the workflow ID out of the session state.
+  DEFAULT_OPTIONS = {'workflow_id' => 1, 'array' => 0, 'const' => 0} # TODO: Grab the workflow ID out of the session state.
   
   def home
     # No changes
@@ -15,14 +15,19 @@ class EditorController < ApplicationController
   end
   
   def new_variable(var)
-    p = Permission.first_or_create({'user_id' => 1, 'workflow_id' => 1, 'permissions' => 4})
-    # u = User.first_or_create('')
-    w = Workflow.first_or_create({'name' => 'Sample Workflow', 'description' => 'This record should be removed eventually and is just for test purposes.'})
+    now = Time.now
+    Permission.where(:user_id => 1).first_or_create({'workflow_id' => 1, 'permissions' => 4, 'created_at' => now, 'updated_at' => now})
+    User.where(:first_name => 'Michael').first_or_create({'last_name' => 'Jones', 'email' => 'qweoui@adsfqw.com', 'organization' => 'City Team',
+                                                               'pwd_hash' => '21ad42ef24123589abcd', 'created_at' => now, 'updated_at' => now})
+    Workflow.where(:name => 'Sample Workflow').first_or_create({'description' => 'This record should be removed eventually and is just for test purposes.',
+                                                                     'created_at' => now, 'updated_at' => now})
     merged_var = DEFAULT_OPTIONS.merge(var)
-    puts "WHAT IS GOING ON???"
-    puts merged_var.inspect
-    v = Variable.new(merged_var)
-    puts v.save
+    merged_var['created_at'] = now
+    merged_var['updated_at'] = now
+    merged_var['variable_type'] = merged_var['variable_type'].to_i
+    merged_var['array'] = merged_var['array'].to_i
+    merged_var['const'] = merged_var['const'].to_i
+    Variable.create(merged_var)
   end
   
 end

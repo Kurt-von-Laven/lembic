@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   validates :organization, :presence => true;
   
   has_many :workflows, :through => :permissions
-  validates_associated :permissions
+  # validates_associated :permissions
   
   validates :created_at, :presence => true;
   validates :updated_at, :presence => true;

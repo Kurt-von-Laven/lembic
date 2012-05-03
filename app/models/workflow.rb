@@ -7,10 +7,10 @@ class Workflow < ActiveRecord::Base
   validates :description, :presence => true
   
   has_many :variables
-  validates_associated :variables
+  # validates_associated :variables
   
   has_many :users, :through => :permissions
-  validates_associated :permissions
+  # validates_associated :permissions
   
   validates :created_at, :presence => true
   validates :updated_at, :presence => true

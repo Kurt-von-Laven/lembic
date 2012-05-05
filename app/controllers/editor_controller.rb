@@ -19,6 +19,7 @@ class EditorController < ApplicationController
       new_relationship(params[:new_relationship])
     end
     @variables = Variable.find(:all)
+      @relationships = Relationship.find(:all)
     render 'equationeditor'
   end
   

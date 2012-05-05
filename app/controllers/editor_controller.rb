@@ -14,6 +14,11 @@ class EditorController < ApplicationController
     render 'variableeditor'
   end
   
+  def equationeditor
+    @variables = Variable.find(:all)
+    render 'equationeditor'
+  end
+  
   def new_variable(var)
     now = Time.now
     Permission.where(:user_id => 1).first_or_create({'workflow_id' => 1, 'permissions' => 4, 'created_at' => now, 'updated_at' => now})

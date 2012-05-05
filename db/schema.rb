@@ -32,14 +32,14 @@ ActiveRecord::Schema.define(:version => 20120501054742) do
   end
 
   create_table "variables", :force => true do |t|
-    t.string   "name",          :limit => 64, :null => false
-    t.string   "description",                 :null => false
-    t.integer  "workflow_id",                 :null => false
-    t.integer  "variable_type",               :null => false
-    t.integer  "array",                       :null => false
-    t.integer  "const",                       :null => false
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
+    t.string   "name",        :limit => 64, :null => false
+    t.string   "description",               :null => false
+    t.integer  "workflow_id",               :null => false
+    t.integer  "type",                      :null => false
+    t.boolean  "array",                     :null => false
+    t.boolean  "const",                     :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
   create_table "variables_editors", :force => true do |t|

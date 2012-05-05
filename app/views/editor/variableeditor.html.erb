@@ -37,6 +37,10 @@
       <td><%= variable.variable_type %></td>
       <td><%= variable.name %></td>
       <td><%= variable.description %></td>
+      <td><%= form_for(:delete_var) do |f| %>
+            <% @delete_var = variable %>
+            <%= f.submit "Delete this variable" %>
+        <% end %></td>
     </tr>
   <% end %>
 

@@ -1,7 +1,10 @@
 Lembic::Application.routes.draw do
+  get "help/help"
+
 	root to: 'editor#home'
 	match '/variableeditor', to: 'editor#variableeditor'
 	match '/equationeditor', to: 'editor#equationeditor'
+	match '/help', to: 'help#help'
 	post "editor/home"
 
   # The priority is based upon order of creation:

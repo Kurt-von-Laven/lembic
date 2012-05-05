@@ -15,9 +15,9 @@ class EditorController < ApplicationController
   end
   
   def equationeditor
-	if !params.nil? and ! (params[:new_relationship].nil?)
-		new_relationship(params[:new_relationship])
-	end
+    if !params.nil? and ! (params[:new_relationship].nil?)
+      new_relationship(params[:new_relationship])
+    end
     @variables = Variable.find(:all)
     render 'equationeditor'
   end

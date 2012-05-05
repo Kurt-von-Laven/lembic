@@ -1,9 +1,18 @@
 Lembic::Application.routes.draw do
+  get "view_editor/editsection"
+
+  get "view_editor/editblock"
+
+  get "view_editor/editquestion"
+
   get "help/help"
 
 	root to: 'editor#home'
 	match '/variableeditor', to: 'editor#variableeditor'
 	match '/equationeditor', to: 'editor#equationeditor'
+    match '/editsection', to: 'view_editor#editsection'
+    match '/editblock', to: 'view_editor#editblock'
+    match '/editquestion', to: 'view_editor#editquestion'
 	match '/help', to: 'help#help'
 	post "editor/home"
 

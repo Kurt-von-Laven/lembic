@@ -1,4 +1,6 @@
 Lembic::Application.routes.draw do
+  get "help/help"
+
 	root to: 'editor#home'
 	match '/variableeditor', to: 'editor#variableeditor'
 	match '/equationeditor', to: 'editor#equationeditor'

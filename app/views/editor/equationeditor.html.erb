@@ -1,0 +1,25 @@
+<h1> Equation Editor </h1>
+
+<p><%= link_to "Home",  root_path %></p>
+
+<h1> Current Variables </h1>
+
+<table>
+
+  <tr>
+    <th>Constant?</th>
+    <th>Array?</th>
+    <th>Type</th>
+    <th>Name</th>
+    <th>Description</th>
+  </tr>
+<% for variable in @variables %>
+    <tr>
+      <td><%= variable.const %></td>
+      <td><%= variable.array %></td>
+      <td><%= variable.variable_type %></td>
+      <td><%= variable.name %></td>
+      <td><%= variable.description %></td>
+    </tr>
+  <% end %>
+</table>

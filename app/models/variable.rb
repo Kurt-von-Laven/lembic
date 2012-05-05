@@ -5,11 +5,11 @@ class Variable < ActiveRecord::Base
   #
   #
   
-  # validates_uniqueness_of :name, :scope => :workflow_id, :message => "Variable names must be unique."
+  validates_uniqueness_of :name, :scope => :workflow_id, :message => "Variable names must be unique."
   validates :name, presence: true
   
   validates :variable_type, presence: true
-  # validates_inclusion_of :variable_type, :in => 0..3, :message => "Invalid variable type. If you're seeing this message, we goofed."
+  validates_inclusion_of :variable_type, :in => 0..3, :message => "Invalid variable type. If you're seeing this message, we goofed."
   
   validates :description, presence: true
   
@@ -18,10 +18,10 @@ class Variable < ActiveRecord::Base
   belongs_to :workflow
   
   validates :array, presence: true
-  # validates_inclusion_of :array, :in => %w(false true), :message => "That is not a boolean.  What did you DO?!?!"
+  validates_inclusion_of :array, :in => 0..1, :message => "That is not a boolean.  What did you DO?!?!"
   
   validates :const, presence: true
-  # validates_inclusion_of :const, :in => %w(false true), :message => "That is not a boolean.  What did you DO?!?!"
+  validates_inclusion_of :const, :in => 0..1, :message => "That is not a boolean.  What did you DO?!?!"
   
   validates :created_at, presence: true
   validates :updated_at, presence: true

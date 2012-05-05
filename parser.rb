@@ -2,7 +2,7 @@
 ### TODO
 ### Have Expression classes store type (e.g. number, variable, string), inputtable as parameter to Expression.new
 ### Change syntax for accessing multidimensional arrays from myvar[i][j][k] to myvar[i,j,k]
-
+### Instead of using puts for error handling, throw exceptions.  Otherwise users who mess up will not know about it.
 
 class ParseNode
 
@@ -24,9 +24,6 @@ end
 
 class Expression
 
-  @operator
-  @args
-  
   def initialize(op, args)
     @op = op
     @args = args
@@ -53,10 +50,12 @@ class Expression
   end
   
   # returns the type of expression.  This can be:
-  # # :number - integer or decimal
-  # # :category - symbol
-  # # :variable
+  # # :number - literal integer or decimal
+  # # :category - symbol for categorical variables; starts with @
+  # # :variable - variable name
+  # # :datetime - date and time in the format YYYY_MM_DD_HH_MM_SS (less significant portions will default to lowest possible value if not specified)
   def type
+    return @type if @type != nil
   end
 end
 
@@ -79,7 +78,9 @@ class Parser
     end
     num_regex = /^([\d]+(\.[\d]+){0,1})$/
     var_regex = /^([a-zA-Z_][a-zA-Z0-9_]*)$/
-    op_regex = /^[\-\+\*\/%]$/
+    #                  Y    Y    Y    Y     _M    M     _D    D     _H    H     _M    M     _S    S
+    datetime_regex = /^[0-9][0-9][0-9][0-9](_[0-9][0-9](_[0-9][0-9](_[0-9][0-9](_[0-9][0-9](_[0-9][0-9](\.[0-9]*)?)?)?)?)?)?/
+    op_regex = /^==|<=|>=|!=|&&|\|\||:|;|[\-\+\*\/%\^<>\{\}\(\)\[\]]$/
     if token.match(num_regex) != nil then
       #token is a number
       return :expression
@@ -88,12 +89,12 @@ class Parser
       #token is a variable name
       return :expression
     end
-    return :operator
     if token.match(op_regex) != nil then
       #token is a math operator
       return :operator
     end
-    return :blah
+    puts "syntax error: unrecognized symbol "
+    return nil
   end
   
   def error_inspect (array)

@@ -7,7 +7,6 @@ class EditorController < ApplicationController
   end
   
   def variableeditor
-    puts Relationship.find(:all)
     if !params.nil? and !(params[:new_var].nil?)
       new_variable(params[:new_var])
     end

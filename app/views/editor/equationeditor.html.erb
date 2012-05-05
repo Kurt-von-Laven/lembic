@@ -23,3 +23,9 @@
     </tr>
   <% end %>
 </table>
+
+<h1> Create Relationship </h1>
+<%= form_for(:new_relationship) do |f| %>
+  <%= f.text_area :relationship%>
+  <%= f.submit "Save Relationship"%>
+<% end %>

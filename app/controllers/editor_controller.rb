@@ -15,6 +15,9 @@ class EditorController < ApplicationController
   end
   
   def equationeditor
+	if !params.nil? and ! (params[:new_relationship].nil?)
+		new_relationship(params[:new_relationship])
+	end
     @variables = Variable.find(:all)
     render 'equationeditor'
   end
@@ -34,5 +37,7 @@ class EditorController < ApplicationController
     merged_var['const'] = merged_var['const'].to_i
     Variable.create(merged_var)
   end
+  
+  
   
 end

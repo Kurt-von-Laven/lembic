@@ -12010,3 +12010,551 @@ Served asset /variables.js - 304 Not Modified (0ms)
 
 Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-05 13:46:04 -0700
 Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2012-05-05 13:49:48 -0700
+Processing by EditorController#home as HTML
+  Rendered editor/home.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 23ms (Views: 22.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-05 13:49:48 -0700
+Served asset /application.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/editor.css?body=1" for 127.0.0.1 at 2012-05-05 13:49:48 -0700
+Served asset /editor.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-05 13:49:48 -0700
+Served asset /jquery.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/variables.css?body=1" for 127.0.0.1 at 2012-05-05 13:49:48 -0700
+Served asset /variables.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-05 13:49:48 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-05 13:49:48 -0700
+Served asset /editor.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-05 13:49:48 -0700
+Served asset /variables.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-05 13:49:48 -0700
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/equationeditor" for 127.0.0.1 at 2012-05-05 13:49:49 -0700
+Processing by EditorController#equationeditor as HTML
+  [1m[36mVariable Load (1.0ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/equationeditor.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 23ms (Views: 21.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/editor.css?body=1" for 127.0.0.1 at 2012-05-05 13:49:49 -0700
+Served asset /editor.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-05 13:49:49 -0700
+Served asset /application.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/variables.css?body=1" for 127.0.0.1 at 2012-05-05 13:49:49 -0700
+Served asset /variables.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-05 13:49:49 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-05 13:49:49 -0700
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-05 13:49:49 -0700
+Served asset /variables.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-05 13:49:49 -0700
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-05 13:49:50 -0700
+Served asset /editor.js - 304 Not Modified (0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2012-05-05 13:49:51 -0700
+Processing by EditorController#home as HTML
+  Rendered editor/home.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 31ms (Views: 30.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-05 13:49:51 -0700
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/editor.css?body=1" for 127.0.0.1 at 2012-05-05 13:49:51 -0700
+Served asset /editor.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-05 13:49:51 -0700
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-05 13:49:51 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-05 13:49:51 -0700
+Served asset /editor.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.css?body=1" for 127.0.0.1 at 2012-05-05 13:49:51 -0700
+Served asset /variables.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-05 13:49:51 -0700
+Served asset /variables.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-05 13:49:51 -0700
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started GET "/variableeditor" for 127.0.0.1 at 2012-05-05 13:51:10 -0700
+Processing by EditorController#variableeditor as HTML
+  [1m[35mVariable Load (0.0ms)[0m  SELECT "variables".* FROM "variables" 
+  Rendered editor/variableeditor.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 14ms (Views: 13.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-05 13:51:10 -0700
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/editor.css?body=1" for 127.0.0.1 at 2012-05-05 13:51:10 -0700
+Served asset /editor.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.css?body=1" for 127.0.0.1 at 2012-05-05 13:51:10 -0700
+Served asset /variables.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-05 13:51:10 -0700
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-05 13:51:10 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-05 13:51:10 -0700
+Served asset /editor.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-05 13:51:10 -0700
+Served asset /variables.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-05 13:51:10 -0700
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/equationeditor" for 127.0.0.1 at 2012-05-05 13:51:15 -0700
+Processing by EditorController#equationeditor as HTML
+  [1m[36mVariable Load (0.0ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/equationeditor.html.erb within layouts/application (0.0ms)
+Completed 200 OK in 24ms (Views: 22.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-05 13:51:15 -0700
+Served asset /application.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/editor.css?body=1" for 127.0.0.1 at 2012-05-05 13:51:15 -0700
+Served asset /editor.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-05 13:51:15 -0700
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-05 13:51:15 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-05 13:51:15 -0700
+Served asset /editor.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.css?body=1" for 127.0.0.1 at 2012-05-05 13:51:15 -0700
+Served asset /variables.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-05 13:51:15 -0700
+Served asset /variables.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-05 13:51:15 -0700
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2012-05-05 13:57:44 -0700
+Processing by EditorController#home as HTML
+  Rendered editor/home.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 23ms (Views: 22.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/editor.css?body=1" for 127.0.0.1 at 2012-05-05 13:57:44 -0700
+Served asset /editor.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-05 13:57:44 -0700
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.css?body=1" for 127.0.0.1 at 2012-05-05 13:57:44 -0700
+Served asset /variables.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-05 13:57:44 -0700
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-05 13:57:44 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-05 13:57:44 -0700
+Served asset /editor.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-05 13:57:44 -0700
+Served asset /variables.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-05 13:57:44 -0700
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started GET "/variableeditor" for 127.0.0.1 at 2012-05-05 13:57:45 -0700
+Processing by EditorController#variableeditor as HTML
+  [1m[35mVariable Load (0.0ms)[0m  SELECT "variables".* FROM "variables" 
+  Rendered editor/variableeditor.html.erb within layouts/application (5.0ms)
+Completed 200 OK in 28ms (Views: 26.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-05 13:57:45 -0700
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/editor.css?body=1" for 127.0.0.1 at 2012-05-05 13:57:45 -0700
+Served asset /editor.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.css?body=1" for 127.0.0.1 at 2012-05-05 13:57:45 -0700
+Served asset /variables.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-05 13:57:45 -0700
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-05 13:57:46 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-05 13:57:46 -0700
+Served asset /editor.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-05 13:57:46 -0700
+Served asset /variables.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-05 13:57:46 -0700
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/variableeditor" for 127.0.0.1 at 2012-05-05 13:59:03 -0700
+Processing by EditorController#variableeditor as HTML
+  [1m[36mVariable Load (0.0ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/variableeditor.html.erb within layouts/application (4.0ms)
+Completed 200 OK in 28ms (Views: 26.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-05 13:59:03 -0700
+Served asset /application.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/editor.css?body=1" for 127.0.0.1 at 2012-05-05 13:59:03 -0700
+Served asset /editor.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-05 13:59:03 -0700
+Served asset /jquery.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-05 13:59:03 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.css?body=1" for 127.0.0.1 at 2012-05-05 13:59:03 -0700
+Served asset /variables.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-05 13:59:03 -0700
+Served asset /editor.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-05 13:59:03 -0700
+Served asset /variables.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-05 13:59:03 -0700
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/equationeditor" for 127.0.0.1 at 2012-05-05 13:59:04 -0700
+Processing by EditorController#equationeditor as HTML
+  [1m[35mVariable Load (1.0ms)[0m  SELECT "variables".* FROM "variables" 
+  Rendered editor/equationeditor.html.erb within layouts/application (28.0ms)
+Completed 500 Internal Server Error in 42ms
+
+ActionView::Template::Error (undefined method `text_box' for #<ActionView::Helpers::FormBuilder:0x32dbdc0>):
+    26: 
+    27: <h1> Create Relationship </h1>
+    28: <%= form_for(:new_var) do |f| %>
+    29:   <%= f.text_box:name %>
+    30:   <%= f.submit "Save Relationship"%>
+    31: <% end %>
+  app/views/editor/equationeditor.html.erb:29:in `block in _app_views_editor_equationeditor_html_erb__651077256_29330904'
+  app/views/editor/equationeditor.html.erb:28:in `_app_views_editor_equationeditor_html_erb__651077256_29330904'
+  app/controllers/editor_controller.rb:19:in `equationeditor'
+
+
+  Rendered C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (4.0ms)
+  Rendered C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.0ms)
+  Rendered C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (40.0ms)
+
+
+Started GET "/equationeditor" for 127.0.0.1 at 2012-05-05 14:00:13 -0700
+Processing by EditorController#equationeditor as HTML
+  [1m[36mVariable Load (1.0ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/equationeditor.html.erb within layouts/application (15.0ms)
+Completed 500 Internal Server Error in 31ms
+
+ActionView::Template::Error (undefined method `text_box' for #<ActionView::Helpers::FormBuilder:0x368cf70>):
+    26: 
+    27: <h1> Create Relationship </h1>
+    28: <%= form_for(:new_var) do |f| %>
+    29:   <%= f.text_box:name %>
+    30: <% end %>
+  app/views/editor/equationeditor.html.erb:29:in `block in _app_views_editor_equationeditor_html_erb__651077256_32582820'
+  app/views/editor/equationeditor.html.erb:28:in `_app_views_editor_equationeditor_html_erb__651077256_32582820'
+  app/controllers/editor_controller.rb:19:in `equationeditor'
+
+
+  Rendered C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (4.0ms)
+  Rendered C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.0ms)
+  Rendered C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (44.0ms)
+
+
+Started GET "/equationeditor" for 127.0.0.1 at 2012-05-05 14:00:27 -0700
+Processing by EditorController#equationeditor as HTML
+  [1m[35mVariable Load (1.0ms)[0m  SELECT "variables".* FROM "variables" 
+  Rendered editor/equationeditor.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 25ms (Views: 23.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/editor.css?body=1" for 127.0.0.1 at 2012-05-05 14:00:27 -0700
+Served asset /editor.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-05 14:00:27 -0700
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.css?body=1" for 127.0.0.1 at 2012-05-05 14:00:27 -0700
+Served asset /variables.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-05 14:00:27 -0700
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-05 14:00:27 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-05 14:00:27 -0700
+Served asset /editor.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-05 14:00:27 -0700
+Served asset /variables.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-05 14:00:27 -0700
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2012-05-05 14:16:40 -0700
+Processing by EditorController#home as HTML
+  Rendered editor/home.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 27ms (Views: 27.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-05 14:16:40 -0700
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/editor.css?body=1" for 127.0.0.1 at 2012-05-05 14:16:40 -0700
+Served asset /editor.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.css?body=1" for 127.0.0.1 at 2012-05-05 14:16:40 -0700
+Served asset /variables.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-05 14:16:40 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-05 14:16:40 -0700
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-05 14:16:40 -0700
+Served asset /editor.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-05 14:16:40 -0700
+Served asset /variables.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-05 14:16:40 -0700
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/variableeditor" for 127.0.0.1 at 2012-05-05 14:16:43 -0700
+Processing by EditorController#variableeditor as HTML
+  [1m[36mVariable Load (1.0ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/variableeditor.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 14ms (Views: 13.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-05 14:16:43 -0700
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-05 14:16:43 -0700
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/editor.css?body=1" for 127.0.0.1 at 2012-05-05 14:16:43 -0700
+Served asset /editor.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.css?body=1" for 127.0.0.1 at 2012-05-05 14:16:43 -0700
+Served asset /variables.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-05 14:16:43 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-05 14:16:43 -0700
+Served asset /editor.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-05 14:16:43 -0700
+Served asset /variables.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-05 14:16:43 -0700
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/equationeditor" for 127.0.0.1 at 2012-05-05 14:16:45 -0700
+Processing by EditorController#equationeditor as HTML
+  [1m[35mVariable Load (1.0ms)[0m  SELECT "variables".* FROM "variables" 
+  Rendered editor/equationeditor.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 20ms (Views: 19.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/editor.css?body=1" for 127.0.0.1 at 2012-05-05 14:16:45 -0700
+Served asset /editor.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.css?body=1" for 127.0.0.1 at 2012-05-05 14:16:45 -0700
+Served asset /variables.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-05 14:16:45 -0700
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-05 14:16:45 -0700
+Served asset /jquery.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-05 14:16:45 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-05 14:16:45 -0700
+Served asset /editor.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-05 14:16:45 -0700
+Served asset /variables.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-05 14:16:45 -0700
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/equationeditor" for 127.0.0.1 at 2012-05-05 14:21:10 -0700
+Processing by EditorController#equationeditor as HTML
+  [1m[36mVariable Load (0.0ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/equationeditor.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 54ms (Views: 20.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-05 14:21:11 -0700
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/editor.css?body=1" for 127.0.0.1 at 2012-05-05 14:21:11 -0700
+Served asset /editor.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.css?body=1" for 127.0.0.1 at 2012-05-05 14:21:11 -0700
+Served asset /variables.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-05 14:21:11 -0700
+Served asset /editor.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-05 14:21:11 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-05 14:21:11 -0700
+Served asset /variables.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-05 14:21:11 -0700
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-05 14:21:11 -0700
+Served asset /application.js - 304 Not Modified (0ms)

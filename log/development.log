@@ -9939,3 +9939,94 @@ Migrating to CreatePermissions (20120501054742)
   [1m[35m (0.0ms)[0m  PRAGMA index_list("variables")
   [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("variables_editors")[0m
   [1m[35m (0.0ms)[0m  PRAGMA index_list("workflows")
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Migrating to CreateVariables (20120421020715)
+Migrating to CreateVariablesEditors (20120430223409)
+Migrating to AddMinimumViableVariableColumns (20120501031111)
+Migrating to CreateUsers (20120501044220)
+Migrating to CreateWorkflows (20120501045403)
+Migrating to CreatePermissions (20120501054742)
+  [1m[35m (7.8ms)[0m  select sqlite_version(*)
+  [1m[36m (0.2ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("permissions")
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("users")[0m
+  [1m[35m (0.1ms)[0m  PRAGMA index_list("variables")
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("variables_editors")[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("workflows")
+
+
+Started GET "/" for 127.0.0.1 at 2012-05-04 22:52:46 -0700
+Processing by EditorController#home as HTML
+  Rendered editor/home.html.erb within layouts/application (10.6ms)
+Completed 200 OK in 275ms (Views: 274.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-04 22:52:48 -0700
+Served asset /application.css - 200 OK (18ms)
+
+
+Started GET "/assets/editor.css?body=1" for 127.0.0.1 at 2012-05-04 22:52:48 -0700
+Served asset /editor.css - 200 OK (3ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-04 22:52:48 -0700
+Served asset /jquery.js - 200 OK (8ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-04 22:52:48 -0700
+Served asset /jquery_ujs.js - 200 OK (3ms)
+
+
+Started GET "/assets/variables.css?body=1" for 127.0.0.1 at 2012-05-04 22:52:48 -0700
+Served asset /variables.css - 200 OK (5ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-04 22:52:48 -0700
+Served asset /editor.js - 200 OK (5ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-04 22:52:48 -0700
+Served asset /application.js - 200 OK (13ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-04 22:52:48 -0700
+Served asset /variables.js - 200 OK (2ms)
+
+
+Started GET "/variableeditor" for 127.0.0.1 at 2012-05-04 22:52:49 -0700
+Processing by EditorController#variableeditor as HTML
+  [1m[36mVariable Load (0.3ms)[0m  [1mSELECT "variables".* FROM "variables" [0m
+  Rendered editor/variableeditor.html.erb within layouts/application (130.9ms)
+Completed 200 OK in 297ms (Views: 160.3ms | ActiveRecord: 3.6ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-04 22:52:50 -0700
+Served asset /application.css - 304 Not Modified (3ms)
+
+
+Started GET "/assets/editor.css?body=1" for 127.0.0.1 at 2012-05-04 22:52:50 -0700
+Served asset /editor.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-04 22:52:50 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-04 22:52:50 -0700
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.css?body=1" for 127.0.0.1 at 2012-05-04 22:52:50 -0700
+Served asset /variables.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/editor.js?body=1" for 127.0.0.1 at 2012-05-04 22:52:50 -0700
+Served asset /editor.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/variables.js?body=1" for 127.0.0.1 at 2012-05-04 22:52:50 -0700
+Served asset /variables.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-04 22:52:50 -0700
+Served asset /application.js - 304 Not Modified (0ms)

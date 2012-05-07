@@ -4,6 +4,8 @@
 ### Change syntax for accessing multidimensional arrays from myvar[i][j][k] to myvar[i,j,k]
 ### Instead of using puts for error handling, throw exceptions.  Otherwise users who mess up will not know about it.
 
+require "./parser_patterns"
+
 class ParseNode
 
   @args
@@ -62,13 +64,13 @@ class Parser
   
   @tokens
   # operators are listed in order of precedence.
-  @@operators = [ /\^/, /[\*\/%]/, /[\+\-]/, /==|<=|>=|!=|<|>/, /&&|\|\|/ ] 
+  @@operators = [ /^\^$/, /^[\*\/%]$/, /^[\+\-]$/, /^(==|<=|>=|!=|<|>)$/, /^(&&|\|\|)$/ ] 
   
   def self.token_type(token)
     if token.instance_of?(Expression) then
       return :expression
     end
-    num_regex = /^([\d]+(\.[\d]+){0,1})$/
+    num_regex = /^(\-){0,1}[\d]+(\.[\d]*){0,1}|\.[\d]+$/
     var_regex = /^([a-zA-Z_][a-zA-Z0-9_]*)$/
     #                  Y    Y    Y    Y     _M    M     _D    D     _H    H     _M    M     _S    S
     datetime_regex = /^[0-9][0-9][0-9][0-9](_[0-9][0-9](_[0-9][0-9](_[0-9][0-9](_[0-9][0-9](_[0-9][0-9](\.[0-9]*)?)?)?)?)?)?/
@@ -102,11 +104,16 @@ class Parser
   end
   
   def tokenize (s)
-    special_tokens = /(==|<=|>=|!=|&&|\|\||[;:\*\+\-\/\^%\(\)\[\]\{\}=<>])/
-    s.gsub!(special_tokens, " \\1 ")
+    #tricky case: get negative numbers to work right.  It's VITAL to gsub numbers before ops, or minus signs will get separated from negative numbers
+    #neg_expressions = /([\+\-\*\/\^%\(\{\[:;^])\s*(\-[\d]+(\.[\d]*){0,1}|\-\.[\d]+)/
+    #pos_numbers = /([\d]+(\.[\d]*){0,1}|\.[\d]+)/
+    ops = /(==|<=|>=|!=|&&|\|\||[;:\*\+\-\/\^%\(\)\[\]\{\}=<>,])/
+    #s =~ neg_numbers
+    #puts "s was #{s}, neg_numbers matched #{$1}"
+    #s.gsub!(neg_expressions, '\\1 (0 \\2)')
+    s.gsub!(ops, " \\1 ")
     s.gsub!(/^\s+|\s+$/, "") #remove leading and trailing whitespace
     return s.split(/\s+/)
-  ### TODO: check for illegal characters and remove them.  Probably the best way to do this is by 
   end
   
   # munch_tokens takes a list of tokens, an index to start munching at, a pattern for munching, and the min and max number of times to match the pattern
@@ -114,7 +121,6 @@ class Parser
   # returns the number of tokens matched.
   
   def match_token? (token, criterion, comparee)
-    puts "comparing token #{token} to #{comparee} by #{criterion}"
     if criterion == :type then
       return false unless Parser.token_type(token) == comparee
     elsif criterion == :value then
@@ -125,12 +131,10 @@ class Parser
     else
       return false
     end
-    puts "returned true!"
     return true
   end
   
-  def munch_tokens (tokens, start_index, pattern, min_matches, max_matches)
-    puts "munch_tokens pattern: #{pattern.inspect}"
+  def munch_tokens_deprecated (tokens, start_index, pattern, min_matches, max_matches)
     currtoken = start_index
     tokens_matched = 0
     pattern_pos = 0
@@ -152,22 +156,71 @@ class Parser
   end
   
   def number_of_matching_tokens (tokens, start_index, pattern)
-    puts "in number_of_matching_tokens"
     currtoken = start_index
     pattern_pos = 0
     pattern_elems = pattern.length / 3
-    puts "pattern #{pattern} with #{pattern_elems} elems"
     while pattern_pos < pattern_elems && currtoken < tokens.length
       min_matches = pattern[pattern_pos*3]
       max_matches = pattern[pattern_pos*3+1]
       munch_pattern = pattern[pattern_pos*3+2]
-      puts "min: #{min_matches}, max: #{max_matches}, munch_pattern: #{munch_pattern}"
-      munched = munch_tokens(tokens, currtoken, munch_pattern, min_matches, max_matches)
+      munched = munch_tokens_deprecated(tokens, currtoken, munch_pattern, min_matches, max_matches)
       return 0 if munched == -1
       currtoken += munched
       pattern_pos += 1
     end
     return currtoken - start_index
+  end
+  
+  def munch_tokens (tokens, start_index, pattern, min, max)
+    #puts "called munch with tokens #{tokens.inspect}, s_i #{start_index}, pattern #{pattern.inspect}"
+    currtoken = start_index
+    pattern_index = 0
+    all_tokens = []
+    captured_tokens = []
+    this_bite = []
+    this_bite_captured = []
+    munches = 0
+    while currtoken < tokens.length && (max < 0 || munches <= max)
+      break unless match_token?(tokens[currtoken], pattern[pattern_index][:criterion], pattern[pattern_index][:match])
+      this_bite << tokens[currtoken]
+      this_bite_captured << tokens[currtoken] if pattern[pattern_index][:capturing]
+      currtoken += 1
+      pattern_index = (pattern_index + 1) % (pattern.length)
+      if pattern_index == 0 then
+        if max == 0 #special case: the match is poison!  die right away
+          return nil
+        end
+        munches += 1
+        all_tokens.concat(this_bite)
+        this_bite = []
+        captured_tokens.concat(this_bite_captured)
+        this_bite_captured = []
+      end
+    end
+    return nil if munches < min
+    #puts "munched #{tokens[start_index...tokens.length].inspect} with #{pattern.inspect} and got #{all_tokens.inspect}"
+    return { :all => all_tokens, :captured => captured_tokens }
+  end
+  
+  def matching_tokens (tokens, start_index, munches)
+    currtoken = start_index
+    munch_index = 0
+    all_tokens = []
+    captured_tokens = []
+    while munch_index < munches.length
+      #puts "munch_index = #{munch_index}, munches.length = #{munches.length}"
+      munched = munch_tokens(tokens, currtoken, munches[munch_index][:munch_pattern], munches[munch_index][:min_munches], munches[munch_index][:max_munches])
+      puts "returning false b/c munched was nil " if munched.nil?
+      return { :matched => false } if munched.nil?
+      all_tokens.concat(munched[:all])
+      captured_tokens.concat(munched[:captured])
+      puts "all: #{all_tokens.inspect}, captured: #{captured_tokens.inspect}"
+      munch_index += 1
+      currtoken += munched[:all].length
+      return { :matched => false } if currtoken > tokens.length #this should never be true, b/c munch_tokens is checking for out-of-bounds stuff
+    end
+    puts "matched #{all_tokens}, captured #{captured_tokens}"
+    return { :matched => true, :all => all_tokens, :captured => captured_tokens }
   end
   
   # function match_tokens
@@ -180,6 +233,7 @@ class Parser
   # and the odd-numbered elems denote the object to be compared to the element.
   # The example above means: "first element should be of type :expression, second element should be "+" or "-", third element should be of type :expression".
   
+  #DEPRECATED
   def match_tokens (tokens, start_index, pattern)
     pattern_error = "Whoa!  Someone typed a pattern wrong. This is not a user error; the dude who wrote this screwed up. You should probably email ben.christel@gmail.com and yell at him."
     if pattern.length % 2 == 1
@@ -303,9 +357,12 @@ class Parser
         #  tokens[currtoken+1] == "[" &&
         #  Parser.token_type(tokens[currtoken+2]) == :expression &&
         #  tokens[currtoken+3] == "]"
-        if match_tokens(tokens, currtoken, [:type, :expression, :value, "[", :type, :expression, :value, "]"])
-        then
-          tokens[currtoken..currtoken+3] = Expression.new("[]", [tokens[currtoken], tokens[currtoken+2]])
+        #if match_tokens(tokens, currtoken, [:type, :expression, :value, "[", :type, :expression, :value, "]"])
+        
+        
+        matches = matching_tokens(tokens, currtoken, ParserPatterns.array_pattern)
+        if matches[:matched] then
+          tokens[currtoken..currtoken+matches[:all].length] = Expression.new("[]", matches[:captured])
           loops_since_made_progress = 0
           made_progress = true
         end

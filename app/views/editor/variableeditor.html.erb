@@ -17,7 +17,7 @@
   <%= f.text_field :value %>
 
   
-  <%= f.submit "Create my variable"%>
+  <%= f.submit "Create my variable" %>
 <% end %>
 
 <h1> Current Variables </h1>
@@ -41,10 +41,9 @@
       <td><%= variable.variable_type %></td>
       <td><%= variable.name %></td>
       <td><%= variable.description %></td>
-      <td><%= form_for(:delete_var) do |f| %>
-            <% @delete_var = variable %>
-            <%= f.submit "Delete this variable" %>
-        <% end %></td>
+      <td><%= button_to "Delete this variable", {:action =>
+               'delete', :id => variable.id}, :confirm => "Are you sure you want to delete the variable #{variable.name}?",
+               :method => :delete %></td>
     </tr>
   <% end %>
 

@@ -6,19 +6,29 @@ class EditorController < ApplicationController
     # No changes
   end
   
+  def delete
+    puts 'Yo dawg.'
+  end
+  
   def variableeditor
-    if !params.nil? and !(params[:new_var].nil?)
-      new_variable(params[:new_var])
+    if !params.nil?
+      if !(params[:new_var].nil?)
+        new_variable(params[:new_var])
+      elsif !(params[:delete_var].nil?)
+        puts @delete_var.inspect
+        Variable.delete(@delete_var.id)
+      end
     end
     @variables = Variable.find(:all)
     render 'variableeditor'
   end
   
   def equationeditor
-	if !params.nil? and ! (params[:new_relationship].nil?)
-		new_relationship(params[:new_relationship])
-	end
+    if !params.nil? and ! (params[:new_relationship].nil?)
+      new_relationship(params[:new_relationship])
+    end
     @variables = Variable.find(:all)
+      @relationships = Relationship.find(:all)
     render 'equationeditor'
   end
   
@@ -38,6 +48,8 @@ class EditorController < ApplicationController
     Variable.create(merged_var)
   end
   
-  
+  def new_relationship(rel)
+    Relationship.create(rel)
+  end
   
 end

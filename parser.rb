@@ -32,21 +32,13 @@ class Expression
   def inspect
     args_inspected = []
     @args.each do |arg|
-      if arg.class == "string"
+      if arg.instance_of?(String) then
         args_inspected << arg
       else
         args_inspected << arg.inspect
       end
     end
     return "#{@op}(#{args_inspected.join(", ")})"
-  end
-  
-  def to_s
-    return "..."
-  end
-  
-  def match (*args)
-    return false
   end
   
   # returns the type of expression.  This can be:
@@ -73,7 +65,7 @@ class Parser
   @@operators = [ /\^/, /[\*\/%]/, /[\+\-]/, /==|<=|>=|!=|<|>/, /&&|\|\|/ ] 
   
   def self.token_type(token)
-    if token.class == "expression" then
+    if token.instance_of?(Expression) then
       return :expression
     end
     num_regex = /^([\d]+(\.[\d]+){0,1})$/
@@ -81,11 +73,12 @@ class Parser
     #                  Y    Y    Y    Y     _M    M     _D    D     _H    H     _M    M     _S    S
     datetime_regex = /^[0-9][0-9][0-9][0-9](_[0-9][0-9](_[0-9][0-9](_[0-9][0-9](_[0-9][0-9](_[0-9][0-9](\.[0-9]*)?)?)?)?)?)?/
     op_regex = /^==|<=|>=|!=|&&|\|\||:|;|[\-\+\*\/%\^<>\{\}\(\)\[\]]$/
+    symbol_regex = /@[a-zA-Z_][a-zA-Z0-9_]*/
     if token.match(num_regex) != nil then
       #token is a number
       return :expression
     end
-    if token.match(var_regex) != nil then
+    if token.match(var_regex) != nil || token.match(symbol_regex) != nil then
       #token is a variable name
       return :expression
     end
@@ -93,14 +86,17 @@ class Parser
       #token is a math operator
       return :operator
     end
-    puts "syntax error: unrecognized symbol "
     return nil
   end
   
   def error_inspect (array)
     ret = ""
     array.each do |a|
-      ret << a.to_s
+      if a.class == :expression then
+        ret << "..."
+      else
+        ret << a.to_s
+      end
     end
     return ret
   end
@@ -110,15 +106,80 @@ class Parser
     s.gsub!(special_tokens, " \\1 ")
     s.gsub!(/^\s+|\s+$/, "") #remove leading and trailing whitespace
     return s.split(/\s+/)
+  ### TODO: check for illegal characters and remove them.  Probably the best way to do this is by 
+  end
+  
+  # munch_tokens takes a list of tokens, an index to start munching at, a pattern for munching, and the min and max number of times to match the pattern
+  #
+  # returns the number of tokens matched.
+  
+  def match_token? (token, criterion, comparee)
+    puts "comparing token #{token} to #{comparee} by #{criterion}"
+    if criterion == :type then
+      return false unless Parser.token_type(token) == comparee
+    elsif criterion == :value then
+      return false unless token == comparee
+    elsif criterion == :regex then
+      return false unless token.respond_to?(:match)
+      return false unless token.match(comparee)
+    else
+      return false
+    end
+    puts "returned true!"
+    return true
+  end
+  
+  def munch_tokens (tokens, start_index, pattern, min_matches, max_matches)
+    puts "munch_tokens pattern: #{pattern.inspect}"
+    currtoken = start_index
+    tokens_matched = 0
+    pattern_pos = 0
+    pattern_elems = pattern.length / 2
+    #pattern = [pattern] unless pattern.instance_of? Array
+    while currtoken < tokens.length
+      break unless match_token?(tokens[currtoken], pattern[pattern_pos*2], pattern[pattern_pos*2+1])
+      pattern_pos = (pattern_pos + 1) % (pattern_elems)
+      tokens_matched += pattern_elems if pattern_pos == 0
+      return tokens_matched if max_matches > 0 && tokens_matched == max_matches*pattern_elems
+      #special case when max_matches == 0: forbid the match
+      if max_matches == 0 && tokens_matched > 0
+        return -1
+      end
+      currtoken += 1
+    end
+    return -1 if tokens_matched < min_matches*pattern_elems 
+    return [tokens_matched, max_matches*pattern_elems].min
+  end
+  
+  def number_of_matching_tokens (tokens, start_index, pattern)
+    puts "in number_of_matching_tokens"
+    currtoken = start_index
+    pattern_pos = 0
+    pattern_elems = pattern.length / 3
+    puts "pattern #{pattern} with #{pattern_elems} elems"
+    while pattern_pos < pattern_elems && currtoken < tokens.length
+      min_matches = pattern[pattern_pos*3]
+      max_matches = pattern[pattern_pos*3+1]
+      munch_pattern = pattern[pattern_pos*3+2]
+      puts "min: #{min_matches}, max: #{max_matches}, munch_pattern: #{munch_pattern}"
+      munched = munch_tokens(tokens, currtoken, munch_pattern, min_matches, max_matches)
+      return 0 if munched == -1
+      currtoken += munched
+      pattern_pos += 1
+    end
+    return currtoken - start_index
   end
   
   # function match_tokens
+  #
+  # returns the number of tokens matched
   #
   # param pattern is an array like this:
   # [ :type, :expression, :regex, /^\+\-$/, :type, :expression ]
   # that is, the even-numbered elems (indexed from zero) denote the type of comparison to be applied to each element,
   # and the odd-numbered elems denote the object to be compared to the element.
   # The example above means: "first element should be of type :expression, second element should be "+" or "-", third element should be of type :expression".
+  
   def match_tokens (tokens, start_index, pattern)
     pattern_error = "Whoa!  Someone typed a pattern wrong. This is not a user error; the dude who wrote this screwed up. You should probably email ben.christel@gmail.com and yell at him."
     if pattern.length % 2 == 1
@@ -127,13 +188,15 @@ class Parser
       return false
     end
     return false if tokens.length < start_index + pattern.length/2
+    currtoken = start_index
     tokens[start_index...start_index+pattern.length/2].each_with_index do |tok, i|
       if pattern[i*2] == :type then
         return false unless Parser.token_type(tok) == pattern[i*2+1]
       elsif pattern[i*2] == :value then
         return false unless tok == pattern[i*2+1]
       elsif pattern[i*2] == :regex then
-        return false unless tok.match pattern[i*2+1]
+        return false unless tok.respond_to?(:match)
+        return false unless tok.match(pattern[i*2+1])
       else
         puts "error 2: invalid match criterion #{pattern[i*2]}"
         puts pattern_error
@@ -170,8 +233,9 @@ class Parser
         #  Parser.token_type(tokens[currtoken+1]) == :operator && tokens[currtoken+1].match(@@operators[precedence]) &&
         #  Parser.token_type(tokens[currtoken+2]) == :expression &&
         #  (currtoken >= tokens.length - 3 || tokens[currtoken+3] != "[") #we don't want to add something to an array that hasn't been indexed yet!
-        if match_tokens(tokens, currtoken, [:type, :expression, :regex, @@operators[precedence], :type, :expression]) &&
-          (currtoken >= tokens.length - 3 || tokens[currtoken+3] != "[") #we don't want to add something to an array that hasn't been indexed yet!
+        #if match_tokens(tokens, currtoken, [:type, :expression, :regex, @@operators[precedence], :type, :expression]) &&
+        #  (currtoken >= tokens.length - 3 || tokens[currtoken+3] != "[") #we don't want to add something to an array that hasn't been indexed yet!
+        if (number_of_matching_tokens(tokens, currtoken, [1, 1, [:type, :expression], 1, 1, [:regex, @@operators[precedence]], 1, 1, [:type, :expression], 0, 0, [:value, "["]]) == 3)
         then
           tokens[currtoken..currtoken+2] = Expression.new(tokens[currtoken+1], [tokens[currtoken], tokens[currtoken+2]])
           loops_since_made_progress = 0
@@ -259,7 +323,11 @@ class Parser
       loops_since_made_progress += 1
       
     end
-    return tokens
+    return tokens[0]
+  end
+  
+  def prefix_form(s)
+    return parse(s).inspect
   end
   
 end
@@ -271,7 +339,7 @@ while input_string != "q"
   print "Enter something to parse, or q to quit: "
   input_string = gets.chomp
   if input_string != "q"
-    puts p.parse(input_string).inspect
+    puts p.prefix_form(input_string)
   end
 end
 

@@ -134,45 +134,7 @@ class Parser
     return true
   end
   
-  def munch_tokens_deprecated (tokens, start_index, pattern, min_matches, max_matches)
-    currtoken = start_index
-    tokens_matched = 0
-    pattern_pos = 0
-    pattern_elems = pattern.length / 2
-    #pattern = [pattern] unless pattern.instance_of? Array
-    while currtoken < tokens.length
-      break unless match_token?(tokens[currtoken], pattern[pattern_pos*2], pattern[pattern_pos*2+1])
-      pattern_pos = (pattern_pos + 1) % (pattern_elems)
-      tokens_matched += pattern_elems if pattern_pos == 0
-      return tokens_matched if max_matches > 0 && tokens_matched == max_matches*pattern_elems
-      #special case when max_matches == 0: forbid the match
-      if max_matches == 0 && tokens_matched > 0
-        return -1
-      end
-      currtoken += 1
-    end
-    return -1 if tokens_matched < min_matches*pattern_elems 
-    return [tokens_matched, max_matches*pattern_elems].min
-  end
-  
-  def number_of_matching_tokens (tokens, start_index, pattern)
-    currtoken = start_index
-    pattern_pos = 0
-    pattern_elems = pattern.length / 3
-    while pattern_pos < pattern_elems && currtoken < tokens.length
-      min_matches = pattern[pattern_pos*3]
-      max_matches = pattern[pattern_pos*3+1]
-      munch_pattern = pattern[pattern_pos*3+2]
-      munched = munch_tokens_deprecated(tokens, currtoken, munch_pattern, min_matches, max_matches)
-      return 0 if munched == -1
-      currtoken += munched
-      pattern_pos += 1
-    end
-    return currtoken - start_index
-  end
-  
   def munch_tokens (tokens, start_index, pattern, min, max)
-    #puts "called munch with tokens #{tokens.inspect}, s_i #{start_index}, pattern #{pattern.inspect}"
     currtoken = start_index
     pattern_index = 0
     all_tokens = []
@@ -198,7 +160,6 @@ class Parser
       end
     end
     return nil if munches < min
-    #puts "munched #{tokens[start_index...tokens.length].inspect} with #{pattern.inspect} and got #{all_tokens.inspect}"
     return { :all => all_tokens, :captured => captured_tokens }
   end
   
@@ -208,56 +169,15 @@ class Parser
     all_tokens = []
     captured_tokens = []
     while munch_index < munches.length
-      #puts "munch_index = #{munch_index}, munches.length = #{munches.length}"
       munched = munch_tokens(tokens, currtoken, munches[munch_index][:munch_pattern], munches[munch_index][:min_munches], munches[munch_index][:max_munches])
-      puts "returning false b/c munched was nil " if munched.nil?
       return { :matched => false } if munched.nil?
       all_tokens.concat(munched[:all])
       captured_tokens.concat(munched[:captured])
-      puts "all: #{all_tokens.inspect}, captured: #{captured_tokens.inspect}"
       munch_index += 1
       currtoken += munched[:all].length
       return { :matched => false } if currtoken > tokens.length #this should never be true, b/c munch_tokens is checking for out-of-bounds stuff
     end
-    puts "matched #{all_tokens}, captured #{captured_tokens}"
     return { :matched => true, :all => all_tokens, :captured => captured_tokens }
-  end
-  
-  # function match_tokens
-  #
-  # returns the number of tokens matched
-  #
-  # param pattern is an array like this:
-  # [ :type, :expression, :regex, /^\+\-$/, :type, :expression ]
-  # that is, the even-numbered elems (indexed from zero) denote the type of comparison to be applied to each element,
-  # and the odd-numbered elems denote the object to be compared to the element.
-  # The example above means: "first element should be of type :expression, second element should be "+" or "-", third element should be of type :expression".
-  
-  #DEPRECATED
-  def match_tokens (tokens, start_index, pattern)
-    pattern_error = "Whoa!  Someone typed a pattern wrong. This is not a user error; the dude who wrote this screwed up. You should probably email ben.christel@gmail.com and yell at him."
-    if pattern.length % 2 == 1
-      puts "error 1: number of elements in param pattern must be even; was #{pattern.length}"
-      puts pattern_error
-      return false
-    end
-    return false if tokens.length < start_index + pattern.length/2
-    currtoken = start_index
-    tokens[start_index...start_index+pattern.length/2].each_with_index do |tok, i|
-      if pattern[i*2] == :type then
-        return false unless Parser.token_type(tok) == pattern[i*2+1]
-      elsif pattern[i*2] == :value then
-        return false unless tok == pattern[i*2+1]
-      elsif pattern[i*2] == :regex then
-        return false unless tok.respond_to?(:match)
-        return false unless tok.match(pattern[i*2+1])
-      else
-        puts "error 2: invalid match criterion #{pattern[i*2]}"
-        puts pattern_error
-        return false
-      end
-    end
-    return true
   end
   
   # We use an iterative, bottom-up parsing strategy that runs in O(n^2) time in the number of input tokens.
@@ -281,16 +201,10 @@ class Parser
         
         ### BASIC EXPRESSIONS W/ ORDER OF OPERATIONS ###
         
-        # TODO: delete this when we're sure the new code works.
-        #if currtoken < tokens.length - 2 &&
-        #  Parser.token_type(tokens[currtoken]) == :expression &&
-        #  Parser.token_type(tokens[currtoken+1]) == :operator && tokens[currtoken+1].match(@@operators[precedence]) &&
-        #  Parser.token_type(tokens[currtoken+2]) == :expression &&
-        #  (currtoken >= tokens.length - 3 || tokens[currtoken+3] != "[") #we don't want to add something to an array that hasn't been indexed yet!
-        #if match_tokens(tokens, currtoken, [:type, :expression, :regex, @@operators[precedence], :type, :expression]) &&
-        #  (currtoken >= tokens.length - 3 || tokens[currtoken+3] != "[") #we don't want to add something to an array that hasn't been indexed yet!
-        if (number_of_matching_tokens(tokens, currtoken, [1, 1, [:type, :expression], 1, 1, [:regex, @@operators[precedence]], 1, 1, [:type, :expression], 0, 0, [:value, "["]]) == 3)
-        then
+        #if (number_of_matching_tokens(tokens, currtoken, [1, 1, [:type, :expression], 1, 1, [:regex, @@operators[precedence]], 1, 1, [:type, :expression], 0, 0, [:value, "["]]) == 3)
+        
+        matches = matching_tokens(tokens, currtoken, ParserPatterns.infix_operator_pattern(@@operators[precedence]))
+        if matches[:matched] then
           tokens[currtoken..currtoken+2] = Expression.new(tokens[currtoken+1], [tokens[currtoken], tokens[currtoken+2]])
           loops_since_made_progress = 0
           made_progress = true
@@ -310,55 +224,14 @@ class Parser
         
         ### CASE STATEMENTS ###
         
-        if tokens[currtoken] == "{"
-          # look ahead to close bracket; see if the stuff in between is a valid case statement
-          look_ahead = 1
-          is_case_stmt = true
-          case_args = []
-          while look_ahead < tokens.length && tokens[currtoken+look_ahead] != "}"
-            if (look_ahead % 4 == 1 || look_ahead % 4 == 3) then
-              if Parser.token_type(tokens[currtoken+look_ahead]) == :expression then
-                case_args << tokens[currtoken+look_ahead]
-              else
-                is_case_stmt = false
-                break
-              end
-            end
-            if look_ahead % 4 == 2 then
-              if tokens[currtoken+look_ahead] != ":" then
-                is_case_stmt = false
-                break
-              end
-            end
-            if look_ahead % 4 == 0 then
-              if tokens[currtoken+look_ahead] != ";" then
-                is_case_stmt = false
-                break
-              end
-            end
-            look_ahead += 1
-          end
-
-          is_case_stmt = is_case_stmt && look_ahead % 4 == 1 && look_ahead > 1
-          if is_case_stmt then
-            tokens[currtoken..currtoken+look_ahead] = Expression.new("CASE", case_args)
-            #currtoken -= 1
-            made_progress_at = precedence
-            loops_since_made_progress = 0
-            made_progress = true
-          end
+        matches = matching_tokens(tokens, currtoken, ParserPatterns.case_pattern)
+        if matches[:matched] then
+          tokens[currtoken..currtoken+matches[:all].length] = Expression.new("CASE", matches[:captured])
+          loops_since_made_progress = 0
+          made_progress = true
         end
         
         ### ARRAY INDEXING ###
-        
-        # TODO: delete this when we're sure the new code works.
-        #if currtoken < tokens.length - 3 &&
-        #  Parser.token_type(tokens[currtoken]) == :expression &&
-        #  tokens[currtoken+1] == "[" &&
-        #  Parser.token_type(tokens[currtoken+2]) == :expression &&
-        #  tokens[currtoken+3] == "]"
-        #if match_tokens(tokens, currtoken, [:type, :expression, :value, "[", :type, :expression, :value, "]"])
-        
         
         matches = matching_tokens(tokens, currtoken, ParserPatterns.array_pattern)
         if matches[:matched] then

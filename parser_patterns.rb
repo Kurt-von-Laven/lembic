@@ -1,4 +1,46 @@
 class ParserPatterns
+  
+  def self.infix_operator_pattern(op_regex)
+    return [
+      {
+        :min_munches => 1,
+        :max_munches => 1,
+        :munch_pattern =>
+        [
+          {
+            :criterion => :type,
+            :match => :expression,
+            :capturing => true
+          }
+        ]
+      },
+      {
+        :min_munches => 1,
+        :max_munches => 1,
+        :munch_pattern =>
+        [
+          {
+            :criterion => :regex,
+            :match => op_regex,
+            :capturing => true
+          }
+        ]
+      },
+      {
+        :min_munches => 1,
+        :max_munches => 1,
+        :munch_pattern =>
+        [
+          {
+            :criterion => :type,
+            :match => :expression,
+            :capturing => true
+          }
+        ]
+      }
+    ]
+  end
+  
   def self.array_pattern
   return [
           { # match variable name

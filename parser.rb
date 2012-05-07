@@ -201,11 +201,18 @@ class Parser
         
         ### BASIC EXPRESSIONS W/ ORDER OF OPERATIONS ###
         
-        #if (number_of_matching_tokens(tokens, currtoken, [1, 1, [:type, :expression], 1, 1, [:regex, @@operators[precedence]], 1, 1, [:type, :expression], 0, 0, [:value, "["]]) == 3)
-        
         matches = matching_tokens(tokens, currtoken, ParserPatterns.infix_operator_pattern(@@operators[precedence]))
         if matches[:matched] then
           tokens[currtoken..currtoken+2] = Expression.new(tokens[currtoken+1], [tokens[currtoken], tokens[currtoken+2]])
+          loops_since_made_progress = 0
+          made_progress = true
+        end
+        
+        ### NEGATIVE NUMBERS ###
+        
+        matches = matching_tokens(tokens, currtoken, ParserPatterns.negative_expressions_pattern)
+        if matches[:matched] && (currtoken == 0 || (tokens[currtoken-1].instance_of?(String) && tokens[currtoken-1].match(/^[\{\(\[\+\-\*\/\^%;:,]$/))) then
+          tokens[currtoken..currtoken+1] = Expression.new("-", ["0", tokens[currtoken+1]])
           loops_since_made_progress = 0
           made_progress = true
         end
@@ -217,7 +224,6 @@ class Parser
           tokens[currtoken+2] == ")"
         then
           tokens[currtoken..currtoken+2] = tokens[currtoken+1]
-          made_progress_at = precedence
           loops_since_made_progress = 0
           made_progress = true
         end

@@ -136,4 +136,31 @@ class ParserPatterns
       }
     ]
   end
+  
+  def self.negative_expressions_pattern
+    return [
+      {
+        :min_munches => 1,
+        :max_munches => 1,
+        :munch_pattern => [
+          {
+            :criterion => :value,
+            :match => "-",
+            :capturing => false
+          }
+        ]
+      },
+      {
+        :min_munches => 1,
+        :max_munches => 1,
+        :munch_pattern => [
+          {
+            :criterion => :type,
+            :match => :expression,
+            :capturing => true
+          }
+        ]
+      }
+    ]
+  end
 end

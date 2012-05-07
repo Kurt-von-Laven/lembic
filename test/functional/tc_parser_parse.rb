@@ -16,8 +16,8 @@ class TestParserParse < Test::Unit::TestCase
   
   def test_tokenizer
     assert_equal( ["1", "+", "2", "-", "3"], @p.tokenize("1+2-3") )
-    assert_equal( ["1", "*", "(", "0", "-", "3", ")"], @p.tokenize("1*-3") )
-    assert_equal( ["-1", "*", "3"], @p.tokenize("-1*3") )
+    assert_equal( ["1", "*", "-", "3"], @p.tokenize("1*-3") )
+    assert_equal( ["-", "1", "*", "3"], @p.tokenize("-1*3") )
   end
   
   # 1+1
@@ -42,10 +42,14 @@ class TestParserParse < Test::Unit::TestCase
     assert_equal( "nil" , @p.prefix_form(".+1") )
   end
   
-  # 1*-2
-  # ~~~~
-  def test_neg_numbers_1
-    assert_equal( "*(1, -(0, 2))" , @p.prefix_form("1*-2"))
+  def test_neg_numbers
+    assert_equal( "-(0, 1)" , @p.prefix_form("-1") )
+    assert_equal( "-(0, 1)" , @p.prefix_form("-(1)") )
+    assert_equal( "*(1, -(0, 2))" , @p.prefix_form("1*-2") )
+    assert_equal( "+(-(0, 1), 2)" , @p.prefix_form("(-1+2)") )
+    assert_equal( "[](var, -(0, 1))" , @p.prefix_form("var[-1]") )
+    assert_equal( "CASE(-(0, 1), 2)" , @p.prefix_form("{-1:2;}") )
+    assert_equal( "CASE(-(0, 1), 2, 3, -(0, 4))" , @p.prefix_form("{-1:2;3:-4;}") )
   end
   
   def test_single_number_expression

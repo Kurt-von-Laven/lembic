@@ -55,7 +55,6 @@ class Parser
   end
   
   def tokenize (s)
-    #tricky case: get negative numbers to work right.  It's VITAL to gsub numbers before ops, or minus signs will get separated from negative numbers
     #neg_expressions = /([\+\-\*\/\^%\(\{\[:;^])\s*(\-[\d]+(\.[\d]*){0,1}|\-\.[\d]+)/
     #pos_numbers = /([\d]+(\.[\d]*){0,1}|\.[\d]+)/
     ops = /(==|<=|>=|!=|&&|\|\||[;:\*\+\-\/\^%\(\)\[\]\{\}=<>,])/
@@ -67,9 +66,11 @@ class Parser
     return s.split(/\s+/)
   end
   
-  # munch_tokens takes a list of tokens, an index to start munching at, a pattern for munching, and the min and max number of times to match the pattern
-  #
-  # returns the number of tokens matched.
+  # returns true iff token parameter matches the comparee parameter by the given criterion
+  # criterion may be:
+  #   :type, which only restricts the token to be an expression or an operator.  Comparee may be :expression or :operator
+  #   :value, which compares the string value of token to that of comparee.
+  #   :regex, which checks whether token matches the regex specified in comparee
   
   def match_token? (token, criterion, comparee)
     if criterion == :type then
@@ -85,11 +86,26 @@ class Parser
     return true
   end
   
+  # munch_tokens starts at the given start_index in the list of tokens, and compares the tokens after that position to the given pattern.
+  # The pattern loops if there are more tokens than pattern elements, so the pattern [a, b, c] would match the first six elements of [a, b, c, a, b, c, d].
+  #
+  # The pattern always starts matching at the start_index, so if start_index is 0, the pattern is [a, b], and the token sequence is [c, a, b],
+  # munch_tokens will return nil, indicating that there is no match at the specified position.
+  #
+  # returns a hash with keys :all and :captured, or nil if the match failed.
+  #   :all stores all the tokens
+  #   :captured stores only the tokens indicated as capturing by the pattern
+  # the match fails if:
+  #   the pattern was not found min times
+  #   max was 0 and the pattern was found
+  # 
+  
   def munch_tokens (tokens, start_index, pattern, min, max)
     currtoken = start_index
     pattern_index = 0
     all_tokens = []
     captured_tokens = []
+    # a bite is a sequence of tokens that matches a single repetition of the given pattern
     this_bite = []
     this_bite_captured = []
     munches = 0
@@ -209,6 +225,9 @@ class Parser
       
       loops_since_made_progress += 1
       
+    end
+    if tokens[0].instance_of?(String)
+      tokens[0] = Expression.new(nil, [tokens[0]])
     end
     return tokens[0]
   end

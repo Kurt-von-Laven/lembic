@@ -52,7 +52,7 @@ class TestParserParse < Test::Unit::TestCase
   end
   
   def test_single_number_expression
-    assert_equal( '"1"' , @p.prefix_form("1"))
+    assert_equal( "(1)" , @p.prefix_form("1"))
   end
   
   def test_wacky_whitespace
@@ -102,9 +102,18 @@ class TestParserParse < Test::Unit::TestCase
     assert_equal( 8, @p.parse("2*4").eval("blah", {}, nil))
     assert_equal( 14, @p.parse("2+3*4").eval("blah", {}, nil))
     assert_equal( 20, @p.parse("(2+3)*4").eval("blah", {}, nil))
-    assert_equal( 2/3, @p.parse("2/3").eval("blah", {}, nil))
+    assert_equal( 2.0/3, @p.parse("2/3").eval("blah", {}, nil))
     assert_equal( 8, @p.parse("2^3").eval("blah", {}, nil))
     assert_equal( 2, @p.parse("5%3").eval("blah", {}, nil))
+    assert_equal( 1, @p.parse("1 ==1").eval("blah", {}, nil))
+  end
+  
+  def test_evaluator_simple_vars
+    assert_equal( 4, @p.parse("2+two").eval("blah", {"two" => { :formula => @p.parse("2") }}, nil))
+    assert_equal( 4, @p.parse("2+two").eval("blah", {"two" => { :formula => @p.parse("1+1") }}, nil))
+    assert_equal( 4, @p.parse("2+two").eval("blah", {"two" => { :value => 2 }}, nil))
+    assert_equal( 4, @p.parse("two+two").eval("blah", {"two" => { :formula => @p.parse("1+1") }}, nil))
+    assert_equal( 3, @p.parse("two+one").eval("blah", {"two" => { :formula => @p.parse("one+one") }, "one" => {:value => 1}}, nil))
   end
   
 end

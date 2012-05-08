@@ -62,24 +62,28 @@ class Expression
     
     @args.each do |arg|
       if arg.instance_of?(Expression)
-        arg_cache << arg.eval(nil, globals, indices)
-      elsif arg.match(/\d+/) then
-        arg_cache << arg.to_i
-      elsif !arg.to_f.nil?
+        arg_cache << arg.eval(nil, globals, nil)
+      elsif arg.match(/^(\-){0,1}[\d]+(\.[\d]*){0,1}|\.[\d]+$/) then
         arg_cache << arg.to_f
       else
         # arg is a variable name
-        if !globals[arg][:value].nil?
+        if !indices.nil? && !indices[arg].nil?
+          arg_cache << indices[arg]
+        elsif !globals[arg][:value].nil?
           arg_cache << globals[arg][:value]
+        elsif !globals[arg][:formula].nil?
+          arg_cache << globals[arg][:formula].eval(arg, globals, nil)
         else
-          arg_cache << globals[arg][:formula].eval(nil, globals, indices)
+          raise "ERROR: undefined variable #{arg} in formula for #{me}"
         end
       end
     end
     
     ## bunch of if-elsif statements go here, with logic for each possible operator
     
-    if @op == "+"
+    if @op.nil?
+      result = arg_cache[0]
+    elsif @op == "+"
       result = arg_cache[0] + arg_cache[1]
     elsif @op == "*"
       result = arg_cache[0] * arg_cache[1]
@@ -92,25 +96,29 @@ class Expression
     elsif @op == "^"
       result = arg_cache[0] ** arg_cache[1]
     elsif @op == "<"
-      result = self.bool_to_i arg_cache[0] < arg_cache[1]
+      result = Expression.bool_to_i (arg_cache[0] < arg_cache[1])
     elsif @op == ">"
-      result = self.bool_to_i arg_cache[0] > arg_cache[1]
+      result = Expression.bool_to_i (arg_cache[0] > arg_cache[1])
     elsif @op == "=="
-      result = self.bool_to_i arg_cache[0] == arg_cache[1]
+      puts "arg_cache = #{arg_cache.inspect}"
+      result = Expression.bool_to_i (arg_cache[0] == arg_cache[1])
     elsif @op == ">="
-      result = self.bool_to_i arg_cache[0] >= arg_cache[1]
+      result = Expression.bool_to_i (arg_cache[0] >= arg_cache[1])
     elsif @op == "<="
-      result = self.bool_to_i arg_cache[0] <= arg_cache[1]
+      result = Expression.bool_to_i (arg_cache[0] <= arg_cache[1])
+    elsif @op == "[]"
+      result = arg_cache[1].eval(nil, globals, arg_cache[2..arg_cache.length-1])
     else
       puts "operator #{@op} doesn't exist or not yet implemented"
     end
 
     if !me.nil?
-      #if indices.nil?
-      #  globals[me][:value] = result
-      #else
-      #  globals[me.to_s+"#"+indices.join("#")] = result
-      #end
+      globals[me] = {} if globals[me].nil?
+      if indices.nil?
+        globals[me][:value] = result
+      else
+        globals[me.to_s+"#"+indices.join("#")] = result
+      end
     end
     return result
     

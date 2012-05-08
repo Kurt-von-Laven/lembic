@@ -1,7 +1,15 @@
+#####################
+# Add filenames that git should ignore in $ git status
+# See http://help.github.com/ignore-files/ for more info
+#####################
+
 log/
 tmp/
 *~
-#*#
+\#*\#
 .DS_Store
 Thumbs.db
 
+# Databases (useful to ignore database if we still want it to be saved in
+# the repository folder but not be version controlled)
+*.sqlite

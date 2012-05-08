@@ -12,7 +12,7 @@ development:
   adapter: sqlite3
   encoding: utf8
   reconnect: false
-  database: ../db/development.sqlite3
+  database: db/development.sqlite3
   pool: 5
 
 # Warning: The database defined as "test" will be erased and
@@ -22,12 +22,12 @@ test:
   adapter: sqlite3
   encoding: utf8
   reconnect: false
-  database: ../db/test.sqlite3
+  database: db/test.sqlite3
   pool: 5
 
 production:
   adapter: sqlite3
   encoding: utf8
   reconnect: false
-  database: ../db/production.sqlite3
+  database: db/production.sqlite3
   pool: 5

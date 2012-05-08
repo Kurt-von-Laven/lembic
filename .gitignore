@@ -12,4 +12,4 @@ Thumbs.db
 
 # Databases (useful to ignore database if we still want it to be saved in
 # the repository folder but not be version controlled)
-*.sqlite
+*.sqlite3

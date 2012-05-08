@@ -1,12 +1,11 @@
 puts "==== at the prompt, enter 'q' ===="
-require "./parser"
+require "./parser/parser"
 require "test/unit"
 
 #Test
 class TestParserParse < Test::Unit::TestCase
   
   def setup
-    
     @p = Parser.new
   end
   
@@ -96,6 +95,16 @@ class TestParserParse < Test::Unit::TestCase
   def test_case_statements
     assert_equal( "CASE(1, 2, 3, 4)" , @p.prefix_form("{1: 2; 3: 4;}") )
     assert_equal( "CASE(<(1.2, foo), 3, else, 4)" , @p.prefix_form("{1.2 < foo:3;else: 4; }") )
+  end
+  
+  def test_evaluator_no_vars
+    assert_equal( 4, @p.parse("2+2").eval("blah", {}, nil))
+    assert_equal( 8, @p.parse("2*4").eval("blah", {}, nil))
+    assert_equal( 14, @p.parse("2+3*4").eval("blah", {}, nil))
+    assert_equal( 20, @p.parse("(2+3)*4").eval("blah", {}, nil))
+    assert_equal( 2/3, @p.parse("2/3").eval("blah", {}, nil))
+    assert_equal( 8, @p.parse("2^3").eval("blah", {}, nil))
+    assert_equal( 2, @p.parse("5%3").eval("blah", {}, nil))
   end
   
 end

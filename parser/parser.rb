@@ -2,26 +2,8 @@
 ### TODO
 ### Instead of using puts for error handling, throw exceptions.  Otherwise users who mess up will not know about it.
 
-require "./parser_patterns"
-require "./expression"
-
-class ParseNode
-
-  @args
-  @operator
-  @node_type
-  
-  # ==================================
-  def initialize(_operator, _args)  
-  # ==================================
-  # params: array of ParseNodes or token strings to be the children of this node.
-  # returns true if valid children were passed to create a node of the parse tree,
-  # false otherwise
-  
-    self.operator = _operator
-    self.args = _args
-  end
-end
+require "./parser/parser_patterns"
+require "./parser/expression"
 
 # [operation, arg1, arg2, ... , argn]
     

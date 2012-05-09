@@ -30,11 +30,11 @@
   <tr>
     <th>Relationship</th>
   </tr>
-<% for relationship in @relationships %>
+<% for variable in @variables %>
     <tr>
-      <td><%= relationship.relationship %></td>
+      <td> <%= variable.name %> = <%=variable.expression_string %></td>
       <td><%= form_for(:delete_relationship) do |f| %>
-            <% @delete_relationship = relationship %>
+            <% @delete_relationship = variable %>
             <%= f.submit "Delete this relationship" %>
         <% end %></td>
     </tr>

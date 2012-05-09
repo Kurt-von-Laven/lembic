@@ -2,6 +2,12 @@
 require "./app/controllers/expression"
 require "./app/controllers/parser"
 
+# Class Evaluator
+# 
+# - The only function you should need to call to evaluate a workflow is
+#   Evaluator::eval_variable.
+#
+
 class Evaluator
   
   def initialize
@@ -81,6 +87,11 @@ class Evaluator
     end
   end
   
+  
+  #
+  # 
+  #
+  #
   def eval_variable (varname, globals, index_values)
     
     #  if variable value was cached previously, return the cached value

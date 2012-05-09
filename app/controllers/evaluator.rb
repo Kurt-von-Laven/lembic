@@ -142,9 +142,9 @@ puts "Enter the exact name of the output variable you want to solve for: "
 output_name = gets.chomp
 
 # Solve
-#e.eval_variable(output_name, relationships, nil)
+e.eval_variable(output_name, relationships, nil)
 #e.eval_variable("foo", relationships, nil)
-relationships[output_name][:formula].eval(output_name, relationships, nil)
+#relationships[output_name][:formula].eval(output_name, relationships, nil)
 #relationships["foo"][:formula].eval("foo", relationships, nil)
 
 # Print

@@ -8,6 +8,11 @@ class Evaluator
     return 0
   end
   
+  # function eval_expression
+  #
+  # params
+  #
+  # returns : numeric value of the exp param
   def eval_expression(exp, globals, indices)
     if exp.instance_of?(Expression)
       args = exp.args

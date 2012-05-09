@@ -236,7 +236,7 @@ class Parser
   
 end
 
-=BEGIN
+=begin
 input_string = ""
 p = Parser.new
 while input_string != "q"

@@ -1,7 +1,5 @@
 class EditorController < ApplicationController
   
-  DEFAULT_OPTIONS = {'workflow_id' => 1, 'array' => 0} # TODO: Grab the workflow ID out of the session state.
-  
   def home
     # No changes
   end
@@ -15,13 +13,8 @@ class EditorController < ApplicationController
   end
   
   def variables
-    if !params.nil?
-      if !(params[:new_var].nil?)
-        create_from_form(params[:new_var])
-      elsif !(params[:delete_var].nil?)
-        puts @delete_var.inspect
-        Variable.delete(@delete_var.id)
-      end
+    if !params.nil? && !(params[:new_var].nil?)
+      Variable.create_from_form(params[:new_var])
     end
     @variables = Variable.find(:all)
   end

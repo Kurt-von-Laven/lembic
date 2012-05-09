@@ -3,25 +3,7 @@
 <p><%= link_to "Home",  root_path %>
 | <%= link_to "Help", help_path %></p>
 
-<h1>Current Variables</h1>
-
-<table>
-
-  <tr>
-    <th>Array?</th>
-    <th>Type</th>
-    <th>Name</th>
-    <th>Description</th>
-  </tr>
-<% for variable in @variables %>
-    <tr>
-      <td><%= variable.array %></td>
-      <td><%= variable.variable_type %></td>
-      <td><%= variable.name %></td>
-      <td><%= variable.description %></td>
-    </tr>
-  <% end %>
-</table>
+<%= render "current_variables" %>
 
 <h1>Current Relationships</h1>
 
@@ -32,7 +14,7 @@
   </tr>
 <% for variable in @variables %>
     <tr>
-      <td> <%= variable.name %> = <%=variable.expression_string %></td>
+      <td><%= variable.name %> = <%=variable.expression_string %></td>
       <td><%= form_for(:delete_relationship) do |f| %>
             <% @delete_relationship = variable %>
             <%= f.submit "Delete this relationship" %>

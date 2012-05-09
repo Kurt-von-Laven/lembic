@@ -4,7 +4,8 @@
   <%= f.check_box(:array) %>
   <%= f.label(:array, "Is this an array?") %>
   
-  <%= f.select :variable_type, [['Categorical', 0],['Integer', 1],['Real', 2], ['Date and Time', 3]] %>
+  <%= f.select :variable_type, [['Categorical', '0'], ['Integer',
+      '1'], ['Real', '2'], ['Date and Time', '3']] %>
   
   <%= f.label :name %>
   <%= f.text_field :name %>
@@ -14,31 +15,7 @@
   <%= f.submit "Create my variable" %>
 <% end %>
 
-<h1>Current Variables</h1>
-
-<table>
-
-  <tr>
-    <th>Array?</th>
-    <th>Type</th>
-    <th>Name</th>
-    <th>Description</th>
-  </tr>
-
-
-
-  <% for variable in @variables %>
-    <tr>
-      <td><%= variable.array %></td>
-      <td><%= variable.variable_type %></td>
-      <td><%= variable.name %></td>
-      <td><%= variable.description %></td>
-      <td><%= button_to "Delete this variable", "/editor/delete_variable?id=#{variable.id}", {:confirm => "Are you sure you want to delete the variable #{variable.name}?",
-               :method => :delete} %></td>
-    </tr>
-  <% end %>
-
-</table>
+<%= render "current_variables" %>
 
 <p><%= link_to "Equation Editor", "/editor/equations" %> 
 	| <%= link_to "Home",  root_path %>

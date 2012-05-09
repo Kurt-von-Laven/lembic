@@ -1,6 +1,8 @@
 class Variable < ActiveRecord::Base
   attr_accessible :name, :description, :workflow_id, :variable_type, :array, :created_at, :updated_at, :expression_string, :expression_object
-
+  
+  DEFAULT_OPTIONS = {'workflow_id' => 1, 'array' => 0} # TODO: Grab the workflow ID out of the session state.
+  
   # type is an integer in range X to X, inclusive.  The mapping is as follows:
   #
   #
@@ -23,14 +25,14 @@ class Variable < ActiveRecord::Base
   validates :created_at, presence: true
   validates :updated_at, presence: true
   
-  def create_from_form(form_hash)
+  def self.create_from_form(form_hash)
     now = Time.now
     Permission.where(:user_id => 1).first_or_create({'workflow_id' => 1, 'permissions' => 4, 'created_at' => now, 'updated_at' => now})
     User.where(:first_name => 'Michael').first_or_create({'last_name' => 'Jones', 'email' => 'qweoui@adsfqw.com', 'organization' => 'City Team',
                                                                'pwd_hash' => '21ad42ef24123589abcd', 'created_at' => now, 'updated_at' => now})
     Workflow.where(:name => 'Sample Workflow').first_or_create({'description' => 'This record should be removed eventually and is just for test purposes.',
                                                                      'created_at' => now, 'updated_at' => now})
-    merged_var = DEFAULT_OPTIONS.merge(var)
+    merged_var = DEFAULT_OPTIONS.merge(form_hash)
     merged_var['created_at'] = now
     merged_var['updated_at'] = now
     merged_var['variable_type'] = merged_var['variable_type'].to_i

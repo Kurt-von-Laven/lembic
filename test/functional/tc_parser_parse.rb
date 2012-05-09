@@ -1,4 +1,4 @@
-puts "==== at the prompt, enter 'q' ===="
+
 require "./app/controllers/parser"
 require "./app/controllers/evaluator"
 require "test/unit"

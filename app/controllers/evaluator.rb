@@ -1,7 +1,12 @@
 
 require "./app/controllers/expression"
+require "./app/controllers/parser"
 
 class Evaluator
+  
+  def initialize
+    @p = Parser.new
+  end
   
   def bool_to_i(b)
     return 1 if b

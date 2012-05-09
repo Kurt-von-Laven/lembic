@@ -2,8 +2,8 @@
 ### TODO
 ### Instead of using puts for error handling, throw exceptions.  Otherwise users who mess up will not know about it.
 
-require "./parser_patterns"
-require "./expression"
+require "./parser/parser_patterns"
+require "./parser/expression"
 
 # [operation, arg1, arg2, ... , argn]
     

@@ -1,6 +1,6 @@
 class EditorController < ApplicationController
   
-  DEFAULT_OPTIONS = {'workflow_id' => 1, 'array' => 0, 'expression_string' => nil, 'expression_object' =>nil} # TODO: Grab the workflow ID out of the session state.
+  DEFAULT_OPTIONS = {'workflow_id' => 1, 'array' => 0} # TODO: Grab the workflow ID out of the session state.
   
   def home
     # No changes
@@ -25,7 +25,7 @@ class EditorController < ApplicationController
   
   def equations
     if !params.nil? and ! (params[:new_relationship].nil?)
-	  Variable.find_by_name(params[:new_relationship]["var"]).update_relationship
+	  Variable.find_by_name(params[:new_relationship]["var"]).update_relationship(params[:new_relationship])
     end
     @variables = Variable.find(:all)
     render 'equations'
@@ -43,8 +43,12 @@ class EditorController < ApplicationController
     merged_var['updated_at'] = now
     merged_var['variable_type'] = merged_var['variable_type'].to_i
     merged_var['array'] = merged_var['array'].to_i
-	puts(merged_var.inspect)
-    Variable.create(merged_var)
+#	puts(merged_var.inspect)
+	v = Variable.new(merged_var)
+	
+	v.save
+	puts(v.errors.inspect)
+   # Variable.create(merged_var)
   end
   
  

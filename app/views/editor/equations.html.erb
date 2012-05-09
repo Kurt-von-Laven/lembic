@@ -32,19 +32,15 @@
     <th><%= f.label :expression_string %></th>
     </tr>
     <tr>
-    <td> <%= f.text_field :name %></td>
+    <td><%= f.text_field :name %></td>
     <td><b><strong> = </strong></b></td>
     <td><%= f.text_area :expression_string %></td>
     </tr>
     <tr>
     <td></td>
-    <td> <%= f.submit "Save Relationship" %></td>
-    <td></td>
-    </tr>
-    <tr>
-    <td></td>
-    <td><%= link_to "Francisco, Look What You Can Do...", "/editor/evaluator" %></td>
+    <td><%= f.submit "Save Relationship" %></td>
     <td></td>
     </tr>
 </table>
+<p><%= link_to "Variable Editor", "/editor/variables" %> | <%= link_to "Francisco, Look What You Can Do...", "/editor/evaluator" %></p>
 <% end %>

@@ -8,6 +8,10 @@ class WorkflowController < ApplicationController
       for input_variable, input_formula in input_values
         input_values[input_variable] = {:value => input_formula}
       end
+      Variable.find(:all).each do |variable|
+        expression_object = variable.expression_object
+        input_values[variable.name] = {:formula => expression_object} unless expression_object.nil?
+      end
       puts input_values.inspect
       output_variable = variables['output_variable']
       evaluator = Evaluator.new

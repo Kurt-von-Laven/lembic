@@ -7,7 +7,7 @@ class Evaluator
 end
 
 
-require "./parser"
+require "./parser.rb"
 
 p = Parser.new
 

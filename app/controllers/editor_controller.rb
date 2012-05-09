@@ -7,8 +7,6 @@ class EditorController < ApplicationController
   end
   
   def delete_variable
-    puts 'Yo dawg.'
-    puts params.inspect
     if !params.nil? and !(params[:id].nil?)
       Variable.delete(params[:id]) # TODO: Check that this ID is valid.
     end

@@ -1,0 +1,23 @@
+<h1>Current Variables</h1>
+
+<table>
+
+  <tr>
+    <th>Array?</th>
+    <th>Type</th>
+    <th>Name</th>
+    <th>Description</th>
+  </tr>
+  
+  <% for variable in @variables %>
+    <tr>
+      <td><%= variable.array %></td>
+      <td><%= variable.variable_type %></td>
+      <td><%= variable.name %></td>
+      <td><%= variable.description %></td>
+      <td><%= button_to "Delete this variable", "/editor/delete_variable?id=#{variable.id}", {:confirm => "Are you sure you want to delete the variable #{variable.name}?",
+               :method => :delete} %></td>
+    </tr>
+  <% end %>
+  
+</table>

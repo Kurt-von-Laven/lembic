@@ -16,7 +16,9 @@ class EditorController < ApplicationController
       new_relationship = params[:new_relationship]
       variable_name = new_relationship['name']
       expression_string = new_relationship['expression_string']
-      Variable.where(:name => variable_name).update_all(:expression_string => expression_string)
+      parser = Parser.new
+      expression_object = parser.parse(expression_string)
+      Variable.where(:name => variable_name).update_all(:expression_string => expression_string, :expression_object => expression_object)
     end
     @variables = Variable.find(:all)
     render 'equations'

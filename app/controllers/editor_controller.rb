@@ -22,7 +22,6 @@ class EditorController < ApplicationController
     render 'equations'
   end
   
-  
   def delete_variable
     if !params.nil? and !(params[:id].nil?)
       Variable.delete(params[:id]) # TODO: Check that this ID is valid.

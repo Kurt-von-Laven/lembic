@@ -2,11 +2,10 @@
 ### TODO
 ### Instead of using puts for error handling, throw exceptions.  Otherwise users who mess up will not know about it.
 
-require "./parser_patterns.rb"
-require "./expression.rb"
 
-# [operation, arg1, arg2, ... , argn]
-    
+require "./parser_patterns"
+require "./expression"
+
 # ================ #   
 #   PARSER CLASS   #
 # ================ #
@@ -238,7 +237,7 @@ class Parser
   
 end
 
-    
+=begin
 input_string = ""
 p = Parser.new
 while input_string != "q"
@@ -248,4 +247,5 @@ while input_string != "q"
     puts p.prefix_form(input_string)
   end
 end
+=end
 

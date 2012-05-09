@@ -7,6 +7,9 @@ Lembic::Application.routes.draw do
   match '/editor/variables', to: 'editor#variables'
   match '/editor/equations', to: 'editor#equations'
   match '/editor/evaluator', to: 'editor#evaluator'
+  match '/editor/delete_variable', to: 'editor#delete_variable'
+  match '/editor/delete_relationship', to: 'editor#delete_relationship'
+  match '/evaluator', to: 'workflow#evaluate'
   post "editor/home"
   
   # The priority is based upon order of creation:

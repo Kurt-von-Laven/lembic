@@ -1,26 +1,14 @@
 class EditorController < ApplicationController
   
-  DEFAULT_OPTIONS = {'workflow_id' => 1, 'array' => 0} # TODO: Grab the workflow ID out of the session state.
-  
   def home
-    # No changes
-  end
-  
-  def delete
-    puts 'Yo dawg.'
+    # Do nothing.
   end
   
   def variables
-    if !params.nil?
-      if !(params[:new_var].nil?)
-        new_variable(params[:new_var])
-      elsif !(params[:delete_var].nil?)
-        puts @delete_var.inspect
-        Variable.delete(@delete_var.id)
-      end
+    if !params.nil? and !(params[:new_var].nil?)
+      Variable.create_from_form(params[:new_var])
     end
     @variables = Variable.find(:all)
-    render 'variables'
   end
   
   def equations
@@ -28,27 +16,27 @@ class EditorController < ApplicationController
       new_relationship = params[:new_relationship]
       variable_name = new_relationship['name']
       expression_string = new_relationship['expression_string']
-      Variable.where(:name => variable_name).update_all(:expression_string => expression_string)
+      parser = Parser.new
+      expression_object = parser.parse(expression_string)
+      Variable.where(:name => variable_name).update_all(:expression_string => expression_string, :expression_object => expression_object)
     end
     @variables = Variable.find(:all)
     render 'equations'
   end
   
-  def new_variable(var)
-    now = Time.now
-    Permission.where(:user_id => 1).first_or_create({'workflow_id' => 1, 'permissions' => 4, 'created_at' => now, 'updated_at' => now})
-    User.where(:first_name => 'Michael').first_or_create({'last_name' => 'Jones', 'email' => 'qweoui@adsfqw.com', 'organization' => 'City Team',
-                                                               'pwd_hash' => '21ad42ef24123589abcd', 'created_at' => now, 'updated_at' => now})
-    Workflow.where(:name => 'Sample Workflow').first_or_create({'description' => 'This record should be removed eventually and is just for test purposes.',
-                                                                     'created_at' => now, 'updated_at' => now})
-    merged_var = DEFAULT_OPTIONS.merge(var)
-    merged_var['created_at'] = now
-    merged_var['updated_at'] = now
-    merged_var['variable_type'] = merged_var['variable_type'].to_i
-    merged_var['array'] = merged_var['array'].to_i
-    Variable.create(merged_var)
+  def delete_variable
+    if !params.nil? and !(params[:id].nil?)
+      Variable.delete(params[:id]) # TODO: Check that this ID is valid.
+    end
+    @variables = Variable.find(:all)
+    redirect_to request.referer # TODO: This is not a robust way to redirect the user to the page they were on.
   end
   
- 
+  def delete_relationship
+    if !params.nil? and !(params[:id].nil?)
+      Variable.update(params[:id], {:expression_string => nil, :expression_object => nil})
+      redirect_to '/editor/equations'
+    end
+  end
   
 end

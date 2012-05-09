@@ -6,7 +6,7 @@ class WorkflowController < ApplicationController
       puts variables.inspect
       input_values = eval(variables['input_values'])
       for input_variable, input_formula in input_values
-        input_values[input_variable] = {:formula => input_formula.to_s}
+        input_values[input_variable] = {:value => input_formula}
       end
       puts input_values.inspect
       output_variable = variables['output_variable']

@@ -1,4 +1,12 @@
 
+
+class Evaluator
+  def eval (varname, globals, indices)
+    my_formula = globals[varname][:formula]
+  end
+end
+
+
 require "./parser/parser"
 
 p = Parser.new

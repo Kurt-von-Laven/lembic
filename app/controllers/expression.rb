@@ -107,7 +107,13 @@ class Expression
     elsif @op == "<="
       result = Expression.bool_to_i (arg_cache[0] <= arg_cache[1])
     elsif @op == "[]"
-      result = arg_cache[1].eval(nil, globals, arg_cache[2..arg_cache.length-1])
+      puts "arg_cache = #{arg_cache}"
+      array_indices = {}
+      arg_cache[1..arg_cache.length-1].each_with_index do |arg, i|
+        index_name = globals[me][:index_names][i]
+        array_indices[index_name] = arg
+      end
+      result = arg_cache[0].eval(nil, globals, array_indices)
     else
       puts "operator #{@op} doesn't exist or not yet implemented"
     end

@@ -1,7 +1,5 @@
 <h1>Variable Editor</h1>
 <%= form_for(:new_var) do |f| %>
-  <%= f.check_box(:const) %>
-  <%= f.label(:const, "Is this a constant?") %>
   
   <%= f.check_box(:array) %>
   <%= f.label(:array, "Is this an array?") %>
@@ -13,10 +11,6 @@
   <%= f.label :description %>
   <%= f.text_field :description %>
   
-  <%= f.label :value %>
-  <%= f.text_field :value %>
-
-  
   <%= f.submit "Create my variable" %>
 <% end %>
 
@@ -25,7 +19,6 @@
 <table>
 
   <tr>
-    <th>Constant?</th>
     <th>Array?</th>
     <th>Type</th>
     <th>Name</th>
@@ -36,7 +29,6 @@
 
   <% for variable in @variables %>
     <tr>
-      <td><%= variable.const %></td>
       <td><%= variable.array %></td>
       <td><%= variable.variable_type %></td>
       <td><%= variable.name %></td>

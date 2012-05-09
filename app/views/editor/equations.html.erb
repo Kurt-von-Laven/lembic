@@ -8,7 +8,6 @@
 <table>
 
   <tr>
-    <th>Constant?</th>
     <th>Array?</th>
     <th>Type</th>
     <th>Name</th>
@@ -16,7 +15,6 @@
   </tr>
 <% for variable in @variables %>
     <tr>
-      <td><%= variable.const %></td>
       <td><%= variable.array %></td>
       <td><%= variable.variable_type %></td>
       <td><%= variable.name %></td>
@@ -45,6 +43,20 @@
 
 <h1>Create Relationship</h1>
 <%= form_for(:new_relationship) do |f| %>
-  <%= f.text_area :relationship %>
-  <%= f.submit "Save Relationship" %>
+<table>
+    <tr>
+    <th><%= f.label(:var, "Variable") %></th>
+    <th> </th>
+    <th><%= f.label :relationship %></th>
+    </tr>
+    <tr>
+    <td> <%= f.text_field :var%></td>
+    <td><b><strong> = </strong></b></td>
+    <td><%= f.text_area :relationship %></td>
+    </tr>
+    <tr>
+    <td></td>
+    <td> <%= f.submit "Save Relationship" %></td>
+    <td></td>
+</table>
 <% end %>

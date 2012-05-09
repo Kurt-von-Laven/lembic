@@ -1,5 +1,6 @@
 
 ### TODO
+### Throw exceptions for tokens like "1x" that start with a number but aren't numeric
 ### Instead of using puts for error handling, throw exceptions.  Otherwise users who mess up will not know about it.
 
 
@@ -24,7 +25,7 @@ class Parser
     var_regex = /^([a-zA-Z_][a-zA-Z0-9_]*)$/
     #                  Y    Y    Y    Y     _M    M     _D    D     _H    H     _M    M     _S    S
     datetime_regex = /^[0-9][0-9][0-9][0-9](_[0-9][0-9](_[0-9][0-9](_[0-9][0-9](_[0-9][0-9](_[0-9][0-9](\.[0-9]*)?)?)?)?)?)?/
-    op_regex = /^==|<=|>=|!=|&&|\|\||:|;|[\-\+\*\/%\^<>\{\}\(\)\[\]]$/
+    op_regex = /^==|<=|>=|!=|&&|\|\||[\-\+\*\/%\^<>\{\}\(\)\[\],;:]$/
     symbol_regex = /@[a-zA-Z_][a-zA-Z0-9_]*/
     if token.match(num_regex) != nil then
       #token is a number
@@ -38,6 +39,7 @@ class Parser
       #token is a math operator
       return :operator
     end
+    raise "Error: Unrecognized token `#{token}`"
     return nil
   end
   
@@ -57,9 +59,6 @@ class Parser
     #neg_expressions = /([\+\-\*\/\^%\(\{\[:;^])\s*(\-[\d]+(\.[\d]*){0,1}|\-\.[\d]+)/
     #pos_numbers = /([\d]+(\.[\d]*){0,1}|\.[\d]+)/
     ops = /(==|<=|>=|!=|&&|\|\||[;:\*\+\-\/\^%\(\)\[\]\{\}=<>,])/
-    #s =~ neg_numbers
-    #puts "s was #{s}, neg_numbers matched #{$1}"
-    #s.gsub!(neg_expressions, '\\1 (0 \\2)')
     s.gsub!(ops, " \\1 ")
     s.gsub!(/^\s+|\s+$/, "") #remove leading and trailing whitespace
     return s.split(/\s+/)
@@ -218,7 +217,7 @@ class Parser
       precedence = (precedence + 1) % @@operators.length
 
       if loops_since_made_progress > @@operators.length then
-        puts "Syntax error!  I've replaced the parts I could understand with dots: #{error_inspect(tokens)}"
+        raise "Syntax error!  I've replaced the parts I could understand with dots: #{error_inspect(tokens)}"
         return nil
       end
       

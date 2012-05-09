@@ -40,7 +40,7 @@ class TestParserParse < Test::Unit::TestCase
   def test_decimals
     assert_equal( "+(+(1., 2.2), 3.325)" , @p.prefix_form("1.+2.2+3.325") )
     assert_equal( "+(0.0, .2)" , @p.prefix_form("0.0+.2") )
-    assert_equal( "nil" , @p.prefix_form(".+1") )
+    assert_raise(RuntimeError) { @p.prefix_form(".+1") }
   end
   
   def test_neg_numbers

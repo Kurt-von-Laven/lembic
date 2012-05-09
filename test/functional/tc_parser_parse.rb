@@ -1,5 +1,6 @@
 puts "==== at the prompt, enter 'q' ===="
-require "./parser"
+require "./app/controllers/parser"
+require "./app/controllers/evaluator"
 require "test/unit"
 
 #Test
@@ -7,6 +8,7 @@ class TestParserParse < Test::Unit::TestCase
   
   def setup
     @p = Parser.new
+    @e = Evaluator.new
   end
   
   def teardown
@@ -98,26 +100,27 @@ class TestParserParse < Test::Unit::TestCase
   end
   
   def test_evaluator_no_vars
-    assert_equal( 4, @p.parse("2+2").eval("blah", {}, nil))
-    assert_equal( 8, @p.parse("2*4").eval("blah", {}, nil))
-    assert_equal( 14, @p.parse("2+3*4").eval("blah", {}, nil))
-    assert_equal( 20, @p.parse("(2+3)*4").eval("blah", {}, nil))
-    assert_equal( 2.0/3, @p.parse("2/3").eval("blah", {}, nil))
-    assert_equal( 8, @p.parse("2^3").eval("blah", {}, nil))
-    assert_equal( 2, @p.parse("5%3").eval("blah", {}, nil))
-    assert_equal( 1, @p.parse("1 ==1").eval("blah", {}, nil))
+    assert_equal( 4, @e.eval_expression(@p.parse("2+2"), nil, nil) )
+    assert_equal( 8, @e.eval_expression(@p.parse("2*4"), nil, nil) )
+    assert_equal( 14, @e.eval_expression(@p.parse("2+3*4"), nil, nil) )
+    assert_equal( 20, @e.eval_expression(@p.parse("(2+3)*4"), nil, nil) )
+    assert_equal( 2.0/3, @e.eval_expression(@p.parse("2/3"), nil, nil) )
+    assert_equal( 8, @e.eval_expression(@p.parse("2^3"), nil, nil) )
+    assert_equal( 2, @e.eval_expression(@p.parse("5%3"), nil, nil) )
+    assert_equal( 1, @e.eval_expression(@p.parse("1==1"), nil, nil) )
+    assert_equal( 0, @e.eval_expression(@p.parse("1==0"), nil, nil) )
   end
   
   def test_evaluator_simple_vars
-    assert_equal( 4, @p.parse("2+two").eval("blah", {"two" => { :formula => @p.parse("2") }}, nil))
-    assert_equal( 4, @p.parse("2+two").eval("blah", {"two" => { :formula => @p.parse("1+1") }}, nil))
-    assert_equal( 4, @p.parse("2+two").eval("blah", {"two" => { :value => 2 }}, nil))
-    assert_equal( 4, @p.parse("two+two").eval("blah", {"two" => { :formula => @p.parse("1+1") }}, nil))
-    assert_equal( 3, @p.parse("two+one").eval("blah", {"two" => { :formula => @p.parse("one+one") }, "one" => {:value => 1}}, nil))
+    assert_equal( 4, @e.eval_expression(@p.parse("2+two"), {"two" => { :formula => @p.parse("2") }}, nil))
+    assert_equal( 4, @e.eval_expression(@p.parse("2+two"), {"two" => { :formula => @p.parse("1+1") }}, nil))
+    assert_equal( 4, @e.eval_expression(@p.parse("2+two"), {"two" => { :value => 2 }}, nil))
+    assert_equal( 4, @e.eval_expression(@p.parse("2+two"), {}, { "two" => 2 }))
+    assert_equal( 3, @e.eval_expression(@p.parse("two+one"), {"two" => { :formula => @p.parse("one+one") }, "one" => {:value => 1}}, nil))
   end
   
   def test_evaluator_arrays
-    assert_equal( 4, @p.parse("arr[1]").eval("blah", {"arr" => { :index_names => ["i"], :formula => @p.parse("2*i") }}, nil))
+    assert_equal( 4, @e.eval_expression(@p.parse("arr[2]"), {"arr" => { :index_names => ["i"], :formula => @p.parse("2*i") }}, nil))
   end
   
 end

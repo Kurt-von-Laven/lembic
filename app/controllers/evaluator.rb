@@ -1,5 +1,5 @@
 
-require "./expression"
+require "./app/controllers/expression"
 
 class Evaluator
   
@@ -8,7 +8,9 @@ class Evaluator
       args = exp.args
       puts args.inspect
       op = exp.op
-      if op == "+"
+      if op.nil?
+        return eval_expression(args[0], globals, indices)
+      elsif op == "+"
         return eval_expression(args[0], globals, indices) + eval_expression(args[1], globals, indices)
       elsif op == "-"
         return eval_expression(args[0], globals, indices) - eval_expression(args[1], globals, indices)
@@ -74,7 +76,7 @@ class Evaluator
   
 end
 
-require "./parser"
+require "./app/controllers/parser"
 
 p = Parser.new
 e = Evaluator.new

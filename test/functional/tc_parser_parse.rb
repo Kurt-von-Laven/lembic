@@ -107,8 +107,35 @@ class TestParserParse < Test::Unit::TestCase
     assert_equal( 2.0/3, @e.eval_expression(@p.parse("2/3"), nil, nil) )
     assert_equal( 8, @e.eval_expression(@p.parse("2^3"), nil, nil) )
     assert_equal( 2, @e.eval_expression(@p.parse("5%3"), nil, nil) )
+    #equals
     assert_equal( 1, @e.eval_expression(@p.parse("1==1"), nil, nil) )
     assert_equal( 0, @e.eval_expression(@p.parse("1==0"), nil, nil) )
+    #greater-than
+    assert_equal( 1, @e.eval_expression(@p.parse("1>0"), nil, nil) )
+    assert_equal( 0, @e.eval_expression(@p.parse("0>1"), nil, nil) )
+    #less-than
+    assert_equal( 1, @e.eval_expression(@p.parse("0<1"), nil, nil) )
+    assert_equal( 0, @e.eval_expression(@p.parse("1<0"), nil, nil) )
+    #greater-than-or-equals
+    assert_equal( 1, @e.eval_expression(@p.parse("1>=0"), nil, nil) )
+    assert_equal( 0, @e.eval_expression(@p.parse("0>=1"), nil, nil) )
+    assert_equal( 1, @e.eval_expression(@p.parse("1>=1"), nil, nil) )
+    assert_equal( 1, @e.eval_expression(@p.parse("1>=1"), nil, nil) )
+    #less-than-or-equals
+    assert_equal( 1, @e.eval_expression(@p.parse("0<=1"), nil, nil) )
+    assert_equal( 0, @e.eval_expression(@p.parse("1<=0"), nil, nil) )
+    assert_equal( 1, @e.eval_expression(@p.parse("1<=1"), nil, nil) )
+    assert_equal( 1, @e.eval_expression(@p.parse("1<=1"), nil, nil) )
+    #boolean and
+    assert_equal( 0, @e.eval_expression(@p.parse("0&&0"), nil, nil) )
+    assert_equal( 0, @e.eval_expression(@p.parse("0&&1"), nil, nil) )
+    assert_equal( 0, @e.eval_expression(@p.parse("1&&0"), nil, nil) )
+    assert_equal( 1, @e.eval_expression(@p.parse("1&&1"), nil, nil) )
+    #boolean or
+    assert_equal( 0, @e.eval_expression(@p.parse("0||0"), nil, nil) )
+    assert_equal( 1, @e.eval_expression(@p.parse("0||1"), nil, nil) )
+    assert_equal( 1, @e.eval_expression(@p.parse("1||0"), nil, nil) )
+    assert_equal( 1, @e.eval_expression(@p.parse("1||1"), nil, nil) )
   end
   
   def test_evaluator_simple_vars
@@ -121,6 +148,14 @@ class TestParserParse < Test::Unit::TestCase
   
   def test_evaluator_arrays
     assert_equal( 4, @e.eval_expression(@p.parse("arr[2]"), {"arr" => { :index_names => ["i"], :formula => @p.parse("2*i") }}, nil))
+    assert_equal( 6, @e.eval_expression(@p.parse("arr[x+1]"), {"arr" => { :index_names => ["i"], :formula => @p.parse("2*i")}, "x" => {:value => 2}}, nil))
+  end
+  
+  def test_evaluator_case_statements
+    assert_equal( 4, @e.eval_expression(@p.parse("{3>2:4;else:2;}"), nil, nil))
+    assert_equal( 2, @e.eval_expression(@p.parse("{3<2:4;else:2;}"), nil, nil))
+    assert_equal( 2, @e.eval_expression(@p.parse("{else:2;}"), nil, nil))
+    assert_equal( 0, @e.eval_expression(@p.parse("{3<2:4;}"), nil, nil))
   end
   
 end

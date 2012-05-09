@@ -3,10 +3,14 @@ require "./app/controllers/expression"
 
 class Evaluator
   
+  def bool_to_i(b)
+    return 1 if b
+    return 0
+  end
+  
   def eval_expression(exp, globals, indices)
     if exp.instance_of?(Expression)
       args = exp.args
-      puts args.inspect
       op = exp.op
       if op.nil?
         return eval_expression(args[0], globals, indices)
@@ -22,12 +26,34 @@ class Evaluator
         return eval_expression(args[0], globals, indices) % eval_expression(args[1], globals, indices)
       elsif op == "^"
         return eval_expression(args[0], globals, indices) ** eval_expression(args[1], globals, indices)
+      elsif op == "=="
+        return bool_to_i(eval_expression(args[0], globals, indices) == eval_expression(args[1], globals, indices))
+      elsif op == "<"
+        return bool_to_i(eval_expression(args[0], globals, indices) < eval_expression(args[1], globals, indices))
+      elsif op == ">"
+        return bool_to_i(eval_expression(args[0], globals, indices) > eval_expression(args[1], globals, indices))
+      elsif op == "<="
+        return bool_to_i(eval_expression(args[0], globals, indices) <= eval_expression(args[1], globals, indices))
+      elsif op == ">="
+        return bool_to_i(eval_expression(args[0], globals, indices) >= eval_expression(args[1], globals, indices))
+      elsif op == "&&"
+        return bool_to_i(eval_expression(args[0], globals, indices) != 0 && eval_expression(args[1], globals, indices) != 0)
+      elsif op == "||"
+        return bool_to_i(eval_expression(args[0], globals, indices) != 0 || eval_expression(args[1], globals, indices) != 0)
       elsif op == "[]"
         index_values = []
         args[1...args.length].each do |index_value|
           index_values << eval_expression(index_value, globals, indices)
         end
         return eval_variable(args[0], globals, index_values)
+      elsif op == "CASE"
+        for case_index in 0...args.length/2
+          if args[case_index*2] == "else" || eval_expression(args[case_index*2], globals, indices) != 0
+            return eval_expression(args[case_index*2+1], globals, indices)
+          end
+        end
+        # if we got here, none of the cases were true and there was no else; return arbitrary default
+        return 0
       end
     else
       #exp is a string

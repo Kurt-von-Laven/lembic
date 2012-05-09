@@ -10,7 +10,7 @@ class EditorController < ApplicationController
     puts 'Yo dawg.'
   end
   
-  def variableeditor
+  def variables
     if !params.nil?
       if !(params[:new_var].nil?)
         new_variable(params[:new_var])
@@ -20,16 +20,16 @@ class EditorController < ApplicationController
       end
     end
     @variables = Variable.find(:all)
-    render 'variableeditor'
+    render 'variables'
   end
   
-  def equationeditor
+  def equations
     if !params.nil? and ! (params[:new_relationship].nil?)
       new_relationship(params[:new_relationship])
     end
     @variables = Variable.find(:all)
       @relationships = Relationship.find(:all)
-    render 'equationeditor'
+    render 'equations'
   end
   
   def new_variable(var)

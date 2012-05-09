@@ -1,9 +1,9 @@
-<h1> Equation Editor </h1>
+<h1>Equation Editor</h1>
 
 <p><%= link_to "Home",  root_path %>
 | <%= link_to "Help", help_path %></p>
 
-<h1> Current Variables </h1>
+<h1>Current Variables</h1>
 
 <table>
 
@@ -25,12 +25,12 @@
   <% end %>
 </table>
 
-<h1> Current Variables </h1>
+<h1>Current Variables</h1>
 
 <table>
 
   <tr>
-    <th>Relationship </th>
+    <th>Relationship</th>
   </tr>
 <% for relationship in @relationships %>
     <tr>
@@ -43,9 +43,8 @@
   <% end %>
 </table>
 
-<h1> Create Relationship </h1>
+<h1>Create Relationship</h1>
 <%= form_for(:new_relationship) do |f| %>
   <%= f.text_area :relationship %>
   <%= f.submit "Save Relationship" %>
 <% end %>
-

@@ -1,4 +1,4 @@
-<h1> Variable Editor </h1>
+<h1>Variable Editor</h1>
 <%= form_for(:new_var) do |f| %>
   <%= f.check_box(:const) %>
   <%= f.label(:const, "Is this a constant?") %>
@@ -20,7 +20,7 @@
   <%= f.submit "Create my variable" %>
 <% end %>
 
-<h1> Current Variables </h1>
+<h1>Current Variables</h1>
 
 <table>
 
@@ -49,7 +49,7 @@
 
 </table>
 
-<p><%= link_to "Equation Editor", equationeditor_path %> 
+<p><%= link_to "Equation Editor", "/editor/equations" %> 
 	| <%= link_to "Home",  root_path %>
     | <%= link_to "Help", help_path %>
 </p>

@@ -1,7 +1,7 @@
 class EditorController < ApplicationController
   
   def home
-    # No changes
+    # Do nothing.
   end
   
   def delete_variable
@@ -9,11 +9,11 @@ class EditorController < ApplicationController
       Variable.delete(params[:id]) # TODO: Check that this ID is valid.
     end
     @variables = Variable.find(:all)
-    redirect_to '/editor/variables'
+    redirect_to request.referer # TODO: This is not a robust way to redirect the user to the page they were on.
   end
   
   def variables
-    if !params.nil? && !(params[:new_var].nil?)
+    if !params.nil? and !(params[:new_var].nil?)
       Variable.create_from_form(params[:new_var])
     end
     @variables = Variable.find(:all)

@@ -22,12 +22,9 @@ class Variable < ActiveRecord::Base
   
   validates :created_at, presence: true
   validates :updated_at, presence: true
- 
   
-  # store expression string in expression_string column for give name
-  def update_relationship(relationship_hash)
-	expression_string = relationship_hash["relationship"]
-	save
-	puts(errors.inspect)
+  def create_from_form()
+    # TODO: Move some controller code in here.
   end
+  
 end

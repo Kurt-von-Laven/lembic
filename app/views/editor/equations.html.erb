@@ -45,14 +45,14 @@
 <%= form_for(:new_relationship) do |f| %>
 <table>
     <tr>
-    <th><%= f.label(:var, "Variable") %></th>
+    <th><%= f.label(:name, "Variable") %></th>
     <th> </th>
-    <th><%= f.label :relationship %></th>
+    <th><%= f.label :expression_string %></th>
     </tr>
     <tr>
-    <td> <%= f.text_field :var%></td>
+    <td> <%= f.text_field :name %></td>
     <td><b><strong> = </strong></b></td>
-    <td><%= f.text_area :relationship %></td>
+    <td><%= f.text_area :expression_string %></td>
     </tr>
     <tr>
     <td></td>

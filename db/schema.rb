@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120509063926) do
+ActiveRecord::Schema.define(:version => 20120509053527) do
 
   create_table "permissions", :force => true do |t|
     t.integer  "workflow_id", :null => false

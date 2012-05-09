@@ -24,8 +24,11 @@ class EditorController < ApplicationController
   end
   
   def equations
-    if !params.nil? and ! (params[:new_relationship].nil?)
-	  Variable.find_by_name(params[:new_relationship]["var"]).update_relationship(params[:new_relationship])
+    if !params.nil? and !(params[:new_relationship].nil?)
+      new_relationship = params[:new_relationship]
+      variable_name = new_relationship['name']
+      expression_string = new_relationship['expression_string']
+      Variable.where(:name => variable_name).update_all(:expression_string => expression_string)
     end
     @variables = Variable.find(:all)
     render 'equations'
@@ -43,12 +46,7 @@ class EditorController < ApplicationController
     merged_var['updated_at'] = now
     merged_var['variable_type'] = merged_var['variable_type'].to_i
     merged_var['array'] = merged_var['array'].to_i
-#	puts(merged_var.inspect)
-	v = Variable.new(merged_var)
-	
-	v.save
-	puts(v.errors.inspect)
-   # Variable.create(merged_var)
+    Variable.create(merged_var)
   end
   
  

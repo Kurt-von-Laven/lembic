@@ -116,4 +116,8 @@ class TestParserParse < Test::Unit::TestCase
     assert_equal( 3, @p.parse("two+one").eval("blah", {"two" => { :formula => @p.parse("one+one") }, "one" => {:value => 1}}, nil))
   end
   
+  def test_evaluator_arrays
+    assert_equal( 4, @p.parse("arr[1]").eval("blah", {"arr" => { :index_names => ["i"], :formula => @p.parse("2*i") }}, nil))
+  end
+  
 end

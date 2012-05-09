@@ -236,7 +236,7 @@ class Parser
   
 end
 
-    
+=BEGIN
 input_string = ""
 p = Parser.new
 while input_string != "q"
@@ -246,4 +246,5 @@ while input_string != "q"
     puts p.prefix_form(input_string)
   end
 end
+=end
 

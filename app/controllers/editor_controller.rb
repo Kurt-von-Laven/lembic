@@ -4,14 +4,6 @@ class EditorController < ApplicationController
     # Do nothing.
   end
   
-  def delete_variable
-    if !params.nil? and !(params[:id].nil?)
-      Variable.delete(params[:id]) # TODO: Check that this ID is valid.
-    end
-    @variables = Variable.find(:all)
-    redirect_to request.referer # TODO: This is not a robust way to redirect the user to the page they were on.
-  end
-  
   def variables
     if !params.nil? and !(params[:new_var].nil?)
       Variable.create_from_form(params[:new_var])
@@ -28,6 +20,22 @@ class EditorController < ApplicationController
     end
     @variables = Variable.find(:all)
     render 'equations'
+  end
+  
+  
+  def delete_variable
+    if !params.nil? and !(params[:id].nil?)
+      Variable.delete(params[:id]) # TODO: Check that this ID is valid.
+    end
+    @variables = Variable.find(:all)
+    redirect_to request.referer # TODO: This is not a robust way to redirect the user to the page they were on.
+  end
+  
+  def delete_relationship
+    if !params.nil? and !(params[:id].nil?)
+      Variable.update(params[:id], {:expression_string => nil, :expression_object => nil})
+      redirect_to '/editor/equations'
+    end
   end
   
 end

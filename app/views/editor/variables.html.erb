@@ -1,4 +1,10 @@
 <h1>Variable Editor</h1>
+
+<p><%= link_to "Equation Editor", "/editor/equations" %> 
+	| <%= link_to "Home",  root_path %>
+    | <%= link_to "Help", help_path %>
+</p>
+
 <%= form_for(:new_var) do |f| %>
   
   <%= f.check_box(:array) %>
@@ -16,8 +22,3 @@
 <% end %>
 
 <%= render "current_variables" %>
-
-<p><%= link_to "Equation Editor", "/editor/equations" %> 
-	| <%= link_to "Home",  root_path %>
-    | <%= link_to "Help", help_path %>
-</p>

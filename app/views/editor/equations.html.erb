@@ -1,7 +1,6 @@
 <h1>Equation Editor</h1>
 
-<p><%= link_to "Home",  root_path %>
-| <%= link_to "Help", help_path %></p>
+<p><%= link_to "Variable Editor", "/editor/variables" %> | <%= link_to "Francisco, Look What You Can Do...", "/editor/evaluator" %> | <%= link_to "Home",  root_path %> | <%= link_to "Help", help_path %></p>
 
 <%= render "current_variables" %>
 
@@ -42,5 +41,5 @@
     <td></td>
     </tr>
 </table>
-<p><%= link_to "Variable Editor", "/editor/variables" %> | <%= link_to "Francisco, Look What You Can Do...", "/editor/evaluator" %></p>
+
 <% end %>

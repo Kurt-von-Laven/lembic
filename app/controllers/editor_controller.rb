@@ -47,8 +47,4 @@ class EditorController < ApplicationController
     Variable.create(merged_var)
   end
   
-  def new_relationship(rel)
-    Relationship.create(rel)
-  end
-  
 end

@@ -23,8 +23,19 @@ class Variable < ActiveRecord::Base
   validates :created_at, presence: true
   validates :updated_at, presence: true
   
-  def create_from_form()
-    # TODO: Move some controller code in here.
+  def create_from_form(form_hash)
+    now = Time.now
+    Permission.where(:user_id => 1).first_or_create({'workflow_id' => 1, 'permissions' => 4, 'created_at' => now, 'updated_at' => now})
+    User.where(:first_name => 'Michael').first_or_create({'last_name' => 'Jones', 'email' => 'qweoui@adsfqw.com', 'organization' => 'City Team',
+                                                               'pwd_hash' => '21ad42ef24123589abcd', 'created_at' => now, 'updated_at' => now})
+    Workflow.where(:name => 'Sample Workflow').first_or_create({'description' => 'This record should be removed eventually and is just for test purposes.',
+                                                                     'created_at' => now, 'updated_at' => now})
+    merged_var = DEFAULT_OPTIONS.merge(var)
+    merged_var['created_at'] = now
+    merged_var['updated_at'] = now
+    merged_var['variable_type'] = merged_var['variable_type'].to_i
+    merged_var['array'] = merged_var['array'].to_i
+    Variable.create(merged_var)
   end
   
 end

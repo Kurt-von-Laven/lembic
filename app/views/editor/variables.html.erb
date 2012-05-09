@@ -33,9 +33,8 @@
       <td><%= variable.variable_type %></td>
       <td><%= variable.name %></td>
       <td><%= variable.description %></td>
-      <td><%= button_to "Delete this variable", {:action =>
-               'delete', :id => variable.id}, :confirm => "Are you sure you want to delete the variable #{variable.name}?",
-               :method => :delete %></td>
+      <td><%= button_to "Delete this variable", "/editor/delete_variable?id=#{variable.id}", {:confirm => "Are you sure you want to delete the variable #{variable.name}?",
+               :method => :delete} %></td>
     </tr>
   <% end %>
 

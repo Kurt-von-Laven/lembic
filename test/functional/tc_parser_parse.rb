@@ -1,5 +1,5 @@
 puts "==== at the prompt, enter 'q' ===="
-require "./parser/parser"
+require "./parser"
 require "test/unit"
 
 #Test

@@ -8,6 +8,14 @@ class Expression
     end
   end
   
+  def args
+    @args
+  end
+  
+  def op
+    @op
+  end
+  
   def inspect
     args_inspected = []
     @args.each do |arg|

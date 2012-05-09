@@ -7,8 +7,6 @@ class Evaluator
 end
 
 
-require "./parser.rb"
-
 p = Parser.new
 
 relationships = {

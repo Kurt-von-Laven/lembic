@@ -26,4 +26,9 @@ class Variable < ActiveRecord::Base
   validates :expression_string, presence: true
   validates :expression_object, presence: true
   
+  # store expression string in expression_string column for give name
+  def update_relationship(relationship_hash)
+	expression_string = relationship_hash["relationship"]
+	save
+  end
 end

@@ -74,7 +74,6 @@ class Evaluator
   
 end
 
-
 require "./parser"
 
 p = Parser.new
@@ -92,4 +91,3 @@ relationships = {
 e.eval_variable("foo", relationships, nil)
 
 puts "foo = #{relationships["foo"][:value]}, bar = #{relationships["bar"][:value]}, baz = #{relationships["baz"][:value]}, a = #{relationships["a"][:value]}"
-

@@ -64,7 +64,7 @@ class Expression
     end
   end
   
-  def eval(me, globals, indices)
+  def eval_deprecated(me, globals, indices)
     
     arg_cache = []
     

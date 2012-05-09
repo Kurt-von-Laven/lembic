@@ -1,6 +1,6 @@
 class EditorController < ApplicationController
   
-  DEFAULT_OPTIONS = {'workflow_id' => 1, 'array' => 0, 'const' => 0} # TODO: Grab the workflow ID out of the session state.
+  DEFAULT_OPTIONS = {'workflow_id' => 1, 'array' => 0} # TODO: Grab the workflow ID out of the session state.
   
   def home
     # No changes
@@ -44,7 +44,6 @@ class EditorController < ApplicationController
     merged_var['updated_at'] = now
     merged_var['variable_type'] = merged_var['variable_type'].to_i
     merged_var['array'] = merged_var['array'].to_i
-    merged_var['const'] = merged_var['const'].to_i
     Variable.create(merged_var)
   end
   

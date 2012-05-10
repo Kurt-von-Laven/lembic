@@ -87,12 +87,32 @@ class Evaluator
     end
   end
   
+  def error_check_eval_variable_params(varname, globals, index_values)
+    raise "Error: second parameter to eval_variable cannot be nil." if globals.nil?
+    raise "Error: variable #{varname} doesn't exist." if globals[varname].nil?
+  end
   
   #
-  # 
+  # function eval_variable
   #
+  # Evaluates a particular variable in the context of a set of input values.
+  # Also evaluates all variables the given variable depends on, so you can get those values too.
+  #
+  # Params:
+  # - String varname - the name of the variable to be evaluated
+  # - Hash globals - stores the formulas and/or input values for all the variables in the model.  Format described below.
+  # - Hash index_values - Nil if the variable being evaluated is a singleton (i.e. not an array).  If we're evaluating an array,
+  #                       index_values should map the index variable names (as strings) to numeric values.
+  #
+  # Returns:
+  # - The value of the variable specified as varname.  Also populates the globals hash with the values of the variables that get 
+  #   computed as a side effect of evaluating the specified variable.
+  #
+  # globals format: { "varname1" => { :formula => <Expression> :value => <Numeric> }, "varname2" => ... , ... "varnameN" => ... }
   #
   def eval_variable (varname, globals, index_values)
+    
+    error_check_eval_variable_params(varname, globals, index_values)
     
     #  if variable value was cached previously, return the cached value
     if !globals[varname][:value].nil?
@@ -100,6 +120,8 @@ class Evaluator
     end
     
     formula = globals[varname][:formula]
+    
+    raise "Error: formula for a variable must be an expression object." if !formula.instance_of?(Expression)
     
     # check if variable is an array or a singleton, and evaluate accordingly
     if globals[varname][:index_names].nil?

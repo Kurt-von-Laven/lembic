@@ -1,22 +1,22 @@
-<h1>Variable Editor</h1>
+<div id="content">
+	<h1>Variable Editor</h1>
 
-<p><%= link_to "Equation Editor", "/editor/equations" %> | <%= link_to "Evaluator", "/evaluator" %>	| <%= link_to "Home",  root_path %> | <%= link_to "Help", help_path %></p>
+	<%= form_for(:new_var) do |f| %>
+	  
+	  <%= f.check_box(:array) %>
+	  <%= f.label(:array, "Is this an array?") %>
+	  
+	  <%= f.select :variable_type, [['Categorical', '0'], ['Integer',
+		  '1'], ['Real', '2'], ['Date and Time', '3']] %>
+	  
+	  <%= f.label :name %>
+	  <%= f.text_field :name %>
+	  <%= f.label :description %>
+	  <%= f.text_field :description %>
+	  
+	  <%= f.submit "Create my variable" %>
+	   
+	<% end %>
 
-<%= form_for(:new_var) do |f| %>
-  
-  <%= f.check_box(:array) %>
-  <%= f.label(:array, "Is this an array?") %>
-  
-  <%= f.select :variable_type, [['Categorical', '0'], ['Integer',
-      '1'], ['Real', '2'], ['Date and Time', '3']] %>
-  
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <%= f.label :description %>
-  <%= f.text_field :description %>
-  
-  <%= f.submit "Create my variable" %>
-   
-<% end %>
-
-<%= render "current_variables" %>
+	<%= render "current_variables" %>
+</div>

@@ -1,47 +1,47 @@
-<h1>Equation Editor</h1>
+<div id="content">
+	<h1>Equation Editor</h1>
 
-<p><%= link_to "Variable Editor", "/editor/variables" %> | <%= link_to "Francisco, Look What You Can Do...", "/evaluator" %> | <%= link_to "Home",  root_path %> | <%= link_to "Help", help_path %></p>
+	<%= render "current_variables" %>
 
-<%= render "current_variables" %>
+	<h1>Current Relationships</h1>
 
-<h1>Current Relationships</h1>
+	<table>
 
-<table>
+	  <tr>
+		<th>Relationship</th>
+	  </tr>
+	  <% for variable in @variables %>
+		<tr>
+		  <td><%= variable.name %> = <%=variable.expression_string %></td>
+		  <td><%= button_to "Delete this relationship",
+				   "/editor/delete_relationship?id=#{variable.id}",
+				   {:confirm => "Are you sure you want to delete the
+				   relationship for the variable named #{variable.name}?",
+				   :method => :delete} %></td>
+		</tr>
+	  <% end %>
+	</table>
 
-  <tr>
-    <th>Relationship</th>
-  </tr>
-  <% for variable in @variables %>
-    <tr>
-      <td><%= variable.name %> = <%=variable.expression_string %></td>
-      <td><%= button_to "Delete this relationship",
-               "/editor/delete_relationship?id=#{variable.id}",
-               {:confirm => "Are you sure you want to delete the
-               relationship for the variable named #{variable.name}?",
-               :method => :delete} %></td>
-    </tr>
-  <% end %>
-</table>
+	<h1>Create Relationship</h1>
+	<p><b>Please note that you must first declare all variable on either side of the relationship using the <%= link_to "Variable Editor", "/editor/variables" %></b></p>
+	<%= form_for(:new_relationship) do |f| %>
+	<table>
+		<tr>
+		<th><%= f.label(:name, "Variable") %></th>
+		<th> </th>
+		<th><%= f.label :expression_string %></th>
+		</tr>
+		<tr>
+		<td><%= f.text_field :name %></td>
+		<td><b><strong> = </strong></b></td>
+		<td><%= f.text_area :expression_string %></td>
+		</tr>
+		<tr>
+		<td></td>
+		<td><%= f.submit "Save Relationship" %></td>
+		<td></td>
+		</tr>
+	</table>
 
-<h1>Create Relationship</h1>
-<p><b>Please note that you must first declare all variable on either side of the relationship using the <%= link_to "Variable Editor", "/editor/variables" %></b></p>
-<%= form_for(:new_relationship) do |f| %>
-<table>
-    <tr>
-    <th><%= f.label(:name, "Variable") %></th>
-    <th> </th>
-    <th><%= f.label :expression_string %></th>
-    </tr>
-    <tr>
-    <td><%= f.text_field :name %></td>
-    <td><b><strong> = </strong></b></td>
-    <td><%= f.text_area :expression_string %></td>
-    </tr>
-    <tr>
-    <td></td>
-    <td><%= f.submit "Save Relationship" %></td>
-    <td></td>
-    </tr>
-</table>
-
-<% end %>
+	<% end %>
+</div>

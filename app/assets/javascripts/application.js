@@ -14,3 +14,7 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require_tree .
+
+jquery(function(){
+       jquery("#tags").tabs();
+       });

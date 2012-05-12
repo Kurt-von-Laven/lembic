@@ -8,6 +8,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   </head>
   <body>
+  <div class = "header">
+  <p> <%= link_to "Home",  root_path %> | <%= link_to "Help", help_path %> | <%= link_to "Variable Editor", "/editor/variables" %> | <%= link_to "Equation Editor", "/editor/equations" %> | <%= link_to "Evaluator", "/evaluator" %></p>
+  </div>
     <%= yield %>
   </body>
 </html>

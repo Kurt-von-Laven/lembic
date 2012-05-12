@@ -150,5 +150,6 @@ DEPENDENCIES
   rspec-rails
   sass-rails (~> 3.2.3)
   therubyracer
+  thor
   uglifier (>= 1.0.3)
   webrat

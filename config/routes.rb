@@ -5,7 +5,6 @@ Lembic::Application.routes.draw do
   match '/editblock', to: 'view_editor#editblock'
   match '/editquestion', to: 'view_editor#editquestion'
   match '/help', to: 'help#help'
-  match '/editor/variables', to: 'editor#variables'
   match '/editor/equations', to: 'editor#equations'
   match '/editor/evaluator', to: 'editor#evaluator'
   match '/editor/delete_variable', to: 'editor#delete_variable'

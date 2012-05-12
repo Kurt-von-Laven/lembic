@@ -4,7 +4,7 @@
     <title>Lembic</title>
     <%= stylesheet_link_tag    "application", :media => "all" %>
     <%= stylesheet_link_tag     "jquery-ui-1.8.20.custom", :media => "all" %>
-	<%= javascript_include_tag "jquery-ui-1.8.20.custom.min" %>
+    <%= javascript_include_tag "jquery-ui-1.8.20.custom.min" %>
     <%= javascript_include_tag "jquery-1.7.2.min" %>
     <%= javascript_include_tag "application" %>
     
@@ -67,16 +67,15 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   </head>
   <body>
-
-
-  <%= image_tag "lembic_blue.png" %>
-  <div id="container">
-    <div id="menu">
-	  <p> <%= link_to "Home",  root_path %> | <%= link_to "Help", help_path %> | <%= link_to "Variable Editor", "/editor/variables" %> | <%= link_to "Equation Editor", "/editor/equations" %> | <%= link_to "Evaluator", "/evaluator" %></p>
-	 </div>
-   
-	 
-    <%= yield %>
-	</div>
+  
+    <%= image_tag "lembic_blue.png" %>
+    <div id="container">
+      <div id="menu">
+        <p> <%= link_to "Home",  root_path %> | <%= link_to "Help", help_path %> | <%= link_to "Variable Editor", "/editor/variables" %> | <%= link_to "Equation Editor", "/editor/equations" %> | <%= link_to "Evaluator", "/evaluator" %></p>
+      </div>
+      <div id="content">
+        <%= yield %>
+      </div>
+    </div>
   </body>
 </html>

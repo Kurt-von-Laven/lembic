@@ -23,7 +23,6 @@
 	</table>
 
 	<h1>Create Relationship</h1>
-	<p><b>Please note that you must first declare all variable on either side of the relationship using the <%= link_to "Variable Editor", "/editor/variables" %></b></p>
 	<%= form_for(:new_relationship) do |f| %>
 	<table>
 		<tr>
@@ -42,6 +41,27 @@
 		<td></td>
 		</tr>
 	</table>
+	
+	<h1>Variable Editor</h1>
+
+	<%= form_for(:new_var) do |f| %>
+	  
+	  <%= f.check_box(:array) %>
+	  <%= f.label(:array, "Is this an array?") %>
+	  
+	  <%= f.select :variable_type, [['Categorical', '0'], ['Integer',
+		  '1'], ['Real', '2'], ['Date and Time', '3']] %>
+	  
+	  <%= f.label :name %>
+	  <%= f.text_field :name %>
+	  <%= f.label :description %>
+	  <%= f.text_field :description %>
+	  
+	  <%= f.submit "Create my variable" %>
+	   
+	<% end %>
+
+	<%= render "current_variables" %>
 
 	<% end %>
 </div>

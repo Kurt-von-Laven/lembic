@@ -182,4 +182,86 @@ class ParserPatterns
       }
     ]
   end
+  
+  def self.literal_array_pattern
+    return [
+      # opening bracket
+      {
+        :min_munches => 1,
+        :max_munches => 1,
+        :munch_pattern => [
+          # {
+          #  :criterion => :value,
+          #  :match => "$",
+          #  :capturing => false
+          # },
+          {
+            :criterion => :value,
+            :match => "[",
+            :capturing => false
+          }
+        ]
+      },
+      
+      # index variable name
+      {
+        :min_munches => 1,
+        :max_munches => 1,
+        :munch_pattern => [
+          {
+            :criterion => :type,
+            :match => :expression,
+            :capturing => true
+          },
+          {
+            :criterion => :value,
+            :match => "|",
+            :capturing => false
+          }
+        ]
+      },
+      
+      # 
+      {
+        :min_munches => 1,
+        :max_munches => 1,
+        :munch_pattern => [
+          {
+            :criterion => :type,
+            :match => :expression,
+            :capturing => true
+          }
+        ]
+      },
+      
+      {
+        :min_munches => 0,
+        :max_munches => -1,
+        :munch_pattern => [
+          {
+            :criterion => :value,
+            :match => ",",
+            :capturing => false
+          },
+          {
+            :criterion => :type,
+            :match => :expression,
+            :capturing => true
+          }
+        ]
+      },
+      
+      {
+        :min_munches => 1,
+        :max_munches => 1,
+        :munch_pattern => [
+          {
+            :criterion => :value,
+            :match => "]",
+            :capturing => false
+          }
+        ]
+      }
+    ]
+  end
 end

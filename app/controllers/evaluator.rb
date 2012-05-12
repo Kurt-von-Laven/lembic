@@ -52,6 +52,8 @@ class Evaluator
         return bool_to_i(eval_expression(args[0], globals, indices) <= eval_expression(args[1], globals, indices))
       elsif op == ">="
         return bool_to_i(eval_expression(args[0], globals, indices) >= eval_expression(args[1], globals, indices))
+      elsif op == "!="
+        return bool_to_i(eval_expression(args[0], globals, indices) != eval_expression(args[1], globals, indices))
       elsif op == "&&"
         return bool_to_i(eval_expression(args[0], globals, indices) != 0 && eval_expression(args[1], globals, indices) != 0)
       elsif op == "||"
@@ -70,6 +72,13 @@ class Evaluator
         end
         # if we got here, none of the cases were true and there was no else; return arbitrary default
         return 0
+      elsif op == "ARRAY"
+        elem_count = args.length - 1
+        index = eval_expression(args[0], globals, indices)
+        if index < 0 || index >= elem_count
+          raise "Array index #{index} is out of bounds.  Must be between 0 and #{elem_count-1}, inclusive."
+        end
+        return eval_expression(args[index+1], globals, indices)
       end
     else
       #exp is a string

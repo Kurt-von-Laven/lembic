@@ -17,8 +17,7 @@ body {
 	padding:0px;
 	text-align:center;
 }
-	
-#content {
+#container {
 	width:600px;
 	margin:0px auto;
 	padding:15px;
@@ -26,6 +25,14 @@ body {
 	border-radius:25px;
 	-moz-border-radius:25px; /* Firefox 3.6 and earlier */
 	background-color:#dee6ed;
+}
+#content {
+	margin: 10px;
+	padding:15px;
+	text-align:left;
+	border-radius:25px;
+	-moz-border-radius:25px; /* Firefox 3.6 and earlier */
+	background-color: #fff;
 }
 
 h1{
@@ -36,6 +43,7 @@ h1{
 #menu{
 	width:600px;
 	margin:0px auto;
+	text-align: center;
     background-color:#dee6ed;
     font-family: Garamond, Baskerville, "Times New Roman", serif;
 }

@@ -70,10 +70,13 @@
 
 
   <%= image_tag "lembic_blue.png" %>
+  <div id="container">
     <div id="menu">
-  <p> <%= link_to "Home",  root_path %> | <%= link_to "Help", help_path %> | <%= link_to "Variable Editor", "/editor/variables" %> | <%= link_to "Equation Editor", "/editor/equations" %> | <%= link_to "Evaluator", "/evaluator" %></p>
-  </div>
-  </div>
+	  <p> <%= link_to "Home",  root_path %> | <%= link_to "Help", help_path %> | <%= link_to "Variable Editor", "/editor/variables" %> | <%= link_to "Equation Editor", "/editor/equations" %> | <%= link_to "Evaluator", "/evaluator" %></p>
+	 </div>
+   
+	 
     <%= yield %>
+	</div>
   </body>
 </html>

@@ -11,6 +11,7 @@ Lembic::Application.routes.draw do
   match '/editor/delete_variable', to: 'editor#delete_variable'
   match '/editor/delete_relationship', to: 'editor#delete_relationship'
   match '/evaluator', to: 'workflow#evaluate'
+	
     
 
   post "editor/home"

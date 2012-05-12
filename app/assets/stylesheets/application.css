@@ -34,3 +34,7 @@ h1{
     background-color:#dee6ed;
     font-family: Garamond, Baskerville, "Times New Roman", serif;
 }
+
+a{
+text-decoration: none;
+}

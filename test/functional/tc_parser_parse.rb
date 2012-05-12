@@ -99,6 +99,10 @@ class TestParserParse < Test::Unit::TestCase
     assert_equal( "CASE(<(1.2, foo), 3, else, 4)" , @p.prefix_form("{1.2 < foo:3;else: 4; }") )
   end
   
+  def test_literal_arrays
+    assert_equal( "ARRAY(i, 1, 2, foo, 4)" , @p.prefix_form("[i|1,2,foo,4]"))
+  end
+  
   def test_evaluator_no_vars
     assert_equal( 4, @e.eval_expression(@p.parse("2+2"), nil, nil) )
     assert_equal( 8, @e.eval_expression(@p.parse("2*4"), nil, nil) )
@@ -149,6 +153,8 @@ class TestParserParse < Test::Unit::TestCase
   def test_evaluator_arrays
     assert_equal( 4, @e.eval_expression(@p.parse("arr[2]"), {"arr" => { :index_names => ["i"], :formula => @p.parse("2*i") }}, nil))
     assert_equal( 6, @e.eval_expression(@p.parse("arr[x+1]"), {"arr" => { :index_names => ["i"], :formula => @p.parse("2*i")}, "x" => {:value => 2}}, nil))
+    #literal arrays
+    assert_equal( 6, @e.eval_expression(@p.parse("[a|2,4,6]"), {}, {"a" => 2}))
   end
   
   def test_evaluator_case_statements

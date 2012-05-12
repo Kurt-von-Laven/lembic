@@ -58,7 +58,7 @@ class Parser
   def tokenize (s)
     #neg_expressions = /([\+\-\*\/\^%\(\{\[:;^])\s*(\-[\d]+(\.[\d]*){0,1}|\-\.[\d]+)/
     #pos_numbers = /([\d]+(\.[\d]*){0,1}|\.[\d]+)/
-    ops = /(==|<=|>=|!=|&&|\|\||[;:\*\+\-\/\^%\(\)\[\]\{\}=<>,])/
+    ops = /(==|<=|>=|!=|&&|\|\||[;:\*\+\-\/\^%\(\)\[\]\{\}=<>,\|])/
     s.gsub!(ops, " \\1 ")
     s.gsub!(/^\s+|\s+$/, "") #remove leading and trailing whitespace
     return s.split(/\s+/)
@@ -201,12 +201,21 @@ class Parser
           loops_since_made_progress = 0
           made_progress = true
         end
-        
+
         ### ARRAY INDEXING ###
         
         matches = matching_tokens(tokens, currtoken, ParserPatterns.array_pattern)
         if matches[:matched] then
           tokens[currtoken..currtoken+matches[:all].length] = Expression.new("[]", matches[:captured])
+          loops_since_made_progress = 0
+          made_progress = true
+        end
+        
+        ### LITERAL ARRAYS ###
+        
+        matches = matching_tokens(tokens, currtoken, ParserPatterns.literal_array_pattern)
+        if matches[:matched] then
+          tokens[currtoken..currtoken+matches[:all].length] = Expression.new("ARRAY", matches[:captured])
           loops_since_made_progress = 0
           made_progress = true
         end

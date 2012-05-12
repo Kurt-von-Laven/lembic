@@ -31,6 +31,8 @@ h1{
 }
 
 #menu{
+	width:600px;
+	margin:0px auto;
     background-color:#dee6ed;
     font-family: Garamond, Baskerville, "Times New Roman", serif;
 }

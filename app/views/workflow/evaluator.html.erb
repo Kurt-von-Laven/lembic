@@ -1,33 +1,35 @@
-<h1>Evaluate</h1>
+<div id="content">
+	<h1>Evaluate</h1>
 
-<p><%= link_to "Variable Editor", "/editor/variables" %> |
-       <%= link_to "Equation Editor", "/editor/equations" %> |
-       <%= link_to "Home",  root_path %> |
-       <%= link_to "Help", help_path %></p>
+	<p><%= link_to "Variable Editor", "/editor/variables" %> |
+		   <%= link_to "Equation Editor", "/editor/equations" %> |
+		   <%= link_to "Home",  root_path %> |
+		   <%= link_to "Help", help_path %></p>
 
-<table>
-  <tr>
-    <th>Enter your variables in this form: {'varName' => value, 'varName2' => value2}
-    </th>
-    <th>Output</th>
-  </tr>
-  
-  <tr>
-    <td>
-      <%= form_for(:variables) do |f| %>
-        <%= f.label(:output_variable, "Variable to Solve For") %>
-	<%= f.text_field :output_variable %>
-        <%= f.text_area :input_values %>
-        <%= f.submit "Run Model" %>
-      <% end %>
-    </td>
-    <td>
-      <ul>
-        <% for variable_name, variable_result  in @results %>
-          <li><%= variable_name %>: <%= variable_result[:value] %></li>
-        <% end %>
-      </ul>
-    </td>
-  </tr>
-</table>
+	<table>
+	  <tr>
+		<th>Enter your variables in this form: {'varName' => value, 'varName2' => value2}
+		</th>
+		<th>Output</th>
+	  </tr>
+	  
+	  <tr>
+		<td>
+		  <%= form_for(:variables) do |f| %>
+			<%= f.label(:output_variable, "Variable to Solve For") %>
+		<%= f.text_field :output_variable %>
+			<%= f.text_area :input_values %>
+			<%= f.submit "Run Model" %>
+		  <% end %>
+		</td>
+		<td>
+		  <ul>
+			<% for variable_name, variable_result  in @results %>
+			  <li><%= variable_name %>: <%= variable_result[:value] %></li>
+			<% end %>
+		  </ul>
+		</td>
+	  </tr>
+	</table>
+</div>
 

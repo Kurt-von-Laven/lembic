@@ -72,7 +72,10 @@
   <%= image_tag "lembic_blue.png" %>
   <div id="container">
     <div id="menu">
-	  <p> <%= link_to "Home",  root_path %> | <%= link_to "Help", help_path %> | <%= link_to "Variable Editor", "/editor/variables" %> | <%= link_to "Equation Editor", "/editor/equations" %> | <%= link_to "Evaluator", "/evaluator" %></p>
+    <div class="menu_item"> <%= link_to "Home",  root_path, {:style=>'color:#dee6ed;', :class => "css_class"} %>  </div>  
+    <div class="menu_item"><%= link_to "Help", help_path, {:style=>'color:#dee6ed;', :class => "css_class"} %> </div>    
+    <div class="menu_item"><%= link_to "Equation Editor", "/editor/equations", {:style=>'color:#dee6ed;', :class => "css_class"} %>   </div>  
+    <div class="menu_item"><%= link_to "Evaluator", "/evaluator", {:style=>'color:#dee6ed;', :class => "css_class"} %> </div></p>
 	 </div>
    
 	 

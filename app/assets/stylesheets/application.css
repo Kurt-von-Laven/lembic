@@ -24,7 +24,17 @@ body {
 	text-align:left;
 	padding:15px;
 }
+
 h1{
 	background-color:#1e3652;
 	color: #dee6ed;
+}
+
+#menu{
+    background-color:#dee6ed;
+    font-family: Garamond, Baskerville, "Times New Roman", serif;
+}
+
+a{
+text-decoration: none;
 }

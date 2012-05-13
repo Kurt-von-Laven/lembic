@@ -55,5 +55,8 @@ module Lembic
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+    
+    # Heroku compiles slugs without access to config variables or the database.
+    config.assets.initialize_on_precompile = false
   end
 end

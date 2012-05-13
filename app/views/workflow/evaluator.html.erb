@@ -9,18 +9,22 @@
     <tr>
       <td>
         <%= form_for(:variables) do |f| %>
-          <%= f.label(:output_variable, "Variable to Solve For") %>
-          <%= f.text_field :output_variable %>
-          <%= f.text_area :input_values %>
-          <%= f.submit "Run Model" %>
+          <div>
+            <%= f.label(:output_variable, "Variable to Solve For") %>
+            <%= f.text_field :output_variable %>
+            <%= f.text_area :input_values %>
+            <%= f.submit "Run Model" %>
+          </div>
         <% end %>
       </td>
-      <td>
-        <ul>
-          <% for variable_name, variable_result  in @results %>
-            <li><%= variable_name %>: <%= variable_result[:value] %></li>
-          <% end %>
-        </ul>
-      </td>
+      <% if !@results.empty? %>
+        <td>
+          <ul>
+            <% for variable_name, variable_result  in @results %>
+              <li><%= variable_name %>: <%= variable_result[:value] %></li>
+            <% end %>
+          </ul>
+        </td>
+      <% end %>
     </tr>
 </table>

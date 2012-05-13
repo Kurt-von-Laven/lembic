@@ -19,12 +19,31 @@ class Evaluator
     return 0
   end
   
+  def eval_builtin_function(function_name, globals, params)
+    if function_name == "SUM"
+      array_name = params[0]
+      min = params[1]
+      max = params[2]
+      sum = 0
+      i = min
+      while i <= max
+        inc = eval_variable(array_name, globals, [i])
+        sum += inc
+        i += 1
+      end
+      return sum
+    end
+    return nil
+  end
+  
   # function eval_expression
   #
   # params
   #
   # returns : numeric value of the exp param
   def eval_expression(exp, globals, indices)
+    if !indices.nil?
+    end
     if exp.instance_of?(Expression)
       args = exp.args
       op = exp.op
@@ -63,6 +82,8 @@ class Evaluator
         args[1...args.length].each do |index_value|
           index_values << eval_expression(index_value, globals, indices)
         end
+        builtin_return = eval_builtin_function(args[0], globals, index_values)
+        return builtin_return unless builtin_return.nil?
         return eval_variable(args[0], globals, index_values)
       elsif op == "CASE"
         for case_index in 0...args.length/2
@@ -75,6 +96,9 @@ class Evaluator
       elsif op == "ARRAY"
         elem_count = args.length - 1
         index = eval_expression(args[0], globals, indices)
+        if index.to_i != index
+          raise "Array index must be an integer.  Was #{index}."
+        end
         if index < 0 || index >= elem_count
           raise "Array index #{index} is out of bounds.  Must be between 0 and #{elem_count-1}, inclusive."
         end
@@ -122,7 +146,6 @@ class Evaluator
   def eval_variable (varname, globals, index_values)
     
     error_check_eval_variable_params(varname, globals, index_values)
-    
     #  if variable value was cached previously, return the cached value
     if !globals[varname][:value].nil?
       return globals[varname][:value]
@@ -136,10 +159,17 @@ class Evaluator
     if globals[varname][:index_names].nil?
       #variable is a singleton
       result = eval_expression(formula, globals, nil)
+      globals[varname][:value] = result
     else
       #variable is an array; need to pass in index name-value mapping for expression evaluator
       indices = {}
       index_names = globals[varname][:index_names]
+      # if index_values is nil and we're trying to evaluate an array, it MAY be okay
+      # as long as the array is being passed to an aggregator function.  Return
+      # the name of the array so the aggregator can use it, and cross your fingers...
+      if index_values.nil?
+        return varname
+      end
       if index_names.length != index_values.length
         raise "Wrong number of indices for array #{varname}: expected #{index_names.length} but was #{index_values.length}."
       end
@@ -147,9 +177,31 @@ class Evaluator
         indices[index_name] = index_values[i]
       end
       result = eval_expression(formula, globals, indices)
+      globals[varname][:values] = {} if globals[varname][:values].nil?
+      globals[varname][:values][index_values.join(",")] = result
     end
-    globals[varname][:value] = result
     return result
+  end
+  
+  #
+  # param outputs is an array that looks like this:
+  # [{:name => "myvar"}, {:name => "myarray", :indices => {:min => 0, :max => 100 }}, ... ]
+  #
+  def eval_all(outputs, globals)
+    outputs.each do |output|
+      if output[:indices].nil?
+        # output variable is a singleton
+        eval_variable(output[:name], globals, nil)
+      else
+        # output is an array
+        min_index = output[:indices][:min]
+        max_index = output[:indices][:min]
+        for curr in min_index..max_index
+          eval_variable(output[:name], globals, [curr])
+        end
+      end
+    end
+    return globals
   end
   
 end

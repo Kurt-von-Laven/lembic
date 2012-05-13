@@ -154,7 +154,12 @@ class TestParserParse < Test::Unit::TestCase
     assert_equal( 4, @e.eval_expression(@p.parse("arr[2]"), {"arr" => { :index_names => ["i"], :formula => @p.parse("2*i") }}, nil))
     assert_equal( 6, @e.eval_expression(@p.parse("arr[x+1]"), {"arr" => { :index_names => ["i"], :formula => @p.parse("2*i")}, "x" => {:value => 2}}, nil))
     #literal arrays
+    assert_equal( 2, @e.eval_expression(@p.parse("[a|2,4,6]"), {}, {"a" => 0}))
     assert_equal( 6, @e.eval_expression(@p.parse("[a|2,4,6]"), {}, {"a" => 2}))
+    assert_equal( 6, @e.eval_variable("arr", {"arr" => {:index_names => ["a"], :formula => @p.parse("[a|2,4,6]") }}, [2]))
+    assert_raise(RuntimeError) { @e.eval_expression(@p.parse("[a|2,4,6]"), {}, {"a" => 3}) }
+    assert_raise(RuntimeError) { @e.eval_expression(@p.parse("[a|2,4,6]"), {}, {"a" => -1}) }
+    assert_raise(RuntimeError) { @e.eval_expression(@p.parse("[a|2,4,6]"), {}, {"a" => 0.5}) }
   end
   
   def test_evaluator_case_statements
@@ -162,6 +167,10 @@ class TestParserParse < Test::Unit::TestCase
     assert_equal( 2, @e.eval_expression(@p.parse("{3<2:4;else:2;}"), nil, nil))
     assert_equal( 2, @e.eval_expression(@p.parse("{else:2;}"), nil, nil))
     assert_equal( 0, @e.eval_expression(@p.parse("{3<2:4;}"), nil, nil))
+  end
+  
+  def test_evaluator_builtin_functions
+    assert_equal( 15, @e.eval_expression(@p.parse("SUM[arr, 0, 4]"), {"arr" => {:index_names => ["i"], :formula => @p.parse("[i|1,2,3,4,5]") }}, nil) )
   end
   
 end

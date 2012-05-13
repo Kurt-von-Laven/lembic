@@ -50,13 +50,16 @@ h1 {
     text-align: center;
     background-color:#1e3652;
     font-family: Garamond, Baskerville, "Times New Roman", serif;
+    list-style-type: none;
 }
 
-#menu > div {
+#menu > li {
     width: 125px;
-    float: left;
     font-size: 22px;
     height: 100%;
+    display: inline;
+    padding-left: 30px;
+    padding-right: 30px;
 }
 
 a {

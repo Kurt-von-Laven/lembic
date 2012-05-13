@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <title>Lembic</title>
+    <title><%= @title %></title>
 
     <%= javascript_include_tag "jquery-1.7.2.min" %>
     <%= javascript_include_tag "jquery-ui-1.8.20.custom.min" %>
@@ -76,7 +76,8 @@
           <li><%= link_to "Home",  root_path, {:style=>'color:#dee6ed;', :class => "css_class"} %></li>
           <li><%= link_to "Help", help_path, {:style=>'color:#dee6ed;', :class => "css_class"} %></li>
           <li><%= link_to "Equation Editor", "/editor/equations", {:style=>'color:#dee6ed;', :class => "css_class"} %></li>
-          <li><%= link_to "Evaluator", "/evaluator", {:style=>'color:#dee6ed;', :class => "css_class"} %></li>
+          <li><%= link_to "View Editor", "/editsection", {:style=>'color:#dee6ed;', :class => "css_class"} %></li>
+	  <li><%= link_to "Evaluator", "/evaluator", {:style=>'color:#dee6ed;', :class => "css_class"} %></li>
       </ul>
       <div id="content">
         <%= yield %>

@@ -40,6 +40,15 @@ h1 {
 	color: #dee6ed;
 }
 
+ul {
+  list-style-type: none;
+  padding-left: 0px;
+}
+
+li {
+  display: inline;
+}
+
 #menu {
     width:550px;
     padding:10px;
@@ -50,16 +59,14 @@ h1 {
     text-align: center;
     background-color:#1e3652;
     font-family: Garamond, Baskerville, "Times New Roman", serif;
-    list-style-type: none;
 }
 
 #menu > li {
     width: 125px;
     font-size: 22px;
     height: 100%;
-    display: inline;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 8px;
+    padding-right: 8px;
 }
 
 a {

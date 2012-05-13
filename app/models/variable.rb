@@ -37,6 +37,10 @@ class Variable < ActiveRecord::Base
     merged_var['updated_at'] = now
     merged_var['variable_type'] = merged_var['variable_type'].to_i
     merged_var['array'] = merged_var['array'].to_i
+    if !merged_var['expression_string'].nil?
+      parser = Parser.new
+      merged_var['expression_object'] = parser.parse(merged_var['expression_string'])
+    end
     Variable.create(merged_var)
   end
   

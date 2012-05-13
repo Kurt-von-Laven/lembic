@@ -1,31 +1,11 @@
+<% @title = "Equation Editor" %>
 <h1>Equation Editor</h1>
 
 <%= render "current_variables" %>
 
-<h1>Variable Editor</h1>
-
-<%= form_for(:new_variable) do |f| %>
-  <div>
-    <%= f.check_box(:array) %>
-    <%= f.label(:array, "Is this an array?") %>
-    
-    <%= f.select :variable_type, [['Categorical', '0'], ['Integer', '1'], ['Real', '2'], ['Date and Time', '3']] %>
-    
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-    <%= f.label :description %>
-    <%= f.text_field :description %>
-    
-    <%= f.submit "Create my variable" %>
-  </div>
-<% end %>
-
-<h1>Current Relationships</h1>
+<h1>Current Equations</h1>
 
 <table>
-  <tr>
-    <th>Relationship</th>
-  </tr>
   <% for variable in @variables %>
     <tr>
       <td><%= variable.name %> = <%=variable.expression_string %></td>
@@ -37,23 +17,27 @@
   <% end %>
 </table>
 
-<h1>Create Relationship</h1>
-<%= form_for(:new_relationship) do |f| %>
-  <table>
-    <tr>
-      <th><%= f.label(:name, "Variable") %></th>
-      <th> </th>
-      <th><%= f.label :expression_string %></th>
-    </tr>
-    <tr>
-      <td><%= f.text_field :name %></td>
-      <td><b><strong> = </strong></b></td> <!--TODO: Remove style information from HTML -->
-      <td><%= f.text_area :expression_string %></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td><%= f.submit "Save Relationship" %></td>
-      <td></td>
-    </tr>
-  </table>
+<h1>Create Equation</h1>
+<%= form_for(:new_equation) do |f| %>
+  <div>
+    <p>
+      <%= f.check_box(:array) %>
+      <%= f.label(:array, "Is this an array?") %>
+    </p>
+    <p>
+      <%= f.label(:variable_type, "Variable Type:") %>
+      <%= f.select(:variable_type, [['Categorical', '0'], ['Integer',
+      '1'], ['Real', '2'], ['Date and Time', '3']]) %>
+    </p>
+    <p>
+      <%= f.label(:description, "Description:") %>
+      <%= f.text_field(:description) %>
+    </p>
+    <p>
+      <%= f.text_field(:name) %> = <%= f.text_area(:expression_string) %>
+    </p>
+    <p>
+      <%= f.submit("Create Equation", :id => "new_equation_submit") %>
+    </p>
+  </div>
 <% end %>

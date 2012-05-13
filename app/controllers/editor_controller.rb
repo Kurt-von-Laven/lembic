@@ -2,15 +2,9 @@ class EditorController < ApplicationController
   
   def equations
     if !params.nil?
-      if !(params[:new_relationship].nil?)
-        new_relationship = params[:new_relationship]
-        variable_name = new_relationship['name']
-        expression_string = new_relationship['expression_string']
-        parser = Parser.new
-        expression_object = parser.parse(expression_string)
-        Variable.where(:name => variable_name).update_all(:expression_string => expression_string, :expression_object => expression_object)
-      elsif !(params[:new_variable].nil?)
-        Variable.create_from_form(params[:new_variable])
+      if !(params[:new_equation].nil?)
+        new_equation = params[:new_equation]
+        Variable.create_from_form(new_equation)
       end
     end
     @variables = Variable.find(:all)

@@ -3,20 +3,21 @@
 <%= render "current_variables" %>
 
 <h1>Variable Editor</h1>
-  
+
 <%= form_for(:new_variable) do |f| %>
-  
-  <%= f.check_box(:array) %>
-  <%= f.label(:array, "Is this an array?") %>
-  
-  <%= f.select :variable_type, [['Categorical', '0'], ['Integer', '1'], ['Real', '2'], ['Date and Time', '3']] %>
-  
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <%= f.label :description %>
-  <%= f.text_field :description %>
-  
-  <%= f.submit "Create my variable" %>
+  <div>
+    <%= f.check_box(:array) %>
+    <%= f.label(:array, "Is this an array?") %>
+    
+    <%= f.select :variable_type, [['Categorical', '0'], ['Integer', '1'], ['Real', '2'], ['Date and Time', '3']] %>
+    
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+    
+    <%= f.submit "Create my variable" %>
+  </div>
 <% end %>
 
 <h1>Current Relationships</h1>

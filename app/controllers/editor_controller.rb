@@ -7,7 +7,7 @@ class EditorController < ApplicationController
         Variable.create_from_form(new_equation)
       end
     end
-    @variables = Variable.find(:all)
+    @variables = Variable.order(:name)
     render 'equations'
   end
   
@@ -15,14 +15,14 @@ class EditorController < ApplicationController
     if !params.nil? and !(params[:id].nil?)
       Variable.delete(params[:id]) # TODO: Check that this ID is valid.
     end
-    @variables = Variable.find(:all)
-    redirect_to 'equations'
+    @variables = Variable.order(:name)
+    redirect_to '/editor/equations'
   end
   
   def delete_relationship
     if !params.nil? and !(params[:id].nil?)
       Variable.update(params[:id], {:expression_string => nil, :expression_object => nil})
-      redirect_to 'equations'
+      redirect_to '/editor/equations'
     end
   end
   

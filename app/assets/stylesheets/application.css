@@ -35,32 +35,31 @@ body {
 	background-color: #fff;
 }
 
-h1{
+h1 {
 	background-color:#1e3652;
 	color: #dee6ed;
 }
 
-#menu{
-	width:550px;
+#menu {
+    width:550px;
     padding:10px;
     border-radius:10px;
-	-moz-border-radius:10px; /* Firefox 3.6 and earlier */
-	background-color:#dee6ed;
-	margin:0px auto;
-	text-align: center;
+    -moz-border-radius:10px; /* Firefox 3.6 and earlier */
+    background-color:#dee6ed;
+    margin:0px auto;
+    text-align: center;
     background-color:#1e3652;
     font-family: Garamond, Baskerville, "Times New Roman", serif;
-    
 }
 
-.menu_item{
+#menu > div {
     width: 125px;
-    float:left;
-    font-size:22px;
-    height:100%;
+    float: left;
+    font-size: 22px;
+    height: 100%;
 }
 
-a{
+a {
     text-decoration: none;
     color: #113855;
 }

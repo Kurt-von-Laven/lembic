@@ -1,6 +1,25 @@
 <% @title = "Edit Block" %>
-<h1>ViewEditor#editblock</h1>
-<p>Find me in app/views/view_editor/editblock.html.erb</p>
+<h1>View Editor: Edit Block</h1>
+<h4> FYI, this doesn't work yet. </h4>
+<p> Think of a block as a set of variables that are connected in relationships, or are generally measured together. For instance, you might have a block of general measurements, or a block that is only filled out in certain circumstance. Add variables to the "Measure" Box to added the variables to the block. Define relationships using the "Logic" Box. For instance you might use the logic box to say "If VAR1 = TRUE and VAR2 > 10, DO Block <name>", or "If VAR1 = TRUE, FIND VAR2".</p>
 
+<%= render "current_variables" %>
 
-<p><%= link_to "Edit Question",  editquestion_path %> | <%= link_to "Edit Section",  editsection_path %></p>
+<h3> TODO: OUTPUT CURRENT BLOCKS </h3>
+
+<h3> Create Blocks </h3>
+
+<%= form_for(:blocks) do |f| %>
+<div>
+            <%= f.label(:input_variables, "Measure These Variables: ") %>
+            <%= f.text_area :input_variables %>
+</div>
+<div>
+            <%= f.label(:input_relationships, "Logic for Measurements: ") %>
+            <%= f.text_area :input_relationships %>
+</div>
+            <%= f.submit "Create Block" %>
+         
+<% end %>
+
+<p><%= link_to "Edit Question",  editquestion_path %></p>

@@ -1,7 +1,7 @@
 Lembic::Application.routes.draw do
     
   root to: 'home#home'
-  match '/editsection', to: 'view_editor#editsection'
+  
   match '/editblock', to: 'view_editor#editblock'
   match '/editquestion', to: 'view_editor#editquestion'
   match '/help', to: 'help#help'

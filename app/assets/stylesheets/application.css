@@ -12,6 +12,19 @@
  *= require_tree .
 */
 
+a {
+    text-decoration: none;
+    color: #113855;
+}
+
+a:hover{
+    
+}
+
+a:visited{
+    color:#fdde8c;
+}
+
 body {
 	margin: 50px 0px; 
 	padding:0px;
@@ -36,8 +49,14 @@ body {
 }
 
 h1 {
-	background-color:#1e3652;
+    background-color:#1e3652;
 	color: #dee6ed;
+    font-family: Garamond, Baskerville, "Times New Roman", serif;
+    text-align: center;
+    
+    padding:10px;
+    border-radius:10px;
+    -moz-border-radius:10px; /* Firefox 3.6 and earlier */
 }
 
 ul {
@@ -59,6 +78,7 @@ li {
     text-align: center;
     background-color:#1e3652;
     font-family: Garamond, Baskerville, "Times New Roman", serif;
+    color:#fdde8c;
 }
 
 #menu > li {
@@ -69,15 +89,4 @@ li {
     padding-right: 8px;
 }
 
-a {
-    text-decoration: none;
-    color: #113855;
-}
 
-a:hover{
-    
-}
-
-a:visited{
-    color:#fdde8c;
-}

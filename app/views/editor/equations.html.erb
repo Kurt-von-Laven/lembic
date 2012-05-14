@@ -3,7 +3,7 @@
 
 <%= render "current_variables" %>
 
-<h1>Current Equations</h1>
+<h3>Current Equations</h3>
 
 <table>
   <% for variable in @variables %>
@@ -17,7 +17,7 @@
   <% end %>
 </table>
 
-<h1>Create Equation</h1>
+<h3>Create Equation</h3>
 <%= form_for(:new_equation) do |f| %>
   <div>
     <p>

@@ -1,4 +1,4 @@
-<h1>Current Variables</h1>
+<h3>Current Variables</h3>
 
 <table>
 
@@ -11,7 +11,23 @@
   
   <% for variable in @variables %>
     <tr>
-      <td><%= variable.array %></td>
+    
+        <% if variable.array == 0 %>
+            <td>No</td>
+        <% elsif variable.array == 1 %>
+            <td>Yes</td>
+        <% end %>
+        
+        <% if variable.variable_type == 0 %>
+            <td>Categorical</td>
+        <% elsif variable.variable_type == 1 %>
+            <td>Integer</td>
+        <% elsif variable.variable_type == 2 %>
+            <td>Real</td>
+        <% elsif variable.variable_type == 3 %>
+            <td>Date and Time</td>
+        <% end %>
+     
       <td><%= variable.variable_type %></td>
       <td><%= variable.name %></td>
       <td><%= variable.description %></td>

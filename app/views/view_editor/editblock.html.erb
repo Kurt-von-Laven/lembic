@@ -7,11 +7,10 @@
 
 <h3> TODO: OUTPUT CURRENT BLOCKS </h3>
 
-<h3> Create Blocks </h3>
-
-<%= form_for(:blocks) do |f| %>
+<h3> Create A Block </h3>
+ <%= form_for(:blocks) do |f| %>
 <div>
-            <%= f.label(:input_variables, "Measure These Variables: ") %>
+            <%= f.label(:input_variables, "Measure these variables: ") %>
             <%= f.text_area :input_variables %>
 </div>
 <div>
@@ -20,6 +19,40 @@
 </div>
             <%= f.submit "Create Block" %>
          
-<% end %>
+<% end %>        
 
 <p><%= link_to "Edit Question",  editquestion_path %></p>
+
+<h3> TODO PRINT ALL OUTPUTS ALREADY ASSIGNED </h3>
+
+<h3> Done Creating Blocks? Choose Output </h3>
+
+
+
+<%= form_for(:outputs) do |f| %>
+<div>
+            <%= f.label(:output_variables, "Output these variables: ") %>
+            <%= f.text_area (:output_variables) %>
+</div>
+<div>   
+            <%= f.label(:show_as_type, "Display Type:") %>
+            <%= f.select(:show_as_type, [['Graph', 'graph'], ['Integer',
+            'integer'], ['Percentage', 'percent']]) %>
+    </p>
+    <p>
+</div>
+            <%= f.submit "Add Output" %>
+<% end %>
+
+
+
+<h3> See the Workflow </h3>
+<h4> Currently redirects to the evaluator page. </h4>
+<h5> Implementation: </h5>
+<p>
+Each block appears in its own tab, using JQuery. All blocks appear, but some will be grayed out. This means that logic statements have be parsed and translated. As the associated variables are filled in, the if statements are evaluated. If the statement is true, the view updates to include a new  section(google form style if we can make it happen), or ungrays a block. Blocks that do not have all necessary variables filled in will be red. As soon as all variables are satisified, it will turn blue. The finish button will always be present (maybe at the bottom left) but will be disabled until all necessary values have been filled in. Time and date variables will have associated sliders (Jquery). Categorial will have check boxes (Jquery). Done will redirect simplified evaluator page. 
+</p>
+<%= button_to "View Workflow",
+              "/evaluator",
+              {:confirm => "Are you sure you are ready to leave this page?",
+               :method => :delete} %>

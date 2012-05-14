@@ -28,7 +28,6 @@
             <td>Date and Time</td>
         <% end %>
      
-      <td><%= variable.variable_type %></td>
       <td><%= variable.name %></td>
       <td><%= variable.description %></td>
       <td><%= button_to "Delete this variable", "/editor/delete_variable?id=#{variable.id}", {:confirm => "Are you sure you want to delete the variable #{variable.name}?",

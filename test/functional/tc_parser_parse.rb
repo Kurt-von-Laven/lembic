@@ -1,6 +1,6 @@
 
-require "./app/controllers/parser"
-require "./app/controllers/evaluator"
+require "./app/helpers/parser"
+require "./app/helpers/evaluator"
 require "test/unit"
 
 #Test
@@ -200,18 +200,36 @@ class TestParserParse < Test::Unit::TestCase
   end
   
   def test_medium_model
-    puts @p.prefix_form("a[i]+var")
-    puts @p.prefix_form("x+SUM[primes, 0, 20]")
-    puts @p.prefix_form("a[i]+SUM[primes, 0, 20]")
     output = @e.eval_all([{:name => "o", :indices => {:min => 0, :max => 20}}],
                          {
                           "a" => {:index_names => ["i"], :formula => @p.parse("primes[i]*ints[i]-odds[i]")},
                           "ints" => {:index_names => ["i"], :formula => @p.parse("i+1")},
                           "odds" => {:index_names => ["i"], :formula => @p.parse("i*2+1")},
-                          "primes" => {:index_names => ["i"], :formula => @p.parse("[i|2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,49,53,59,61,67,71,73]")},
+                          "primes" => {:index_names => ["i"], :formula => @p.parse("[i|2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73]")},
                           "o" => {:index_names => ["i"], :formula => @p.parse("a[i]+SUM[primes, 0, 20]")}
                          })
-    puts output.inspect
+    assert_equal(1, output["a"][:values]["0"])
+    assert_equal(3, output["a"][:values]["1"])
+    assert_equal(10, output["a"][:values]["2"])
+    assert_equal(21, output["a"][:values]["3"])
+    assert_equal(713, output["o"][:values]["0"])
+    assert_equal(715, output["o"][:values]["1"])
+    assert_equal(722, output["o"][:values]["2"])
+    assert_equal(733, output["o"][:values]["3"])
   end
   
+=begin
+  def test_large_model
+    output = @e.eval_all([{:name => "o", :indices => {:min => 0, :max => 9999}}],
+                         {
+                          "a" => {:index_names => ["i"], :formula => @p.parse("1+1+1+1+1+1+1+1+1+1")},
+                          "b" => {:index_names => ["i"], :formula => @p.parse("a[i]*2-20+10")},
+                          "c" => {:index_names => ["i"], :formula => @p.parse("-20*(i-i+1)")},
+                          "d" => {:index_names => ["i"], :formula => @p.parse("i")},
+                          "o" => {:index_names => ["i"], :formula => @p.parse("a[i]+b[i]+c[i]+d[i]")}
+                         }
+                         )
+    puts output["o"][:values].inspect
+  end
+=end
 end

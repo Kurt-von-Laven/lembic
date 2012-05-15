@@ -1,6 +1,8 @@
 <div id="content">
 	<h1>Equation Editor</h1>
 
+	
+
 	<%= render "current_variables" %>
 
 	<h1>Current Relationships</h1>
@@ -24,24 +26,13 @@
 
 	<h1>Create Relationship</h1>
 	<p><b>Please note that you must first declare all variable on either side of the relationship using the <%= link_to "Variable Editor", "/editor/variables" %></b></p>
-	<%= form_for(:new_relationship) do |f| %>
-	<table>
-		<tr>
-		<th><%= f.label(:name, "Variable") %></th>
-		<th> </th>
-		<th><%= f.label :expression_string %></th>
-		</tr>
-		<tr>
-		<td><%= f.text_field :name %></td>
-		<td><b><strong> = </strong></b></td>
-		<td><%= f.text_area :expression_string %></td>
-		</tr>
-		<tr>
-		<td></td>
-		<td><%= f.submit "Save Relationship" %></td>
-		<td></td>
-		</tr>
-	</table>
-
+	<%= form_for(:new_relationship, :html => {:id => "edit_relationship"} ) do |f| %>
+		<div id="input_variable">
+			<%= f.label(:name, "Variable",) %>
+			<%= f.text_field :name, :id => "var"%>
+		</div>
+		<%= f.label :expression_string %>
+		<%= f.text_area :expression_string %>
+		<%= f.submit "Save Relationship" %>
 	<% end %>
 </div>

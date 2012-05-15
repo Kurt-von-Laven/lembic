@@ -39,6 +39,13 @@ h1{
 	background-color:#1e3652;
 	color: #dee6ed;
 }
+#edit_relationship{
+	
+}
+
+#edit_relationship  > label{
+	background-color: #000;
+}
 
 #menu{
 	width:600px;

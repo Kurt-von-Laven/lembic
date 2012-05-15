@@ -43,7 +43,7 @@
 <% end %>
 
 <h3>Upload Array</h3>
-<%= form_for(:new_constant_array) do |f| %>
+<%= form_for(:new_constant_array, :html => {:multipart => true}) do |f| %>
   <div>
     <p>
       <%= f.label(:variable_type, "Variable Type:") %>
@@ -59,8 +59,8 @@
       <%= f.text_field(:description) %>
     </p>
     <p>
-      <%= f.label(:expression_string, "Select a CSV file.") %>
-      <%= f.file_field(:expression_string) %>
+      <%= f.label(:data_file, "Select a CSV file.") %>
+      <%= f.file_field(:data_file) %>
     </p>
     <p>
       <%= f.label(:column_number, "Which column is your array in " +

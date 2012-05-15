@@ -36,8 +36,44 @@
     <p>
       <%= f.text_field(:name) %> = <%= f.text_area(:expression_string) %>
     </p>
-    <p id="new_equation_submit_paragraph">
+    <p class="submit_paragraph">
       <%= f.submit("Create Equation", :id => "new_equation_submit") %>
+    </p>
+  </div>
+<% end %>
+
+<h3>Upload Array</h3>
+<%= form_for(:new_constant_array) do |f| %>
+  <div>
+    <p>
+      <%= f.label(:variable_type, "Variable Type:") %>
+      <%= f.select(:variable_type, [['Categorical', '0'], ['Integer',
+      '1'], ['Real', '2'], ['Date and Time', '3']]) %>
+    </p>
+    <p>
+      <%= f.label(:name, "Variable Name:") %>
+      <%= f.text_field(:name) %>
+    </p>
+    <p>
+      <%= f.label(:description, "Description:") %>
+      <%= f.text_field(:description) %>
+    </p>
+    <p>
+      <%= f.label(:expression_string, "Select a CSV file.") %>
+      <%= f.file_field(:expression_string) %>
+    </p>
+    <p>
+      <%= f.label(:column_number, "Which column is your array in " +
+      "(e.g., 0 for the left-most column)?") %>
+      <%= f.text_field(:column_number, :class => "numeric_input") %>
+    </p>
+    <p>
+      <%= f.label(:row_number, "Which row does your array start " +
+	  "on (e.g., 0 for the top-most row)?") %>
+      <%= f.text_field(:row_number, :class => "numeric_input") %>
+    </p>
+    <p class="submit_paragraph">
+      <%= f.submit("Upload Array", :id => "new_equation_submit") %>
     </p>
   </div>
 <% end %>

@@ -1,38 +1,45 @@
-<div id="content">
-	<h1>Equation Editor</h1>
 
-	
+<% @title = "Equation Editor" %>
+<h1>Equation Editor</h1>
 
-	<%= render "current_variables" %>
+<%= render "current_variables" %>
 
-	<h1>Current Relationships</h1>
+<h3>Current Equations</h3>
 
-	<table>
+<table>
+  <% for variable in @variables %>
+    <tr>
+      <td><%= variable.name %> = <%=variable.expression_string %></td>
+      <td><%= button_to "Delete this relationship",
+              "/editor/delete_relationship?id=#{variable.id}",
+              {:confirm => "Are you sure you want to delete the relationship for the variable named #{variable.name}?",
+               :method => :delete} %></td>
+    </tr>
+  <% end %>
+</table>
 
-	  <tr>
-		<th>Relationship</th>
-	  </tr>
-	  <% for variable in @variables %>
-		<tr>
-		  <td><%= variable.name %> = <%=variable.expression_string %></td>
-		  <td><%= button_to "Delete this relationship",
-				   "/editor/delete_relationship?id=#{variable.id}",
-				   {:confirm => "Are you sure you want to delete the
-				   relationship for the variable named #{variable.name}?",
-				   :method => :delete} %></td>
-		</tr>
-	  <% end %>
-	</table>
+<h3>Create Equation</h3>
+<%= form_for(:new_equation) do |f| %>
+  <div>
+    <p>
+      <%= f.check_box(:array) %>
+      <%= f.label(:array, "Is this an array?") %>
+    </p>
+    <p>
+      <%= f.label(:variable_type, "Variable Type:") %>
+      <%= f.select(:variable_type, [['Categorical', '0'], ['Integer',
+      '1'], ['Real', '2'], ['Date and Time', '3']]) %>
+    </p>
+    <p>
+      <%= f.label(:description, "Description:") %>
+      <%= f.text_field(:description) %>
+    </p>
+    <p>
+      <%= f.text_field(:name) %> = <%= f.text_area(:expression_string) %>
+    </p>
+    <p id="new_equation_submit_paragraph">
+      <%= f.submit("Create Equation", :id => "new_equation_submit") %>
+    </p>
+  </div>
+<% end %>
 
-	<h1>Create Relationship</h1>
-	<p><b>Please note that you must first declare all variable on either side of the relationship using the <%= link_to "Variable Editor", "/editor/variables" %></b></p>
-	<%= form_for(:new_relationship, :html => {:id => "edit_relationship"} ) do |f| %>
-		<div id="input_variable">
-			<%= f.label(:name, "Variable",) %>
-			<%= f.text_field :name, :id => "var"%>
-		</div>
-		<%= f.label :expression_string %>
-		<%= f.text_area :expression_string %>
-		<%= f.submit "Save Relationship" %>
-	<% end %>
-</div>

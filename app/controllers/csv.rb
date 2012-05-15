@@ -18,7 +18,7 @@ module CSV
       formulas[currcol] = ["{"]
       index_var = index_var_names[currcol]
       file_data_each_with_index do |row|
-        formulas[currcol] << index_var << "==" << currcorow[currcol]
+        formulas[currcol] << index_var << "==" << row[currcol]
       end
       currcol += 1
     end

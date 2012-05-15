@@ -1,3 +1,4 @@
+
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
@@ -12,6 +13,19 @@
  *= require_tree .
 */
 
+a {
+    text-decoration: none;
+    color: #113855;
+}
+
+a:hover{
+    
+}
+
+a:visited{
+    color:#fdde8c;
+}
+
 body {
 	margin: 50px 0px; 
 	padding:0px;
@@ -22,39 +36,75 @@ body {
 	margin:0px auto;
 	padding:15px;
 	text-align:left;
-	border-radius:25px;
-	-moz-border-radius:25px; /* Firefox 3.6 and earlier */
+	border-radius:10px;
+    -moz-border-radius:10px; /* Firefox 3.6 and earlier */
 	background-color:#dee6ed;
 }
 #content {
 	margin: 10px;
 	padding:15px;
 	text-align:left;
-	border-radius:25px;
-	-moz-border-radius:25px; /* Firefox 3.6 and earlier */
+	border-radius:10px;
+    -moz-border-radius:10px; /* Firefox 3.6 and earlier */
 	background-color: #fff;
-}
-
-h1{
-	background-color:#1e3652;
-	color: #dee6ed;
-}
-#edit_relationship{
-	
-}
-
-#edit_relationship  > label{
-	background-color: #000;
-}
-
-#menu{
-	width:600px;
-	margin:0px auto;
-	text-align: center;
-    background-color:#dee6ed;
     font-family: Garamond, Baskerville, "Times New Roman", serif;
 }
 
-a{
-text-decoration: none;
+h1 {
+    background-color:#1e3652;
+	color: #dee6ed;
+    font-family: Garamond, Baskerville, "Times New Roman", serif;
+    text-align: center;
+    
+    padding:10px;
+    border-radius:10px;
+    -moz-border-radius:10px; /* Firefox 3.6 and earlier */
 }
+
+h3 {
+    background-color:#5c7e99;
+	color: #dee6ed;
+    font-family: Garamond, Baskerville, "Times New Roman", serif;
+    text-align: center;
+    
+    padding:10px;
+    border-radius:10px;
+    -moz-border-radius:10px; /* Firefox 3.6 and earlier */
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0px;
+}
+
+li {
+  display: inline;
+}
+
+#menu {
+    width:550px;
+    padding:10px;
+    border-radius:10px;
+    -moz-border-radius:10px; /* Firefox 3.6 and earlier */
+    background-color:#dee6ed;
+    margin:0px auto;
+    text-align: center;
+    background-color:#1e3652;
+    font-family: Garamond, Baskerville, "Times New Roman", serif;
+    color:#fdde8c;
+}
+
+#menu > li {
+    width: 125px;
+    font-size: 22px;
+    height: 100%;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+table {
+    width:550px;
+}
+
+
+

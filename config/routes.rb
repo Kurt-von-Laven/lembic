@@ -1,20 +1,15 @@
 Lembic::Application.routes.draw do
     
   root to: 'home#home'
-  match '/editsection', to: 'view_editor#editsection'
+  
   match '/editblock', to: 'view_editor#editblock'
   match '/editquestion', to: 'view_editor#editquestion'
   match '/help', to: 'help#help'
-  match '/editor/variables', to: 'editor#variables'
   match '/editor/equations', to: 'editor#equations'
   match '/editor/evaluator', to: 'editor#evaluator'
   match '/editor/delete_variable', to: 'editor#delete_variable'
   match '/editor/delete_relationship', to: 'editor#delete_relationship'
   match '/evaluator', to: 'workflow#evaluate'
-	
-    
-
-  post "editor/home"
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

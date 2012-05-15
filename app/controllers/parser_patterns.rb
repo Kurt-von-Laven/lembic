@@ -19,6 +19,7 @@
 
 class ParserPatterns
   
+  # ============================================================================
   def self.infix_operator_pattern(op_regex)
     return [
       {
@@ -60,6 +61,7 @@ class ParserPatterns
     ]
   end
   
+  # ============================================================================
   def self.array_pattern
   return [
           { # match variable name
@@ -103,6 +105,7 @@ class ParserPatterns
         ]
   end
   
+  # ============================================================================
   def self.case_pattern
     return [
       {
@@ -156,6 +159,7 @@ class ParserPatterns
     ]
   end
   
+  # ============================================================================
   def self.negative_expressions_pattern
     return [
       {
@@ -183,6 +187,7 @@ class ParserPatterns
     ]
   end
   
+  # ============================================================================
   def self.literal_array_pattern
     return [
       # opening bracket
@@ -261,6 +266,15 @@ class ParserPatterns
             :capturing => false
           }
         ]
+      }
+    ]
+  end
+  
+  # ============================================================================
+  def self.builtin_function_pattern
+    return [
+      {
+        
       }
     ]
   end

@@ -46,7 +46,7 @@ class Parser
   def error_inspect (array)
     ret = ""
     array.each do |a|
-      if a.class == :expression then
+      if a.instance_of?(Expression) then
         ret << "..."
       else
         ret << a.to_s
@@ -107,7 +107,7 @@ class Parser
     this_bite = []
     this_bite_captured = []
     munches = 0
-    while currtoken < tokens.length && (max < 0 || munches <= max)
+    while currtoken < tokens.length && (max < 0 || munches < max)
       break unless match_token?(tokens[currtoken], pattern[pattern_index][:criterion], pattern[pattern_index][:match])
       this_bite << tokens[currtoken]
       this_bite_captured << tokens[currtoken] if pattern[pattern_index][:capturing]
@@ -197,7 +197,7 @@ class Parser
         
         matches = matching_tokens(tokens, currtoken, ParserPatterns.case_pattern)
         if matches[:matched] then
-          tokens[currtoken..currtoken+matches[:all].length] = Expression.new("CASE", matches[:captured])
+          tokens[currtoken...currtoken+matches[:all].length] = Expression.new("CASE", matches[:captured])
           loops_since_made_progress = 0
           made_progress = true
         end
@@ -206,7 +206,8 @@ class Parser
         
         matches = matching_tokens(tokens, currtoken, ParserPatterns.array_pattern)
         if matches[:matched] then
-          tokens[currtoken..currtoken+matches[:all].length] = Expression.new("[]", matches[:captured])
+          puts matches.inspect
+          tokens[currtoken...currtoken+matches[:all].length] = Expression.new("[]", matches[:captured])
           loops_since_made_progress = 0
           made_progress = true
         end
@@ -215,13 +216,15 @@ class Parser
         
         matches = matching_tokens(tokens, currtoken, ParserPatterns.literal_array_pattern)
         if matches[:matched] then
-          tokens[currtoken..currtoken+matches[:all].length] = Expression.new("ARRAY", matches[:captured])
+          tokens[currtoken...currtoken+matches[:all].length] = Expression.new("ARRAY", matches[:captured])
           loops_since_made_progress = 0
           made_progress = true
         end
         
         currtoken += 1 unless made_progress
       end
+
+      puts error_inspect(tokens)
 
       precedence = (precedence + 1) % @@operators.length
 

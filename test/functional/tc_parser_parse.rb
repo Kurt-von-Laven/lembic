@@ -92,6 +92,13 @@ class TestParserParse < Test::Unit::TestCase
     assert_equal( "[](cats, 1, 2)" , @p.prefix_form("cats[1, 2]") )
     assert_equal( "[](cats, 1, 2, 3, 4, 5)" , @p.prefix_form("cats[1, 2, 3, 4, 5]") )
     assert_equal( "[](cats, +(1, *(3, 5)), 7)" , @p.prefix_form("cats[1+3*5, 7]") )
+    assert_equal( "[](a, [](b, [](c, 1)))" , @p.prefix_form("a[b[c[1]]]") )
+  end
+  
+  def test_arrays_with_other_operations
+    assert_equal( "+(x, [](cats, 1))" , @p.prefix_form("x+cats[1]") )
+    assert_equal( "+([](cats, 1, 2, 3), x)" , @p.prefix_form("cats[1,2,3]+x") )
+    assert_equal( "+(+(x, [](cats, 1, 2, 3)), x)" , @p.prefix_form("x+cats[1, 2, 3]+x") )
   end
   
   def test_case_statements
@@ -171,6 +178,40 @@ class TestParserParse < Test::Unit::TestCase
   
   def test_evaluator_builtin_functions
     assert_equal( 15, @e.eval_expression(@p.parse("SUM[arr, 0, 4]"), {"arr" => {:index_names => ["i"], :formula => @p.parse("[i|1,2,3,4,5]") }}, nil) )
+  end
+  
+  def test_small_model
+    output = @e.eval_all([{:name => "foo"}, {:name => "bar"}, {:name => "baz"}, {:name => "a"}],
+                      {
+                        "foo" => {:formula => @p.parse("bar+bar")},
+                        "bar" => {:formula => @p.parse("baz*baz")},
+                        "baz" => {:value => 2},
+                        "a" => {:formula => @p.parse("b/c")},
+                        "b" => {:formula => @p.parse("bar+2")},
+                        "c" => {:formula => @p.parse("1+2")}
+                      }
+                      )
+    assert_equal( 8, output["foo"][:value])
+    assert_equal( 4, output["bar"][:value])
+    assert_equal( 2, output["baz"][:value])
+    assert_equal( 2, output["a"][:value])
+    assert_equal( 6, output["b"][:value])
+    assert_equal( 3, output["c"][:value])
+  end
+  
+  def test_medium_model
+    puts @p.prefix_form("a[i]+var")
+    puts @p.prefix_form("x+SUM[primes, 0, 20]")
+    puts @p.prefix_form("a[i]+SUM[primes, 0, 20]")
+    output = @e.eval_all([{:name => "o", :indices => {:min => 0, :max => 20}}],
+                         {
+                          "a" => {:index_names => ["i"], :formula => @p.parse("primes[i]*ints[i]-odds[i]")},
+                          "ints" => {:index_names => ["i"], :formula => @p.parse("i+1")},
+                          "odds" => {:index_names => ["i"], :formula => @p.parse("i*2+1")},
+                          "primes" => {:index_names => ["i"], :formula => @p.parse("[i|2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,49,53,59,61,67,71,73]")},
+                          "o" => {:index_names => ["i"], :formula => @p.parse("a[i]+SUM[primes, 0, 20]")}
+                         })
+    puts output.inspect
   end
   
 end

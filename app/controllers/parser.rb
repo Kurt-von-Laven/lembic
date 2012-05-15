@@ -206,7 +206,6 @@ class Parser
         
         matches = matching_tokens(tokens, currtoken, ParserPatterns.array_pattern)
         if matches[:matched] then
-          puts matches.inspect
           tokens[currtoken...currtoken+matches[:all].length] = Expression.new("[]", matches[:captured])
           loops_since_made_progress = 0
           made_progress = true
@@ -223,8 +222,6 @@ class Parser
         
         currtoken += 1 unless made_progress
       end
-
-      puts error_inspect(tokens)
 
       precedence = (precedence + 1) % @@operators.length
 

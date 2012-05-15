@@ -12,9 +12,7 @@ class Variable < ActiveRecord::Base
   
   validates :variable_type, presence: true
   validates_inclusion_of :variable_type, :in => 0..3, :message => "Invalid variable type. If you're seeing this message, we goofed."
-  
-  validates :description, presence: true
-  
+    
   validates :workflow_id, presence: true
   # validates_associated :workflow
   belongs_to :workflow
@@ -37,6 +35,12 @@ class Variable < ActiveRecord::Base
     merged_var['updated_at'] = now
     merged_var['variable_type'] = merged_var['variable_type'].to_i
     merged_var['array'] = merged_var['array'].to_i
+    if merged_var['expression_string'].empty?
+      merged_var['expression_string'] = nil
+    else
+      parser = Parser.new
+      merged_var['expression_object'] = parser.parse(merged_var['expression_string'])
+    end
     Variable.create(merged_var)
   end
   

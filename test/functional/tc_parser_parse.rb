@@ -57,6 +57,10 @@ class TestParserParse < Test::Unit::TestCase
     assert_equal( "(1)" , @p.prefix_form("1"))
   end
   
+  def test_time
+    assert_equal( "(1970_01_01_00_00_00)", @p.prefix_form("1970_01_01_00_00_00"))
+  end
+  
   def test_wacky_whitespace
     assert_equal( "+(+(1, 2), 3)" ,  @p.prefix_form(" \n 1 \n\t   + 2+3  \t ") )
   end
@@ -216,6 +220,10 @@ class TestParserParse < Test::Unit::TestCase
     assert_equal(715, output["o"][:values]["1"])
     assert_equal(722, output["o"][:values]["2"])
     assert_equal(733, output["o"][:values]["3"])
+  end
+  
+  def test_evaluator_time
+    assert_equal(0, @e.eval_expression(@p.parse("1970_01_01_00_00_00"), {}, {}))
   end
   
 =begin

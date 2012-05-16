@@ -95,16 +95,12 @@ class Variable < ActiveRecord::Base
       :date_time
     end
     parsed_data = CSV.parse(csv_data, :converters => converter)
-    expression_string = "[ #{INDEX} | "
-    curr_row = 0
-    parsed_data.each do |row_contents|
-      if curr_row >= start_row
-        expression_string += "#{row_contents[column_number]}, "
-      end
-      curr_row += 1
-    end
-    expression_length = expression_string.length
-    return expression_string[0, expression_length - 2] + ']'
+    num_rows_desired = parsed_data.length - start_row
+    desired_rows = parsed_data[start_row, num_rows_desired]
+    desired_column = desired_rows.map {|r| r[column_number]}
+    desired_column_with_nans = desired_column.map {|v| v.nil? ? Float::NAN : v}
+    desired_values_as_str = desired_column_with_nans.join(', ')
+    return "[ #{INDEX} | #{desired_values_as_str}]"
   end
   
 end

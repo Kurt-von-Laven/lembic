@@ -8,7 +8,7 @@
 <table>
   <% for variable in @variables %>
     <tr>
-      <td><%= variable.name %> = <%=variable.expression_string %></td>
+      <td><div class="preserve_whitespace"><%= variable.name %> = <%=variable.expression_string %></div></td>
       <td><%= button_to "Delete this relationship",
               "/editor/delete_relationship?id=#{variable.id}",
               {:confirm => "Are you sure you want to delete the relationship for the variable named #{variable.name}?",

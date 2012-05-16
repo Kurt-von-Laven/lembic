@@ -30,6 +30,7 @@ body {
 	margin: 50px 0px; 
 	padding:0px;
 	text-align:center;
+	background-color:#dee6ed;
 }
 #container {
 	width:600px;
@@ -104,6 +105,10 @@ li {
 
 table {
     width:550px;
+}
+
+.preserve_whitespace {
+    white-space: pre;
 }
 
 

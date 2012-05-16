@@ -3,8 +3,11 @@ class EditorController < ApplicationController
   def equations
     if !params.nil?
       new_equation = params[:new_equation]
+      new_constant_array = params[:new_constant_array]
       if !(new_equation.nil?)
         Variable.create_from_form(new_equation)
+      elsif !(new_constant_array.nil?)
+        Variable.create_constant_array(new_constant_array)
       end
     end
     @variables = Variable.order(:name)

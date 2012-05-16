@@ -59,6 +59,8 @@ class TestParserParse < Test::Unit::TestCase
   
   def test_time
     assert_equal( "(1970_01_01_00_00_00)", @p.prefix_form("1970_01_01_00_00_00"))
+    assert_equal( "(1970_01_01)", @p.prefix_form("1970_01_01"))
+    assert_equal( "(00_00_00)", @p.prefix_form("00_00_00"))
   end
   
   def test_wacky_whitespace
@@ -224,6 +226,9 @@ class TestParserParse < Test::Unit::TestCase
   
   def test_evaluator_time
     assert_equal(0, @e.eval_expression(@p.parse("1970_01_01_00_00_00"), {}, {}))
+    assert_equal(0, @e.eval_expression(@p.parse("00_00_00"), {}, {}))
+    assert_equal(86400, @e.eval_expression(@p.parse("1970_01_02_00_00_00"), {}, {}))
+    assert_equal(86400, @e.eval_expression(@p.parse("1970_01_02"), {}, {}))
   end
   
 =begin

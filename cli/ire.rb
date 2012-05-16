@@ -3,8 +3,8 @@
 #
 #
 
-require "./app/controllers/parser"
-require "./app/controllers/evaluator"
+require "./app/helpers/parser"
+require "./app/helpers/evaluator"
 
 p = Parser.new
 e = Evaluator.new

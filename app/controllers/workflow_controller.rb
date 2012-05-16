@@ -1,5 +1,5 @@
 require 'yaml'
-require './app/controllers/expression'
+require './app/helpers/expression'
 
 class WorkflowController < ApplicationController
   

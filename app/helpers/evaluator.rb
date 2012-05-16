@@ -1,6 +1,7 @@
 
-require "./app/controllers/expression"
-require "./app/controllers/parser"
+require "./app/helpers/expression"
+require "./app/helpers/parser"
+require "date"
 
 # Class Evaluator
 # 
@@ -106,9 +107,21 @@ class Evaluator
       end
     else
       #exp is a string
-      if exp.match(/^[\d]+(\.[\d]*){0,1}|\.[\d]+$/)
+      if exp == "NaN"
+        #exp is nan
+        return 0.0/0.0
+      elsif exp.match(/^[\d]+(\.[\d]*){0,1}$|^\.[\d]+$/)
         #exp is a number
         return exp.to_f
+      elsif exp.match(/^\d\d\d\d_\d\d_\d\d_\d\d_\d\d_\d\d$/)
+        #exp is a date and time
+        return DateTime.strptime(exp, "%Y_%m_%d_%H_%M_%S").to_time.to_f
+      elsif exp.match(/^\d\d\d\d_\d\d_\d\d$/)
+        #exp is a date
+        return DateTime.strptime(exp, "%Y_%m_%d").to_time.to_f
+      elsif exp.match(/^\d\d\_\d\d_\d\d$/)
+        #exp is a time
+        return DateTime.strptime("1970_01_01_"+exp, "%Y_%m_%d_%H_%M_%S").to_time.to_f
       else
         #exp is a variable
         if !indices.nil? && !indices[exp].nil?
@@ -144,13 +157,13 @@ class Evaluator
   # globals format: { "varname1" => { :formula => <Expression> :value => <Numeric> }, "varname2" => ... , ... "varnameN" => ... }
   #
   def eval_variable (varname, globals, index_values)
-    
+        
     error_check_eval_variable_params(varname, globals, index_values)
     #  if variable value was cached previously, return the cached value
     if !globals[varname][:value].nil?
       return globals[varname][:value]
     end
-    
+
     formula = globals[varname][:formula]
     
     raise "Error: formula for a variable must be an expression object." if !formula.instance_of?(Expression)
@@ -176,6 +189,9 @@ class Evaluator
       index_names.each_with_index do |index_name, i|
         indices[index_name] = index_values[i]
       end
+      values_key = index_values.join(",")
+      if []
+      end
       result = eval_expression(formula, globals, indices)
       globals[varname][:values] = {} if globals[varname][:values].nil?
       globals[varname][:values][index_values.join(",")] = result
@@ -195,9 +211,11 @@ class Evaluator
       else
         # output is an array
         min_index = output[:indices][:min]
-        max_index = output[:indices][:min]
-        for curr in min_index..max_index
+        max_index = output[:indices][:max]
+        curr = min_index
+        while curr <= max_index do
           eval_variable(output[:name], globals, [curr])
+          curr += 1
         end
       end
     end

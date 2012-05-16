@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120513064736) do
+ActiveRecord::Schema.define(:version => 20120516023832) do
 
   create_table "permissions", :force => true do |t|
     t.integer  "workflow_id", :null => false
@@ -42,14 +42,14 @@ ActiveRecord::Schema.define(:version => 20120513064736) do
   end
 
   create_table "variables", :force => true do |t|
-    t.string   "name",              :limit => 64, :null => false
-    t.string   "description",                     :null => false
-    t.integer  "workflow_id",                     :null => false
-    t.integer  "variable_type",                   :null => false
-    t.integer  "array",                           :null => false
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
-    t.string   "expression_string"
+    t.string   "name",              :limit => 64,      :null => false
+    t.string   "description",                          :null => false
+    t.integer  "workflow_id",                          :null => false
+    t.integer  "variable_type",                        :null => false
+    t.integer  "array",                                :null => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+    t.string   "expression_string", :limit => 1048576
     t.binary   "expression_object"
   end
 

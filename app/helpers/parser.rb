@@ -4,8 +4,8 @@
 ### Instead of using puts for error handling, throw exceptions.  Otherwise users who mess up will not know about it.
 
 
-require "./app/controllers/parser_patterns"
-require "./app/controllers/expression"
+require "./app/helpers/parser_patterns"
+require "./app/helpers/expression"
  
 # ================ #   
 #   PARSER CLASS   #

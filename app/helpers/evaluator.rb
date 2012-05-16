@@ -107,7 +107,10 @@ class Evaluator
       end
     else
       #exp is a string
-      if exp.match(/^[\d]+(\.[\d]*){0,1}$|^\.[\d]+$/)
+      if exp == "NaN"
+        #exp is nan
+        return 0.0/0.0
+      elsif exp.match(/^[\d]+(\.[\d]*){0,1}$|^\.[\d]+$/)
         #exp is a number
         return exp.to_f
       elsif exp.match(/^\d\d\d\d_\d\d_\d\d_\d\d_\d\d_\d\d$/)
@@ -118,7 +121,7 @@ class Evaluator
         return DateTime.strptime(exp, "%Y_%m_%d").to_time.to_f
       elsif exp.match(/^\d\d\_\d\d_\d\d$/)
         #exp is a time
-        return DateTime.strptime(exp, "%H_%M_%S").to_time.to_f
+        return DateTime.strptime("1970_01_01_"+exp, "%Y_%m_%d_%H_%M_%S").to_time.to_f
       else
         #exp is a variable
         if !indices.nil? && !indices[exp].nil?

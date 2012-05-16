@@ -231,6 +231,10 @@ class TestParserParse < Test::Unit::TestCase
     assert_equal(86400, @e.eval_expression(@p.parse("1970_01_02"), {}, {}))
   end
   
+  def test_evaluator_nan
+    assert((@e.eval_expression(@p.parse("NaN"), {}, {})).nan?)
+  end
+  
 =begin
   def test_large_model
     output = @e.eval_all([{:name => "o", :indices => {:min => 0, :max => 9999}}],

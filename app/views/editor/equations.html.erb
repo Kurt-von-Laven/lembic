@@ -1,22 +1,6 @@
 <% @title = "Equation Editor" %>
 <h1>Equation Editor</h1>
 
-<%= render "current_variables" %>
-
-<h3>Current Equations</h3>
-
-<table>
-  <% for variable in @variables %>
-    <tr>
-      <td><%= variable.name %> = <%=variable.expression_string %></td>
-      <td><%= button_to "Delete this relationship",
-              "/editor/delete_relationship?id=#{variable.id}",
-              {:confirm => "Are you sure you want to delete the relationship for the variable named #{variable.name}?",
-               :method => :delete} %></td>
-    </tr>
-  <% end %>
-</table>
-
 <h3>Create Equation</h3>
 <%= form_for(:new_equation) do |f| %>
   <div>
@@ -77,3 +61,19 @@
     </p>
   </div>
 <% end %>
+
+<%= render "current_variables" %>
+
+<h3>Current Equations</h3>
+
+<table>
+  <% for variable in @variables %>
+    <tr>
+      <td><%= variable.name %> = <%=variable.expression_string %></td>
+      <td><%= button_to "Delete this relationship",
+              "/editor/delete_relationship?id=#{variable.id}",
+              {:confirm => "Are you sure you want to delete the relationship for the variable named #{variable.name}?",
+               :method => :delete} %></td>
+    </tr>
+  <% end %>
+</table>

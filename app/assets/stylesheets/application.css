@@ -106,4 +106,8 @@ table {
     width:550px;
 }
 
+.preserve_whitespace {
+    white-space: pre;
+}
+
 

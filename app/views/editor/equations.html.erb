@@ -28,7 +28,12 @@
 <% end %>
 
 <h3>Date Picker Example</h3>
+<%= form_for(:date_picker) do |f| %>
 <p>Date: <input type="text" id="datepicker"></p>
+<p class="submit_paragraph">
+      <%= f.submit("Upload Date", :id => "date_submit") %>
+    </p>
+<% end %>
 
 
 <h3>Upload Array</h3>

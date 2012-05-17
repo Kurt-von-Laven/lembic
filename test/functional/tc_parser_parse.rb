@@ -184,6 +184,9 @@ class TestParserParse < Test::Unit::TestCase
   
   def test_evaluator_builtin_functions
     assert_equal( 15, @e.eval_expression(@p.parse("SUM[arr, 0, 4]"), {"arr" => {:index_names => ["i"], :formula => @p.parse("[i|1,2,3,4,5]") }}, nil) )
+    assert_equal( 10, @e.eval_expression(@p.parse("SUM[arr, 0, 20]"), {"arr" => {:index_names => ["i"], :formula => @p.parse("i % 2") }}, nil) )
+    assert_equal( 14, @e.eval_expression(@p.parse("MAX[arr, 0, 5]"), {"arr" => {:index_names => ["i"], :formula => @p.parse("[i|10,8,0,14,4,9]") }}, nil) )
+    assert_equal( 0, @e.eval_expression(@p.parse("MIN[arr, 0, 5]"), {"arr" => {:index_names => ["i"], :formula => @p.parse("[i|10,8,0,14,4,9]") }}, nil) )
   end
   
   def test_small_model
@@ -233,6 +236,7 @@ class TestParserParse < Test::Unit::TestCase
     assert(@e.eval_expression(@p.parse("00_00_01"), {}, {}) > @e.eval_expression(@p.parse("00_00_00"), {}, {}))
     assert(@e.eval_expression(@p.parse("11_00_00"), {}, {}) > @e.eval_expression(@p.parse("10_59_59"), {}, {}))
     assert_equal(@e.eval_expression(@p.parse("1970_01_01_00_00_00"), {}, {}), @e.eval_expression(@p.parse("00_00_00"), {}, {}))
+    assert_equal(@e.eval_expression(@p.parse("2012_12_21_23_59_59"), {}, {}), @e.eval_expression(@p.parse("2012_12_21+23_59_59"), {}, {}))
   end
   
   def test_evaluator_nan

@@ -21,18 +21,57 @@ class Evaluator
   end
   
   def eval_builtin_function(function_name, globals, params)
-    if function_name == "SUM"
+    
+    #setup for array aggregators
+    if params.length == 3
       array_name = params[0]
-      min = params[1]
-      max = params[2]
+      min_i = params[1]
+      max_i = params[2]
+    end
+    
+    if function_name == "SUM"
+      if params.length != 3
+        raise "Wrong number of arguments to SUM: expected 3 but found #{params.length}."
+      end
       sum = 0
-      i = min
-      while i <= max
+      i = min_i
+      while i <= max_i
         inc = eval_variable(array_name, globals, [i])
         sum += inc
         i += 1
       end
       return sum
+    
+    elsif function_name == "MAX"
+      if params.length != 3
+        raise "Wrong number of arguments to MAX: expected 3 but found #{params.length}."
+      end
+      i = min_i
+      max = eval_variable(array_name, globals, [i])
+      while i < max_i
+        candidate = eval_variable(array_name, globals, [i])
+        if candidate > max
+          max = candidate
+        end
+        i += 1
+      end
+      return max
+    
+    elsif function_name == "MIN"
+      if params.length != 3
+        raise "Wrong number of arguments to MIN: expected 3 but found #{params.length}."
+      end
+      i = min_i
+      min = eval_variable(array_name, globals, [i])
+      while i < max_i
+        candidate = eval_variable(array_name, globals, [i])
+        if candidate < min
+          min = candidate
+        end
+        i += 1
+      end
+      return min
+    
     end
     return nil
   end

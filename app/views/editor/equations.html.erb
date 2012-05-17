@@ -2,7 +2,7 @@
 <% @title = "Equation Editor" %>
 <h1>Equation Editor</h1>
 
-<h3>Create Equation</h3>
+<h3>Create Magical Anything You Feel Like</h3>
 <%= form_for(:new_equation) do |f| %>
   <div>
     <p>
@@ -40,10 +40,16 @@
 		<option value="'day' d 'of' MM 'in the year' yy">With text - 'day' d 'of' MM 'in the year' yy</option>
 	</select>
 </p>
+
+
 <p class="submit_paragraph">
       <%= f.submit("Upload Date", :id => "date_submit") %>
     </p>
 <% end %>
+
+<p id = "hello">If you click on the "Hide" button, I will disappear.</p>
+<button id="hide">Hide</button>
+
 
 
 <h3>Upload Array</h3>

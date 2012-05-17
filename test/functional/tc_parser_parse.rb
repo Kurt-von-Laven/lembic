@@ -229,10 +229,18 @@ class TestParserParse < Test::Unit::TestCase
     assert_equal(0, @e.eval_expression(@p.parse("00_00_00"), {}, {}))
     assert_equal(86400, @e.eval_expression(@p.parse("1970_01_02_00_00_00"), {}, {}))
     assert_equal(86400, @e.eval_expression(@p.parse("1970_01_02"), {}, {}))
+    assert(@e.eval_expression(@p.parse("1970_01_02"), {}, {}) > @e.eval_expression(@p.parse("1970_01_01"), {}, {}))
+    assert(@e.eval_expression(@p.parse("00_00_01"), {}, {}) > @e.eval_expression(@p.parse("00_00_00"), {}, {}))
+    assert(@e.eval_expression(@p.parse("11_00_00"), {}, {}) > @e.eval_expression(@p.parse("10_59_59"), {}, {}))
+    assert_equal(@e.eval_expression(@p.parse("1970_01_01_00_00_00"), {}, {}), @e.eval_expression(@p.parse("00_00_00"), {}, {}))
   end
   
   def test_evaluator_nan
     assert((@e.eval_expression(@p.parse("NaN"), {}, {})).nan?)
+  end
+  
+  def test_evaluator_symbols
+    assert_equal(:cat, @e.eval_expression(@p.parse("@cat"), {}, {}))
   end
   
 =begin

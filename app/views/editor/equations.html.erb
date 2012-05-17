@@ -2,8 +2,10 @@
 <% @title = "Equation Editor" %>
 <h1>Equation Editor</h1>
 
-<h3>Create Equation</h3>
+
+<h3>Create Magical Anything You Feel Like</h3>
 <%= form_for(:new_equation, :html => {:class => "input_form"}) do |f| %>
+
   <div>
     <div>
       <%= f.check_box(:array) %>
@@ -26,6 +28,30 @@
     </div>
   </div>
 <% end %>
+
+<h3>Date Picker Example</h3>
+<%= form_for(:date_picker) do |f| %>
+<p>Date: <input type="text" id="datepicker"></p>
+    <p>Format options:<br />
+	<select id="format">
+		<option value="mm/dd/yy">Default - mm/dd/yy</option>
+		<option value="yy-mm-dd">ISO 8601 - yy-mm-dd</option>
+		<option value="d M, y">Short - d M, y</option>
+		<option value="d MM, y">Medium - d MM, y</option>
+		<option value="DD, d MM, yy">Full - DD, d MM, yy</option>
+		<option value="'day' d 'of' MM 'in the year' yy">With text - 'day' d 'of' MM 'in the year' yy</option>
+	</select>
+</p>
+
+
+<p class="submit_paragraph">
+      <%= f.submit("Upload Date", :id => "date_submit") %>
+    </p>
+<% end %>
+
+<p id = "hello">If you click on the "Hide" button, I will disappear.</p>
+<button id="hide">Hide</button>
+
 
 
 <h3>Upload Array</h3> 

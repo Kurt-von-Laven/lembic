@@ -107,7 +107,10 @@ class Evaluator
       end
     else
       #exp is a string
-      if exp == "NaN"
+      if exp[0] == ?@
+        #exp is a symbol
+        return exp[1..-1].intern
+      elsif exp == "NaN"
         #exp is nan
         return 0.0/0.0
       elsif exp.match(/^[\d]+(\.[\d]*){0,1}$|^\.[\d]+$/)

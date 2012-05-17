@@ -1,3 +1,4 @@
+
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
@@ -29,6 +30,7 @@ body {
 	margin: 50px 0px; 
 	padding:0px;
 	text-align:center;
+	background-color:#dee6ed;
 }
 #container {
 	width:600px;
@@ -108,5 +110,6 @@ table {
 .preserve_whitespace {
     white-space: pre;
 }
+
 
 

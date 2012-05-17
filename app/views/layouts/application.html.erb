@@ -42,6 +42,10 @@
 				$('#datepicker').datepicker({
 					inline: true
 				});
+                
+                $( "#format" ).change(function() {
+                    $( "#datepicker" ).datepicker( "option", "dateFormat", $( this ).val() );
+                });
 
 				// Slider
 				$('#slider').slider({

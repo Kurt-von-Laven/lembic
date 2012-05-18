@@ -2,28 +2,30 @@
 <% @title = "Equation Editor" %>
 <h1>Equation Editor</h1>
 
-<h3>Create Equation</h3>
-<%= form_for(:new_equation) do |f| %>
+
+<h3>Create Magical Anything You Feel Like</h3>
+<%= form_for(:new_equation, :html => {:class => "input_form"}) do |f| %>
+
   <div>
-    <p>
+    <div>
       <%= f.check_box(:array) %>
       <%= f.label(:array, "Is this an array?") %>
-    </p>
-    <p>
+    </div>
+    <div>
       <%= f.label(:variable_type, "Variable Type:") %>
       <%= f.select(:variable_type, [['Categorical', '0'], ['Integer',
       '1'], ['Real', '2'], ['Date and Time', '3']]) %>
-    </p>
-    <p>
+    </div>
+    <div>
       <%= f.label(:description, "Description:") %>
       <%= f.text_field(:description) %>
-    </p>
-    <p>
+    </div>
+    <div id = "expression">
       <%= f.text_field(:name) %> = <%= f.text_area(:expression_string) %>
-    </p>
-    <p class="submit_paragraph">
+    </div>
+    <div class="submit_paragraph">
       <%= f.submit("Create Equation", :id => "new_equation_submit") %>
-    </p>
+    </div>
   </div>
 <% end %>
 
@@ -40,13 +42,19 @@
 		<option value="'day' d 'of' MM 'in the year' yy">With text - 'day' d 'of' MM 'in the year' yy</option>
 	</select>
 </p>
+
+
 <p class="submit_paragraph">
       <%= f.submit("Upload Date", :id => "date_submit") %>
     </p>
 <% end %>
 
+<p id = "hello">If you click on the "Hide" button, I will disappear.</p>
+<button id="hide">Hide</button>
 
-<h3>Upload Array</h3>
+
+
+<h3>Upload Array</h3> 
 <%= form_for(:new_constant_array, :html => {:multipart => true}) do |f| %>
   <div>
     <p>

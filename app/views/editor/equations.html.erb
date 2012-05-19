@@ -1,5 +1,14 @@
 
 <% @title = "Equation Editor" %>
+
+<!--Slider Script -->
+<script>
+	$(function() {
+		$( "#slider" ).slider();
+	});
+</script>
+ 
+       
 <h1>Equation Editor</h1>
 
 
@@ -16,6 +25,7 @@
       <%= f.select(:variable_type, [['Categorical', '0'], ['Integer',
       '1'], ['Real', '2'], ['Date and Time', '3']]) %>
     </div>
+      
     <div>
       <%= f.label(:description, "Description:") %>
       <%= f.text_field(:description) %>
@@ -29,25 +39,42 @@
   </div>
 <% end %>
 
-<h3>Date Picker Example</h3>
-<%= form_for(:date_picker) do |f| %>
-<p>Date: <input type="text" id="datepicker"></p>
-    <p>Format options:<br />
-	<select id="format">
-		<option value="mm/dd/yy">Default - mm/dd/yy</option>
-		<option value="yy-mm-dd">ISO 8601 - yy-mm-dd</option>
-		<option value="d M, y">Short - d M, y</option>
-		<option value="d MM, y">Medium - d MM, y</option>
-		<option value="DD, d MM, yy">Full - DD, d MM, yy</option>
-		<option value="'day' d 'of' MM 'in the year' yy">With text - 'day' d 'of' MM 'in the year' yy</option>
-	</select>
-</p>
+<h3> Create a Date and Time Variable</h3>
 
+        <%= form_for(:date_picker) do |f| %>
+            <p>Date: <input type="text" id="datepicker"></p>
+        
+            <p>Format options:<br />
+            <select id="format">
+                <option value="mm/dd/yy">Default - mm/dd/yy</option>
+                <option value="yy-mm-dd">ISO 8601 - yy-mm-dd</option>
+                <option value="d M, y">Short - d M, y</option>
+                <option value="d MM, y">Medium - d MM, y</option>
+                <option value="DD, d MM, yy">Full - DD, d MM, yy</option>
+                <option value="'day' d 'of' MM 'in the year' yy">With text - 'day' d 'of' MM 'in the year' yy</option>
+            </select>
+            </p>
+            
+            
+            <!-- Slider -->
+            <p>
+            <label for="time">Time range (in military time):</label>
+            <input type="text" id="time" style="border:0; color:#f6931f; font-weight:bold;" />
+            </p>
 
-<p class="submit_paragraph">
-      <%= f.submit("Upload Date", :id => "date_submit") %>
-    </p>
-<% end %>
+            <div id="slider-range"></div>
+            
+            
+            <!--Submit-->
+            <div>
+
+                <p class="submit_paragraph">
+                <%= f.submit("Upload Date", :id => "date_submit") %>
+                </p>
+            </div>
+        <% end %>
+        
+		   
 
 <p id = "hello">If you click on the "Hide" button, I will disappear.</p>
 <button id="hide">Hide</button>

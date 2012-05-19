@@ -16,5 +16,5 @@
 //= require_tree .
 
 jquery(function(){
-       jquery("#tags").tabs();
+       jquery("#slider").slider();
        });

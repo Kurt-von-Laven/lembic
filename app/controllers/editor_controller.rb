@@ -16,24 +16,24 @@ class EditorController < ApplicationController
   
   def delete_variable
     if !params.nil?
-      variable_id = params[:id] # TODO: Check that this ID is valid.
-      if !(variable_id.nil?)
-        Variable.delete(variable_id)
+      variable = Variable.where(:id => params[:id]).first
+      if !variable.nil?
+        variable.destroy()
       end
     end
-    @variables = Variable.order(:name)
-    redirect_to '/editor/equations'
+    redirect_to :action => 'equations'
   end
   
   def delete_relationship
     if !params.nil?
-      variable_id = params[:id] # TODO: Check that this ID is valid.
-      if !(variable_id.nil?)
-        Variable.update(variable_id, {:expression_string => nil, :expression_object => nil})
+      variable = Variable.where(:id => params[:id]).first
+      if !variable.nil?
+        variable.expression_string = nil
+        variable.expression_object = nil
+        variable.save
       end
     end
-    @variables = Variable.order(:name)
-    redirect_to '/editor/equations'
+    redirect_to :action => 'equations'
   end
   
 end

@@ -6,7 +6,6 @@ class WorkflowController < ApplicationController
   def evaluate
     if !params.nil? and !(params[:variables].nil?)
       variables = params[:variables]
-      puts variables.inspect
       input_values = eval(variables['input_values'])
       for input_variable, input_formula in input_values
         input_values[input_variable] = {:value => input_formula}

@@ -56,17 +56,6 @@ body {
 	background-color: #fff;
     font-family: Garamond, Baskerville, "Times New Roman", serif;
 }
-.deleteb{
-	background-image:url('delete.png');
-	background-repeat: no-repeat;
-    cursor:pointer;
-    top: 3px;
-    right:3px;
-    height: auto;
-    padding-top:5px;
-    padding-bottom:5px;
-    width: 35px;
-}
 
 #expression { 
 	border-radius:10px;
@@ -77,10 +66,32 @@ body {
 }
 #expression >textarea {
 	height: 100px;
-	width: 60%;
+	width: 72%;
 	margin: 10px 0 10px 0;
 }
-
+#var_input_block{
+	margin: auto;
+	width: 72%;
+	padding: 0 20px 0 20px;
+}
+border-radius:10px;
+    -moz-border-radius:10px; /* Firefox 3.6 and earlier */
+	background-color: #dee6ed;
+	padding: 20px;
+	margin: 10px;
+	margin: 10px;
+}
+.input_form{
+	border-radius:10px;
+    -moz-border-radius:10px; /* Firefox 3.6 and earlier */
+	border-color: #ccc;
+	padding: 20px;
+	margin: 10px;
+}
+.input_form div {
+	margin: 5px;
+	text-align: left;
+}
 .input_form label{
 	width: 200px;
 	display: block;
@@ -155,15 +166,23 @@ li {
 
 table {
     width:750px;
+	border: 1px solid;
+	border-color: #5c7e99;
+	
 }
 
+table th {
+	color:  #5c7e99;
+	padding: 5px;
+}
 table td
     {
-	background-color: #dee6ed;
-	border-bottom:2px solid #fff;
-	border-right: none;
-    height: 5px;
-    }
+	background-color: #e9f2f9;
+	border-top:2px solid #fff;
+	border-collapse: collapse;
+    border-spacing: 0px;
+	padding-left: 10px;
+  }
 
 .preserve_whitespace {
     white-space: pre;

@@ -6,8 +6,8 @@ class UserController < ApplicationController
   def login
     login_form = params[:user]
     logger.info('This is a test of secure_str_cmp. The next two lines should be true and false, respectively.')
-    logger.info(system('./bin/secure_str_cmp', 'test', 'test'))
-    logger.info(system('./bin/secure_str_cmp', 'asdfoipuwer', 'asdfoipuwxr'))
+    logger.info(system(Rails.root.join('bin/secure_str_cmp').to_s, 'test', 'test'))
+    logger.info(system(Rails.root.join('bin/secure_str_cmp').to_s, 'asdfoipuwer', 'asdfoipuwxr'))
     if !login_form.nil?
       email = login_form[:email]
       user = User.where(:email => email).first
@@ -38,8 +38,15 @@ class UserController < ApplicationController
       password_confirmation = registration_form[:password_confirmation]
       @user.password = password
       @user.valid? # Populate error messages.
+      if password.length < User::MINIMUM_PASSWORD_LENGTH
+        errors.add(:password, "is too short (minimum is #{User::MINIMUM_PASSWORD_LENGTH} characters)")
+      end
       if password == password_confirmation
-        if @user.save
+        is_valid = @user.save
+        if password.length < User::MINIMUM_PASSWORD_LENGTH
+          errors.add(:password, "is too short (minimum is #{User::MINIMUM_PASSWORD_LENGTH} characters)")
+        end
+        if is_valid
           flash[:account_created] = 'Your account was successfully created.'
           redirect_to login_path
           return

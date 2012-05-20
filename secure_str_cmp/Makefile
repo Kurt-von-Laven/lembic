@@ -15,7 +15,6 @@ CC = gcc
 #  -f...       fine-grained optimization instructions that don't introduce
 #              vulnerabilities to timing attacks
 #  -std=gnu99  use the Gnu C99 standard language definition
-#  -m32        emit code for IA32 architecture
 #  -D_GNU_SOURCE use GNU library extension
 CFLAGS = -g -Wall -pedantic -fcprop-registers -fguess-branch-probability \
   -fif-conversion -fif-conversion2 -ftree-ch -ftree-copyrename -ftree-fre \
@@ -23,7 +22,7 @@ CFLAGS = -g -Wall -pedantic -fcprop-registers -fguess-branch-probability \
   -fcse-skip-blocks -fdelete-null-pointer-checks -fgcse -fgcse-lm -fgcse-sm \
   -fgcse-las -fgcse-after-reload -fregmove -freorder-blocks \
   -frerun-cse-after-loop -fsched-spec-load -fschedule-insns -fschedule-insns2 \
-  -fstrict-aliasing -ftree-pre -std=gnu99 -m32 -D_GNU_SOURCE
+  -fstrict-aliasing -ftree-pre -std=gnu99 -D_GNU_SOURCE
 
 # In this section, you list the files that are part of the project.
 # If you add/change names of header/source files, here is where you

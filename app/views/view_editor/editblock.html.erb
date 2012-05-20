@@ -22,7 +22,7 @@
             <%= f.label(:input_relationships, "Logic for Measurements: ") %>
             <%= f.text_area :input_relationships %>
 </div>
-            <%= f.submit "Create Block" %>
+            <%= f.submit('Create Block', :class => "button") %>
          
 <% end %>        
 
@@ -46,7 +46,7 @@
     </p>
     <p>
 </div>
-            <%= f.submit "Add Output" %>
+            <%= f.submit('Add Output', :class => "button") %>
 <% end %>
 
 
@@ -59,4 +59,4 @@ Each block appears in its own tab, using JQuery. All blocks appear, but some wil
 </p>
 <%= button_to "View Workflow", "/workflow",
               {:confirm => "Are you sure you are ready to leave this page?",
-               :method => :delete} %>
+               :method => :delete, :class => "button"} %>

@@ -33,7 +33,7 @@
     <%= f.text_field(:name) %> = <%= f.text_area(:expression_string) %>
   </div>
   <div class="submit_paragraph">
-    <%= f.submit("Create Equation", :id => "new_equation_submit") %>
+    <%= f.submit("Create Equation", :id => "new_equation_submit", :class => "button") %>
   </div>
 <% end %>
 
@@ -67,7 +67,7 @@
   <div>
     
     <p class="submit_paragraph">
-      <%= f.submit("Upload Date", :id => "date_submit") %>
+      <%= f.submit("Upload Date", :id => "date_submit", :class => "button") %>
     </p>
   </div>
 <% end %>
@@ -108,7 +108,7 @@
       <%= f.text_field(:start_row, :class => "numeric_input") %>
     </p>
     <p class="submit_paragraph">
-      <%= f.submit("Upload Array", :id => "new_equation_submit") %>
+      <%= f.submit("Upload Array", :id => "new_equation_submit", :class => "button") %>
     </p>
   </div>
 <% end %>

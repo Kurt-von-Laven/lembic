@@ -5,8 +5,8 @@ class UserController < ApplicationController
   
   def login
     login_form = params[:user]
-    flash[:test_one] = system('./secure_str_cmp/secure_str_cmp', 'test', 'test')
-    flash[:test_two] = system('./secure_str_cmp/secure_str_cmp', 'asdfoipuwer', 'asdfoipuwxr')
+    logger.info(system('./bin/secure_str_cmp', 'test', 'test'))
+    logger.info(system('./bin/secure_str_cmp', 'asdfoipuwer', 'asdfoipuwxr'))
     if !login_form.nil?
       email = login_form[:email]
       user = User.where(:email => email).first

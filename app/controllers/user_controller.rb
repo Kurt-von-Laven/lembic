@@ -38,8 +38,15 @@ class UserController < ApplicationController
       password_confirmation = registration_form[:password_confirmation]
       @user.password = password
       @user.valid? # Populate error messages.
+      if password.length < User::MINIMUM_PASSWORD_LENGTH
+        errors.add(:password, "is too short (minimum is #{User::MINIMUM_PASSWORD_LENGTH} characters)")
+      end
       if password == password_confirmation
-        if @user.save
+        is_valid = @user.save
+        if password.length < User::MINIMUM_PASSWORD_LENGTH
+          errors.add(:password, "is too short (minimum is #{User::MINIMUM_PASSWORD_LENGTH} characters)")
+        end
+        if is_valid
           flash[:account_created] = 'Your account was successfully created.'
           redirect_to login_path
           return

@@ -5,7 +5,6 @@
   <tr>
     <th>Name</th>
     <th>Description</th>
-	<th>Array?</th>
     <th>Type</th>
 	<th>Relationship</th>
 	<th></th>
@@ -16,21 +15,9 @@
       <td><%= variable.name %> </td>
       <td><%= variable.description %></td>
 
-	<% if variable.array == 0 %>
-       <td>No</td>
-        <% elsif variable.array == 1 %>
-           <td>Yes</td>
-        <% end %>
         
-        <% if variable.variable_type == 0 %>
-            <td>Categorical</td>
-        <% elsif variable.variable_type == 1 %>
-            <td>Integer</td>
-        <% elsif variable.variable_type == 2 %>
-            <td>Real</td>
-        <% elsif variable.variable_type == 3 %>
-            <td>Date and Time</td>
-        <% end %>
+		<td> <%= variable.variable_type_string %>
+     
 		<td width = "200px">
 		</td>
 		

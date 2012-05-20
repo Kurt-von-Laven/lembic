@@ -30,8 +30,8 @@ class Variable < ActiveRecord::Base
 			when 3
 			  'Date and Time'
 			end
-	if array == 0
-		var = "moo"
+	if array == 1
+		var += " Array"
 	 end
 	 return var
   end

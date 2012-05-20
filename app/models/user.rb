@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
   
   def password_valid?(candidate_password)
     candidate_hash = hash_password(candidate_password)
-    return system('./bin/secure_str_cmp', pwd_hash, candidate_hash)
+    return system("#{Rails.root}./bin/secure_str_cmp", pwd_hash, candidate_hash)
   end
   
   def hash_password(plain_text_password)

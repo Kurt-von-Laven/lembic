@@ -85,7 +85,7 @@ body {
 	width: 200px;
 	display: block;
 	float: left;
-	text-align: rigth;
+	text-align: right;
 	margin: 0 0 0 50px;
 }
 
@@ -94,8 +94,9 @@ h1 {
 	color: #dee6ed;
     font-family: Garamond, Baskerville, "Times New Roman", serif;
     text-align: center;
-    
-    padding:10px;
+    margin-left:auto;
+    margin-right:auto;
+        padding:10px;
     border-radius:10px;
     -moz-border-radius:10px; /* Firefox 3.6 and earlier */
 }
@@ -104,12 +105,14 @@ h3 {
     background-color:#5c7e99;
 	color: #dee6ed;
     font-family: Garamond, Baskerville, "Times New Roman", serif;
-    text-align: center;
-    
+    text-align:center;
+    margin-left:auto;
+    margin-right:auto;
     padding:10px;
     border-radius:10px;
     -moz-border-radius:10px; /* Firefox 3.6 and earlier */
 }
+
 
 .login {
     width:200px;

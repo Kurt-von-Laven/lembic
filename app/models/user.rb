@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email
   
   MINIMUM_PASSWORD_LENGTH = 8
-  validates :password, :length => {:minimum => MINIMUM_PASSWORD_LENGTH}, :on => :create
+  #validates :password, :length => {:minimum => MINIMUM_PASSWORD_LENGTH}, :on => :create
   
   has_many :workflows, :through => :permissions
   # validates_associated :permissions

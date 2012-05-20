@@ -57,7 +57,6 @@
 <p>
 Each block appears in its own tab, using JQuery. All blocks appear, but some will be grayed out. This means that logic statements have be parsed and translated. As the associated variables are filled in, the if statements are evaluated. If the statement is true, the view updates to include a new  section(google form style if we can make it happen), or ungrays a block. Blocks that do not have all necessary variables filled in will be red. As soon as all variables are satisified, it will turn blue. The finish button will always be present (maybe at the bottom left) but will be disabled until all necessary values have been filled in. Time and date variables will have associated sliders (Jquery). Categorial will have check boxes (Jquery). Done will redirect simplified evaluator page. 
 </p>
-<%= button_to "View Workflow",
-              "/evaluator",
+<%= button_to "View Workflow", evaluator_path,
               {:confirm => "Are you sure you are ready to leave this page?",
                :method => :delete} %>

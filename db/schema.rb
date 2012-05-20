@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120516023832) do
+ActiveRecord::Schema.define(:version => 20120520052304) do
 
   create_table "permissions", :force => true do |t|
     t.integer  "workflow_id", :null => false
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(:version => 20120516023832) do
     t.string   "pwd_hash",     :null => false
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+    t.string   "salt",         :null => false
   end
 
   create_table "variables", :force => true do |t|

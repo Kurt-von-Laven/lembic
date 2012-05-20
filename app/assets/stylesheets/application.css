@@ -120,8 +120,8 @@ li {
     width: 125px;
     font-size: 22px;
     height: 100%;
-    padding-left: 8px;
-    padding-right: 8px;
+    padding-left: 2px;
+    padding-right: 2px;
 }
 
 table {
@@ -132,5 +132,10 @@ table {
     white-space: pre;
 }
 
+.success {
+    color: green;
+}
 
-
+.error {
+    color: red;
+}

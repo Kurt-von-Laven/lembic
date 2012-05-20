@@ -1,0 +1,25 @@
+<% @title = 'Create Your Account' %>
+<%= form_for(@user, :url => register_path) do |f| %>
+  <% errors = @user.errors %>
+  <%= render(:partial => 'registration_field', :locals => {:field => :first_name,
+                     :prompt => 'Enter your first name:', :is_password => false,
+                     :errors => errors, :form => f}) %>
+  <%= render(:partial => 'registration_field', :locals => {:field => :last_name,
+                     :prompt => 'Enter your last name:', :is_password => false,
+                     :errors => errors, :form => f}) %>
+  <%= render(:partial => 'registration_field', :locals => {:field => :email,
+                     :prompt => 'Enter your email address:', :is_password => false,
+                     :errors => errors, :form => f}) %>
+  <%= render(:partial => 'registration_field', :locals => {:field => :organization,
+                     :prompt => 'Enter your organization:', :is_password => false,
+                     :errors => errors, :form => f}) %>
+  <%= render(:partial => 'registration_field', :locals => {:field => :password,
+                     :prompt => 'Create a password:', :is_password => true,
+                     :errors => errors, :form => f}) %>
+  <%= render(:partial => 'registration_field', :locals => {:field => :password_confirmation,
+                     :prompt => 'Confirm your password:', :is_password => true,
+                     :errors => errors, :form => f}) %>
+  <div>
+    <%= f.submit('Create Account') %>
+  </div>
+<% end %>

@@ -1,12 +1,14 @@
 
 <h3>Current Variables</h3>
  
-<table>
+<table cellpadding="2px" cellspacing="0">
   <tr>
     <th>Name</th>
     <th>Description</th>
 	<th>Array?</th>
     <th>Type</th>
+	<th>Relationship</th>
+	<th></th>
   </tr>
   
   <% for variable in @variables %>
@@ -29,8 +31,10 @@
         <% elsif variable.variable_type == 3 %>
             <td>Date and Time</td>
         <% end %>
+		<td width = "200px">
+		</td>
+		
 		<td align="center">
-	  
 		   <form method="post" action="/editor/delete_variable?id=<%= variable.id %>" >
 			<div>
 				<input type="hidden" value="delete" name="_method">

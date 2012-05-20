@@ -1,5 +1,8 @@
 <% @title = 'Login' %>
 <%= render(:partial => 'flash_message', :locals => {:flash_symbol =>:account_created, :tag => 'p', :class_name => 'success'}) %>
+<p>Test of system call. The next two lines should be true and false, respectively.</p>
+<%= render(:partial => 'flash_message', :locals => {:flash_symbol =>:test_one, :tag => 'p', :class_name => 'error'}) %>
+<%= render(:partial => 'flash_message', :locals => {:flash_symbol =>:test_two, :tag => 'p', :class_name => 'error'}) %>
 <%= form_for(:user) do |f| %>
     <div>
       <%= f.label(:email, 'Email:') %>

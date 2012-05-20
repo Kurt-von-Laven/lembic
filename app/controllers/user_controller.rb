@@ -5,9 +5,8 @@ class UserController < ApplicationController
   
   def login
     login_form = params[:user]
-    logger.info('Test of system call. The next two lines should be true and false, respectively.')
-    logger.info(system('./secure_str_cmp/secure_str_cmp', 'test', 'test'))
-    logger.info(system('./secure_str_cmp/secure_str_cmp', 'asdfoipuwer', 'asdfoipuwxr'))
+    flash[:test_one] = system('./secure_str_cmp/secure_str_cmp', 'test', 'test')
+    flash[:test_two] = system('./secure_str_cmp/secure_str_cmp', 'asdfoipuwer', 'asdfoipuwxr')
     if !login_form.nil?
       email = login_form[:email]
       user = User.where(:email => email).first
@@ -30,15 +29,14 @@ class UserController < ApplicationController
   def register
     registration_form = params[:user]
     if !registration_form.nil?
-      now = Time.now
       @user = User.new(:first_name => registration_form[:first_name],
                        :last_name => registration_form[:last_name],
                        :email => registration_form[:email],
                        :organization => registration_form[:organization])
       password = registration_form[:password]
       password_confirmation = registration_form[:password_confirmation]
-      @user.valid? # Populate error messages.
       @user.password = password
+      @user.valid? # Populate error messages.
       if password == password_confirmation
         if @user.save
           flash[:account_created] = 'Your account was successfully created.'

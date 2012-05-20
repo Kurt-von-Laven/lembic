@@ -2,7 +2,7 @@
 <% @title = "Equation Editor" %>
 
 <!--Slider Script -->
-<script>
+<script type="text/javascript">
 	$(function() {
 		$( "#slider" ).slider();
 	});
@@ -40,7 +40,7 @@
 <h3> Create a Date and Time Variable</h3>
 
 <%= form_for(:date_picker) do |f| %>
-  <p>Date: <input type="text" id="datepicker"></p>
+  <p>Date: <input type="text" id="datepicker"></input></p>
   
   <p>Format options:<br />
     <select id="format">
@@ -108,13 +108,14 @@
       <%= f.text_field(:start_row, :class => "numeric_input") %>
     </p>
     <p class="submit_paragraph">
-      <%= f.submit("Upload Array", :id => "new_equation_submit") %>
+      <%= f.submit("Upload Array", :id => "file_upload_submit") %>
     </p>
   </div>
 <% end %>
 
 <h3>Current Equations</h3>
 
+<% if @variables.length > 0 %>
 <table>
   <% for variable in @variables %>
     <tr>
@@ -126,5 +127,6 @@
     </tr>
   <% end %>
 </table>
+<% end %>
 
 <%= render "current_variables" %>

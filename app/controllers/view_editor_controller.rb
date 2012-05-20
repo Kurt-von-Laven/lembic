@@ -1,10 +1,10 @@
 class ViewEditorController < ApplicationController
 
   def editblock
-      @variables = Variable.order(:name)
+      @variables = Variable.where(:workflow_id => session[:user_id]).order(:name)
   end
 
   def editquestion
-      @variables = Variable.order(:name)
+      @variables = Variable.where(:workflow_id => session[:user_id]).order(:name)
   end
 end

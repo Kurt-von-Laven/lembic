@@ -23,7 +23,7 @@ a:hover{
 }
 
 a:visited{
-    color:#fdde8c;
+    color:#63B063;
 }
 
 body {
@@ -33,7 +33,7 @@ body {
 	background-color:#dee6ed;
 }
 #container {
-	width:600px;
+	width:800px;
 	margin:0px auto;
 	padding:15px;
 	text-align:left;
@@ -94,6 +94,11 @@ h3 {
     -moz-border-radius:10px; /* Firefox 3.6 and earlier */
 }
 
+.login {
+    width:200px;
+    float:left;
+}
+
 ul {
   list-style-type: none;
   padding-left: 0px;
@@ -104,7 +109,7 @@ li {
 }
 
 #menu {
-    width:550px;
+    width:750px;
     padding:10px;
     border-radius:10px;
     -moz-border-radius:10px; /* Firefox 3.6 and earlier */
@@ -117,20 +122,29 @@ li {
 }
 
 #menu > li {
-    width: 125px;
+    width: 200px;
     font-size: 22px;
     height: 100%;
-    padding-left: 8px;
-    padding-right: 8px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.register {
+   text-align:left;
 }
 
 table {
-    width:550px;
+    width:750px;
 }
 
 .preserve_whitespace {
     white-space: pre;
 }
 
+.success {
+    color: green;
+}
 
-
+.error {
+    color: red;
+}

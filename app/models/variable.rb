@@ -3,26 +3,23 @@ require 'csv'
 class Variable < ActiveRecord::Base
   attr_accessible :name, :description, :workflow_id, :variable_type, :array, :created_at, :updated_at, :expression_string, :expression_object
   
-  INDEX = 'i' # The index used for constant arrays.
+  validates_presence_of :name, :workflow_id, :variable_type, :array
   
   validates_uniqueness_of :name, :scope => :workflow_id, :message => 'Variable names must be unique.'
-  validates :name, presence: true
   
-  validates :variable_type, presence: true
   validates_inclusion_of :variable_type, :in => 0..3, :message => 'Invalid variable type. If you\'re seeing this message, we goofed.'
-    
-  validates :workflow_id, presence: true
+  
+  validates_inclusion_of :array, :in => 0..1, :message => 'That is not a boolean.  What did you DO?!?!'
+  
+  serialize :expression_object
+  
   # validates_associated :workflow
   belongs_to :workflow
   
-  validates :array, presence: true
-  validates_inclusion_of :array, :in => 0..1, :message => 'That is not a boolean.  What did you DO?!?!'
-  
-  validates :created_at, presence: true
-  validates :updated_at, presence: true
+  INDEX = 'i' # The index used for constant arrays.
   
   # The variable type is represented as an integer in range [0, 3] according to this mapping.
-  def variable_type_as_string
+  def variable_type_string
     case variable_type
     when 0
       return 'Categorical'
@@ -35,17 +32,11 @@ class Variable < ActiveRecord::Base
     end
   end
   
-  def self.create_from_form(form_hash)
-    now = Time.now
-    Permission.where(:user_id => 1).first_or_create({'workflow_id' => 1, 'permissions' => 4, 'created_at' => now, 'updated_at' => now})
-    User.where(:first_name => 'Michael').first_or_create({'last_name' => 'Jones', 'email' => 'qweoui@adsfqw.com', 'organization' => 'City Team',
-                                                               'pwd_hash' => '21ad42ef24123589abcd', 'created_at' => now, 'updated_at' => now})
-    Workflow.where(:name => 'Sample Workflow').first_or_create({'description' => 'This record should be removed eventually and is just for test purposes.',
-                                                                     'created_at' => now, 'updated_at' => now})
+  def self.create_from_form(form_hash, user_id)
+    Permission.where(:user_id => user_id).first_or_create({'workflow_id' => user_id, 'permissions' => 4})
+    Workflow.where(:name => 'Sample Workflow').first_or_create({'description' => 'This record should be removed eventually and is just for test purposes.'})
     merged_var = {'array' => 0}.merge(form_hash)
-    merged_var['created_at'] = now
-    merged_var['updated_at'] = now
-    merged_var['workflow_id'] = 1 # TODO: Grab the workflow ID out of the session state.
+    merged_var['workflow_id'] = user_id # TODO: Grab the workflow ID out of the session state.
     merged_var['variable_type'] = merged_var['variable_type'].to_i
     merged_var['array'] = merged_var['array'].to_i
     if merged_var['expression_string'].empty?
@@ -57,18 +48,15 @@ class Variable < ActiveRecord::Base
     Variable.create(merged_var)
   end
   
-  def self.create_constant_array(form_hash)
-    now = Time.now
-    Permission.where(:user_id => 1).first_or_create({'workflow_id' => 1, 'permissions' => 4, 'created_at' => now, 'updated_at' => now})
+  def self.create_constant_array(form_hash, user_id)
+    Permission.where(:user_id => user_id).first_or_create({'workflow_id' => user_id, 'permissions' => 4})
     User.where(:first_name => 'Michael').first_or_create({'last_name' => 'Jones', 'email' => 'qweoui@adsfqw.com', 'organization' => 'City Team',
-                                                               'pwd_hash' => '21ad42ef24123589abcd', 'created_at' => now, 'updated_at' => now})
-    Workflow.where(:name => 'Sample Workflow').first_or_create({'description' => 'This record should be removed eventually and is just for test purposes.',
-                                                                     'created_at' => now, 'updated_at' => now})
+                                                           'pwd_hash' => Digest::SHA512.hexdigest('raasdqweqjkladsfi'),
+                                                           'salt' => Digest::SHA512.hexdigest('raasdqweqjkladsfi')})
+    Workflow.where(:name => 'Sample Workflow').first_or_create({'description' => 'This record should be removed eventually and is just for test purposes.'})
     merged_array = {'array' => 0, 'start_row' => 0, 'column_number' => 0}.merge(form_hash)
     merged_array['name'] += "[#{INDEX}]"
-    merged_array['created_at'] = now
-    merged_array['updated_at'] = now
-    merged_array['workflow_id'] = 1 # TODO: Grab the workflow ID out of the session state.
+    merged_array['workflow_id'] = user_id # TODO: Grab the workflow ID out of the session state.
     merged_array['variable_type'] = merged_array['variable_type'].to_i
     merged_array['array'] = 1
     data = merged_array['data_file'].read()

@@ -3,13 +3,14 @@
   <head>
     <title><%= @title %></title>
 
+      <%= javascript_include_tag "jquery-ui-1.8.20.custom.min" %>
     <%= javascript_include_tag "jquery-1.7.2.min" %>
-    <%= javascript_include_tag "jquery-ui-1.8.20.custom.min" %>
     <%= javascript_include_tag "application" %>
     <%= stylesheet_link_tag     "jquery-ui-1.8.20.custom", :media => "all" %>
     <%= stylesheet_link_tag    "application", :media => "all" %>
     
     <script type="text/javascript">
+            
 			$(function(){
 
 				// Accordion
@@ -50,14 +51,26 @@
                 $("#hide").click(function(){
                     $("#hello").toggle();
                 });
-                
-                
 
 				// Slider
-				$('#slider').slider({
+				$("#slider").slider({
 					range: true,
 					values: [17, 67]
 				});
+                
+                // Range Slider
+                $( "#slider-range" ).slider({
+                    range: true,
+                    min: 0,
+                    max: 24,
+                    values: [ 9, 17 ],
+                    slide: function( event, ui ) {
+                        $( "#time" ).val( ui.values[ 0 ] + " - " + ui.values[ 1 ]);
+                    }
+                });
+                
+                $( "#time" ).val( $( "#slider-range" ).slider( "values", 0 ) +
+                    " - " + $( "#slider-range" ).slider( "values", 1 ));
 
 				// Progressbar
 				$("#progressbar").progressbar({
@@ -86,12 +99,17 @@
     </div>
     <div id="container">
       <ul id="menu">
-          <li><%= link_to "Home",  root_path, {:style=>'color:#dee6ed;', :class => "css_class"} %></li>
+          <li><%= link_to "Home",  home_path, {:style=>'color:#dee6ed;', :class => "css_class"} %></li>
           <li><%= link_to "Help", help_path, {:style=>'color:#dee6ed;', :class => "css_class"} %></li>
-          <li><%= link_to "Equation Editor", "/editor/equations", {:style=>'color:#dee6ed;', :class => "css_class"} %></li>
-          <li><%= link_to "View Editor", "/editblock", {:style=>'color:#dee6ed;', :class => "css_class"} %></li>
-	  <li><%= link_to "Evaluator", "/evaluator", {:style=>'color:#dee6ed;', :class => "css_class"} %></li>
-      </ul>
+          <li><%= link_to "Equation Editor", equations_path, {:style=>'color:#dee6ed;', :class => "css_class"} %></li>
+          <li><%= link_to "View Editor", editblock_path, {:style=>'color:#dee6ed;', :class => "css_class"} %></li>
+          <li><%= link_to "Evaluator", evaluator_path, {:style=>'color:#dee6ed;', :class => "css_class"} %></li>
+          <% if User.where(:id => session[:user_id]).empty? %>
+            <li><%= link_to "Login", login_path, {:style=>'color:#dee6ed;', :class => "css_class"} %></li>
+          <% else %>
+            <li><%= link_to "Logout", logout_path, {:style=>'color:#dee6ed;', :class => "css_class"} %></li>
+          <% end %>
+        </ul>
       <div id="content">
         <%= yield %>
       </div>

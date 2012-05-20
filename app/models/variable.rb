@@ -17,20 +17,27 @@ class Variable < ActiveRecord::Base
   belongs_to :workflow
   
   INDEX = 'i' # The index used for constant arrays.
-  
+ 
   # The variable type is represented as an integer in range [0, 3] according to this mapping.
   def variable_type_string
-    case variable_type
-    when 0
-      return 'Categorical'
-    when 1
-      return 'Integer'
-    when 2
-      return 'Real'
-    when 3
-      return 'Date and Time'
-    end
+	var = case variable_type
+			when 0
+			   'Categorical'
+			when 1
+			   'Integer'
+			when 2
+			   'Real'
+			when 3
+			  'Date and Time'
+			end
+	if array == 0
+		var = "moo"
+	 end
+	 return var
   end
+
+	
+ 
   
   def self.create_from_form(form_hash, user_id)
     Permission.where(:user_id => user_id).first_or_create({'workflow_id' => user_id, 'permissions' => 4})

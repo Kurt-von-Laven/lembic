@@ -3,18 +3,21 @@
 <p>Test of system call. The next two lines should be true and false, respectively.</p>
 <%= render(:partial => 'flash_message', :locals => {:flash_symbol =>:test_one, :tag => 'p', :class_name => 'error'}) %>
 <%= render(:partial => 'flash_message', :locals => {:flash_symbol =>:test_two, :tag => 'p', :class_name => 'error'}) %>
+<div class="login-form-wrapper">
 <%= form_for(:user) do |f| %>
-    <div>
+    <div class = "login" >
       <%= f.label(:email, 'Email:') %>
       <%= f.text_field(:email) %>
     </div>
-    <div>
+    <div class = "login" >
       <%= f.label(:password, 'Password:') %>
       <%= f.password_field(:password) %>
     </div>
     <%= render(:partial => 'flash_message', :locals => {:flash_symbol => :wrong_login, :tag => 'div', :class_name => 'error'}) %>
-    <div class="submit_paragraph">
+    <div class="login">
+        <p> </p>
       <%= f.submit('Login') %>
     </div>
 <% end %>
-<p>If you don't already have an account, click <a href="<%= register_path %>">here</a> to create a new one.</p>
+</div>
+<p class = "register">If you don't already have an account, click <a href="<%= register_path %>">here</a> to create a new one.</p>

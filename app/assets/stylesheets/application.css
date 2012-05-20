@@ -23,7 +23,7 @@ a:hover{
 }
 
 a:visited{
-    color:#fdde8c;
+    color:#008A8A;
 }
 
 body {
@@ -94,6 +94,11 @@ h3 {
     -moz-border-radius:10px; /* Firefox 3.6 and earlier */
 }
 
+.login {
+    width:200px;
+    float:left;
+}
+
 ul {
   list-style-type: none;
   padding-left: 0px;
@@ -122,6 +127,10 @@ li {
     height: 100%;
     padding-left: 15px;
     padding-right: 15px;
+}
+
+.register {
+   text-align:left;
 }
 
 table {

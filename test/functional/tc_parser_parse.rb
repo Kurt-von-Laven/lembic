@@ -21,6 +21,14 @@ class TestParserParse < Test::Unit::TestCase
     assert_equal( ["-", "1", "*", "3"], @p.tokenize("-1*3") )
   end
   
+  def test_tokenizer_errors
+    begin
+      @p.prefix_form("[i|1,2,]")
+    rescue RuntimeError => e
+      assert_equal("Syntax error!  I've replaced the parts I could understand with dots: [i|1,2,]", e.message)
+    end
+  end
+  
   # 1+1
   # ~~~
   def test_add_two_numbers

@@ -1,5 +1,9 @@
 <% @title = 'Login' %>
 <%= render(:partial => 'flash_message', :locals => {:flash_symbol =>:account_created, :tag => 'p', :class_name => 'success'}) %>
+<p>Test of system call. The next two lines should be true and false, respectively.</p>
+<%= render(:partial => 'flash_message', :locals => {:flash_symbol =>:test_one, :tag => 'p', :class_name => 'error'}) %>
+<%= render(:partial => 'flash_message', :locals => {:flash_symbol =>:test_two, :tag => 'p', :class_name => 'error'}) %>
+<div class="login-form-wrapper">
 <%= form_for(:user) do |f| %>
     <div class = "login" >
       <%= f.label(:email, 'Email:') %>
@@ -10,11 +14,9 @@
       <%= f.password_field(:password) %>
     </div>
     <%= render(:partial => 'flash_message', :locals => {:flash_symbol => :wrong_login, :tag => 'div', :class_name => 'error'}) %>
-    <br />
-    <br />
-   <br />
     <div class="login">
       <%= f.submit('Login', :class => "button") %>
     </div>
 <% end %>
+</div>
 <p class = "register">If you don't already have an account, click <a href="<%= register_path %>">here</a> to create a new one.</p>

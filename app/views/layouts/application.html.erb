@@ -3,11 +3,12 @@
   <head>
     <title><%= @title %></title>
 
-      <%= javascript_include_tag "jquery-ui-1.8.20.custom.min" %>
+    <%= javascript_include_tag "jquery-ui-1.8.20.custom.min" %>
     <%= javascript_include_tag "jquery-1.7.2.min" %>
     <%= javascript_include_tag "application" %>
-    <%= stylesheet_link_tag     "jquery-ui-1.8.20.custom", :media => "all" %>
-    <%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= stylesheet_link_tag   "jquery-ui-1.8.20.custom", :media => "all" %>
+    <%= stylesheet_link_tag   "jquery-ui-1.8.20.custom", :media => "all" %>
+    <%= stylesheet_link_tag   "application", :media => "all" %>
     
     <script type="text/javascript">
             
@@ -84,6 +85,17 @@
 					function() { $(this).addClass('ui-state-hover'); },
 					function() { $(this).removeClass('ui-state-hover'); }
 				);
+				
+				$( ".closeX" ).button({
+				icons: {
+					primary: "images/ui-icon-gear",
+                    secondary: "images/ui-icon-triangle-1-s"
+					 
+				},
+				.prepend('<span class="ui-icon ui-icon-trash"></span>');
+
+				text: false
+			})
 
 			});
 

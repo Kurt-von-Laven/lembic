@@ -32,6 +32,12 @@ body {
 	text-align:center;
 	background-color:#dee6ed;
 }
+
+.button{
+    font-size: 1em !important;
+}
+
+
 #container {
 	width:800px;
 	margin:0px auto;

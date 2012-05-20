@@ -50,6 +50,17 @@ body {
 	background-color: #fff;
     font-family: Garamond, Baskerville, "Times New Roman", serif;
 }
+.deleteb{
+	background-image:url('delete.png');
+	background-repeat: no-repeat;
+    cursor:pointer;
+    top: 3px;
+    right:3px;
+    height: auto;
+    padding-top:5px;
+    padding-bottom:5px;
+    width: 35px;
+}
 
 #expression { 
 	border-radius:10px;
@@ -127,6 +138,14 @@ li {
 table {
     width:550px;
 }
+
+table td
+    {
+	background-color: #dee6ed;
+	border-bottom:2px solid #fff;
+	border-right: none;
+    height: 5px;
+    }
 
 .preserve_whitespace {
     white-space: pre;

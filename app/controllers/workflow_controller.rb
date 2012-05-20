@@ -1,4 +1,3 @@
-require 'yaml'
 require './app/helpers/expression'
 
 class WorkflowController < ApplicationController
@@ -12,12 +11,10 @@ class WorkflowController < ApplicationController
       end
       Variable.find(:all).each do |variable|
         expression_object = variable.expression_object
-        input_values[variable.name] = {:formula => YAML::load(expression_object)} unless expression_object.nil?
+        input_values[variable.name] = {:formula => expression_object} unless expression_object.nil?
       end
       output_variable = variables['output_variable']
       evaluator = Evaluator.new
-      puts output_variable.inspect
-      puts input_values.inspect
       evaluator.eval_variable(output_variable, input_values, nil)
       @results = input_values
     else

@@ -8,10 +8,12 @@
 	});
 </script>
  
-       
+      
 <h1>Equation Editor</h1>
 
 <h3>Create Magical Anything You Feel Like</h3>
+
+
 <%= form_for(:new_equation, :html => {:class => "input_form"}) do |f| %>
 <div id="var_input_block">
   <div>
@@ -32,12 +34,18 @@
   <div id = "expression">
     <%= f.text_field(:name) %> = <%= f.text_area(:expression_string) %>
   </div>
+  
+  <%= render(:partial => 'flash_message', :locals => {:flash_symbol => :variable_not_saved, :tag => 'div', :class_name => 'error'}) %>
+
+
+  
   <div style="text-align: right; margin-right: 10px">
     <%= f.submit("Create Equation", :id => "new_equation_submit", :class => "button") %>
-
   </div>
 <% end %>
+
 <h3> Create a Date and Time Variable</h3>
+
 
 <%= form_for(:date_picker) do |f| %>
   <p>Date: <input type="text" id="datepicker"></p>

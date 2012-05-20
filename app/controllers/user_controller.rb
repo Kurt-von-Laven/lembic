@@ -17,7 +17,7 @@ class UserController < ApplicationController
         redirect_to home_path
         return
       end
-      flash[:wrong_login] = 'The login name or password you entered is incorrect.'
+      flash[:wrong_login] = 'The email address or password you entered is incorrect.'
     end
     render 'login'
   end

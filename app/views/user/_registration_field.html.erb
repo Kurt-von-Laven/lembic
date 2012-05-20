@@ -1,0 +1,16 @@
+<div>
+  <%= form.label(field, prompt) %>
+  <% if is_password %>
+    <%= form.password_field(field) %>
+  <% else %>
+    <%= form.text_field(field) %>
+  <% end %>
+  <% errors_for_field = errors[field] %>
+  <% if !errors_for_field.nil? and !errors_for_field.empty? %>
+    <div class="error">
+      <% for error in errors_for_field %>
+        <%= field.to_s.capitalize.gsub('_', ' ') %> <%= error %>.
+      <% end %>
+    </div>
+  <% end %>
+</div>

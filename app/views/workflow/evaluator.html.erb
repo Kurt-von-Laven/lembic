@@ -21,7 +21,7 @@
       <% if !@results.empty? %>
         <td>
           <ul>
-            <% for variable_name, variable_result  in @results %>
+            <% for variable_name, variable_result in @results %>
               <li><%= variable_name %>: <%= variable_result[:value] %></li>
             <% end %>
           </ul>

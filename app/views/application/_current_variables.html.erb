@@ -1,0 +1,30 @@
+<h3>Current Variables</h3>
+
+<table>
+
+  <tr>
+    <th>Array?</th>
+    <th>Type</th>
+    <th>Name</th>
+    <th>Description</th>
+  </tr>
+  
+  <% for variable in @variables %>
+    <tr>
+      
+      <% case variable.array %>
+      <% when 0 %>
+        <td>No</td>
+      <% when 1 %>
+        <td>Yes</td>
+      <% end %>
+      
+      <td><%= variable.variable_type_string %></td>
+      <td><%= variable.name %></td>
+      <td><%= variable.description %></td>
+      <td><%= button_to "Delete this variable", "#{delete_variable_path}?id=#{variable.id}", {:confirm => "Are you sure you want to delete the variable #{variable.name}?",
+               :method => :delete} %></td>
+    </tr>
+  <% end %>
+  
+</table>

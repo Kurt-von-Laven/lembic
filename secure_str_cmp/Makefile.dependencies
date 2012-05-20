@@ -1,0 +1,1 @@
+secure_str_cmp.o: secure_str_cmp.c

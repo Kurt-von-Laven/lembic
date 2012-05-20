@@ -5,8 +5,6 @@
 
 log/
 tmp/
-secure_str_cmp/secure_str_cmp
-secure_str_cmp/secure_str_cmp.o
 *~
 \#*\#
 .DS_Store

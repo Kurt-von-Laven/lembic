@@ -70,6 +70,8 @@
                     }
                 });
                 
+                $( ".button" ).button();
+                
                 $( "#time" ).val( $( "#slider-range" ).slider( "values", 0 ) +
                     " - " + $( "#slider-range" ).slider( "values", 1 ));
 
@@ -83,7 +85,9 @@
 					function() { $(this).addClass('ui-state-hover'); },
 					function() { $(this).removeClass('ui-state-hover'); }
 				);
-	
+
+                
+                $('select').selectmenu();
 
 			});
 

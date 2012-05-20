@@ -17,12 +17,12 @@ CC = gcc
 #  -std=gnu99  use the Gnu C99 standard language definition
 #  -D_GNU_SOURCE use GNU library extension
 CFLAGS = -g -Wall -pedantic -fcprop-registers -fguess-branch-probability \
-  -fif-conversion -fif-conversion2   \
-   -fthread-jumps -fcaller-saves -fcse-follow-jumps \
+  -fif-conversion -fif-conversion2 \
+  -fthread-jumps -fcaller-saves -fcse-follow-jumps \
   -fcse-skip-blocks -fdelete-null-pointer-checks -fgcse -fgcse-lm -fgcse-sm \
   -fgcse-las -fgcse-after-reload -fregmove -freorder-blocks \
   -frerun-cse-after-loop -fsched-spec-load -fschedule-insns -fschedule-insns2 \
-  -fstrict-aliasing  -std=gnu99 -D_GNU_SOURCE
+  -fstrict-aliasing -std=gnu99 -D_GNU_SOURCE
 
 # In this section, you list the files that are part of the project.
 # If you add/change names of header/source files, here is where you

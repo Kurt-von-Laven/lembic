@@ -25,7 +25,7 @@ class Parser
     var_regex = /^([a-zA-Z_][a-zA-Z0-9_]*)$/
     #                  Y    Y    Y    Y     _M    M     _D    D     _H    H     _M    M     _S    S
     datetime_regex = /^[0-9][0-9][0-9][0-9](_[0-9][0-9](_[0-9][0-9](_[0-9][0-9](_[0-9][0-9](_[0-9][0-9](\.[0-9]*)?)?)?)?)?)?/
-    op_regex = /^==|<=|>=|!=|&&|\|\||[\-\+\*\/%\^<>\{\}\(\)\[\],;:]$/
+    op_regex = /^==|<=|>=|!=|&&|\|\||[\-\+\*\/%\^<>\{\}\(\)\[\],;:\|]$/
     symbol_regex = /@[a-zA-Z_][a-zA-Z0-9_]*/
     if token.match(num_regex) != nil then
       #token is a number

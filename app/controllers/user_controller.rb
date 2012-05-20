@@ -5,6 +5,9 @@ class UserController < ApplicationController
   
   def login
     login_form = params[:user]
+    logger.info('Test of system call. The next two lines should be true and false, respectively.')
+    logger.info(system('./secure_str_cmp/secure_str_cmp', 'test', 'test'))
+    logger.info(system('./secure_str_cmp/secure_str_cmp', 'asdfoipuwer', 'asdfoipuwxr'))
     if !login_form.nil?
       email = login_form[:email]
       user = User.where(:email => email).first

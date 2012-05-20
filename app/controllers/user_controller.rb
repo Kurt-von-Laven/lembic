@@ -5,6 +5,7 @@ class UserController < ApplicationController
   
   def login
     login_form = params[:user]
+    logger.info('This is a test of secure_str_cmp. The next two lines should be true and false, respectively.')
     logger.info(system('./bin/secure_str_cmp', 'test', 'test'))
     logger.info(system('./bin/secure_str_cmp', 'asdfoipuwer', 'asdfoipuwxr'))
     if !login_form.nil?

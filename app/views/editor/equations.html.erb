@@ -11,10 +11,9 @@
        
 <h1>Equation Editor</h1>
 
-
 <h3>Create Magical Anything You Feel Like</h3>
 <%= form_for(:new_equation, :html => {:class => "input_form"}) do |f| %>
-  
+<div id="var_input_block">
   <div>
     <%= f.check_box(:array) %>
     <%= f.label(:array, "Is this an array?") %>
@@ -24,19 +23,19 @@
     <%= f.select(:variable_type, [['Categorical', '0'], ['Integer',
     '1'], ['Real', '2'], ['Date and Time', '3']]) %>
   </div>
-  
+
   <div>
     <%= f.label(:description, "Description:") %>
     <%= f.text_field(:description) %>
   </div>
+  </div>
   <div id = "expression">
     <%= f.text_field(:name) %> = <%= f.text_area(:expression_string) %>
   </div>
-  <div class="submit_paragraph">
+  <div style="text-align: right; margin-right: 10px">
     <%= f.submit("Create Equation", :id => "new_equation_submit") %>
   </div>
 <% end %>
-
 <h3> Create a Date and Time Variable</h3>
 
 <%= form_for(:date_picker) do |f| %>
@@ -114,8 +113,7 @@
 <% end %>
 
 <h3>Current Equations</h3>
-
-<table>
+<table cellpadding="0" cellspacing="0">
   <% for variable in @variables %>
     <tr>
       <td><div class="preserve_whitespace"><%= variable.name %> = <%=variable.expression_string %></div></td>

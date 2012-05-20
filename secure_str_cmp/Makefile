@@ -25,17 +25,12 @@ CFLAGS = -g -Wall -pedantic -fcprop-registers -fguess-branch-probability \
   -frerun-cse-after-loop -fsched-spec-load -fschedule-insns -fschedule-insns2 \
   -fstrict-aliasing -ftree-pre -std=gnu99 -m32 -D_GNU_SOURCE
 
-# The LDFLAGS variable sets flags for linker
-#  -m32	  link with IA32 libraries
-LDFLAGS = -m32
-
 # In this section, you list the files that are part of the project.
 # If you add/change names of header/source files, here is where you
 # edit the Makefile.
 SOURCES = secure_str_cmp.c
 OBJECTS = $(SOURCES:.c=.o)
 TARGET = secure_str_cmp
-
 
 # The first target defined in the makefile is the one
 # used when make is invoked with no argument. Given the definitions
@@ -45,7 +40,7 @@ TARGET = secure_str_cmp
 default: $(TARGET)
 
 $(TARGET) : $(OBJECTS) Makefile.dependencies
-	$(CC) $(CFLAGS) -o $@ $(OBJECTS) $(LDFLAGS)
+	$(CC) $(CFLAGS) -o $@ $(OBJECTS)
 
 # In make's default rules, a .o automatically depends on its .c file
 # (so editing the .c will cause recompilation into its .o file).

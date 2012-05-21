@@ -12,8 +12,7 @@
     </div>
     <%= render(:partial => 'flash_message', :locals => {:flash_symbol => :wrong_login, :tag => 'div', :class_name => 'error'}) %>
     <div class="login">
-        <p> </p>
-      <%= f.submit('Login') %>
+      <%= f.submit('Login', :class => "button") %>
     </div>
 <% end %>
 </div>

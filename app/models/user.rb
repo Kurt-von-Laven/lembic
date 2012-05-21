@@ -33,10 +33,6 @@ class User < ActiveRecord::Base
   end
   
   def password=(plain_text_password)
-    if plain_text_password.length < MINIMUM_PASSWORD_LENGTH
-      errors.add(:password, "is too short (minimum is #{MINIMUM_PASSWORD_LENGTH} characters)")
-      return
-    end
     salt_as_array = Array.new(SALT_LENGTH) do
       rand(SALT_BASE).to_s(SALT_BASE)
     end
@@ -46,7 +42,7 @@ class User < ActiveRecord::Base
   
   def password_valid?(candidate_password)
     candidate_hash = hash_password(candidate_password)
-    return system('./secure_str_cmp/secure_str_cmp', pwd_hash, candidate_hash)
+    return system(Rails.root.join('bin/secure_str_cmp').to_s, pwd_hash, candidate_hash)
   end
   
   def hash_password(plain_text_password)

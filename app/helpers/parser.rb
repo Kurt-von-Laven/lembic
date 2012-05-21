@@ -39,7 +39,7 @@ class Parser
       #token is a math operator
       return :operator
     end
-    raise "Error: Unrecognized token `#{token}`"
+    raise ArgumentError, "Error: Unrecognized token `#{token}`"
     return nil
   end
   
@@ -53,6 +53,60 @@ class Parser
       end
     end
     return ret
+  end
+  
+  def get_matching_paren (c)
+    return ")" if c == "(" 
+    return "(" if c == ")" 
+    return "]" if c == "[" 
+    return "[" if c == "]"
+    return "}" if c == "{" 
+    return "{" if c == "}"
+    return nil
+  end
+  
+  def get_paren_mismatch_error (s)
+    parens = []
+    chars = s.split(//)
+    chars.each do |c|
+      if c == "(" || c == "{" || c =="["
+        parens << c
+      elsif c == ")" || c == "]" || c == "}"
+        return "expected `#{c}`" if parens.last != get_matching_paren(c)
+        parens.pop
+      end
+    end
+    if parens.length > 0
+      return "expected `#{get_matching_paren parens.last}`"
+    end
+    return nil;
+  end
+  
+  # get_error_analysis takes the string returned by error_inspect and tries to figure out what caused the error.
+  # it returns a string describing the error, intended for human consumption.
+  def get_error_analysis (err)
+    error_messages = []
+    unparseables = err.split("...")
+    err_string = unparseables.join("#")
+    puts err_string
+    paren_error = get_paren_mismatch_error(err_string);
+    if paren_error
+      error_messages << paren_error
+    end
+    unparseables.each do |u|
+      if u.match(/[\+\-\/\*%\^]/)
+        error_messages << "operator `#{u}` expects an expression on either side"
+      end
+      if u.match(/}/) && !u.match(/;}/)
+        error_messages << "expected `;` before `}`"
+      end
+      if u.match(/,\]/)
+        error_messages << "extraneous `,` before `]`"
+      end
+      
+    end
+    return error_messages.join(", ") if error_messages.length > 0
+    return nil
   end
   
   def tokenize (s)
@@ -226,7 +280,14 @@ class Parser
       precedence = (precedence + 1) % @@operators.length
 
       if loops_since_made_progress > @@operators.length then
-        raise "Syntax error!  I've replaced the parts I could understand with dots: #{error_inspect(tokens)}"
+        
+        remaining_tokens_string = error_inspect(tokens)
+        analysis = get_error_analysis(remaining_tokens_string)
+        if !analysis
+          raise ArgumentError, "Syntax error!  I've replaced the parts I could understand with dots: #{remaining_tokens_string}." 
+        else
+          raise ArgumentError, "Syntax error! #{analysis}." 
+        end
         return nil
       end
       

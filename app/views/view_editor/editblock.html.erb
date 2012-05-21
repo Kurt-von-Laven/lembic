@@ -6,22 +6,31 @@
 <%= render "current_variables" %>
 
 <h3> TODO: OUTPUT CURRENT BLOCKS </h3>
+<!--OUTPUT CURRENT BLOCKS -->
+<%# Get all blocks %>
+<% myblocks = Block.find(:all) %>
+<% numBlocks = myblocks.length %>
+There are <%=numBlocks %> blocks defined:<br/>
+<% for block in myblocks do %>
+	<%# Print block info %>
+	<%=block.name %><br/>
+<% end %>
 
 <h3> Create A Block </h3>
- <%= form_for(:blocks) do |f| %>
+ <%= form_for(:new_block) do |f| %>
  <div>
-            <%= f.label(:block_name, "Name of Block: ") %>
-            <%= f.text_field :block_name %>
+            <%= f.label(:name, "Name of Block: ") %>
+            <%= f.text_field :name %>
     
  </div>
-<div>
+<!--<div>
             <%= f.label(:block_input_variables, "Measure these variables: ") %>
             <%= f.text_area :block_input_variables %>
 </div>
 <div>
             <%= f.label(:input_relationships, "Logic for Measurements: ") %>
             <%= f.text_area :input_relationships %>
-</div>
+</div>-->
             <%= f.submit "Create Block" %>
          
 <% end %>        

@@ -123,23 +123,6 @@
   </div>
 <% end %>
 
-<h3>Current Equations</h3>
-
-<table cellpadding="0" cellspacing="0">
-  <tr>
-    <th>Equation</th>
-    <th></th>
-  </tr>
-  <% for variable in @variables %>
-    <tr>
-      <td class="preserve_whitespace"><%= variable.name %> = <%=variable.expression_string %></td>
-      <td class="delete">
-        <%= button_to "Delete this relationship", "#{delete_relationship_path}?id=#{variable.id}",
-           {:confirm => "Are you sure you want to delete the relationship for the variable named #{variable.name}?",
-            :method => :delete} %>
-      </td>
-    </tr>
-  <% end %>
-</table>
+<%= render "current_equations" %>
 
 <%= render "current_variables" %>

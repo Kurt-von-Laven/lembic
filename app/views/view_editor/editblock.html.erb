@@ -5,7 +5,7 @@
 
 <%= render "current_variables" %>
 
-<h3> TODO: OUTPUT CURRENT BLOCKS </h3>
+<h3> Current Blocks </h3>
 <!--OUTPUT CURRENT BLOCKS -->
 <%# Get all blocks %>
 <% myblocks = Block.find(:all) %>
@@ -34,7 +34,7 @@ There are <%=numBlocks %> blocks defined:<br/>
             <%= f.submit('Create Block', :class => "button") %>         
 <% end %>        
 
-<p><%= link_to "Edit Question",  editquestion_path %></p>
+
 
 <h3> TODO PRINT ALL OUTPUTS ALREADY ASSIGNED </h3>
 

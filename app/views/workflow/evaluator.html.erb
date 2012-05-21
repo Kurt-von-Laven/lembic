@@ -1,6 +1,10 @@
 <% @title = "Evaluator" %>
 <h1>Evaluate</h1>
 
+<%= render "current_variables" %>
+
+<%= render "current_equations" %>
+
   <table>
     <tr>
       <th>Enter your variables in this form: {'varName' => value, 'varName2' => value2}</th>
@@ -9,7 +13,7 @@
     
     <tr>
       <td>
-        <%= form_for(:variables) do |f| %>
+        <%= form_for(:vars) do |f| %>
           <div>
             <%= f.label(:output_variable, "Variable to Solve For") %>
             <%= f.text_field :output_variable %>

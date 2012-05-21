@@ -68,7 +68,6 @@ end
     merged_array['expression_string'] = self.parse_csv_expression(data, merged_array['start_row'].to_i, merged_array['column_number'].to_i,
                                                                   merged_array['variable_type'])
     parser = Parser.new
-    puts merged_array['expression_string']
     begin
         merged_array['expression_object'] = parser.parse(merged_array['expression_string'])
     rescue ArgumentError, SystemCallError, IOError, RuntimeError
@@ -80,7 +79,9 @@ end
     Variable.create(merged_array)
   end
   
-  def self.parse_csv_expression(csv_data, start_row, column_number, variable_type)
+  def self.parse_csv_expression(csv_data, start_row_one_indexed, column_number_one_indexed, variable_type)
+    start_row = start_row_one_indexed - 1
+    column_number = column_number_one_indexed - 1
     converter = case variable_type
                 when 0
                   nil
@@ -95,7 +96,7 @@ end
     num_rows_desired = parsed_data.length - start_row
     desired_rows = parsed_data[start_row, num_rows_desired]
     desired_column = desired_rows.map {|r| r[column_number]}
-    desired_column_with_nans = desired_column.map {|v| v.nil? or '' ? Float::NAN : v}
+    desired_column_with_nans = desired_column.map {|v| (v.nil? or '') ? Float::NAN : v}
     desired_values_as_str = desired_column_with_nans.join(', ')
     return "[ #{INDEX} | #{desired_values_as_str}]"
   end

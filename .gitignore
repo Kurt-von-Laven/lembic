@@ -3,6 +3,7 @@
 # See http://help.github.com/ignore-files/ for more info
 #####################
 
+bin/secure_str_cmp
 log/
 tmp/
 *~

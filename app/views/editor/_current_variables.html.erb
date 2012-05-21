@@ -26,17 +26,9 @@
       <td><%= variable.expression_string %></td>
       
       <td class="delete">
-        <form method="post" action="<%= "#{delete_variable_path}?id=#{variable.id}" %>" >
-          <div>
-            <input type="hidden" value="delete" name="_method">
-            <button class="ui-button ui-button-icon-only ui-widget
-                                     ui-state-default ui-corner-all" title="Delete Variable" type="submit" 
-                          data-confirm="Are you sure you want to delete the variable <%= variable.name %>?">
-              <span class="ui-button-icon-primary ui-icon ui-icon-close"></span>
-              <span class="ui-button-text">Delete Variable</span>
-            </button>
-          </div>
-        </form>
+        <%= button_to "Delete this variable", "#{delete_variable_path}?id=#{variable.id}",
+           {:confirm => "Are you sure you want to delete the variable named #{variable.name}?",
+            :method => :delete} %>
       </td>
     </tr>
   <% end %>

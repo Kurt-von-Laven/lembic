@@ -4,22 +4,22 @@ class EditorController < ApplicationController
     user_id = session[:user_id]
     new_equation = params[:new_equation]
     if !new_equation.nil?
-        begin
-            Variable.create_from_form(new_equation, user_id)
-        rescue ArgumentError => e
-            flash[:variable_not_saved] = e.message
-        else
-            flash[:variable_saved] = 'Your variable was successfully saved.'
-        end
+      begin
+        Variable.create_from_form(new_equation, user_id)
+      rescue ArgumentError => e
+        flash[:variable_not_saved] = e.message
+      else
+        flash[:variable_saved] = 'Your variable was successfully saved.'
+      end
     else
       new_constant_array = params[:new_constant_array]
       if !new_constant_array.nil?
         begin
-            Variable.create_constant_array(new_constant_array, user_id)
-        rescue ArgumentError =>e
-            flash[:variable_not_saved] = e.message
+          Variable.create_constant_array(new_constant_array, user_id)
+        rescue ArgumentError => e
+          flash[:variable_not_saved] = e.message
         else
-            flash[:variable_saved] = 'Your variable was successfully saved.'
+          flash[:variable_saved] = 'Your variable was successfully saved.'
         end
       end
     end

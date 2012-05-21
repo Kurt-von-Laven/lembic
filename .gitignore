@@ -3,6 +3,8 @@
 # See http://help.github.com/ignore-files/ for more info
 #####################
 
+bin/secure_str_cmp
+bin/secure_str_cmp.o
 log/
 tmp/
 *~
@@ -13,3 +15,7 @@ Thumbs.db
 # Databases (useful to ignore database if we still want it to be saved in
 # the repository folder but not be version controlled)
 *.sqlite3
+
+# TextMate project files (used by TextMate text editor to track
+# a set of files organized into a project)
+*.tmproj

@@ -24,8 +24,21 @@ class TestParserParse < Test::Unit::TestCase
   def test_tokenizer_errors
     begin
       @p.prefix_form("[i|1,2,]")
-    rescue RuntimeError => e
-      assert_equal("Syntax error!  I've replaced the parts I could understand with dots: [i|1,2,]", e.message)
+    rescue ArgumentError => e
+      assert_equal("Syntax error! extraneous `,` before `]`.", e.message)
+    end
+  end
+  
+  def test_syntax_error_messages
+    begin
+      @p.prefix_form("1+1+")
+    rescue ArgumentError => e
+      assert_equal("Syntax error! operator `+` expects an expression on either side.", e.message)
+    end
+    begin
+      @p.prefix_form("(1+1")
+    rescue ArgumentError => e
+      assert_equal("Syntax error! expected `)`.", e.message)
     end
   end
   
@@ -48,7 +61,7 @@ class TestParserParse < Test::Unit::TestCase
   def test_decimals
     assert_equal( "+(+(1., 2.2), 3.325)" , @p.prefix_form("1.+2.2+3.325") )
     assert_equal( "+(0.0, .2)" , @p.prefix_form("0.0+.2") )
-    assert_raise(RuntimeError) { @p.prefix_form(".+1") }
+    assert_raise(ArgumentError) { @p.prefix_form(".+1") }
   end
   
   def test_neg_numbers
@@ -178,9 +191,9 @@ class TestParserParse < Test::Unit::TestCase
     assert_equal( 2, @e.eval_expression(@p.parse("[a|2,4,6]"), {}, {"a" => 0}))
     assert_equal( 6, @e.eval_expression(@p.parse("[a|2,4,6]"), {}, {"a" => 2}))
     assert_equal( 6, @e.eval_variable("arr", {"arr" => {:index_names => ["a"], :formula => @p.parse("[a|2,4,6]") }}, [2]))
-    assert_raise(RuntimeError) { @e.eval_expression(@p.parse("[a|2,4,6]"), {}, {"a" => 3}) }
-    assert_raise(RuntimeError) { @e.eval_expression(@p.parse("[a|2,4,6]"), {}, {"a" => -1}) }
-    assert_raise(RuntimeError) { @e.eval_expression(@p.parse("[a|2,4,6]"), {}, {"a" => 0.5}) }
+    assert_raise(ArgumentError) { @e.eval_expression(@p.parse("[a|2,4,6]"), {}, {"a" => 3}) }
+    assert_raise(ArgumentError) { @e.eval_expression(@p.parse("[a|2,4,6]"), {}, {"a" => -1}) }
+    assert_raise(ArgumentError) { @e.eval_expression(@p.parse("[a|2,4,6]"), {}, {"a" => 0.5}) }
   end
   
   def test_evaluator_case_statements

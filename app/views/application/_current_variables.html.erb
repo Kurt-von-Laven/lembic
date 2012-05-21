@@ -1,13 +1,15 @@
 <h3>Current Variables</h3>
 
-<table>
-
+<table class = "tablesorter">
+<thead>
   <tr>
     <th>Array?</th>
     <th>Type</th>
     <th>Name</th>
     <th>Description</th>
   </tr>
+</thead>
+<tbody>
   
   <% for variable in @variables %>
     <tr>
@@ -26,5 +28,5 @@
                :method => :delete} %></td>
     </tr>
   <% end %>
-  
+</tbody>  
 </table>

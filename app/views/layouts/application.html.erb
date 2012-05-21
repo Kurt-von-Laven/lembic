@@ -5,6 +5,7 @@
 
     <%= javascript_include_tag "jquery-ui-1.8.20.custom.min" %>
     <%= javascript_include_tag "jquery-1.7.2.min" %>
+    <%= javascript_include_tag "jquery.tablesorter.min" %>
     <%= javascript_include_tag "application" %>
     <%= stylesheet_link_tag   "jquery-ui-1.8.20.custom", :media => "all" %>
     <%= stylesheet_link_tag   "jquery-ui-1.8.20.custom", :media => "all" %>
@@ -71,6 +72,8 @@
                 });
                 
                 $( ".button" ).button();
+                
+                $("table").tablesorter();
                 
                 $( "#time" ).val( $( "#slider-range" ).slider( "values", 0 ) +
                     " - " + $( "#slider-range" ).slider( "values", 1 ));

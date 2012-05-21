@@ -4,6 +4,7 @@
 #####################
 
 bin/secure_str_cmp
+bin/secure_str_cmp.o
 log/
 tmp/
 *~

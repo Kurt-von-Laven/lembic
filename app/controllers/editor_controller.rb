@@ -14,7 +14,13 @@ class EditorController < ApplicationController
     else
       new_constant_array = params[:new_constant_array]
       if !new_constant_array.nil?
-        Variable.create_constant_array(new_constant_array, user_id)
+        begin
+            Variable.create_constant_array(new_constant_array, user_id)
+        rescue ArgumentError =>e
+            flash[:variable_not_saved] = e.message
+        else
+            flash[:variable_saved] = 'Your variable was successfully saved.'
+        end
       end
     end
     @variables = Variable.where(:workflow_id => user_id).order(:name)

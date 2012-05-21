@@ -31,7 +31,7 @@ class Evaluator
     
     if function_name == "SUM"
       if params.length != 3
-        raise "Wrong number of arguments to SUM: expected 3 but found #{params.length}."
+        raise ArgumentError, "Wrong number of arguments to SUM: expected 3 but found #{params.length}."
       end
       sum = 0
       i = min_i
@@ -44,7 +44,7 @@ class Evaluator
     
     elsif function_name == "MAX"
       if params.length != 3
-        raise "Wrong number of arguments to MAX: expected 3 but found #{params.length}."
+        raise ArgumentError, "Wrong number of arguments to MAX: expected 3 but found #{params.length}."
       end
       i = min_i
       max = eval_variable(array_name, globals, [i])
@@ -59,7 +59,7 @@ class Evaluator
     
     elsif function_name == "MIN"
       if params.length != 3
-        raise "Wrong number of arguments to MIN: expected 3 but found #{params.length}."
+        raise ArgumentError, "Wrong number of arguments to MIN: expected 3 but found #{params.length}."
       end
       i = min_i
       min = eval_variable(array_name, globals, [i])
@@ -137,10 +137,10 @@ class Evaluator
         elem_count = args.length - 1
         index = eval_expression(args[0], globals, indices)
         if index.to_i != index
-          raise "Array index must be an integer.  Was #{index}."
+          raise ArgumentError, "Array index must be an integer.  Was #{index}."
         end
         if index < 0 || index >= elem_count
-          raise "Array index #{index} is out of bounds.  Must be between 0 and #{elem_count-1}, inclusive."
+          raise ArgumentError, "Array index #{index} is out of bounds.  Must be between 0 and #{elem_count-1}, inclusive."
         end
         return eval_expression(args[index+1], globals, indices)
       end
@@ -176,8 +176,8 @@ class Evaluator
   end
   
   def error_check_eval_variable_params(varname, globals, index_values)
-    raise "Error: second parameter to eval_variable cannot be nil." if globals.nil?
-    raise "Error: variable #{varname} doesn't exist." if globals[varname].nil?
+    raise ArgumentError, "Error: second parameter to eval_variable cannot be nil." if globals.nil?
+    raise ArgumentError, "Error: variable #{varname} doesn't exist." if globals[varname].nil?
   end
   
   #
@@ -208,7 +208,7 @@ class Evaluator
 
     formula = globals[varname][:formula]
     
-    raise "Error: formula for a variable must be an expression object." if !formula.instance_of?(Expression)
+    raise ArgumentError, "Error: formula for a variable must be an expression object." if !formula.instance_of?(Expression)
     
     # check if variable is an array or a singleton, and evaluate accordingly
     if globals[varname][:index_names].nil?
@@ -226,7 +226,7 @@ class Evaluator
         return varname
       end
       if index_names.length != index_values.length
-        raise "Wrong number of indices for array #{varname}: expected #{index_names.length} but was #{index_values.length}."
+        raise ArgumentError, "Wrong number of indices for array #{varname}: expected #{index_names.length} but was #{index_values.length}."
       end
       index_names.each_with_index do |index_name, i|
         indices[index_name] = index_values[i]

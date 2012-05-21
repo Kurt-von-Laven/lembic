@@ -135,6 +135,10 @@ ul {
   padding-left: 0px;
 }
 
+li {
+  display: inline;
+}
+
 #menu {
     width:750px;
     padding:10px;
@@ -154,7 +158,6 @@ ul {
     height: 100%;
     padding-left: 15px;
     padding-right: 15px;
-    display: inline;
 }
 
 .register {

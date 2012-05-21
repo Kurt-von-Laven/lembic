@@ -28,7 +28,7 @@ class EditorController < ApplicationController
   end
   
   def delete_variable
-    variable = Variable.where(:id => params[:id], :workflow_id => user_id).first
+    variable = Variable.where(:id => params[:id], :workflow_id => session[:user_id]).first
     if !variable.nil?
       variable.destroy
     end
@@ -36,7 +36,7 @@ class EditorController < ApplicationController
   end
   
   def delete_relationship
-    variable = Variable.where(:id => params[:id], :workflow_id => user_id).first
+    variable = Variable.where(:id => params[:id], :workflow_id => session[:user_id]).first
     if !variable.nil?
       variable.expression_string = nil
       variable.expression_object = nil

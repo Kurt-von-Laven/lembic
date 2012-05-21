@@ -77,9 +77,6 @@ end
   end
   
   def self.parse_csv_expression(csv_data, start_row_one_indexed, column_number_one_indexed, variable_type)
-    logger.debug(start_row_one_indexed)
-    logger.debug(column_number_one_indexed)
-    logger.debug(variable_type)
     start_row = start_row_one_indexed - 1
     column_number = column_number_one_indexed - 1
     converter = case variable_type

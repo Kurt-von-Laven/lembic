@@ -106,12 +106,12 @@
     </p>
     <p>
       <%= f.label(:column_number, "Which column is your array in " +
-      "(e.g., 0 for the left-most column)?") %>
+      "(e.g., 1 for the left-most column)?") %>
       <%= f.text_field(:column_number, :class => "numeric_input") %>
     </p>
     <p>
       <%= f.label(:start_row, "Which row does your array start " +
-	  "on (e.g., 0 for the top-most row)?") %>
+	  "on (e.g., 1 for the top-most row)?") %>
       <%= f.text_field(:start_row, :class => "numeric_input") %>
     </p>
     
@@ -125,18 +125,21 @@
 
 <h3>Current Equations</h3>
 
-<% if @variables.length > 0 %>
 <table cellpadding="0" cellspacing="0">
+  <tr>
+    <th>Equation</th>
+    <th></th>
+  </tr>
   <% for variable in @variables %>
     <tr>
-      <td><div class="preserve_whitespace"><%= variable.name %> = <%=variable.expression_string %></div></td>
-      <td><%= button_to "Delete this relationship",
-              "#{delete_relationship_path}?id=#{variable.id}",
-              {:confirm => "Are you sure you want to delete the relationship for the variable named #{variable.name}?",
-               :method => :delete} %></td>
+      <td class="preserve_whitespace"><%= variable.name %> = <%=variable.expression_string %></td>
+      <td class="delete">
+        <%= button_to "Delete this relationship", "#{delete_relationship_path}?id=#{variable.id}",
+           {:confirm => "Are you sure you want to delete the relationship for the variable named #{variable.name}?",
+            :method => :delete} %>
+      </td>
     </tr>
   <% end %>
 </table>
-<% end %>
 
 <%= render "current_variables" %>

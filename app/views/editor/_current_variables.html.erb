@@ -1,7 +1,7 @@
 
 <h3>Current Variables</h3>
  
-<table cellpadding="2px" cellspacing="0">
+<table cellpadding="0" cellspacing="0">
   <tr>
     <th>Name</th>
     <th>Description</th>
@@ -15,40 +15,22 @@
     <tr>
       <td><%= variable.name %> </td>
       <td><%= variable.description %></td>
-
-	<% if variable.array == 0 %>
-       <td>No</td>
-        <% elsif variable.array == 1 %>
-           <td>Yes</td>
-        <% end %>
-        
-        <% if variable.variable_type == 0 %>
-            <td>Categorical</td>
-        <% elsif variable.variable_type == 1 %>
-            <td>Integer</td>
-        <% elsif variable.variable_type == 2 %>
-            <td>Real</td>
-        <% elsif variable.variable_type == 3 %>
-            <td>Date and Time</td>
-        <% end %>
-		<td width = "200px">
-		</td>
-		
-		<td align="center">
-		   <form method="post" action="/editor/delete_variable?id=<%= variable.id %>" >
-			<div>
-				<input type="hidden" value="delete" name="_method">
-				<button class="ui-button ui-button-icon-only ui-widget ui-state-default ui-corner-all" title="Button" type="submit" 
-						style="width:20px; height:20px; margin: 10px"
-				data-confirm="Are you sure you want to delete the variable <%= variable.name %>?">
-					<span class="ui-button-icon-primary ui-icon ui-icon-close"></span>
-					<span class="ui-button-text">Delete</span>
-				</button>
-			</div>
-			</form>
-	  </td>
+      
+      <% if variable.array == 0 %>
+        <td>No</td>
+      <% elsif variable.array == 1 %>
+         <td>Yes</td>
+      <% end %>
+      
+      <td><%= variable.variable_type_string %></td>
+      <td><%= variable.expression_string %></td>
+      
+      <td class="delete">
+        <%= button_to "Delete this variable", "#{delete_variable_path}?id=#{variable.id}",
+           {:confirm => "Are you sure you want to delete the variable named #{variable.name}?",
+            :method => :delete} %>
+      </td>
     </tr>
   <% end %>
   
-
 </table>

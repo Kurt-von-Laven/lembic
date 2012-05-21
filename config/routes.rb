@@ -1,8 +1,8 @@
 Lembic::Application.routes.draw do
-    
+  
   root to: 'user#login', as: 'login'
-	
-	match '/workflow', to: 'workflow#expertworkflow', as: 'workflow'  
+  
+  match '/workflow', to: 'workflow#expertworkflow', as: 'workflow'
   match '/logout', to: 'user#logout', as: 'logout'
   match '/register', to: 'user#register', as: 'register'
   match '/editblock', to: 'view_editor#editblock', as: 'editblock'

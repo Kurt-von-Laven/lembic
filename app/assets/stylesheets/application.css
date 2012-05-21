@@ -62,17 +62,22 @@ body {
     -moz-border-radius:10px; /* Firefox 3.6 and earlier */
 	background-color: #dee6ed;
 	padding: 20px;
-	margin: 10px;
+	margin: 20px 100px 20px 100px;
 }
+
 #expression > textarea {
 	height: 100px;
-	width: 72%;
-	margin: 10px 0 10px 0;
+	width: 100%;
+}
+
+#expresion > text_field {
+	text-align: left;
 }
 #var_input_block{
 	margin: auto;
 	width: 72%;
-	padding: 0 20px 0 20px;
+	text-align: left;
+	padding: 0px 20px 10px 20px;
 }
 border-radius:10px;
     -moz-border-radius:10px; /* Firefox 3.6 and earlier */
@@ -96,7 +101,7 @@ border-radius:10px;
 	width: 200px;
 	display: block;
 	float: left;
-	text-align: right;
+	text-align: left;
 	margin: 0 0 0 50px;
 }
 
@@ -168,13 +173,16 @@ table {
     width:750px;
     border: 1px solid;
     border-color: #5c7e99;
+  -moz-border-radius: 6px 6px 6px 6px;
+    border-radius: 6px 6px 6px 6px;
 }
 
 th {
     color:  #5c7e99;
     padding: 5px;
-    text-align: center;
+    text-align: left;
 }
+
 
 td {
     background-color: #e9f2f9;
@@ -182,6 +190,14 @@ td {
     border-collapse: collapse;
     border-spacing: 0px;
     padding-left: 10px;
+}
+tr td:first-child  {
+  -moz-border-radius: 0 0 0 6px;
+    border-radius: 0 0 0 6px;
+}
+tr td:last-child  {
+  -moz-border-radius: 0 0 6px 0;
+    border-radius: 0 0 6px 0;
 }
 
 .delete {

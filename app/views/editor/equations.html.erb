@@ -13,43 +13,40 @@
 
 <h3>Create Magical Anything You Feel Like</h3>
 
-
 <%= form_for(:new_equation, :html => {:class => "input_form"}) do |f| %>
 <div id="var_input_block">
-  <div>
-    <%= f.check_box(:array) %>
-    <%= f.label(:array, "Is this an array?") %>
-  </div>
-  <div>
-    <%= f.label(:variable_type, "Variable Type:") %>
-    <%= f.select(:variable_type, [['Categorical', '0'], ['Integer',
-    '1'], ['Real', '2'], ['Date and Time', '3']]) %>
-  </div>
+	<div>
+		<%= f.label(:variable_type, "Variable Type:") %>
+		<%= f.select(:variable_type, [['Categorical', '0'], ['Integer',
+		'1'], ['Real', '2'], ['Date and Time', '3']]) %>
+	  </div>
 
-  <div>
-    <%= f.label(:description, "Description:") %>
-    <%= f.text_field(:description) %>
-  </div>
-  </div>
-  <div id = "expression">
-    <%= f.text_field(:name) %> = <%= f.text_area(:expression_string) %>
-  </div>
-  
-  <%= render(:partial => 'flash_message', :locals => {:flash_symbol => :variable_not_saved, :tag => 'div', :class_name => 'error'}) %>
-
-  
-  <div style="text-align: right; margin-right: 10px">
-    <%= f.submit("Create Equation", :id => "new_equation_submit", :class => "button") %>
-  </div>
+	  <div>
+		<%= f.label(:description, "Description:") %>
+		<%= f.text_field(:description) %>
+	  </div>
+		<div>
+		<%= f.check_box(:array) %>
+		<%= f.label(:array, "Is this an array?") %>
+	  </div>
+	</div>
+	<div id = "expression">
+		<%= f.text_field(:name) %> = 
+		<%= f.text_area(:expression_string) %>
+	</div>
+	
+	<%= render(:partial => 'flash_message', :locals => {:flash_symbol => :variable_not_saved, :tag => 'div', :class_name => 'error'}) %>
+	 <div style="text-align: center">
+		<%= f.submit("Create Equation", :class => "button") %>
+	 </div>
 <% end %>
 
 <h3> Create a Date and Time Variable</h3>
-
-
-<%= form_for(:date_picker) do |f| %>
-  <p>Date: <input type="text" id="datepicker"></input></p>
+<%= form_for(:date_picker, :html => {:class => "input_form"}) do |f| %>
+<div id="var_input_block">
+  <div>Date: <input type="text" id="datepicker"></input></div>
   
-  <p>Format options:<br />
+  <div>Format options:<br />
     <select id="format">
       <option value="mm/dd/yy">Default - mm/dd/yy</option>
       <option value="yy-mm-dd">ISO 8601 - yy-mm-dd</option>
@@ -58,18 +55,18 @@
       <option value="DD, d MM, yy">Full - DD, d MM, yy</option>
       <option value="'day' d 'of' MM 'in the year' yy">With text - 'day' d 'of' MM 'in the year' yy</option>
     </select>
-  </p>
+  </div>
   
   
   <!-- Slider -->
-  <p>
+  <div>
     <label for="time">Time range (in military time):</label>
     <input type="text" id="time" style="border:0; color:#f6931f; font-weight:bold;" />
-  </p>
+  </div>
   
   <div id="slider-range"></div>
   
-  
+ </div> 
   <!--Submit-->
   <div>
     
@@ -85,42 +82,40 @@
 
 
 <h3>Upload Array</h3> 
-<%= form_for(:new_constant_array, :html => {:multipart => true}) do |f| %>
-  <div>
-    <p>
-      <%= f.label(:variable_type, "Variable Type:") %>
-      <%= f.select(:variable_type, [['Categorical', '0'], ['Integer',
-      '1'], ['Real', '2'], ['Date and Time', '3']]) %>
-    </p>
-    <p>
-      <%= f.label(:name, "Variable Name:") %>
-      <%= f.text_field(:name) %>
-    </p>
-    <p>
-      <%= f.label(:description, "Description:") %>
-      <%= f.text_field(:description) %>
-    </p>
-    <p>
-      <%= f.label(:data_file, "Select a CSV file.") %>
-      <%= f.file_field(:data_file) %>
-    </p>
-    <p>
-      <%= f.label(:column_number, "Which column is your array in " +
-      "(e.g., 1 for the left-most column)?") %>
-      <%= f.text_field(:column_number, :class => "numeric_input") %>
-    </p>
-    <p>
-      <%= f.label(:start_row, "Which row does your array start " +
-	  "on (e.g., 1 for the top-most row)?") %>
-      <%= f.text_field(:start_row, :class => "numeric_input") %>
-    </p>
-    
-    <%= render(:partial => 'flash_message', :locals => {:flash_symbol => :variable_not_saved, :tag => 'div', :class_name => 'error'}) %>
-    
-    <p class="submit_paragraph">
+<%= form_for(:new_constant_array, :html => {:multipart => true, :class => "input_form"}) do |f| %>
+  <div id="var_input_block">
+		<div>
+		  <%= f.label(:name, "Variable Name:") %>
+		  <%= f.text_field(:name) %>
+		</div>
+		<div>
+		  <%= f.label(:variable_type, "Variable Type:") %>
+		  <%= f.select(:variable_type, [['Categorical', '0'], ['Integer',
+		  '1'], ['Real', '2'], ['Date and Time', '3']]) %>
+		</div>
+		<div>
+		  <%= f.label(:description, "Description:") %>
+		  <%= f.text_field(:description) %>
+		</div>
+		<div>
+		  <%= f.label(:column_number, "First column of array ") %>
+		  <%= f.text_field(:column_number, :class => "numeric_input") %>  "(e.g., 1 for the left-most column)?"
+		</div>
+		<div>
+		  <%= f.label(:start_row, "First row of array ") %>
+		  <%= f.text_field(:start_row, :class => "numeric_input") %>  "(e.g., 1 for the top-most row)?"
+		</div>
+		
+		<%= render(:partial => 'flash_message', :locals => {:flash_symbol => :variable_not_saved, :tag => 'div', :class_name => 'error'}) %>
+		<div>
+		  <%= f.label(:data_file, "Select a CSV file.") %>
+		  <%= f.file_field(:data_file) %>
+		</div>
+	</div>
+    <div style="text-align: center">
       <%= f.submit("Upload Array", :id => "file_upload_submit", :class => "button") %>
-    </p>
-  </div>
+    </div>
+
 <% end %>
 
 <h3>Current Equations</h3>

@@ -12,16 +12,10 @@
   
   <% for variable in @variables %>
     <tr>
-      <td><%= variable.name %> </td>
-      <td><%= variable.description %></td>
-
-
-        
-		<td> <%= variable.variable_type_string %>
-     
-		<td width = "200px">
-		</td>
-		
+        <td><%= variable.name %> </td>
+        <td><%= variable.description %></td>
+		<td><%= variable.variable_type_string %>
+		<td><%= variable.name %> = <%= variable.expression_string %></td>
 		<td align="center">
 		   <form method="post" action="/editor/delete_variable?id=<%= variable.id %>" >
 			<div>
@@ -34,10 +28,7 @@
 				</button>
 			</div>
 			</form>
-	  </td>
-
-      <td><%= variable.expression_string %></td>
-      
+		</td> 
     </tr>
   <% end %>
   

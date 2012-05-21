@@ -125,18 +125,29 @@
 
 <h3>Current Equations</h3>
 
-<% if @variables.length > 0 %>
 <table cellpadding="0" cellspacing="0">
+  <tr>
+    <th>Equation</th>
+    <th></th>
+  </tr>
   <% for variable in @variables %>
     <tr>
-      <td><div class="preserve_whitespace"><%= variable.name %> = <%=variable.expression_string %></div></td>
-      <td><%= button_to "Delete this relationship",
-              "#{delete_relationship_path}?id=#{variable.id}",
-              {:confirm => "Are you sure you want to delete the relationship for the variable named #{variable.name}?",
-               :method => :delete} %></td>
+      <td class="preserve_whitespace"><%= variable.name %> = <%=variable.expression_string %></td>
+      <td class="delete">
+        <form method="post" action="#{delete_relationship_path}?id=<%= variable.id %>" >
+          <div>
+            <input type="hidden" value="delete" name="_method">
+            <button class="ui-button ui-button-icon-only ui-widget
+                                     ui-state-default ui-corner-all" title="Delete Relationship" type="submit" 
+                          data-confirm="Are you sure you want to delete the relationship for the variable named <%= variable.name %>?">
+              <span class="ui-button-icon-primary ui-icon ui-icon-close"></span>
+              <span class="ui-button-text">Delete Relationship</span>
+            </button>
+          </div>
+        </form>
+      </td>
     </tr>
   <% end %>
 </table>
-<% end %>
 
 <%= render "current_variables" %>

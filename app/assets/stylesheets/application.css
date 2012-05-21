@@ -33,7 +33,7 @@ body {
 	background-color:#dee6ed;
 }
 
-.button{
+.button {
     font-size: 1em !important;
 }
 
@@ -64,7 +64,7 @@ body {
 	padding: 20px;
 	margin: 10px;
 }
-#expression >textarea {
+#expression > textarea {
 	height: 100px;
 	width: 72%;
 	margin: 10px 0 10px 0;
@@ -135,10 +135,6 @@ ul {
   padding-left: 0px;
 }
 
-li {
-  display: inline;
-}
-
 #menu {
     width:750px;
     padding:10px;
@@ -158,6 +154,7 @@ li {
     height: 100%;
     padding-left: 15px;
     padding-right: 15px;
+    display: inline;
 }
 
 .register {
@@ -166,23 +163,34 @@ li {
 
 table {
     width:750px;
-	border: 1px solid;
-	border-color: #5c7e99;
-	
+    border: 1px solid;
+    border-color: #5c7e99;
 }
 
-table th {
-	color:  #5c7e99;
-	padding: 5px;
+th {
+    color:  #5c7e99;
+    padding: 5px;
+    text-align: center;
 }
-table td
-    {
-	background-color: #e9f2f9;
-	border-top:2px solid #fff;
-	border-collapse: collapse;
+
+td {
+    background-color: #e9f2f9;
+    border-top:2px solid #fff;
+    border-collapse: collapse;
     border-spacing: 0px;
-	padding-left: 10px;
-  }
+    padding-left: 10px;
+}
+
+.delete {
+  text-align: center;
+  width: 20px;
+}
+
+.delete button {
+  width: 20px !important;
+  height: 20px;
+  margin: 10px;
+}
 
 .preserve_whitespace {
     white-space: pre;

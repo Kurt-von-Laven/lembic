@@ -77,6 +77,9 @@ end
   end
   
   def self.parse_csv_expression(csv_data, start_row_one_indexed, column_number_one_indexed, variable_type)
+    logger.debug(start_row_one_indexed)
+    logger.debug(column_number_one_indexed)
+    logger.debug(variable_type)
     start_row = start_row_one_indexed - 1
     column_number = column_number_one_indexed - 1
     converter = case variable_type
@@ -93,7 +96,7 @@ end
     num_rows_desired = parsed_data.length - start_row
     desired_rows = parsed_data[start_row, num_rows_desired]
     desired_column = desired_rows.map {|r| r[column_number]}
-    desired_column_with_nans = desired_column.map {|v| (v.nil? or '') ? Float::NAN : v}
+    desired_column_with_nans = desired_column.map {|v| (v.nil? or (v == '')) ? Float::NAN : v}
     desired_values_as_str = desired_column_with_nans.join(', ')
     return "[ #{INDEX} | #{desired_values_as_str}]"
   end

@@ -2,7 +2,7 @@
 <% @title = "Equation Editor" %>
 
 <!--Slider Script -->
-<script>
+<script type="text/javascript">
 	$(function() {
 		$( "#slider" ).slider();
 	});
@@ -47,7 +47,7 @@
 
 
 <%= form_for(:date_picker) do |f| %>
-  <p>Date: <input type="text" id="datepicker"></p>
+  <p>Date: <input type="text" id="datepicker"></input></p>
   
   <p>Format options:<br />
     <select id="format">
@@ -118,12 +118,15 @@
     <%= render(:partial => 'flash_message', :locals => {:flash_symbol => :variable_not_saved, :tag => 'div', :class_name => 'error'}) %>
     
     <p class="submit_paragraph">
+      <%= f.submit("Upload Array", :id => "file_upload_submit", :class => "button") %>
       <%= f.submit("Upload Array", :id => "new_equation_submit", :class => "button") %>
     </p>
   </div>
 <% end %>
 
 <h3>Current Equations</h3>
+
+<% if @variables.length > 0 %>
 <table cellpadding="0" cellspacing="0">
   <% for variable in @variables %>
     <tr>
@@ -135,5 +138,6 @@
     </tr>
   <% end %>
 </table>
+<% end %>
 
 <%= render "current_variables" %>

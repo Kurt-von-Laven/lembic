@@ -93,7 +93,7 @@ end
     num_rows_desired = parsed_data.length - start_row
     desired_rows = parsed_data[start_row, num_rows_desired]
     desired_column = desired_rows.map {|r| r[column_number]}
-    desired_column_with_nans = desired_column.map {|v| (v.nil? or '') ? Float::NAN : v}
+    desired_column_with_nans = desired_column.map {|v| (v.nil? or (v == '')) ? Float::NAN : v}
     desired_values_as_str = desired_column_with_nans.join(', ')
     return "[ #{INDEX} | #{desired_values_as_str}]"
   end

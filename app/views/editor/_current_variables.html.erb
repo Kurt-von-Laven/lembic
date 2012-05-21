@@ -26,7 +26,7 @@
       <td><%= variable.expression_string %></td>
       
       <td class="delete">
-        <form method="post" action="<%= "#{delete_variable_path}?id=variable.id" %>" >
+        <form method="post" action="<%= "#{delete_variable_path}?id=#{variable.id}" %>" >
           <div>
             <input type="hidden" value="delete" name="_method">
             <button class="ui-button ui-button-icon-only ui-widget

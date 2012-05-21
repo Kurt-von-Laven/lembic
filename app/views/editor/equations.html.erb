@@ -37,7 +37,6 @@
   
   <%= render(:partial => 'flash_message', :locals => {:flash_symbol => :variable_not_saved, :tag => 'div', :class_name => 'error'}) %>
 
-
   
   <div style="text-align: right; margin-right: 10px">
     <%= f.submit("Create Equation", :id => "new_equation_submit", :class => "button") %>
@@ -115,6 +114,9 @@
 	  "on (e.g., 0 for the top-most row)?") %>
       <%= f.text_field(:start_row, :class => "numeric_input") %>
     </p>
+    
+    <%= render(:partial => 'flash_message', :locals => {:flash_symbol => :variable_not_saved, :tag => 'div', :class_name => 'error'}) %>
+    
     <p class="submit_paragraph">
       <%= f.submit("Upload Array", :id => "new_equation_submit", :class => "button") %>
     </p>

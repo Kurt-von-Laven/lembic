@@ -69,7 +69,11 @@ end
                                                                   merged_array['variable_type'])
     parser = Parser.new
     puts merged_array['expression_string']
-    merged_array['expression_object'] = parser.parse(merged_array['expression_string'])
+    begin
+        merged_array['expression_object'] = parser.parse(merged_array['expression_string'])
+    rescue ArgumentError, SystemCallError, IOError, RuntimeError
+        raise ArgumentError, "An unexpected error occured saving your variable. Please try again."
+    end
     merged_array.delete('data_file')
     merged_array.delete('start_row')
     merged_array.delete('column_number')

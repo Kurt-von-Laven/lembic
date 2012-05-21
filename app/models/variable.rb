@@ -59,7 +59,7 @@ end
                                                            'pwd_hash' => Digest::SHA512.hexdigest('raasdqweqjkladsfi'),
                                                            'salt' => Digest::SHA512.hexdigest('raasdqweqjkladsfi')})
     Workflow.where(:name => 'Sample Workflow').first_or_create({'description' => 'This record should be removed eventually and is just for test purposes.'})
-    merged_array = {'array' => 0, 'start_row' => 0, 'column_number' => 0}.merge(form_hash)
+    merged_array = {'array' => 0, 'start_row' => 1, 'column_number' => 1}.merge(form_hash)
     merged_array['name'] += "[#{INDEX}]"
     merged_array['workflow_id'] = user_id # TODO: Grab the workflow ID out of the session state.
     merged_array['variable_type'] = merged_array['variable_type'].to_i
@@ -78,15 +78,15 @@ end
   
   def self.parse_csv_expression(csv_data, start_row, column_number, variable_type)
     converter = case variable_type
-    when 0
-      nil
-    when 1
-      :integer
-    when 2
-      :float
-    when 3
-      :date_time
-    end
+                when 0
+                  nil
+                when 1
+                  :integer
+                when 2
+                  :float
+                when 3
+                  :date_time
+                end
     parsed_data = CSV.parse(csv_data, :converters => converter)
     num_rows_desired = parsed_data.length - start_row
     desired_rows = parsed_data[start_row, num_rows_desired]

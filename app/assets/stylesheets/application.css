@@ -36,19 +36,33 @@ body {
 .button {
     font-size: 1em !important;
 }
+#login_title{
 
+
+float: left;
+	width: 15%;
+	margin: 10px 0 0px 200px;
+	padding: 0 10px 0 10px;
+	color: #1e3652;
+	font-size: 3em;
+	background: #fff;
+}
 .login_form{
-	background-color: #1e3652;
 	border-radius:10px;
     -moz-border-radius:10px; /* Firefox 3.6 and earlier */
-	color: #dee6ed;
+	border: 1px solid;
+	border-color: #1e3652;
+	color: #1e3652;
 	width: 50%;
-	margin: auto;
+	margin-top: 50px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 50px;
 	text-align: left;
-	padding: 20px;
+	padding: 30px 10px 10px 10px;
 }
 .login_form div {
-	margin: 0 0 5px 0;
+	margin: 0 0 10px 0;
 	text-align: left;
 }
 .login_form label{
@@ -56,8 +70,9 @@ body {
 	display: block;
 	float: left;
 	text-align: left;
-	margin: 0 50px 0 5px;
+	margin: 0 50px 0 20px;
 }
+
 #container {
 	width:800px;
 	margin:0px auto;

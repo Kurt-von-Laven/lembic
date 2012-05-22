@@ -17,33 +17,32 @@
 <h1>Equation Editor</h1>
 
 <div id="tabs">
-			<ul>
-				<li><a href="#tabs-1">Create Magical Anything You Feel Like</a></li>
-				<li><a href="#tabs-2">Create Event</a></li>
-				<li><a href="#tabs-3">Upload Array</a></li>
-			</ul>
-			<div id="tabs-1">
-            <%= form_for(:new_equation, :html => {:class => "input_form"}) do |f| %>
-                <div id="var_input_block">
-	<div>
-		<%= f.label(:variable_type, "Variable Type:") %>
-		<%= f.select(:variable_type, [['Categorical', '0'], ['Integer',
-		'1'], ['Real', '2'], ['Date and Time', '3']]) %>
-	  </div>
-
-	  <div>
-		<%= f.label(:description, "Description:") %>
-		<%= f.text_field(:description) %>
-	  </div>
-		<div>
-		<%= f.check_box(:array) %>
-		<%= f.label(:array, "Is this an array?") %>
-	  </div>
-	</div>
-	<div id = "expression">
-		<%= f.text_field(:name) %> = 
-		<%= f.text_area(:expression_string) %>
-	</div>
+  <ul>
+    <li><a href="#tabs-1">Create Magical Anything You Feel Like</a></li>
+    <li><a href="#tabs-2">Create Event</a></li>
+    <li><a href="#tabs-3">Upload Array</a></li>
+  </ul>
+  <div id="tabs-1">
+    <%= form_for(:new_equation, :html => {:class => "input_form"}) do |f| %>
+    <div id="var_input_block">
+      <div>
+        <%= f.label(:variable_type, "Variable Type:") %>
+        <%= f.select(:variable_type, [['Categorical', '0'], ['Integer',
+            '1'], ['Real', '2'], ['Date and Time', '3']]) %>
+      </div>
+      <div>
+        <%= f.label(:description, "Description:") %>
+        <%= f.text_field(:description) %>
+      </div>
+      <div>
+        <%= f.check_box(:array) %>
+        <%= f.label(:array, "Is this an array?") %>
+      </div>
+    </div>
+    <div id = "expression">
+      <%= f.text_field(:name) %> = 
+      <%= f.text_area(:expression_string) %>
+    </div>
 	
 	<%= render(:partial => 'flash_message', :locals => {:flash_symbol => :variable_not_saved, :tag => 'div', :class_name => 'error'}) %>
 	 <div style="text-align: center">

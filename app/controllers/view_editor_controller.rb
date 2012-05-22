@@ -1,6 +1,6 @@
 class ViewEditorController < ApplicationController
 
-  def editblock
+  def edit_block
       # Check for form data for creating new block
       form_hash = params[:create_block_form]
       if !form_hash.nil?
@@ -45,7 +45,7 @@ class ViewEditorController < ApplicationController
       
   end
 
-  def editquestion
+  def edit_question
       @variables = Variable.where(:workflow_id => session[:user_id]).order(:name)
   end
   

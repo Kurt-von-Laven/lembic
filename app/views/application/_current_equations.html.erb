@@ -1,6 +1,6 @@
 <h3>Current Equations</h3>
 
-<table cellpadding="0" cellspacing="0">
+<table cellpadding="0" cellspacing="0" class = "sortable">
   <tr>
     <th>Equation</th>
     <th></th>
@@ -16,3 +16,9 @@
     </tr>
   <% end %>
 </table>
+
+<ul class ="sortable">
+    <% for variable in @variables %>
+        <li class = "preserve_whitespace"> <%= variable.name %> = <%=variable.expression_string %></li>
+    <% end %>    
+</ul>

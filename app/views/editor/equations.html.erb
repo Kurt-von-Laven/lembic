@@ -182,7 +182,7 @@
   </tr>
   <% for variable in @variables %>
     <tr>
-      <td class="preserve_whitespace"><%= variable.name %> = <%= truncate(variable.name, :length =>25) %></td>
+      <td class="preserve_whitespace"><%= variable.name %> = <%= truncate(variable.expression_string, :length => 30, :omission => '... (continued)') %></td>
       <td class="delete">
         <%= button_to "Delete this relationship", "#{delete_relationship_path}?id=#{variable.id}",
            {:confirm => "Are you sure you want to delete the relationship for the variable named #{variable.name}?",

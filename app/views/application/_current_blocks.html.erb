@@ -1,0 +1,36 @@
+<h3>Current Blocks</h3>
+
+<table class = "tablesorter">
+
+<!--Table Headers -->
+<thead>
+  <tr>
+    <th>Name</th>
+    <th>Connections</th>
+  </tr>
+</thead>
+
+<!--Table Body -->
+<tbody>
+	
+	<!--Each Block on a row, with all its connections put together into a string -->
+	<!--TODO: Come up with a better way to display the blocks -->
+	<% for block in @blocks %>
+	
+	  <!--Prepare strings to be displayed in HTML for this block -->
+	  <% name = block.name %>
+	  <% connections = ""%>
+	  <% for bc in block.block_connections %>
+	
+		<!--Concat block_connection fields into a string -->
+		<% conn_str = bc.next_block + " => " + bc.expression %>
+		<% connections += conn_str + ", " %>
+	  <% end %>
+	  <% connections = connections.strip.chomp(",") %>
+	
+	  <!--Render this block in HTML -->
+      <tr><td><%=name %></td><td><%=connections %></td></tr>
+	<% end %>
+	
+</tbody>  
+</table>

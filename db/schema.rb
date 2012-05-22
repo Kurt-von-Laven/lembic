@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120520224801) do
+ActiveRecord::Schema.define(:version => 20120522061629) do
+
+  create_table "block_connections", :force => true do |t|
+    t.string   "expression"
+    t.string   "next_block"
+    t.integer  "block_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "blocks", :force => true do |t|
     t.string   "name"

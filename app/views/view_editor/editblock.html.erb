@@ -5,19 +5,11 @@
 
 <%= render "current_variables" %>
 
-<h3> Current Blocks </h3>
-<!--OUTPUT CURRENT BLOCKS -->
-<%# Get all blocks %>
-<% myblocks = Block.find(:all) %>
-<% numBlocks = myblocks.length %>
-There are <%=numBlocks %> blocks defined:<br/>
-<% for block in myblocks do %>
-	<%# Print block info %>
-	<%=block.name %><br/>
-<% end %>
+<%= render "current_blocks" %>
+
 
 <h3> Create A Block </h3>
- <%= form_for(:new_block) do |f| %>
+ <%= form_for(:create_block_form) do |f| %>
  <div>
             <%= f.label(:name, "Name of Block: ") %>
             <%= f.text_field :name %>
@@ -26,11 +18,11 @@ There are <%=numBlocks %> blocks defined:<br/>
 <!--<div>
             <%= f.label(:block_input_variables, "Measure these variables: ") %>
             <%= f.text_area :block_input_variables %>
-</div>
-<div>
-            <%= f.label(:input_relationships, "Logic for Measurements: ") %>
-            <%= f.text_area :input_relationships %>
 </div>-->
+<div>
+            <%= f.label(:connections_string, "Block connections, one per line:\nExample: 'AC_Block => has_ac == true' or 'FINISH => 1'") %>
+            <%= f.text_area :connections_string %>
+</div>
             <%= f.submit('Create Block', :class => "button") %>         
 <% end %>        
 

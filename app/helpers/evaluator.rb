@@ -72,6 +72,32 @@ class Evaluator
       end
       return min
     
+    elsif function_name == "DAY"
+      if params.length != 1
+        raise ArgumentError, "Wrong number of arguments to DAY: expected 1 but found #{params.length}."
+      end
+      begin
+        datetime = Time.at(params[0]).to_datetime
+        puts "IN DAY: params[0] = #{params[0]}, datetime = #{datetime}"
+      rescue ArgumentError
+        raise ArgumentError, "Argument of DAY must be a date or number."
+      end
+      daynum = datetime.wday
+      if daynum == 0
+        return :Sunday
+      elsif daynum == 1
+        return :Monday
+      elsif daynum == 2
+        return :Tuesday
+      elsif daynum == 3
+        return :Wednesday
+      elsif daynum == 4
+        return :Thursday
+      elsif daynum == 5
+        return :Friday
+      elsif daynum == 6
+        return :Saturday
+      end
     end
     return nil
   end

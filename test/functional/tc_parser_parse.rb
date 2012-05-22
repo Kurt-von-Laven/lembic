@@ -258,6 +258,11 @@ class TestParserParse < Test::Unit::TestCase
     assert(@e.eval_expression(@p.parse("11_00_00"), {}, {}) > @e.eval_expression(@p.parse("10_59_59"), {}, {}))
     assert_equal(@e.eval_expression(@p.parse("1970_01_01_00_00_00"), {}, {}), @e.eval_expression(@p.parse("00_00_00"), {}, {}))
     assert_equal(@e.eval_expression(@p.parse("2012_12_21_23_59_59"), {}, {}), @e.eval_expression(@p.parse("2012_12_21+23_59_59"), {}, {}))
+    assert_equal(:Tuesday, @e.eval_expression(@p.parse("DAY[2012_05_22_10_59_59]"), {}, {}))
+    assert_equal(1, @e.eval_expression(@p.parse("DAY[2012_05_22_10_59_59] == @Tuesday"), {}, {}))
+    assert_equal(1, @e.eval_expression(@p.parse("DAY[2012_05_22] == @Tuesday"), {}, {}))
+    assert_equal(0, @e.eval_expression(@p.parse("DAY[2012_05_22_10_59_59] == @Wednesday"), {}, {}))
+    assert_equal(0, @e.eval_expression(@p.parse("DAY[2012_05_22_10_59_59] != @Tuesday"), {}, {}))
   end
   
   def test_evaluator_nan

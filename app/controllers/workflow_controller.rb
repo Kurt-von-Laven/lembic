@@ -3,7 +3,7 @@ require './app/helpers/expression'
 class WorkflowController < ApplicationController
   
   def evaluate
-       @variables = Variable.where(:workflow_id => session[:user_id]).order(:name)
+    @variables = Variable.where(:workflow_id => session[:user_id]).order(:name)
     vars = params[:variables]
     if !vars.nil?
       input_values = eval(vars['input_values'])

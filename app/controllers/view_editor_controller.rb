@@ -14,7 +14,7 @@ class ViewEditorController < ApplicationController
           
           # Trim the line to get a variable name
           variable_name = line.strip
-          if (variable_name.length == 0) # TODO: get better input validation
+          if variable_name.empty? # TODO: get better input validation
             next
           end
           
@@ -27,7 +27,7 @@ class ViewEditorController < ApplicationController
 
           # Parse the line into a block name and expression
           tokens = line.split("=>")
-          if !(tokens.length == 2) # TODO: get better input validation
+          if tokens.length != 2 # TODO: get better input validation
             next
           end
           next_block = tokens[0].strip

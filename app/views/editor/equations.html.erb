@@ -49,7 +49,6 @@
 <h3> Create an Event</h3>
 <%= form_for(:event, :html => {:class => "input_form"}) do |f| %>
     <div id="var_input_block">
-    
         <!-- Type of day -->
         <div>
             <%= f.label(:day_week, "Type of Day:") %>
@@ -58,58 +57,60 @@
         </div>
   
         <!-- Slider -->
-        <p>
+        <div>
             <label for="time">Time range (in military time):</label>
             <input type="text" id="time" style="border:0; color:#f6931f; font-weight:bold;" />
-        </p>
+        </div>
   
         <div id="slider-range"></div>
         
         <!-- Repeating -->
-            <div>
-            Does this event repeat?
-            </div> 
-            <div>
-            <%= check_box_tag(:mon) %>
-            <%= label_tag(:mon, "Monday") %>
-            </div>
-            <div>
-            <%= check_box_tag(:tues) %>
-            <%= label_tag(:tues, "Tuesday") %>
-            </div>
-            <div>
-            <%= check_box_tag(:wed) %>
-            <%= label_tag(:wed, "Wednesday") %>
-            </div>
-            <div>
-            <%= check_box_tag(:thurs) %>
-            <%= label_tag(:thurs, "Thursday") %>
-            </div>
-            <div>
-            <%= check_box_tag(:fri) %>
-            <%= label_tag(:fri, "Friday") %>
-            </div>
-            <div>
-            <%= check_box_tag(:sat) %>
-            <%= label_tag(:sat, "Saturday") %>
-            </div>
-            <div>
-            <%= check_box_tag(:sun) %>
-            <%= label_tag(:sun, "Sunday") %>
-            </div>
+          <div> Does this event repeat? </div> 
+		  <div>
+				<%= label_tag(:nil, "From: ")%>
+				<!-- Datepicker -->       
+				<div> <input type="text" class="datepicker"></input></div>
+          </div>
             
+          <div>
+				<%= label_tag(:nil, "To: ")%>
+				<!-- Datepicker -->       
+				<div><input type="text" class="datepicker"></input></div>
+          </div>
+		  <br>
+		  <div>
+			Repeat every
+		  </div>
+		  <div id = "date_range">
+			<div>
+				<%= check_box_tag(:mon) %>
+				<%= label_tag(:mon, "Monday") %>
+			</div>
             <div>
-            From: 
-            <!-- Datepicker -->       
-            <div>Date: <input type="text" class="datepicker"></input></div>
+				<%= check_box_tag(:tues) %>
+				<%= label_tag(:tues, "Tuesday") %>
             </div>
-            
             <div>
-            To:
-            <!-- Datepicker -->       
-            <div>Date: <input type="text" class="datepicker"></input></div>
+				<%= check_box_tag(:wed) %>
+				<%= label_tag(:wed, "Wednesday") %>
             </div>
-            
+            <div>
+				<%= check_box_tag(:thurs) %>
+				<%= label_tag(:thurs, "Thursday") %>
+            </div>
+            <div>
+				<%= check_box_tag(:fri) %>
+				<%= label_tag(:fri, "Friday") %>
+            </div>
+            <div>
+				<%= check_box_tag(:sat) %>
+				<%= label_tag(:sat, "Saturday") %>
+            </div>
+            <div>
+				<%= check_box_tag(:sun) %>
+				<%= label_tag(:sun, "Sunday") %>
+            </div>  
+		</div>
     </div> 
   
     <!--Submit-->

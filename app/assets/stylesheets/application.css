@@ -223,7 +223,9 @@ li {
 .sortable li{
     display: list-item;
 }
-
+#date_range {
+	margin-left: 50px;
+}
 #menu {
     width:750px;
     padding:10px;

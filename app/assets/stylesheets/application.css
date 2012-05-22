@@ -207,12 +207,18 @@ li {
   display: inline;
 }
 
+#home {
+	height: 100px;
+	padding: 100px;
+	text-align: center;
+	font-size: 2em;
+}
 #menu {
     width:750px;
     padding:10px;
     border-radius:10px;
     -moz-border-radius:10px; /* Firefox 3.6 and earlier */
-    background-color:#dee6ed;
+    border-color:#dee6ed;
     margin:0px auto;
     text-align: center;
     background-color:#1e3652;

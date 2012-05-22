@@ -36,6 +36,10 @@ body {
 .button {
     font-size: 1em !important;
 }
+
+#tabs {
+    font-size: 1em !important;
+}
 #login_title{
 	float: left;
 	width: 15%;

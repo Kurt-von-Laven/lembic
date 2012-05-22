@@ -1,9 +1,9 @@
 <% @title = 'Login' %>
 <%= render(:partial => 'flash_message', :locals => {:flash_symbol =>:account_created, :tag => 'p', :class_name => 'success'}) %>
-
-
+	<div id = "login_title">
+		Login
+	</div>
 <%= form_for(:user, :html => {:class => "login_form"}) do |f| %>
-	
 	<div>
 		  <%= f.label(:email, 'Email:') %>
 		  <%= f.text_field(:email) %>

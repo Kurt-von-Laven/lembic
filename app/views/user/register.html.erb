@@ -1,25 +1,29 @@
 <% @title = 'Create Your Account' %>
-<%= form_for(@user, :url => register_path) do |f| %>
+
+<div id = "register_title">
+	Create an Account
+</div>
+<%= form_for(@user, :url => register_path, :html => {:id => "register_form"}) do |f| %>
   <% errors = @user.errors %>
   <%= render(:partial => 'registration_field', :locals => {:field => :first_name,
-                     :prompt => 'Enter your first name:', :is_password => false,
+                     :prompt => 'First name:', :is_password => false,
                      :errors => errors, :form => f}) %>
   <%= render(:partial => 'registration_field', :locals => {:field => :last_name,
-                     :prompt => 'Enter your last name:', :is_password => false,
+                     :prompt => 'Last name:', :is_password => false,
                      :errors => errors, :form => f}) %>
   <%= render(:partial => 'registration_field', :locals => {:field => :email,
-                     :prompt => 'Enter your email address:', :is_password => false,
+                     :prompt => 'Email address:', :is_password => false,
                      :errors => errors, :form => f}) %>
   <%= render(:partial => 'registration_field', :locals => {:field => :organization,
-                     :prompt => 'Enter your organization:', :is_password => false,
+                     :prompt => 'Organization:', :is_password => false,
                      :errors => errors, :form => f}) %>
   <%= render(:partial => 'registration_field', :locals => {:field => :password,
-                     :prompt => 'Create a password:', :is_password => true,
+                     :prompt => 'Create password:', :is_password => true,
                      :errors => errors, :form => f}) %>
   <%= render(:partial => 'registration_field', :locals => {:field => :password_confirmation,
-                     :prompt => 'Confirm your password:', :is_password => true,
+                     :prompt => 'Confirm password:', :is_password => true,
                      :errors => errors, :form => f}) %>
-  <div>
+  <div style="text-align: center; margin-top:20px">
     <%= f.submit('Create Account', :class => "button") %>
   </div>
 <% end %>

@@ -19,17 +19,9 @@
 		<td><%= variable.variable_type_string %>
 		<td><%= variable.name %> = <%= variable.expression_string %></td>
 		<td align="center">
-		   <form method="post" action="/editor/delete_variable?id=<%= variable.id %>" >
-			<div>
-				<input type="hidden" value="delete" name="_method">
-				<button class="ui-button ui-button-icon-only ui-widget ui-state-default ui-corner-all" title="Button" type="submit" 
-						style="width:20px; height:20px; margin: 10px"
-				data-confirm="Are you sure you want to delete the variable <%= variable.name %>?">
-					<span class="ui-button-icon-primary ui-icon ui-icon-close"></span>
-					<span class="ui-button-text">Delete</span>
-				</button>
-			</div>
-			</form>
+		<%= button_to "x", "#{delete_relationship_path}?id=#{variable.id}",
+		{:confirm => "Are you sure you want to delete the relationship for the variable named #{variable.name}?",
+          :method => :delete} %>
 		</td> 
     </tr>
   <% end %>

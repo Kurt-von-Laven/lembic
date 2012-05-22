@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   attr_accessible :first_name, :last_name, :email, :organization, :pwd_hash, :salt, :created_at, :updated_at
   
-  validates_presence_of :first_name, :last_name, :email, :organization, :pwd_hash, :salt
+  validates_presence_of :first_name, :last_name, :email, :pwd_hash, :salt
   
   validates_uniqueness_of :email
   

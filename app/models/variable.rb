@@ -50,14 +50,13 @@ class Variable < ActiveRecord::Base
       merged_var['expression_string'] = nil
     else
       parser = Parser.new
-    begin
-      merged_var['expression_object'] = parser.parse(merged_var['expression_string'])
-    rescue ArgumentError, SystemCallError, IOError, RuntimeError
-        raise ArgumentError, "An unexpected error occured saving your variable. Please try again."
-    end
-    Variable.create(merged_var)
-end 
-            
+      begin
+	merged_var['expression_object'] = parser.parse(merged_var['expression_string'])
+      rescue SystemCallError, IOError, RuntimeError
+	raise ArgumentError, "An unexpected error occured saving your variable. Please try again."
+      end
+      Variable.create(merged_var)
+    end       
   end
   
   def self.create_constant_array(form_hash, user_id)

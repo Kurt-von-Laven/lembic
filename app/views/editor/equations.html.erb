@@ -40,45 +40,80 @@
 	 </div>
 <% end %>
 
-<h3> Create a Date and Time Variable</h3>
-<%= form_for(:date_picker, :html => {:class => "input_form"}) do |f| %>
-<div id="var_input_block">
-  <div>Date: <input type="text" id="datepicker"></input></div>
-  
-  <p>Format options:<br />
-    <select id="format">
-      <option value="mm/dd/yy">Default - mm/dd/yy</option>
-      <option value="yy-mm-dd">ISO 8601 - yy-mm-dd</option>
-      <option value="d M, y">Short - d M, y</option>
-      <option value="d MM, y">Medium - d MM, y</option>
-      <option value="DD, d MM, yy">Full - DD, d MM, yy</option>
-      <option value="'day' d 'of' MM 'in the year' yy">With text - 'day' d 'of' MM 'in the year' yy</option>
-    </select>
-  </p>
-  
-  
-  <!-- Slider -->
-  <p>
-    <label for="time">Time range (in military time):</label>
-    <input type="text" id="time" style="border:0; color:#f6931f; font-weight:bold;" />
-  </p>
-  
-  <div id="slider-range"></div>
-  
- </div> 
-  <!--Submit-->
-  <div>
+<h3> Create an Event</h3>
+<%= form_for(:event, :html => {:class => "input_form"}) do |f| %>
+    <div id="var_input_block">
     
-    <p class="submit_paragraph">
-      <%= f.submit("Upload Date", :id => "date_submit", :class => "button") %>
-    </p>
-  </div>
+        <!-- Type of day -->
+        <div>
+            <%= f.label(:day_week, "Type of Day:") %>
+            <%= f.select(:day_week, [['Weekday', '0'], ['Weekend',
+            '1'], ['Holiday', '2'], ['Other', '3']]) %>
+        </div>
+  
+        <!-- Slider -->
+        <p>
+            <label for="time">Time range (in military time):</label>
+            <input type="text" id="time" style="border:0; color:#f6931f; font-weight:bold;" />
+        </p>
+  
+        <div id="slider-range"></div>
+        
+        <!-- Repeating -->
+            <div>
+            Does this event repeat?
+            </div> 
+            <div>
+            <%= check_box_tag(:mon) %>
+            <%= label_tag(:mon, "Monday") %>
+            </div>
+            <div>
+            <%= check_box_tag(:tues) %>
+            <%= label_tag(:tues, "Tuesday") %>
+            </div>
+            <div>
+            <%= check_box_tag(:wed) %>
+            <%= label_tag(:wed, "Wednesday") %>
+            </div>
+            <div>
+            <%= check_box_tag(:thurs) %>
+            <%= label_tag(:thurs, "Thursday") %>
+            </div>
+            <div>
+            <%= check_box_tag(:fri) %>
+            <%= label_tag(:fri, "Friday") %>
+            </div>
+            <div>
+            <%= check_box_tag(:sat) %>
+            <%= label_tag(:sat, "Saturday") %>
+            </div>
+            <div>
+            <%= check_box_tag(:sun) %>
+            <%= label_tag(:sun, "Sunday") %>
+            </div>
+            
+            <div>
+            From: 
+            <!-- Datepicker -->       
+            <div>Date: <input type="text" class="datepicker"></input></div>
+            </div>
+            
+            <div>
+            To:
+            <!-- Datepicker -->       
+            <div>Date: <input type="text" class="datepicker"></input></div>
+            </div>
+            
+    </div> 
+  
+    <!--Submit-->
+    <div>
+    
+        <p class="submit_paragraph">
+            <%= f.submit("Upload Event", :id => "event_submit", :class => "button") %>
+        </p>
+    </div>
 <% end %>
-
-<p id = "hello">If you click on the "Hide" button, I will disappear.</p>
-<button id="hide">Hide</button>
-
-
 
 <h3>Upload Array</h3> 
 <%= form_for(:new_constant_array, :html => {:multipart => true, :class => "input_form"}) do |f| %>

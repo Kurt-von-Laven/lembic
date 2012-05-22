@@ -207,12 +207,23 @@ li {
   display: inline;
 }
 
+
 #home {
 	height: 100px;
 	padding: 100px;
 	text-align: center;
 	font-size: 2em;
 }
+
+.sortable ul{
+    list-style-type: cicle; !important
+    padding-left:2px;
+}
+
+.sortable li{
+    display: list-item;
+}
+
 #menu {
     width:750px;
     padding:10px;
@@ -248,7 +259,7 @@ table {
 
 th {
     color:  #5c7e99;
-    padding: 5px;
+    padding: 18px;
     text-align: left;
 }
 
@@ -291,3 +302,22 @@ tr td:last-child  {
 .error {
     color: red;
 }
+
+/* tables */
+
+table.tablesorter thead tr .header {
+	background-image: url(bg.gif);
+	background-repeat: no-repeat;
+	background-position: center right;
+	cursor: pointer;
+    
+
+}
+table.tablesorter thead tr .headerSortUp {
+	background-image: url(asc.gif);
+}
+table.tablesorter thead tr .headerSortDown {
+	background-image: url(desc.gif);
+}
+
+

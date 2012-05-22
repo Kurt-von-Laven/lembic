@@ -210,7 +210,7 @@ table {
 
 th {
     color:  #5c7e99;
-    padding: 5px;
+    padding: 18px;
     text-align: left;
 }
 
@@ -252,4 +252,21 @@ tr td:last-child  {
 
 .error {
     color: red;
+}
+
+/* tables */
+
+table.tablesorter thead tr .header {
+	background-image: url(bg.gif);
+	background-repeat: no-repeat;
+	background-position: center right;
+	cursor: pointer;
+    
+
+}
+table.tablesorter thead tr .headerSortUp {
+	background-image: url(asc.gif);
+}
+table.tablesorter thead tr .headerSortDown {
+	background-image: url(desc.gif);
 }

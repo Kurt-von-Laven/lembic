@@ -37,7 +37,27 @@ body {
     font-size: 1em !important;
 }
 
-
+.login_form{
+	background-color: #1e3652;
+	border-radius:10px;
+    -moz-border-radius:10px; /* Firefox 3.6 and earlier */
+	color: #dee6ed;
+	width: 50%;
+	margin: auto;
+	text-align: left;
+	padding: 20px;
+}
+.login_form div {
+	margin: 0 0 5px 0;
+	text-align: left;
+}
+.login_form label{
+	width: 50px;
+	display: block;
+	float: left;
+	text-align: left;
+	margin: 0 50px 0 5px;
+}
 #container {
 	width:800px;
 	margin:0px auto;
@@ -79,13 +99,9 @@ body {
 	text-align: left;
 	padding: 0px 20px 10px 20px;
 }
-border-radius:10px;
-    -moz-border-radius:10px; /* Firefox 3.6 and earlier */
-	background-color: #dee6ed;
-	padding: 20px;
-	margin: 10px;
-	margin: 10px;
-}
+
+
+
 .input_form{
 	border-radius:10px;
     -moz-border-radius:10px; /* Firefox 3.6 and earlier */
@@ -166,7 +182,7 @@ li {
 }
 
 .register {
-   text-align:left;
+   text-align:center;
 }
 
 table {

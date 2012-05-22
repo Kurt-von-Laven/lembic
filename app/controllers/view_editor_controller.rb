@@ -9,8 +9,20 @@ class ViewEditorController < ApplicationController
         block_hash = {:name => form_hash[:name]}
         block = Block.create(block_hash)
         
+        # Iterate through lines in the inputs string
+        form_hash[:inputs_string].lines do |line|
+          
+          # Trim the line to get a variable name
+          variable_name = line.strip
+          if (variable_name.length == 0) # TODO: get better input validation
+            next
+          end
+          
+          # Create a block input with the specified variable
+          block.block_inputs.create({:variable => variable_name, :sort_index => 0})
+        end
+        
         # Iterate through lines in the connections string
-        connection_lines = []
         form_hash[:connections_string].lines do |line|
 
           # Parse the line into a block name and expression

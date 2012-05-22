@@ -6,6 +6,7 @@
 <thead>
   <tr>
     <th>Name</th>
+	<th>Inputs</th>
     <th>Connections</th>
   </tr>
 </thead>
@@ -19,17 +20,24 @@
 	
 	  <!--Prepare strings to be displayed in HTML for this block -->
 	  <% name = block.name %>
+	
+	  <!--Concat block_connection fields into a string -->
 	  <% connections = ""%>
 	  <% for bc in block.block_connections %>
-	
-		<!--Concat block_connection fields into a string -->
 		<% conn_str = bc.next_block + " => " + bc.expression %>
 		<% connections += conn_str + ", " %>
 	  <% end %>
 	  <% connections = connections.strip.chomp(",") %>
 	
+	  <!--Concat block_input fields into a string -->
+	  <% inputs = "" %>
+	  <% for bi in block.block_inputs %>
+	    <% inputs += bi.variable + ", " %>
+	  <% end %>
+	  <% inputs = inputs.strip.chomp(",") %>
+	
 	  <!--Render this block in HTML -->
-      <tr><td><%=name %></td><td><%=connections %></td></tr>
+      <tr><td><%=name %></td><td><%=inputs %></td><td><%=connections %></td></tr>
 	<% end %>
 	
 </tbody>  

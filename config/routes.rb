@@ -2,17 +2,17 @@ Lembic::Application.routes.draw do
   
   root to: 'user#login', as: 'login'
   
-  match '/workflow', to: 'workflow#expertworkflow', as: 'workflow'
   match '/logout', to: 'user#logout', as: 'logout'
   match '/register', to: 'user#register', as: 'register'
-  match '/edit_block', to: 'view_editor#edit_block', as: 'edit_block'
-  match '/edit_question', to: 'view_editor#edit_question', as: 'edit_question'
+  match '/view_editor/edit_block', to: 'view_editor#edit_block', as: 'edit_block'
+  match '/view_editor/edit_question', to: 'view_editor#edit_question', as: 'edit_question'
   match '/home', to: 'home#home', as: 'home'
   match '/help', to: 'help#help', as: 'help'
-  match '/editor/equations', to: 'editor#equations', as: 'equations'
-  match '/editor/delete_variable', to: 'editor#delete_variable', as: 'delete_variable'
-  match '/editor/delete_relationship', to: 'editor#delete_relationship', as: 'delete_relationship'
+  match '/equation_editor/equations', to: 'editor#equations', as: 'equations'
+  match '/equation_editor/delete_variable', to: 'editor#delete_variable', as: 'delete_variable'
+  match '/equation_editor/delete_relationship', to: 'editor#delete_relationship', as: 'delete_relationship'
   match '/evaluator', to: 'workflow#evaluate', as: 'evaluator'
+  match '/workflow', to: 'workflow#expert_workflow', as: 'workflow'
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

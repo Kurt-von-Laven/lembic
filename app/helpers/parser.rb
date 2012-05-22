@@ -46,8 +46,8 @@ class Parser
   def error_inspect (array)
     ret = ""
     array.each do |a|
-      if a.instance_of?(Expression) then
-        ret << "..."
+      if a.instance_of?(Expression) || Parser.token_type(a) == :expression then
+        ret << "."
       else
         ret << a.to_s
       end
@@ -86,24 +86,48 @@ class Parser
   # it returns a string describing the error, intended for human consumption.
   def get_error_analysis (err)
     error_messages = []
-    unparseables = err.split("...")
+    unparseables = err.split(".")
     err_string = unparseables.join("#")
-    puts err_string
     paren_error = get_paren_mismatch_error(err_string);
+    
+    #check for mismatched parentheses
     if paren_error
       error_messages << paren_error
+    end
+    
+    # KNOWN ISSUE: if the formula has multiple array references, only the first will be checked for errors.
+    # This isn't so bad, because if an array reference isn't parsed, it either means that the array was malformed or
+    # an subexpression of one of the indices was malformed.
+    
+    #check for bad array variable references
+    array_call = err_string.match(/#\[.*\]/)
+    if array_call && !array_call.to_s.match(/\[[^,\|]+(,[^,\|]+)*\]/)
+      error_messages << "malformed array index"
+    end
+    
+    if err_string.match(/:#:/)
+      error_messages << "expected `;` but was `:`"
+    end
+    if err_string.match(/;#;/)
+      error_messages << "expected `:` but was `;`"
+    end
+    if err_string.match(/;;/)
+      error_messages << "expected `;` but was `;;`"
+    end
+    if err_string.match(/::/)
+      error_messages << "expected `:` but was `::`"
     end
     unparseables.each do |u|
       if u.match(/[\+\-\/\*%\^]/)
         error_messages << "operator `#{u}` expects an expression on either side"
       end
+      
       if u.match(/}/) && !u.match(/;}/)
         error_messages << "expected `;` before `}`"
       end
       if u.match(/,\]/)
         error_messages << "extraneous `,` before `]`"
       end
-      
     end
     return error_messages.join(", ") if error_messages.length > 0
     return nil

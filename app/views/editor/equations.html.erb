@@ -39,15 +39,14 @@
         <%= f.label(:array, "Is this an array?") %>
       </div>
     </div>
+    <%= render(:partial => 'flash_message', :locals => {:flash_symbol => :variable_not_saved, :tag => 'div', :class_name => 'error'}) %>
     <div id = "expression">
       <%= f.text_field(:name) %> = 
       <%= f.text_area(:expression_string) %>
     </div>
-	
-	<%= render(:partial => 'flash_message', :locals => {:flash_symbol => :variable_not_saved, :tag => 'div', :class_name => 'error'}) %>
-	 <div style="text-align: center">
-		<%= f.submit("Create Equation", :class => "button") %>
-	 </div>
+    <div style="text-align: center">
+      <%= f.submit("Create Equation", :class => "button") %>
+    </div>
 <% end %>
 
             </div>

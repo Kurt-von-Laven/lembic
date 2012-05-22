@@ -32,7 +32,7 @@ class EditorController < ApplicationController
     if !variable.nil?
       variable.destroy
     end
-    redirect_to equations_path
+    redirect_to :back
   end
   
   def delete_relationship
@@ -42,7 +42,7 @@ class EditorController < ApplicationController
       variable.expression_object = nil
       variable.save
     end
-    redirect_to equations_path
+    redirect_to :back
   end
   
 end

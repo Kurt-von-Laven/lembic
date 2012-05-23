@@ -72,6 +72,32 @@ class Evaluator
       end
       return min
     
+    elsif function_name == "DAY"
+      if params.length != 1
+        raise ArgumentError, "Wrong number of arguments to DAY: expected 1 but found #{params.length}."
+      end
+      begin
+        datetime = Time.at(params[0]).utc
+        puts "IN DAY: params[0] = #{params[0]}, datetime = #{datetime}"
+      rescue ArgumentError
+        raise ArgumentError, "Argument of DAY must be a date or number."
+      end
+      daynum = datetime.wday
+      if daynum == 0
+        return :Sunday
+      elsif daynum == 1
+        return :Monday
+      elsif daynum == 2
+        return :Tuesday
+      elsif daynum == 3
+        return :Wednesday
+      elsif daynum == 4
+        return :Thursday
+      elsif daynum == 5
+        return :Friday
+      elsif daynum == 6
+        return :Saturday
+      end
     end
     return nil
   end
@@ -157,13 +183,13 @@ class Evaluator
         return exp.to_f
       elsif exp.match(/^\d\d\d\d_\d\d_\d\d_\d\d_\d\d_\d\d$/)
         #exp is a date and time
-        return DateTime.strptime(exp, "%Y_%m_%d_%H_%M_%S").to_time.to_f
+        return DateTime.strptime(exp+" +0", "%Y_%m_%d_%H_%M_%S %z").to_time.to_f
       elsif exp.match(/^\d\d\d\d_\d\d_\d\d$/)
         #exp is a date
-        return DateTime.strptime(exp, "%Y_%m_%d").to_time.to_f
+        return DateTime.strptime(exp+"_00_00_00 +0", "%Y_%m_%d_%H_%M_%S %z").to_time.to_f
       elsif exp.match(/^\d\d\_\d\d_\d\d$/)
         #exp is a time
-        return DateTime.strptime("1970_01_01_"+exp, "%Y_%m_%d_%H_%M_%S").to_time.to_f
+        return DateTime.strptime("1970_01_01_"+exp+" +0", "%Y_%m_%d_%H_%M_%S %z").to_time.to_f
       else
         #exp is a variable
         if !indices.nil? && !indices[exp].nil?

@@ -152,7 +152,7 @@
 		<%= render(:partial => 'flash_message', :locals => {:flash_symbol => :variable_not_saved, :tag => 'div', :class_name => 'error'}) %>
 		<div>
 		  <%= f.label(:data_file, "Select a CSV file.") %>
-		  <%= f.file_field(:data_file) %>
+		  <%= f.file_field(:data_file, :class => "choose_file") %>
 		</div>
 	</div>
     <div style="text-align: center">

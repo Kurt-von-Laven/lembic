@@ -7,7 +7,7 @@
   </tr>
   <% for variable in @variables %>
     <tr>
-      <td class="preserve_whitespace"><%= truncate(variable.name, :length =>17) %> = <%=variable.expression_string %></td>
+      <td class="preserve_whitespace"><%= variable.name %> = <%=truncate(variable.expression_string, :length =>17) %></td>
       <td class="delete">
         <%= button_to "Delete this equation", "#{delete_relationship_path}?id=#{variable.id}",
            {:confirm => "Are you sure you want to delete the equation for the variable named #{variable.name}?",

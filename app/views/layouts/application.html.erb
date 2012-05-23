@@ -73,7 +73,14 @@
                 
                 $( ".button" ).button();
                 
-                $("table").tablesorter();
+                $("table").tablesorter({
+                    headers:{
+                        4: {
+                            sorter:false
+                        }
+                    }
+                
+                });
                 
                 $("#sortable").sortable();
                 $("#sortable").disableSelection();

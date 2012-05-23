@@ -8,13 +8,15 @@
 </script>
       
 <h1>Equation Editor</h1>
-
+<%= render(:partial => 'flash_message', :locals => {:flash_symbol => :variable_not_saved, :tag => 'div', :class_name => 'error'}) %>
 <div id="tabs">
   <ul>
     <li><a href="#tabs-1">Create Magical Anything You Feel Like</a></li>
     <li><a href="#tabs-2">Create Event</a></li>
     <li><a href="#tabs-3">Upload Array</a></li>
   </ul>
+  
+  <!--- CREATE VARIABLE -->
   <div id="tabs-1">
     <%= form_for(:new_equation, :html => {:class => "input_form"}) do |f| %>
     <div id="var_input_block">
@@ -32,7 +34,6 @@
         <%= f.label(:array, "Is this an array?") %>
       </div>
     </div>
-    <%= render(:partial => 'flash_message', :locals => {:flash_symbol => :variable_not_saved, :tag => 'div', :class_name => 'error'}) %>
     <div id = "expression">
       <%= f.text_field(:name) %> = 
       <%= f.text_area(:expression_string) %>
@@ -44,7 +45,7 @@
 
             </div>
             
-            
+     <!-- CREATE EVENT -->       
 			<div id="tabs-2">
             <%= form_for(:event, :html => {:class => "input_form"}) do |f| %>
     <div id="var_input_block">
@@ -124,6 +125,9 @@
 
 
             </div>
+            
+            
+        <!--CREATE ARRAY -->
 			<div id="tabs-3">
             <%= form_for(:new_constant_array, :html => {:multipart => true, :class => "input_form"}) do |f| %>
   <div id="var_input_block">
@@ -148,8 +152,6 @@
 		  <%= f.label(:start_row, "First row of array ") %>
 		  <%= f.text_field(:start_row, :class => "numeric_input") %>  <span style="color: #1e3652">e.g., 1 for the top-most row </span>
 		</div>
-		
-		<%= render(:partial => 'flash_message', :locals => {:flash_symbol => :variable_not_saved, :tag => 'div', :class_name => 'error'}) %>
 		<div>
 		  <%= f.label(:data_file, "Select a CSV file.") %>
 		  <%= f.file_field(:data_file, :class => "choose_file") %>

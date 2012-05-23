@@ -37,76 +37,12 @@ body {
     font-size: 1em !important;
 }
 
-#tabs {
-    font-size: 1em !important;
+#choose_file{
+    text-align: center;
 }
-#login_title{
-	float: left;
-	width: 15%;
-	margin: 10px 0 0px 200px;
-	padding: 0 10px 0 10px;
-	color: #1e3652;
-	font-size: 3em;
-	background: #fff;
-}
-#register_title{
-	float: left;
-	width: 50%;
-	margin: 10px 0 0px 150px;
-	padding: 0 0px 0 10px;
-	color: #1e3652;
-	font-size: 3em;
-	background: #fff;
-}
-#register_form{
-border-radius:10px;
-    -moz-border-radius:10px; /* Firefox 3.6 and earlier */
-	border: 1px solid;
-	border-color: #1e3652;
-	color: #1e3652;
-	width: 70%;
-	margin-top: 50px;
-	margin-left: auto;
-	margin-right: auto;
-	margin-bottom: 50px;
-	text-align: left;
-	padding: 30px 10px 10px 10px;
-}
-#register_form div {
-	margin: 0 0 10px 0;
-	text-align: left;
-}
-#register_form label{
-	width: 120px;
-	display: block;
-	float: left;
-	text-align: left;
-	margin: 0 50px 0 20px;
-}
-.login_form{
-	border-radius:10px;
-    -moz-border-radius:10px; /* Firefox 3.6 and earlier */
-	border: 1px solid;
-	border-color: #1e3652;
-	color: #1e3652;
-	width: 50%;
-	margin-top: 50px;
-	margin-left: auto;
-	margin-right: auto;
-	margin-bottom: 50px;
-	text-align: left;
-	padding: 30px 10px 10px 10px;
-}
-.login_form div {
-	margin: 0 0 10px 0;
-	text-align: left;
-}
-.login_form label{
-	width: 50px;
-	display: block;
-	float: left;
-	text-align: left;
-	margin: 0 50px 0 20px;
+
+.comment{
+    color: #1e3652;
 }
 
 #container {
@@ -118,6 +54,7 @@ border-radius:10px;
     -moz-border-radius:10px; /* Firefox 3.6 and earlier */
 	background-color:#dee6ed;
 }
+
 #content {
 	margin: 10px;
 	padding:15px;
@@ -126,6 +63,25 @@ border-radius:10px;
     -moz-border-radius:10px; /* Firefox 3.6 and earlier */
 	background-color: #fff;
     font-family: Garamond, Baskerville, "Times New Roman", serif;
+}
+
+#date_range {
+	margin-left: 50px;
+}
+
+.delete {
+  text-align: center;
+  width: 20px;
+}
+
+.delete button {
+  width: 20px !important;
+  height: 20px;
+  margin: 10px;
+}
+
+.error {
+    color: red;
 }
 
 #expression { 
@@ -144,32 +100,12 @@ border-radius:10px;
 #expresion > text_field {
 	text-align: left;
 }
-#var_input_block{
-	margin: auto;
-	width: 80%;
-	text-align: left;
-	padding: 0px 20px 10px 20px;
-}
 
-
-
-.input_form{
-	border-radius:10px;
-    -moz-border-radius:10px; /* Firefox 3.6 and earlier */
-	border-color: #ccc;
-	padding: 20px;
-	margin: 10px;
-}
-.input_form div {
-	margin: 5px;
-	text-align: left;
-}
-.input_form label{
-	width: 200px;
-	display: block;
-	float: left;
-	text-align: left;
-	margin: 0 0 0 50px;
+#home {
+	height: 100px;
+	padding: 100px;
+	text-align: center;
+	font-size: 2em;
 }
 
 h1 {
@@ -196,40 +132,70 @@ h3 {
     -moz-border-radius:10px; /* Firefox 3.6 and earlier */
 }
 
-
-.login {
-    width:200px;
-    float:left;
+.input_form{
+	border-radius:10px;
+    -moz-border-radius:10px; /* Firefox 3.6 and earlier */
+	border-color: #ccc;
+	padding: 20px;
+	margin: 10px;
 }
-
-ul {
-  list-style-type: none;
-  padding-left: 0px;
+.input_form div {
+	margin: 5px;
+	text-align: left;
+}
+.input_form label{
+	width: 200px;
+	display: block;
+	float: left;
+	text-align: left;
+	margin: 0 0 0 50px;
 }
 
 li {
   display: inline;
 }
 
-
-#home {
-	height: 100px;
-	padding: 100px;
-	text-align: center;
-	font-size: 2em;
+.login {
+    width:200px;
+    float:left;
 }
 
-.sortable ul{
-    list-style-type: cicle; !important
-    padding-left:2px;
+.login_form{
+	border-radius:10px;
+    -moz-border-radius:10px; /* Firefox 3.6 and earlier */
+	border: 1px solid;
+	border-color: #1e3652;
+	color: #1e3652;
+	width: 50%;
+	margin-top: 50px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 50px;
+	text-align: left;
+	padding: 30px 10px 10px 10px;
+}
+.login_form div {
+	margin: 0 0 10px 0;
+	text-align: left;
+}
+.login_form label{
+	width: 50px;
+	display: block;
+	float: left;
+	text-align: left;
+	margin: 0 50px 0 20px;
 }
 
-.sortable li{
-    display: list-item;
+#login_title{
+	float: left;
+	width: 15%;
+	margin: 10px 0 0px 200px;
+	padding: 0 10px 0 10px;
+	color: #1e3652;
+	font-size: 3em;
+	background: #fff;
 }
-#date_range {
-	margin-left: 50px;
-}
+
 #menu {
     width:750px;
     padding:10px;
@@ -251,8 +217,91 @@ li {
     padding-right: 15px;
 }
 
+.preserve_whitespace {
+    white-space: pre;
+}
+
 .register {
    text-align:center;
+}
+
+
+#register_title{
+	float: left;
+	width: 50%;
+	margin: 10px 0 0px 150px;
+	padding: 0 0px 0 10px;
+	color: #1e3652;
+	font-size: 3em;
+	background: #fff;
+}
+
+#register_form{
+border-radius:10px;
+    -moz-border-radius:10px; /* Firefox 3.6 and earlier */
+	border: 1px solid;
+	border-color: #1e3652;
+	color: #1e3652;
+	width: 70%;
+	margin-top: 50px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 50px;
+	text-align: left;
+	padding: 30px 10px 10px 10px;
+}
+#register_form div {
+	margin: 0 0 10px 0;
+	text-align: left;
+}
+#register_form label{
+	width: 120px;
+	display: block;
+	float: left;
+	text-align: left;
+	margin: 0 50px 0 20px;
+}
+
+#repeating{
+    color: #1e3652;
+}
+.sortable ul{
+    list-style-type: cicle; !important
+    padding-left:2px;
+}
+
+.sortable li{
+    display: list-item;
+}
+
+#slider-style {
+    width: 70%; 
+    margin-left: 40px
+}
+
+.success {
+    color: green;
+}
+
+#tabs {
+    font-size: 1em !important;
+}
+
+/* tables */
+
+table.tablesorter thead tr .header {
+	background-image: url(bg.gif);
+	background-repeat: no-repeat;
+	background-position: center right;
+	cursor: pointer;
+} 
+
+table.tablesorter thead tr .headerSortUp {
+	background-image: url(asc.gif);
+}
+
+table.tablesorter thead tr .headerSortDown {
+	background-image: url(desc.gif);
 }
 
 table {
@@ -263,13 +312,6 @@ table {
     border-radius: 6px 6px 6px 6px;
 }
 
-th {
-    color:  #5c7e99;
-    padding: 18px;
-    text-align: left;
-}
-
-
 td {
     background-color: #e9f2f9;
     border-top:2px solid #fff;
@@ -277,53 +319,42 @@ td {
     border-spacing: 0px;
     padding-left: 10px;
 }
+
+th {
+    color:  #5c7e99;
+    padding: 18px;
+    text-align: left;
+}
+
+#time {
+    border:0; 
+    color:#f6931f; 
+    font-weight:bold
+}
+
 tr td:first-child  {
   -moz-border-radius: 0 0 0 6px;
     border-radius: 0 0 0 6px;
 }
+
 tr td:last-child  {
   -moz-border-radius: 0 0 6px 0;
     border-radius: 0 0 6px 0;
 }
 
-.delete {
-  text-align: center;
-  width: 20px;
+ul {
+  list-style-type: none;
+  padding-left: 0px;
 }
 
-.delete button {
-  width: 20px !important;
-  height: 20px;
-  margin: 10px;
+#upload{
+    text-align: center;
 }
 
-.preserve_whitespace {
-    white-space: pre;
+#var_input_block{
+	margin: auto;
+	width: 80%;
+	text-align: left;
+	padding: 0px 20px 10px 20px;
 }
-
-.success {
-    color: green;
-}
-
-.error {
-    color: red;
-}
-
-/* tables */
-
-table.tablesorter thead tr .header {
-	background-image: url(bg.gif);
-	background-repeat: no-repeat;
-	background-position: center right;
-	cursor: pointer;
-    
-
-}
-table.tablesorter thead tr .headerSortUp {
-	background-image: url(asc.gif);
-}
-table.tablesorter thead tr .headerSortDown {
-	background-image: url(desc.gif);
-}
-
 

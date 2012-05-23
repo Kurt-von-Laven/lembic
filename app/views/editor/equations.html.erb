@@ -59,9 +59,9 @@
         <!-- Slider -->
         <div>
             <label for="time">Time range (in military time):</label>
-            <input type="text" id="time" style="border:0; color:#f6931f; font-weight:bold;" />
+            <input type="text" id="time" />
         </div>
-		<div style="width: 70%; margin-left: 40px">
+		<div id="slider-style">
 			<div id="slider-range"></div>
         </div>
 		<br>
@@ -79,7 +79,7 @@
 				<div><input type="text" class="datepicker"></input></div>
           </div>
 		  <br>
-		  <div style="color: #1e3652"> 
+		  <div id="repeating"> 
 			Repeat every
 		  </div>
 		  <div id = "date_range">
@@ -146,18 +146,19 @@
 		</div>
 		<div>
 		  <%= f.label(:column_number, "First column of array ") %>
-		  <%= f.text_field(:column_number, :class => "numeric_input") %>  <span style="color: #1e3652">e.g., 1 for the left-most column </span>
+		  <%= f.text_field(:column_number, :class => "numeric_input") %>  <span class="comment">e.g., 1 for the left-most column </span>
 		</div>
 		<div>
 		  <%= f.label(:start_row, "First row of array ") %>
-		  <%= f.text_field(:start_row, :class => "numeric_input") %>  <span style="color: #1e3652">e.g., 1 for the top-most row </span>
+		  <%= f.text_field(:start_row, :class => "numeric_input") %>  <span class = "comment">e.g., 1 for the top-most row </span>
 		</div>
-		<div>
+        <br />
+		<div id="choose_file">
 		  <%= f.label(:data_file, "Select a CSV file.") %>
 		  <%= f.file_field(:data_file, :class => "choose_file") %>
 		</div>
 	</div>
-    <div style="text-align: center">
+    <div id="upload">
       <%= f.submit("Upload Array", :id => "file_upload_submit", :class => "button") %>
     </div>
 

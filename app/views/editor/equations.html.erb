@@ -177,8 +177,8 @@
     <tr>
       <td class="preserve_whitespace"><%= variable.name %> = <%= truncate(variable.expression_string, :length => 75, :omission => '... (continued)') %></td>
       <td class="delete">
-        <%= button_to "Delete this relationship", "#{delete_relationship_path}?id=#{variable.id}",
-           {:confirm => "Are you sure you want to delete the relationship for the variable named #{variable.name}?",
+        <%= button_to "Delete this equation", "#{delete_relationship_path}?id=#{variable.id}",
+           {:confirm => "Are you sure you want to delete the equation for the variable named #{variable.name}?",
             :method => :delete} %>
       </td>
     </tr>

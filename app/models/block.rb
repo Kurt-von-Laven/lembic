@@ -5,5 +5,6 @@ class Block < ActiveRecord::Base
   
   has_many :block_inputs
   has_many :block_connections
+  belongs_to :workflow
   
 end

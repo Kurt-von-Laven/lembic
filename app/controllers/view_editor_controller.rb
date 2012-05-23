@@ -6,7 +6,7 @@ class ViewEditorController < ApplicationController
       if !form_hash.nil?
         
         # Create a block with the specified name
-        block_hash = {:name => form_hash[:name]}
+        block_hash = {:name => form_hash[:name], :workflow_id => session[:user_id]}
         block = Block.create(block_hash)
         
         # Iterate through lines in the inputs string
@@ -22,6 +22,8 @@ class ViewEditorController < ApplicationController
           block.block_inputs.create({:variable => variable_name, :sort_index => 0})
         end
         
+        parser = Parser.new
+        
         # Iterate through lines in the connections string
         form_hash[:connections_string].lines do |line|
 
@@ -31,10 +33,12 @@ class ViewEditorController < ApplicationController
             next
           end
           next_block = tokens[0].strip
-          expression = tokens[1].strip
+          expression_string = tokens[1].strip
+          
+          expression_object = parser.parse(expression_string) # TODO: Catch and handle parser errors.
           
           # Create a block connection with the specified next_block and expression
-          block_connection_hash = {:next_block => next_block, :expression => expression}
+          block_connection_hash = {:next_block => next_block, :expression_string => expression_string, :expression_object => expression_object}
           block.block_connections.create(block_connection_hash)
         end
       end

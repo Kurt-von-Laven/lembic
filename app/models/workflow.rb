@@ -11,4 +11,7 @@ class Workflow < ActiveRecord::Base
   has_many :users, :through => :permissions
   # validates_associated :permissions
   
+  has_many :blocks
+  # validates_associated :blocks
+  
 end

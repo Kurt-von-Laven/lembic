@@ -78,7 +78,6 @@ class Evaluator
       end
       begin
         datetime = Time.at(params[0]).utc
-        puts "IN DAY: params[0] = #{params[0]}, datetime = #{datetime}"
       rescue ArgumentError
         raise ArgumentError, "Argument of DAY must be a date or number."
       end
@@ -98,6 +97,18 @@ class Evaluator
       elsif daynum == 6
         return :Saturday
       end
+      
+    elsif function_name == "MONTH"
+      if params.length != 1
+        raise ArgumentError, "Wrong number of arguments to MONTH: expected 1 but found #{params.length}."
+      end
+      begin
+        datetime = Time.at(params[0]).utc
+      rescue ArgumentError
+        raise ArgumentError, "Argument of MONTH must be a date or number."
+      end
+      return datetime.month
+    
     end
     return nil
   end

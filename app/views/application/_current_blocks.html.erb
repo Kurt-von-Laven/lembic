@@ -24,7 +24,7 @@
 	  <!--Concat block_connection fields into a string -->
 	  <% connections = ""%>
 	  <% for bc in block.block_connections %>
-		<% conn_str = bc.next_block + " => " + bc.expression %>
+		<% conn_str = bc.next_block + " => " + bc.expression_string %>
 		<% connections += conn_str + ", " %>
 	  <% end %>
 	  <% connections = connections.strip.chomp(",") %>

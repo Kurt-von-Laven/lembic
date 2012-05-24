@@ -48,25 +48,28 @@ Example: 'AC_Block => has_ac == true' or 'FINISH => 1'
 
 
 
-<h3> TODO PRINT ALL OUTPUTS ALREADY ASSIGNED </h3>
+<%= render "current_output_blocks" %>
 
 <h3> Done Creating Blocks? Choose Output </h3>
 
 
 
-<%= form_for(:outputs) do |f| %>
-<div>
-            <%= f.label(:output_variables, "Output these variables: ") %>
-            <%= f.text_area (:output_variables) %>
-</div>
-<div>   
-            <%= f.label(:show_as_type, "Display Type:") %>
-            <%= f.select(:show_as_type, [['Graph', 'graph'], ['Integer',
-            'integer'], ['Percentage', 'percent']]) %>
+<%= form_for(:create_output_block_form) do |f| %>
+	<div>
+		<%= f.label(:name, "Name of Block: ") %><br/>
+		<%= f.text_field :name %><br/>
+		
+		<%= f.label(:outputs_string, "Output these variables: ") %><br/>
+		<%= f.text_area (:outputs_string) %><br/>
+	</div>
+	<div>   
+		<%= f.label(:display_type, "Display Type:") %><br/>
+		<%= f.select(:display_type, [['Graph', 'graph'], ['Integer',
+            'integer'], ['Percentage', 'percent']]) %><br/>
     <!--</p>
     <p>-->
-</div>
-            <%= f.submit('Add Output', :class => "button") %>
+	</div>
+	<%= f.submit('Add Output', :class => "button") %><br/>
 <% end %>
 
 

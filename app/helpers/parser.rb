@@ -254,7 +254,7 @@ class Parser
         ### NEGATIVE NUMBERS ###
         
         matches = matching_tokens(tokens, currtoken, ParserPatterns.negative_expressions_pattern)
-        if matches[:matched] && (currtoken == 0 || (tokens[currtoken-1].instance_of?(String) && tokens[currtoken-1].match(/^[\{\(\[\+\-\*\/\^%;:,]$/))) then
+        if matches[:matched] && (currtoken == 0 || (tokens[currtoken-1].instance_of?(String) && tokens[currtoken-1].match(/^[\{\(\[\+\-\*\/\^%;:,\|]$/))) then
           tokens[currtoken..currtoken+1] = Expression.new("-", ["0", tokens[currtoken+1]])
           loops_since_made_progress = 0
           made_progress = true

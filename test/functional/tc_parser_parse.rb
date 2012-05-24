@@ -72,6 +72,7 @@ class TestParserParse < Test::Unit::TestCase
     assert_equal( "[](var, -(0, 1))" , @p.prefix_form("var[-1]") )
     assert_equal( "CASE(-(0, 1), 2)" , @p.prefix_form("{-1:2;}") )
     assert_equal( "CASE(-(0, 1), 2, 3, -(0, 4))" , @p.prefix_form("{-1:2;3:-4;}") )
+    assert_equal( "ARRAY(i, -(0, 1), -(0, 2), -(0, 3))" , @p.prefix_form("[i|-1,-2,-3]") )
   end
   
   def test_single_number_expression

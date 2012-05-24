@@ -13,6 +13,8 @@ Lembic::Application.routes.draw do
   match '/equation_editor/delete_relationship', to: 'editor#delete_relationship', as: 'delete_relationship'
   match '/evaluator', to: 'workflow#evaluate', as: 'evaluator'
   match '/workflow', to: 'workflow#expert_workflow', as: 'workflow'
+    
+    match '/fullvariable', to: 'editor#full_variable', as: 'fullvariable'
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

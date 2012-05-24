@@ -8,6 +8,7 @@
     <th>Description</th>
     <th>Type</th>
 	<th>Equation</th>
+    <th></th>
 	<th></th>
   </tr>
 </thead>
@@ -17,7 +18,12 @@
         <td><%= variable.name %> </td>
         <td><%= variable.description %></td>
 		<td><%= variable.variable_type_string %>
-		<td><%= variable.name %> = <%= truncate(variable.expression_string, :length =>17) %></td>
+		<td><%= variable.name %> = <%= truncate(variable.expression_string, :length =>17, :omission => '...(continued)') %></td>
+        <td>
+        
+        <%= link_to "Show Me!", fullvariable_path(:name => variable.name), :popup => true %>
+        
+        </td>
 		<td align="center">
 		<%= button_to "x", "#{delete_variable_path}?id=#{variable.id}",
 		{:confirm => "Are you sure you want to delete the variable named #{variable.name}?",

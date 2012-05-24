@@ -44,5 +44,9 @@ class EditorController < ApplicationController
     end
     redirect_to :back
   end
+    
+    def full_variable
+        @var = Variable.where(:name => params[:name], :workflow_id => session[:user_id]).first
+    end
   
 end

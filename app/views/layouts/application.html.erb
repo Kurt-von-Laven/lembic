@@ -23,7 +23,7 @@
 
 				// Dialog
 				$('#dialog').dialog({
-					autoOpen: false,
+					autoOpen: true,
 					width: 600,
 					buttons: {
 						"Ok": function() {
@@ -50,8 +50,8 @@
                     $( "#datepicker" ).datepicker( "option", "dateFormat", $( this ).val() );
                 });
                 
-                $("#hide").click(function(){
-                    $("#hello").toggle();
+                $(".hide").click(function(){
+                    $(".hello").toggle();
                 });
 
 				// Slider
@@ -101,6 +101,8 @@
 
                 
                 $('select').selectmenu();
+                
+                
 
 			});
 

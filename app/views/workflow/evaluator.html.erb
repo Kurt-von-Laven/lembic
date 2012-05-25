@@ -4,10 +4,12 @@
 <%= render "current_variables" %>
 
 <%= render "current_equations" %>
-
+  <p>Enter input variables in this form: {'varName' => value, 'varName2' => value2}</p>
+  <p>Enter output variables in this form: [{:name => 'varName'}, {:name => 'varName2'}]</p>
+  <p>Specify array outputs with min and max indices in this form: {:name => 'varName', :indices => {:min => 0, :max => 8759}}</p>
   <table>
     <tr>
-      <th>Enter your variables in this form: {'varName' => value, 'varName2' => value2}</th>
+      <th>Input</th>
       <th>Output</th>
     </tr>
     
@@ -15,9 +17,10 @@
       <td>
         <%= form_for(:evaluator) do |f| %>
           <div>
-            <%= f.label(:output_variable, "Variable to Solve For") %>
-            <%= f.text_field :output_variable %>
-            <%= f.text_area :input_values %>
+            <%= f.label(:input_variables, "Input Variable Values") %><br/>
+            <%= f.text_area :input_values %><br/>
+            <%= f.label(:output_variables, "Variables to Solve For") %><br/>
+            <%= f.text_area :output_variables %><br/>
             <%= f.submit('Run Model', :class => "button") %>
           </div>
         <% end %>

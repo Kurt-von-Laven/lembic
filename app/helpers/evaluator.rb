@@ -109,6 +109,17 @@ class Evaluator
       end
       return datetime.month
     
+    elsif function_name == "HOUR"
+      if params.length != 1
+        raise ArgumentError, "Wrong number of arguments to HOUR: expected 1 but found #{params.length}."
+      end
+      begin
+        datetime = Time.at(params[0]).utc
+      rescue ArgumentError
+        raise ArgumentError, "Argument of HOUR must be a date or number."
+      end
+      return datetime.hour
+    
     end
     return nil
   end

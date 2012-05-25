@@ -170,6 +170,7 @@ class TestParserParse < Test::Unit::TestCase
     assert_equal( 0, @e.eval_expression(@p.parse("0&&1"), nil, nil) )
     assert_equal( 0, @e.eval_expression(@p.parse("1&&0"), nil, nil) )
     assert_equal( 1, @e.eval_expression(@p.parse("1&&1"), nil, nil) )
+    assert_equal( 1, @e.eval_expression(@p.parse("1&&1&&1&&1&&1"), nil, nil) )
     #boolean or
     assert_equal( 0, @e.eval_expression(@p.parse("0||0"), nil, nil) )
     assert_equal( 1, @e.eval_expression(@p.parse("0||1"), nil, nil) )
@@ -202,6 +203,7 @@ class TestParserParse < Test::Unit::TestCase
     assert_equal( 2, @e.eval_expression(@p.parse("{3<2:4;else:2;}"), nil, nil))
     assert_equal( 2, @e.eval_expression(@p.parse("{else:2;}"), nil, nil))
     assert_equal( 0, @e.eval_expression(@p.parse("{3<2:4;}"), nil, nil))
+    assert_equal( 0, @e.eval_expression(@p.parse("{3<2:4;}"), nil, nil))    
   end
   
   def test_evaluator_builtin_functions

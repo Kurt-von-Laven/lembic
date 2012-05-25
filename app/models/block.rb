@@ -3,8 +3,8 @@ class Block < ActiveRecord::Base
   
   validates_presence_of :name, :workflow_id, :display_type
   
-  has_many :block_inputs
-  has_many :block_connections
+  has_many :block_inputs, :dependent => :destroy
+  has_many :block_connections, :dependent => :destroy
   belongs_to :workflow
   
 end

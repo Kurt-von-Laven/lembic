@@ -8,6 +8,7 @@
     <th>Name</th>
 	<th>Outputs</th>
 	<th>Display Type</th>
+	<th><!--Delete --></th>
   </tr>
 </thead>
 
@@ -36,8 +37,11 @@
 	  <!--Get display_type -->
 	  <% display_type = block.display_type %>
 	
+	  <!--Generate HTML for a delete button -->
+	  <% buttonHTML = button_to "Delete", delete_block_path(block.id), :confirm => "Are you sure?", :method => :delete %>
+	  
 	  <!--Render this block in HTML -->
-      <tr><td><%=name %></td><td><%=inputs %></td><td><%=display_type %></td></tr>
+      <tr><td><%=name %></td><td><%=inputs %></td><td><%=display_type %></td><td><%=buttonHTML %></td></tr>
 	<% end %>
 	
 </tbody>  

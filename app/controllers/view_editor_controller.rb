@@ -5,11 +5,12 @@ class ViewEditorController < ApplicationController
       form_hash = params[:create_block_form]
       if !form_hash.nil?
         
+        #### BUG: this code for creating blocks doesn't work right now
         # Create a block with the specified name and workflow_id
         name = form_hash[:name]
         workflow_id = session[:user_id]
         display_type = nil # display_type is nil for regular input blocks
-        block = Block.create({:name => name, :workflow_id => workflow_id, :display_type => display_type})
+        Block.create({:name => name, :workflow_id => workflow_id, :display_type => display_type})
       end
       
       ## Check for form data for creating a block_input
@@ -121,6 +122,17 @@ class ViewEditorController < ApplicationController
 
   def edit_question
       @variables = Variable.where(:workflow_id => session[:user_id]).order(:name)
+  end
+  
+  # Delete a block by id
+  def delete_block
+    #begin
+      block = Block.find(params[:id])
+      block.destroy
+    #rescue RecordNotFound => e
+    #  logger.debug "Block not found by id"
+    #end
+    redirect_to :back
   end
   
 end

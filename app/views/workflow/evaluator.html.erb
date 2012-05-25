@@ -29,7 +29,11 @@
         <td>
           <ul>
             <% for variable_name, variable_result in @results %>
+              <% if variable_result[:values] %>
+              <li><%= variable_name %>: <%= variable_result[:values].inspect %></li>
+              <% else %>
               <li><%= variable_name %>: <%= variable_result[:value] %></li>
+              <% end %>
             <% end %>
           </ul>
         </td>

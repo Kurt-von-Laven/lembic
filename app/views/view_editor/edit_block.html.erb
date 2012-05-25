@@ -9,44 +9,67 @@
 
 
 <h3> Create A Block </h3>
- <%= form_for(:create_block_form) do |f| %>
- <div>
-            <%= f.label(:name, "Name of Block: ") %><br/>
-            <%= f.text_field :name %>
-    
- </div>
-<div>
-            <%= f.label(:inputs_string, "Measure these variables, one per line: ") %><br/>
-            <%= f.text_area :inputs_string %>
-</div>
-<div>
-            <%= f.label(:connections_string, "Block connections, one per line:\nExample: 'AC_Block => has_ac == true' or 'FINISH => 1'") %><br/>
-            <%= f.text_area :connections_string %>
-</div>
-            <%= f.submit('Create Block', :class => "button") %>         
+You can add input variables and connections later.<br/>
+<%= form_for(:create_block_form) do |f| %>
+	<div>
+		<%= f.label(:name, "Name of Block: ") %><br/>
+		<%= f.text_field :name %><br/>
+	</div>
+	<%= f.submit('Create Block', :class => "button") %><br/>
+<% end %>
+
+<h3>Add input variables to a block</h3>
+Enter names of input variables to prompt for in this block, one per line.<br/>
+<%= form_for(:create_block_inputs_form) do |f| %>
+	<div>
+		<%= f.label(:block_name, "Name of block this is for: ") %><br/>
+		<%= f.text_field :block_name %><br/>
+		
+		<%= f.label(:inputs_string, "Measure these variables: ") %><br/>
+		<%= f.text_area :inputs_string %><br/>
+	</div>
+	<%= f.submit("Create Input(s)", :class => "button") %><br/>
+<% end %>
+
+<h3>Add connections to a block</h3>
+Enter connections to get to next block after this one, one per line.<br/>
+Each connection has a block name, an arrow (=>), and a boolean expression<br/>
+Example: 'AC_Block => has_ac == true' or 'FINISH => 1'
+<%= form_for(:create_block_connections_form) do |f| %>
+	<div>
+		<%= f.label(:block_name, "Name of block this is for: ") %><br/>
+		<%= f.text_field :block_name %><br/>
+		
+		<%= f.label(:connections_string, "Block connections, one per line:<br/>") %><br/>
+		<%= f.text_area :connections_string %><br/>
+	</div>
+	<%= f.submit("Create Connection(s)", :class => "button") %><br/>
 <% end %>        
 
 
 
-<h3> TODO PRINT ALL OUTPUTS ALREADY ASSIGNED </h3>
+<%= render "current_output_blocks" %>
 
 <h3> Done Creating Blocks? Choose Output </h3>
 
 
 
-<%= form_for(:outputs) do |f| %>
-<div>
-            <%= f.label(:output_variables, "Output these variables: ") %>
-            <%= f.text_area (:output_variables) %>
-</div>
-<div>   
-            <%= f.label(:show_as_type, "Display Type:") %>
-            <%= f.select(:show_as_type, [['Graph', 'graph'], ['Integer',
-            'integer'], ['Percentage', 'percent']]) %>
-    </p>
-    <p>
-</div>
-            <%= f.submit('Add Output', :class => "button") %>
+<%= form_for(:create_output_block_form) do |f| %>
+	<div>
+		<%= f.label(:name, "Name of Block: ") %><br/>
+		<%= f.text_field :name %><br/>
+		
+		<%= f.label(:outputs_string, "Output these variables: ") %><br/>
+		<%= f.text_area (:outputs_string) %><br/>
+	</div>
+	<div>   
+		<%= f.label(:display_type, "Display Type:") %><br/>
+		<%= f.select(:display_type, [['Graph', 'graph'], ['Integer',
+            'integer'], ['Percentage', 'percent']]) %><br/>
+    <!--</p>
+    <p>-->
+	</div>
+	<%= f.submit('Add Output', :class => "button") %><br/>
 <% end %>
 
 

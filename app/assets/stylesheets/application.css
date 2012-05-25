@@ -101,6 +101,10 @@ body {
 	text-align: left;
 }
 
+#hidden{
+    visibility:hidden;
+}
+
 #home {
 	height: 100px;
 	padding: 100px;

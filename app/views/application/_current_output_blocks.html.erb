@@ -1,4 +1,4 @@
-<h3>Current Blocks</h3>
+<h3>Current Output Blocks</h3>
 
 <table class = "tablesorter">
 
@@ -6,8 +6,8 @@
 <thead>
   <tr>
     <th>Name</th>
-	<th>Inputs</th>
-    <th>Connections</th>
+	<th>Outputs</th>
+	<th>Display Type</th>
 	<th><!--Delete --></th>
   </tr>
 </thead>
@@ -19,21 +19,13 @@
 	<!--TODO: Come up with a better way to display the blocks -->
 	<% for block in @blocks %>
 	
-	  <!--Skip "output" blocks with a non-nil display_type -->
-	  <% if !block.display_type.nil? %>
+	  <!--Skip regular blocks with a nil display_type -->
+	  <% if block.display_type.nil? %>
 		<% next %>
 	  <% end %>
 	
 	  <!--Prepare strings to be displayed in HTML for this block -->
 	  <% name = block.name %>
-	
-	  <!--Concat block_connection fields into a string -->
-	  <% connections = ""%>
-	  <% for bc in block.block_connections %>
-		<% conn_str = bc.next_block + " => " + bc.expression_string %>
-		<% connections += conn_str + ", " %>
-	  <% end %>
-	  <% connections = connections.strip.chomp(",") %>
 	
 	  <!--Concat block_input fields into a string -->
 	  <% inputs = "" %>
@@ -42,11 +34,14 @@
 	  <% end %>
 	  <% inputs = inputs.strip.chomp(",") %>
 	
+	  <!--Get display_type -->
+	  <% display_type = block.display_type %>
+	
 	  <!--Generate HTML for a delete button -->
 	  <% buttonHTML = button_to "Delete", delete_block_path(block.id), :confirm => "Are you sure?", :method => :delete %>
-	
+	  
 	  <!--Render this block in HTML -->
-      <tr><td><%=name %></td><td><%=inputs %></td><td><%=connections %></td><td><%=buttonHTML %></td></tr>
+      <tr><td><%=name %></td><td><%=inputs %></td><td><%=display_type %></td><td><%=buttonHTML %></td></tr>
 	<% end %>
 	
 </tbody>  

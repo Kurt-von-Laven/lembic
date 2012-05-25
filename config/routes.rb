@@ -3,9 +3,10 @@ Lembic::Application.routes.draw do
   root to: 'user#login', as: 'login'
   
   match '/logout', to: 'user#logout', as: 'logout'
-  match '/register', to: 'user#register', as: 'register'
+ 	#match '/register', to: 'user#register', as: 'register'
   match '/view_editor/edit_block', to: 'view_editor#edit_block', as: 'edit_block'
   match '/view_editor/edit_question', to: 'view_editor#edit_question', as: 'edit_question'
+  match '/view_editor/delete_block.:id', to: 'view_editor#delete_block', as: 'delete_block'
   match '/home', to: 'home#home', as: 'home'
   match '/help', to: 'help#help', as: 'help'
   match '/equation_editor/equations', to: 'editor#equations', as: 'equations'
@@ -13,6 +14,10 @@ Lembic::Application.routes.draw do
   match '/equation_editor/delete_relationship', to: 'editor#delete_relationship', as: 'delete_relationship'
   match '/evaluator', to: 'workflow#evaluate', as: 'evaluator'
   match '/workflow', to: 'workflow#expert_workflow', as: 'workflow'
+    
+    match '/fullvariable', to: 'editor#full_variable', as: 'fullvariable'
+    
+  
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

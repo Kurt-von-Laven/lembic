@@ -9,7 +9,6 @@ class Workflow < ActiveRecord::Base
   validates_associated :variables
   
   has_many :users, :through => :permissions
-  validates_associated :users
   
   has_many :blocks
   validates_associated :blocks

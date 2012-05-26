@@ -1,19 +1,17 @@
 require 'csv'
 
 class Variable < ActiveRecord::Base
-  attr_accessible :name, :description, :workflow_id, :variable_type, :array, :created_at, :updated_at, :expression_string, :expression_object
+  attr_accessible :id, :name, :description, :workflow_id, :variable_type, :array, :created_at, :updated_at, :expression_string, :expression_object
   
   validates_presence_of :name, :workflow_id, :variable_type, :array
+  validates_numericality_of :workflow_id, :only_integer => true, :greater_than => 0
+  validates_numericality_of :variable_type, :only_integer => true, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 3
+  validates_numericality_of :array, :only_integer => true, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 1
   
-  validates_uniqueness_of :name, :scope => :workflow_id, :message => 'Variable names must be unique.'
-  
-  validates_inclusion_of :variable_type, :in => 0..3, :message => 'Invalid variable type. If you\'re seeing this message, we goofed.'
-  
-  validates_inclusion_of :array, :in => 0..1, :message => 'That is not a boolean.  What did you DO?!?!'
+  validates_uniqueness_of :name, :scope => :workflow_id
   
   serialize :expression_object
   
-  # validates_associated :workflow
   belongs_to :workflow
   
   INDEX = 'i' # The index used for constant arrays.

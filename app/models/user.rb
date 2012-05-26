@@ -1,12 +1,12 @@
 class User < ActiveRecord::Base
-  attr_accessible :first_name, :last_name, :email, :organization, :pwd_hash, :salt, :created_at, :updated_at
+  attr_accessible :id, :first_name, :last_name, :email, :organization, :pwd_hash, :salt, :created_at, :updated_at
   
   validates_presence_of :first_name, :last_name, :email, :pwd_hash, :salt
   
   validates_uniqueness_of :email
   
   has_many :workflows, :through => :permissions
-  # validates_associated :permissions
+  validates_associated :workflows
   
   SHA512_REGEX = Regexp.new('[a-f0-9]{128}')
   SALT_LENGTH = 128

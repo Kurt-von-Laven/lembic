@@ -39,29 +39,8 @@
 		<%= f.submit('Submit', :class => "button") %>
 				<% end %>
 	</div>
-<<<<<<< HEAD
 </div>
-=======
-	<%= f.submit("Create Input(s)", :class => "button") %><br/>
-<% end %>
 
-<h3>Add connections to a block</h3>
-Enter connections to get to next block after this one, one per line.<br/>
-Each connection has a block name, an arrow (=>), and a boolean expression<br/>
-Example: 'AC_Block => has_ac == true' or 'FINISH => 1'
-<%= form_for(:create_block_connections_form) do |f| %>
-	<div>
-		<%= f.label(:block_name, "Name of block this is for: ") %><br/>
-		<%= f.text_field :block_name %><br/>
-		
-		<%= f.label(:connections_string, "Block connections, one per line:") %><br/>
-		<%= f.text_area :connections_string %><br/>
-	</div>
-	<%= f.submit("Create Connection(s)", :class => "button") %><br/>
-<% end %>        
-
-
->>>>>>> ea2f80801fba3c65269010b48a4f00073d04ba38
 
 <div>
 <%= render "current_output_blocks" %>

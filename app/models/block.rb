@@ -12,7 +12,7 @@ class Block < ActiveRecord::Base
   
   def inputs_string 
 	block_inputs.order(:sort_index)
-	
+	myString = String.new
   end
   
   def inputs_string=(string) 

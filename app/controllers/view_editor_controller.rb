@@ -1,6 +1,7 @@
 class ViewEditorController < ApplicationController
 
   def edit_block
+	@block =  Block.new
       ## Check for form data for creating new block
       form_hash = params[:create_block_form]
       if !form_hash.nil?
@@ -28,6 +29,14 @@ class ViewEditorController < ApplicationController
           # Trim the line to get a variable name
           variable_name = line.strip
           if variable_name.empty? # TODO: get better input validation
+            logger.debug "Empty line in input"
+            next
+          end
+          
+          # Find the variable
+          variable = Variable.find_by_name(variable_name)
+          if variable.nil?
+            logger.debug "Could not find variable '#{variable_name}' by name"
             next
           end
           
@@ -35,7 +44,7 @@ class ViewEditorController < ApplicationController
           sort_index = 0
           
           # Create a block input with the specified variable
-          block.block_inputs.create({:variable => variable_name, :sort_index => sort_index})
+          block.block_inputs.create({:variable_id => variable.id, :sort_index => sort_index})
         end
       end
       
@@ -59,8 +68,15 @@ class ViewEditorController < ApplicationController
           if tokens.length != 2 # TODO: get better input validation
             next
           end
-          next_block = tokens[0].strip
+          next_block_name = tokens[0].strip
           expression_string = tokens[1].strip
+          
+          # Find the next block
+          next_block = Block.find_by_name(next_block_name)
+          if next_block.nil?
+            logger.debug "Could not find next block '#{next_block_name}' by name"
+            next
+          end
           
           # Parse the expression into an object, using parser
           expression_object = parser.parse(expression_string) # TODO: Catch and handle parser errors.
@@ -69,7 +85,7 @@ class ViewEditorController < ApplicationController
           sort_index = 0
           
           # Create a block connection with the specified next_block and expression
-          block_connection_hash = {:next_block => next_block, :expression_string => expression_string, :expression_object => expression_object, :sort_index => sort_index}
+          block_connection_hash = {:next_block_id => next_block.id, :expression_string => expression_string, :expression_object => expression_object, :sort_index => sort_index}
           block.block_connections.create(block_connection_hash)
         end
       end
@@ -101,6 +117,14 @@ class ViewEditorController < ApplicationController
           # Trim the line to get a variable name
           variable_name = line.strip
           if variable_name.empty? # TODO: get better input validation
+            logger.debug "Empty line in input"
+            next
+          end
+          
+          # Find the variable
+          variable = Variable.find_by_name(variable_name)
+          if variable.nil?
+            logger.debug "Could not find variable '#{variable_name}' by name"
             next
           end
           
@@ -108,7 +132,7 @@ class ViewEditorController < ApplicationController
           sort_index = 0
           
           # Create a "block input" with the specified variable
-          block.block_inputs.create({:variable => variable_name, :sort_index => sort_index})
+          block.block_inputs.create({:variable_id => variable.id, :sort_index => sort_index})
         end
       end
       

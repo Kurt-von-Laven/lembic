@@ -11,24 +11,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120526050138) do
+ActiveRecord::Schema.define(:version => 20120527220008) do
 
   create_table "block_connections", :force => true do |t|
     t.string   "expression_string", :limit => 1048576, :null => false
-    t.string   "next_block"
     t.integer  "block_id",                             :null => false
     t.datetime "created_at",                           :null => false
     t.datetime "updated_at",                           :null => false
     t.binary   "expression_object",                    :null => false
     t.integer  "sort_index",                           :null => false
+    t.integer  "next_block_id",                        :null => false
   end
 
   create_table "block_inputs", :force => true do |t|
-    t.integer  "block_id",   :null => false
-    t.string   "variable",   :null => false
-    t.integer  "sort_index", :null => false
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "block_id",    :null => false
+    t.integer  "sort_index",  :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "variable_id", :null => false
   end
 
   create_table "blocks", :force => true do |t|

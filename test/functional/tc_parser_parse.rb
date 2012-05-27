@@ -263,13 +263,28 @@ class TestParserParse < Test::Unit::TestCase
     assert(@e.eval_expression(@p.parse("11_00_00"), {}, {}) > @e.eval_expression(@p.parse("10_59_59"), {}, {}))
     assert_equal(@e.eval_expression(@p.parse("1970_01_01_00_00_00"), {}, {}), @e.eval_expression(@p.parse("00_00_00"), {}, {}))
     assert_equal(@e.eval_expression(@p.parse("2012_12_21_23_59_59"), {}, {}), @e.eval_expression(@p.parse("2012_12_21+23_59_59"), {}, {}))
+    # DAY function
     assert_equal(:Tuesday, @e.eval_expression(@p.parse("DAY[2012_05_22_10_59_59]"), {}, {}))
     assert_equal(1, @e.eval_expression(@p.parse("DAY[2012_05_22_10_59_59] == @Tuesday"), {}, {}))
     assert_equal(1, @e.eval_expression(@p.parse("DAY[2012_05_22] == @Tuesday"), {}, {}))
     assert_equal(0, @e.eval_expression(@p.parse("DAY[2012_05_22_10_59_59] == @Wednesday"), {}, {}))
     assert_equal(0, @e.eval_expression(@p.parse("DAY[2012_05_22_10_59_59] != @Tuesday"), {}, {}))
+    # DAYNUM function
+    # 2012_05_28_10_59_59 is a Monday
+    assert_equal(2, @e.eval_expression(@p.parse("DAYNUM[2012_05_28_10_59_59]"), {}, {}))
+    assert_equal(1, @e.eval_expression(@p.parse("DAYNUM[2012_05_28_10_59_59, @Monday]"), {}, {}))
+    assert_equal(1, @e.eval_expression(@p.parse("DAYNUM[2012_05_28_10_59_59, @Sunday, 0]"), {}, {}))
+    assert_equal(0, @e.eval_expression(@p.parse("DAYNUM[2012_05_27_10_59_59, @Sunday, 0]"), {}, {}))
+    assert_equal(1, @e.eval_expression(@p.parse("DAYNUM[2012_05_27_10_59_59, @Sunday, 1]"), {}, {}))
+    assert_equal(2, @e.eval_expression(@p.parse("DAYNUM[2012_05_27_10_59_59, @Saturday, 1]"), {}, {}))
+    assert_equal(7, @e.eval_expression(@p.parse("DAYNUM[2012_05_27_10_59_59, @Monday, 1]"), {}, {}))
+    assert_equal(6, @e.eval_expression(@p.parse("DAYNUM[2012_05_27_10_59_59, @Monday, 0]"), {}, {}))
+    # MONTH function
     assert_equal(5, @e.eval_expression(@p.parse("MONTH[2012_05_22_10_59_59]"), {}, {}))
     assert_equal(9, @e.eval_expression(@p.parse("MONTH[2012_09_22_10_59_59]"), {}, {}))
+    # HOUR function
+    assert_equal(10, @e.eval_expression(@p.parse("HOUR[2012_05_22_10_59_59]"), {}, {}))
+    assert_equal(20, @e.eval_expression(@p.parse("HOUR[2012_09_22_20_00_00]"), {}, {}))
   end
   
   def test_evaluator_nan

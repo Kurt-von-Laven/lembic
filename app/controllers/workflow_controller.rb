@@ -26,7 +26,6 @@ class WorkflowController < ApplicationController
         input_values[varname][:formula] = expression_object unless expression_object.nil?
         input_values[varname][:index_names] = index_names if index_names
       end
-      #output_variable = vars['output_variable']
       evaluator = Evaluator.new
       evaluator.eval_all(output_variables, input_values)
       @results = input_values

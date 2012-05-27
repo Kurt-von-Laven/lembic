@@ -73,9 +73,12 @@
                 
                 $( ".button" ).button();
                 
-                $("table").tablesorter({
+                $(".tablesorter").tablesorter({
                     headers:{
                         4: {
+                            sorter:false
+                        },
+                        5: {
                             sorter:false
                         }
                     }

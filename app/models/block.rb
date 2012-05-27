@@ -10,11 +10,14 @@ class Block < ActiveRecord::Base
   validates_associated :block_inputs, :block_connections
   belongs_to :workflow
   
+  def connections_string
+	result = String.new
+  end 
   def inputs_string 
 	block_inputs.order(:sort_index)
 	myString = String.new
   end
-  
+
   def inputs_string=(string) 
 	string.lines do |line|
           

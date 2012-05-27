@@ -98,6 +98,38 @@ class Evaluator
         return :Saturday
       end
       
+    elsif function_name == "DAYNUM"
+      if params.length < 1 || params.length > 3
+        raise ArgumentError, "Wrong number of arguments to DAYNUM: expected 1 to 3 but found #{params.length}."
+      end
+      begin
+        datetime = Time.at(params[0]).utc
+      rescue ArgumentError
+        raise ArgumentError, "First argument of DAYNUM must be a date or number."
+      end
+      daynum = datetime.wday #0 = Sunday
+      week_start = params[1]
+      index_from = params[2]
+      index_from = 1 if !index_from
+      if week_start == :Sunday || week_start == nil
+        return daynum + index_from
+      elsif week_start == :Monday
+        return (daynum - 1) % 7 + index_from
+      elsif week_start == :Tuesday
+        return (daynum - 2) % 7 + index_from
+      elsif week_start == :Wednesday
+        return (daynum - 3) % 7 + index_from
+      elsif week_start == :Thursday
+        return (daynum - 4) % 7 + index_from
+      elsif week_start == :Friday
+        return (daynum - 5) % 7 + index_from
+      elsif week_start == :Saturday
+        return (daynum - 6) % 7 + index_from
+      else
+        raise ArgumentError, "Second argument of DAYNUM must specify the day the week starts on; must be one of {@Monday, @Tuesday, @Wednesday, @Thursday, @Friday, @Saturday, @Sunday}."
+      end
+      return daynum
+      
     elsif function_name == "MONTH"
       if params.length != 1
         raise ArgumentError, "Wrong number of arguments to MONTH: expected 1 but found #{params.length}."

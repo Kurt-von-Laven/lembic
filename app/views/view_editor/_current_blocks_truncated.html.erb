@@ -1,0 +1,33 @@
+<h3>Current Blocks</h3>
+
+<table class = "tablesorter">
+
+<!--Table Headers -->
+<thead>
+  <tr>
+    <th>Name</th>
+  </tr>
+</thead>
+
+<!--Table Body -->
+<tbody>
+	
+	<!--Each Block on a row, with all its connections put together into a string -->
+	<!--TODO: Come up with a better way to display the blocks -->
+	<% for block in @blocks %>
+	
+	  <!--Skip "output" blocks with a non-nil display_type -->
+	  <% if !block.display_type.nil? %>
+		<% next %>
+	  <% end %>
+	
+	  <!--Prepare strings to be displayed in HTML for this block -->
+	  <% name = block.name %>
+	
+	
+	  <!--Render this block in HTML -->
+      <tr><td><%=name %></td></tr>
+	<% end %>
+	
+</tbody>  
+</table>

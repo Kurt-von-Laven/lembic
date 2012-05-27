@@ -294,8 +294,12 @@ border-radius:10px;
 	float: left;
 	margin: 0 0 0 20px;
 }
-.rigth_column h3 {
+.right_column h3 {
 	width: 100%;
+}
+
+.right_column textarea{
+	width: 60%;
 }
 .sortable ul{
     list-style-type: cicle !important;

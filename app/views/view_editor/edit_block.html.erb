@@ -2,7 +2,7 @@
 <h1>View Editor: Edit Block</h1>
 <h4> FYI, this doesn't work yet. </h4>
 <p> Think of a block as a set of variables that are connected in relationships, or are generally measured together. For instance, you might have a block of general measurements, or a block that is only filled out in certain circumstance. Add variables to the "Measure" Box to add the variables to the block. Define relationships using the "Logic" Box. For instance you might use the logic box to say "If VAR1 = TRUE and VAR2 > 10, DO Block <name>", or "If VAR1 = TRUE, FIND VAR2".</p>
-<div style="width: 100%; height: 1000px">
+<div style="width: 100%; height: 650px">
 	<div class = "left_column">
 		<%= render "current_variables_truncated" %>
 		<%= render "current_blocks_truncated" %>
@@ -21,8 +21,8 @@
 				<li><a href="#tabs-2">Add Connections</a></li>
 			  </ul>
 				<div id="tabs-1">
+				Measure these variables: 
 						<div>
-							<%= f.label(:inputs_string, "Measure these variables: ") %>
 							<%= f.text_area :inputs_string %>
 						</div>
 				</div>
@@ -30,8 +30,8 @@
 					Enter connections to get to next block after this one, one per line.<br/>
 					Each connection has a block name, an arrow (=>), and a boolean expression<br/>
 					Example: 'AC_Block => has_ac == true' or 'FINISH => 1'
+					Block connections, one per line: 
 						<div>
-							<%= f.label(:connections_string, "Block connections, one per line: ") %>
 							<%= f.text_area :connections_string %>
 						</div>
 				</div>      

@@ -14,6 +14,8 @@ class Variable < ActiveRecord::Base
   
   belongs_to :workflow
   
+  has_many :block_inputs, :dependent => :destroy
+  
   INDEX = 'i' # The index used for constant arrays.
  
   # The variable type is represented as an integer in range [0, 3] according to this mapping.

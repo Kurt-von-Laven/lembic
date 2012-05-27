@@ -27,20 +27,20 @@
 	  <!--Prepare strings to be displayed in HTML for this block -->
 	  <% name = block.name %>
 	
-	  <!--Concat block_connection fields into a string -->
-	  <% connections = ""%>
-	  <% for bc in block.block_connections %>
-		<% conn_str = bc.next_block + " => " + bc.expression_string %>
-		<% connections += conn_str + ", " %>
-	  <% end %>
-	  <% connections = connections.strip.chomp(",") %>
-	
 	  <!--Concat block_input fields into a string -->
 	  <% inputs = "" %>
 	  <% for bi in block.block_inputs %>
-	    <% inputs += bi.variable + ", " %>
+	    <% inputs += bi.variable.name + ", " %>
 	  <% end %>
 	  <% inputs = inputs.strip.chomp(",") %>
+	
+	  <!--Concat block_connection fields into a string -->
+	  <% connections = ""%>
+	  <% for bc in block.block_connections %>
+		<% conn_str = bc.next_block.name + " => " + bc.expression_string %>
+		<% connections += conn_str + ", " %>
+	  <% end %>
+	  <% connections = connections.strip.chomp(",") %>
 	
 	  <!--Generate HTML for a delete button -->
 	  <% buttonHTML = button_to "Delete", delete_block_path(block.id), :confirm => "Are you sure?", :method => :delete %>

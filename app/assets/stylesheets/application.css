@@ -300,6 +300,7 @@ border-radius:10px;
 
 .right_column textarea{
 	width: 60%;
+	height: 300px;
 }
 .sortable ul{
     list-style-type: cicle !important;

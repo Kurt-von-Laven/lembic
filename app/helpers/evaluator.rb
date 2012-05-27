@@ -187,10 +187,10 @@ class Evaluator
         if index.to_i != index
           raise ArgumentError, "Array index must be an integer.  Was #{index}."
         end
-        if index < 0 || index >= elem_count
-          raise ArgumentError, "Array index #{index} is out of bounds.  Must be between 0 and #{elem_count-1}, inclusive."
+        if index < 1 || index > elem_count
+          raise ArgumentError, "Array index #{index} is out of bounds.  Must be between 1 and #{elem_count}, inclusive."
         end
-        return eval_expression(args[index+1], globals, indices)
+        return eval_expression(args[index], globals, indices)
       end
     else
       #exp is a string

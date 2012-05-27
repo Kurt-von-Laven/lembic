@@ -10,10 +10,11 @@ class Block < ActiveRecord::Base
   validates_associated :block_inputs, :block_connections
   belongs_to :workflow
   
-  def connections_string
+  def connections_string # getter returnsempty string. TODO: Fix this and create a setter -Kseniya
 	result = String.new
   end 
-  def inputs_string 
+  
+  def inputs_string  # TODO: Needs to return string of input variables -Kseniya
 	block_inputs.order(:sort_index)
 	myString = String.new
   end

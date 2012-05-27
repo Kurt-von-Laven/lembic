@@ -4,7 +4,7 @@ Lembic::Application.routes.draw do
   
   match '/logout', to: 'user#logout', as: 'logout'
  	#match '/register', to: 'user#register', as: 'register'
-  match '/view_editor/edit_block', to: 'view_editor#edit_block', as: 'edit_block'
+  match '/view_editor/edit_block', to: 'view_editor#edit_block', as: 'blocks'
   match '/view_editor/edit_question', to: 'view_editor#edit_question', as: 'edit_question'
   match '/view_editor/delete_block.:id', to: 'view_editor#delete_block', as: 'delete_block'
   match '/home', to: 'home#home', as: 'home'

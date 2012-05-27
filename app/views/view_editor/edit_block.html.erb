@@ -2,54 +2,48 @@
 <h1>View Editor: Edit Block</h1>
 <h4> FYI, this doesn't work yet. </h4>
 <p> Think of a block as a set of variables that are connected in relationships, or are generally measured together. For instance, you might have a block of general measurements, or a block that is only filled out in certain circumstance. Add variables to the "Measure" Box to add the variables to the block. Define relationships using the "Logic" Box. For instance you might use the logic box to say "If VAR1 = TRUE and VAR2 > 10, DO Block <name>", or "If VAR1 = TRUE, FIND VAR2".</p>
-
-<%= render "current_variables" %>
-
-<%= render "current_blocks" %>
-
-
-<h3> Create A Block </h3>
-You can add input variables and connections later.<br/>
-<%= form_for(:create_block_form) do |f| %>
-	<div>
-		<%= f.label(:name, "Name of Block: ") %><br/>
-		<%= f.text_field :name %><br/>
+<div style="width: 100%; height: 1000px">
+	<div class = "left_column">
+		<%= render "current_variables_truncated" %>
+		<%= render "current_blocks_truncated" %>
 	</div>
-	<%= f.submit('Create Block', :class => "button") %><br/>
-<% end %>
-
-<h3>Add input variables to a block</h3>
-Enter names of input variables to prompt for in this block, one per line.<br/>
-<%= form_for(:create_block_inputs_form) do |f| %>
-	<div>
-		<%= f.label(:block_name, "Name of block this is for: ") %><br/>
-		<%= f.text_field :block_name %><br/>
-		
-		<%= f.label(:inputs_string, "Measure these variables: ") %><br/>
-		<%= f.text_area :inputs_string %><br/>
+	
+	<div class = "right_column">
+	<%= form_for(@block, :html => {:class => "input_form"}) do |f| %>
+			<div>
+				<%= f.label(:name, "Name of Block: ") %>
+				<%= f.text_field :name %>
+			</div>
+			
+			<div id="tabs">
+			  <ul>
+				<li><a href="#tabs-1">Add Variables</a></li>
+				<li><a href="#tabs-2">Add Connections</a></li>
+			  </ul>
+				<div id="tabs-1">
+						<div>
+							<%= f.label(:inputs_string, "Measure these variables: ") %>
+							<%= f.text_area :inputs_string %>
+						</div>
+				</div>
+				<div id="tabs-2">
+					Enter connections to get to next block after this one, one per line.<br/>
+					Each connection has a block name, an arrow (=>), and a boolean expression<br/>
+					Example: 'AC_Block => has_ac == true' or 'FINISH => 1'
+						<div>
+							<%= f.label(:connections_string, "Block connections, one per line: ") %>
+							<%= f.text_area :connections_string %>
+						</div>
+				</div>      
+		</div>
+		<%= f.submit('Submit', :class => "button") %>
+				<% end %>
 	</div>
-	<%= f.submit("Create Input(s)", :class => "button") %><br/>
-<% end %>
+</div>
 
-<h3>Add connections to a block</h3>
-Enter connections to get to next block after this one, one per line.<br/>
-Each connection has a block name, an arrow (=>), and a boolean expression<br/>
-Example: 'AC_Block => has_ac == true' or 'FINISH => 1'
-<%= form_for(:create_block_connections_form) do |f| %>
-	<div>
-		<%= f.label(:block_name, "Name of block this is for: ") %><br/>
-		<%= f.text_field :block_name %><br/>
-		
-		<%= f.label(:connections_string, "Block connections, one per line:<br/>") %><br/>
-		<%= f.text_area :connections_string %><br/>
-	</div>
-	<%= f.submit("Create Connection(s)", :class => "button") %><br/>
-<% end %>        
-
-
-
+<div>
 <%= render "current_output_blocks" %>
-
+</div>
 <h3> Done Creating Blocks? Choose Output </h3>
 
 

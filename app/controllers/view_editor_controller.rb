@@ -1,6 +1,7 @@
 class ViewEditorController < ApplicationController
 
   def edit_block
+	@block =  Block.new
       ## Check for form data for creating new block
       form_hash = params[:create_block_form]
       if !form_hash.nil?

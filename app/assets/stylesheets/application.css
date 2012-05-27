@@ -148,13 +148,33 @@ h3 {
 	text-align: left;
 }
 .input_form label{
-	width: 200px;
+	width: 30%;
 	display: block;
 	float: left;
 	text-align: left;
 	margin: 0 0 0 50px;
 }
-
+.left_column{
+	width: 200px;
+	float: left;
+}
+.left_column h3{
+	width: 100%;
+	padding: 0 0 0 0;
+	margin: 5px 0 2px 0;
+	border-style: none;
+	border-radius: 0;
+	background: none;
+	font-size: 1em;
+	color: #1e3652;
+	background-color: #fff;
+}
+.left_column table {
+	border-style: none;
+}
+.left_column table th{
+	padding: 5px 5px 5px 5px;
+}
 li {
   display: inline;
 }
@@ -269,6 +289,14 @@ border-radius:10px;
 #repeating{
     color: #1e3652;
 }
+.right_column {
+	width: 70%;
+	float: left;
+	margin: 0 0 0 20px;
+}
+.rigth_column h3 {
+	width: 100%;
+}
 .sortable ul{
     list-style-type: cicle !important;
     padding-left:2px;
@@ -309,7 +337,7 @@ table.tablesorter thead tr .headerSortDown {
 }
 
 table {
-    width:750px;
+    width:100%;
     border: 1px solid;
     border-color: #5c7e99;
   -moz-border-radius: 6px 6px 6px 6px;

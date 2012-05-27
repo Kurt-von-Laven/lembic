@@ -9,4 +9,25 @@ class Block < ActiveRecord::Base
   validates_associated :block_inputs, :block_connections
   belongs_to :workflow
   
+  def inputs_string 
+	block_inputs.order(:sort_index)
+	
+  end
+  
+  def inputs_string=(string) 
+	string.lines do |line|
+          
+    # Trim the line to get a variable name
+    variable_name = line.strip
+	 if variable_name.empty? # TODO: get better input validation
+        next
+     end
+          
+     # Determine sort_index
+     sort_index = 0
+          
+      # Create a block input with the specified variable
+      block_inputs.create({:variable => variable_name, :sort_index => sort_index})
+	end
+  end
 end

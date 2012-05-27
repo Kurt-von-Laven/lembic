@@ -3,8 +3,13 @@ Lembic::Application.routes.draw do
   root to: 'user#login', as: 'login'
   
   match '/logout', to: 'user#logout', as: 'logout'
+<<<<<<< HEAD
  	#match '/register', to: 'user#register', as: 'register'
   match '/view_editor/edit_block', to: 'view_editor#edit_block', as: 'blocks'
+=======
+ 	match '/register', to: 'user#register', as: 'register' # Uncommented by Tom
+  match '/view_editor/edit_block', to: 'view_editor#edit_block', as: 'edit_block'
+>>>>>>> ea2f80801fba3c65269010b48a4f00073d04ba38
   match '/view_editor/edit_question', to: 'view_editor#edit_question', as: 'edit_question'
   match '/view_editor/delete_block.:id', to: 'view_editor#delete_block', as: 'delete_block'
   match '/home', to: 'home#home', as: 'home'

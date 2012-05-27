@@ -30,7 +30,7 @@
 	  <!--Concat block_input fields into a string -->
 	  <% inputs = "" %>
 	  <% for bi in block.block_inputs %>
-	    <% inputs += bi.variable + ", " %>
+	    <% inputs += bi.variable.name + ", " %>
 	  <% end %>
 	  <% inputs = inputs.strip.chomp(",") %>
 	

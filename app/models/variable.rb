@@ -8,11 +8,13 @@ class Variable < ActiveRecord::Base
   validates_numericality_of :variable_type, :only_integer => true, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 3
   validates_numericality_of :array, :only_integer => true, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 1
   
-  validates_uniqueness_of :name, :scope => :workflow_id
+  validates_uniqueness_of :name, :scope => :workflow_id, :message => "must be unique; delete the existing variable first."
   
   serialize :expression_object
   
   belongs_to :workflow
+  
+  has_many :block_inputs, :dependent => :destroy
   
   INDEX = 'i' # The index used for constant arrays.
  
@@ -34,9 +36,6 @@ class Variable < ActiveRecord::Base
 	 return var
   end
 
-	
- 
-  
   def self.create_from_form(form_hash, user_id)
     Permission.where(:user_id => user_id).first_or_create({'workflow_id' => user_id, 'permissions' => 4})
     Workflow.where(:id => user_id, :name => 'Sample Workflow').first_or_create({'description' => 'This record should be removed eventually and is just for test purposes.'})

@@ -167,23 +167,6 @@
             </div>
 		</div>
 
- 
-<h3>Current Equations</h3>
-<table cellpadding="2" cellspacing="0">
-  <tr>
-    <th>Equation</th>
-    <th></th>
-  </tr>
-  <% for variable in @variables %>
-    <tr>
-      <td class="preserve_whitespace"><%= variable.name %> = <%= truncate(variable.expression_string, :length => 75, :omission => '... (continued)') %></td>
-      <td class="delete">
-        <%= button_to "Delete this equation", "#{delete_relationship_path}?id=#{variable.id}",
-           {:confirm => "Are you sure you want to delete the equation for the variable named #{variable.name}?",
-            :method => :delete} %>
-      </td>
-    </tr>
-  <% end %>
-</table>
-
 <%= render "current_variables" %>
+
+<%= render "current_equations" %>

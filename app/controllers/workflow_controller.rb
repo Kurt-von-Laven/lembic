@@ -16,7 +16,7 @@ class WorkflowController < ApplicationController
         variable_name_components = variable.name.split(/[\[\]]/)
         index_names_string = variable_name_components[1]
         if index_names_string
-          index_names = index_names_string.split(",")
+          index_names = index_names_string.split(',')
           varname = variable_name_components[0]
         else
           index_names = nil

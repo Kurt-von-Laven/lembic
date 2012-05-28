@@ -1,15 +1,15 @@
 <h3>Current Equations</h3>
 
-<table cellpadding="0" cellspacing="0" class = "sortable">
+<table cellpadding="0" cellspacing="0" class="sortable">
   <tr>
     <th>Equation</th>
     <th></th>
   </tr>
   <% for variable in @variables %>
     <tr>
-      <td class="preserve_whitespace"><%= variable.name %> = <%=truncate(variable.expression_string, :length =>17) %></td>
+      <td class="preserve_whitespace"><%= variable.name %> = <%=truncate(variable.expression_string, :length => 75, :omission => '... (continued)') %></td>
       <td class="delete">
-        <%= button_to "Delete this equation", "#{delete_relationship_path}?id=#{variable.id}",
+        <%= button_to "x", "#{delete_relationship_path}?id=#{variable.id}",
            {:confirm => "Are you sure you want to delete the equation for the variable named #{variable.name}?",
             :method => :delete} %>
       </td>

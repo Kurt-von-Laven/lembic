@@ -14,6 +14,7 @@ class Variable < ActiveRecord::Base
   
   belongs_to :workflow
   
+  has_many :index_names
   has_many :block_inputs, :dependent => :destroy
   
   INDEX = 'i' # The index used for constant arrays.

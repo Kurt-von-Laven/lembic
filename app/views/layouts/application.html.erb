@@ -15,6 +15,14 @@
     <script type="text/javascript">
             
 			$(function(){
+            
+                function split( val ) {
+                    return val.split(" ");
+                }
+                
+                function extractLast( term ) {
+                    return split( term ).pop();
+                }
 
 				// Accordion
 				$("#accordion").accordion({ header: "h3" });
@@ -22,25 +30,18 @@
 				// Tabs
 				$('#tabs').tabs();
 
-				// Dialog
-				$('#dialog').dialog({
-					autoOpen: true,
-					width: 600,
-					buttons: {
-						"Ok": function() {
-							$(this).dialog("close");
-						},
-						"Cancel": function() {
-							$(this).dialog("close");
-						}
-					}
-				});
+				//Dialog
+                $( ".dialog" ).dialog({
+                    autoOpen: false,
+                    show: "blind",
+                    hide: "explode",
+                    modal: true
+                });
 
-				// Dialog Link
-				$('#dialog_link').click(function(){
-					$('#dialog').dialog('open');
-					return false;
-				});
+                $( ".opener" ).click(function() {
+                    $( ".dialog" ).dialog( "open" );
+                    return false;
+                });
 
 				// Datepicker
 				$('.datepicker').datepicker({
@@ -104,10 +105,42 @@
 				);
                 
                 
-                $('.auto_complete_variables').autocomplete({ 
-                    source : '/editor/find_variablenames',
+                $('.auto_complete_variables')
+                .bind( "keydown", function( event ) {
+                    if ( event.keyCode === $.ui.keyCode.TAB &&
+						$( this ).data( "autocomplete" ).menu.active ) {
+					event.preventDefault();
+				}
+                })
+                .autocomplete({ 
+                    multiple: true,
+                    multipleSeparator: " ", 
+                    source : function (request, response){
+                        $.getJSON('/editor/find_variablenames', {
+                            term:extractLast(request.term)
+                        }, response);
+                    },
+                    search: function() {
+                        // custom minLength
+                        var term = extractLast( this.value );
+                    },
+                    focus: function() {
+                        // prevent value inserted on focus
+                        return false;
+                    },
                     select: function(event,ui){
-                        $('#v_auto_complete_id').val(ui.item.id)}
+                    
+                        var terms = split( this.value );
+                        // remove the current input
+                        terms.pop();
+                        // add the selected item
+                        terms.push( ui.item.value );
+                        // add placeholder to get the comma-and-space at th end
+                        terms.push( "" );
+                        this.value = terms.join( ", " );
+                        return false;
+                        }
+                        
                     });
 
 

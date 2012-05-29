@@ -35,8 +35,8 @@
       </div>
     </div>
     <div id = "expression">
-      <%= f.text_field(:name, :class =>'auto_complete_variables') %> = 
-      <%= f.text_area(:expression_string) %>
+      <%= f.text_field(:name) %> = 
+      <%= f.text_area(:expression_string, :class =>'auto_complete_variables') %>
     </div>
     <div style="text-align: center">
       <%= f.submit("Create Equation", :class => "button") %>

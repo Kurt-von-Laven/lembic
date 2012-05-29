@@ -1,4 +1,6 @@
 require 'csv'
+require './app/helpers/expression'
+require './app/models/index_name'
 
 class Variable < ActiveRecord::Base
   attr_accessible :id, :name, :description, :workflow_id, :variable_type, :array, :created_at, :updated_at, :expression_string, :expression_object
@@ -53,7 +55,8 @@ class Variable < ActiveRecord::Base
       rescue SystemCallError, IOError, RuntimeError
 	raise ArgumentError, "An unexpected error occured saving your variable. Please try again."
       end
-      Variable.create(merged_var)
+      newvar = Variable.create(merged_var)
+      IndexName.create_from_declaration(form_hash[:name], newvar.id)
     end       
   end
   
@@ -77,7 +80,8 @@ class Variable < ActiveRecord::Base
     merged_array.delete('data_file')
     merged_array.delete('start_row')
     merged_array.delete('column_number')
-    Variable.create(merged_array)
+    newvar = Variable.create(merged_array)
+    IndexName.create_from_declaration("[#{INDEX}]", newvar.id)
   end
   
   def self.parse_csv_expression(csv_data, start_row_one_indexed, column_number_one_indexed, variable_type)

@@ -13,15 +13,8 @@ class WorkflowController < ApplicationController
       end
       Variable.find(:all).each do |variable|
         expression_object = variable.expression_object
-        variable_name_components = variable.name.split(/[\[\]]/)
-        index_names_string = variable_name_components[1]
-        if index_names_string
-          index_names = index_names_string.split(',')
-          varname = variable_name_components[0]
-        else
-          index_names = nil
-          varname = variable.name
-        end
+        varname = variable.name.split(/\s*\[/)[0]
+        index_names = get_index_names(variable)
         input_values[varname] ||= {}
         input_values[varname][:formula] = expression_object unless expression_object.nil?
         input_values[varname][:index_names] = index_names if index_names
@@ -37,6 +30,30 @@ class WorkflowController < ApplicationController
   
   def expert_workflow
     
+  end
+  
+  private
+  
+  def get_index_names(variable)
+    #temporary method to make sure the index names table is working by getting the index names from multiple sources
+    variable_name_components = variable.name.split(/[\[\]]/)
+    index_names_string = variable_name_components[1]
+    index_names_from_table = variable.index_names().order("position").collect { |i| i.name }
+    if index_names_string
+      index_names = index_names_string.split(',')
+    else
+      index_names = nil
+    end
+    if !index_names.nil? && index_names_from_table[0].nil?
+      raise "index names didn't work.  Variable had index names #{index_names_string}, but index names table had nothing."
+    end
+    if index_names_string.to_s != index_names_from_table.join(",")
+      raise "index names didn't match.  Variable had index names #{index_names_string.inspect}, but index names table had #{index_names_from_table.join(",").inspect}."
+    end
+    if index_names_from_table.length == 0
+      return nil
+    end
+    return index_names_from_table
   end
   
 end

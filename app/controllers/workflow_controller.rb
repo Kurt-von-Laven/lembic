@@ -37,19 +37,19 @@ class WorkflowController < ApplicationController
   def get_index_names(variable)
     #temporary method to make sure the index names table is working by getting the index names from multiple sources
     variable_name_components = variable.name.split(/[\[\]]/)
-    index_names_string = variable_name_components[1]
+    #index_names_string = variable_name_components[1]
     index_names_from_table = variable.index_names().order("position").collect { |i| i.name }
-    if index_names_string
-      index_names = index_names_string.split(',')
-    else
-      index_names = nil
-    end
-    if !index_names.nil? && index_names_from_table[0].nil?
-      raise "index names didn't work.  Variable had index names #{index_names_string}, but index names table had nothing."
-    end
-    if index_names_string.to_s != index_names_from_table.join(",")
-      raise "index names didn't match.  Variable had index names #{index_names_string.inspect}, but index names table had #{index_names_from_table.join(",").inspect}."
-    end
+    #if index_names_string
+    #  index_names = index_names_string.split(',')
+    #else
+    #  index_names = nil
+    #end
+    #if !index_names.nil? && index_names_from_table[0].nil?
+    #  raise "index names didn't work.  Variable had index names #{index_names_string}, but index names table had nothing."
+    #end
+    #if index_names_string.to_s != index_names_from_table.join(",")
+    #  raise "index names didn't match.  Variable had index names #{index_names_string.inspect}, but index names table had #{index_names_from_table.join(",").inspect}."
+    #end
     if index_names_from_table.length == 0
       return nil
     end

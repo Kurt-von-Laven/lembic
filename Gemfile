@@ -33,6 +33,7 @@ end
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
+gem 'rails3-jquery-autocomplete', '~> 0.9.1'
 gem 'thor'
 
 # To use ActiveModel has_secure_password

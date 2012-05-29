@@ -6,6 +6,7 @@
     <%= javascript_include_tag "jquery-ui-1.8.20.custom.min" %>
     <%= javascript_include_tag "jquery-1.7.2.min" %>
     <%= javascript_include_tag "jquery.tablesorter.min" %>
+    <%= javascript_include_tag "autocomplete-rails" %>
     <%= javascript_include_tag "application" %>
     <%= stylesheet_link_tag   "jquery-ui-1.8.20.custom", :media => "all" %>
     <%= stylesheet_link_tag   "jquery-ui-1.8.20.custom", :media => "all" %>
@@ -101,6 +102,14 @@
 					function() { $(this).addClass('ui-state-hover'); },
 					function() { $(this).removeClass('ui-state-hover'); }
 				);
+                
+                
+                $('.auto_complete_variables').autocomplete({ 
+                    source : '/editor/find_variablenames',
+                    select: function(event,ui){
+                        $('#v_auto_complete_id').val(ui.item.id)}
+                    });
+
 
                 
                 $('select').selectmenu();

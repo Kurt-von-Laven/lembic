@@ -16,7 +16,7 @@ class BlockInput < ActiveRecord::Base
     # Decrement higher sort_indexs to prevent sparseness
     # NOTE: I'm not quite sure if this is atomic, may need to wrap in a transaction -Tom
     BlockInput.transaction do
-      BlockInput.where("block_id = #{destroyed.block_id} AND sort_index > #{destroyed.sort_index}").each do |bi|
+      BlockInput.where("block_id = ? AND sort_index > ?", destroyed.block_id, destroyed.sort_index).each do |bi|
         bi.sort_index = bi.sort_index - 1
         bi.save :validate => false # Validation was causing problems since it may not go in order
       end

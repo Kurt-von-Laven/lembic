@@ -167,7 +167,7 @@ h3 {
 	margin: 0 0 0 50px;
 }
 .left_column{
-	width: 200px;
+	width: 140px;
 	float: left;
 }
 .left_column h3{
@@ -308,9 +308,9 @@ border-radius:10px;
     color: #1e3652;
 }
 .right_column {
-	width: 70%;
+	width: 80%;
 	float: left;
-	margin: 0 0 0 20px;
+	margin: 0 0 0 10px;
 }
 .right_column h3 {
 	width: 100%;

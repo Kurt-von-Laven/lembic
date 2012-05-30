@@ -36,7 +36,14 @@ body {
 .button {
     font-size: 1em !important;
 }
-
+#centered {
+	text-align: center;
+	margin: 0 150px 0 150px;
+	padding: 10px;
+   -moz-brder-radius: 6px;
+    border-radius: 6px;
+	background-color: #fff8cb;
+}
 #choose_file{
     text-align: center;
 }
@@ -99,6 +106,13 @@ body {
 
 #expresion > text_field {
 	text-align: left;
+}
+
+.help {
+	padding: 0 20px 0 20px;
+}
+.help div {
+	margin: 0 40px 0 40px;
 }
 
 #hidden{
@@ -301,6 +315,13 @@ border-radius:10px;
 .right_column textarea{
 	width: 60%;
 	height: 300px;
+}
+#serial {
+	margin:  0 150px 0 120px;
+	padding: 10px;
+   -moz-brder-radius: 6px;
+    border-radius: 6px;
+	background-color: #fff8cb;
 }
 .sortable ul{
     list-style-type: cicle !important;

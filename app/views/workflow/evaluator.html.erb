@@ -9,6 +9,7 @@
 <p>Specify array outputs with min and max indices in this form: {:name => 'varName', :indices => {:min => 0, :max => 8759}}</p>
 <%= form_for(:evaluator) do |f| %>
   <div>
+    <%= render(:partial => 'flash_message', :locals => {:flash_symbol => :evaluator_error, :tag => 'p', :class_name => 'error'}) %>
     <h2>Input Values</h2>
     <ul class="input_values">
       <% i = 0 %>
@@ -20,6 +21,19 @@
         <% i += 1 %>
       <% end %>
     </ul>
+    <h2>Variable to Solve For</h2>
+    <div>
+      <%= f.label(:variable_to_solve_for, 'Variable to solve for: ') %>
+      <%= f.text_field(:variable_to_solve_for) %>
+    </div>
+    <div>
+      <%= f.label(:min_index, 'For arrays, input the minimum index to solve for:') %>
+      <%= f.text_field(:min_index, :class => 'numeric_input') %>
+    </div>
+    <div>
+      <%= f.label(:max_index, 'For arrays, input the maximum index to solve for:') %>
+      <%= f.text_field(:max_index, :class => 'numeric_input') %>
+    </div>
     <h2>Output Values</h2>
     <ul class="output_values">
       <% i = 0 %>
@@ -27,7 +41,8 @@
           <li>
             <%= f.label(:output_values, output_variable_name + ' = ', :for => "evaluator_output_value_#{i}") %>
             <%= f.text_field(:output_values, :id => "evaluator_output_value_#{i}", :name =>
-            'evaluator[output_values][]', :value => output_variable_value[:value] ) %>
+            'evaluator[output_values][]', :value =>
+            output_variable_value[:value] ) %>
           </li>
         <% end %>
     </ul>

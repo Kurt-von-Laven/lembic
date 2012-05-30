@@ -2,6 +2,6 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-ul.input_values > li {
+ul.input_values > li, ul.output_values > li {
   display: block;
 }

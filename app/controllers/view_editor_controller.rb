@@ -163,6 +163,13 @@ class ViewEditorController < ApplicationController
   def edit_question
       @variables = Variable.where(:workflow_id => session[:user_id]).order(:name)
   end
+    
+    def find_blocknames
+        @blocknames = Block.where('(workflow_id = ?) AND (name LIKE ?)', session[:user_id], "#{params[:term]}%").order(:name)
+        respond_to do |format|
+            format.js { render :layout => false }
+        end
+    end
   
   # Delete a block by id
   def delete_block

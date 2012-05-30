@@ -10,7 +10,10 @@ class Block < ActiveRecord::Base
   validates_associated :block_inputs, :block_connections
   belongs_to :workflow
   
-  def connections_string # getter returnsempty string. TODO: Fix this and create a setter -Kseniya
+  def outputs_string # getter returnsempty string. TODO: Fix this and create a setter 
+	result = String.new
+  end 
+  def connections_string # getter returnsempty string. TODO: Fix this and create a setter 
 	result = String.new
   end 
   

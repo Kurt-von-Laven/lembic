@@ -1,29 +1,53 @@
-require './app/helpers/expression'
+require 'yaml'
+require Rails.root.join('app/helpers/expression')
 
 class WorkflowController < ApplicationController
   
   def evaluate
     @variables = Variable.where(:workflow_id => session[:user_id]).order(:name)
+    @input_variables = Variable.where(:workflow_id => session[:user_id], :expression_string => nil).order(:name)
     vars = params[:evaluator]
     if !vars.nil?
-      input_values = eval(vars['input_values'])
-      output_variables = eval(vars['output_variables'])
-      for input_variable, input_formula in input_values
-        input_values[input_variable] = {:value => input_formula}
+      input_values = vars['input_values']
+      input_values_hash = {}
+      i = 0
+      for input_value in input_values
+        input_value_as_integer = to_i_safely(input_value)
+        input_value = (input_value_as_integer.nil?) ? input_value : input_value_as_integer
+        input_values_hash[@input_variables[i].name] = {:value => input_value}
+        i += 1
       end
+      variable_to_solve_for = Variable.where(:name => vars['variable_to_solve_for']).first
       Variable.find(:all).each do |variable|
         expression_object = variable.expression_object
         varname = variable.name.split(/\s*\[/)[0]
         index_names = get_index_names(variable)
-        input_values[varname] ||= {}
-        input_values[varname][:formula] = expression_object unless expression_object.nil?
-        input_values[varname][:index_names] = index_names if index_names
+        input_values_hash[varname] ||= {}
+        input_values_hash[varname][:formula] = YAML::load(expression_object) unless expression_object.nil?
+        input_values_hash[varname][:index_names] = index_names if index_names
       end
-      evaluator = Evaluator.new
-      evaluator.eval_all(output_variables, input_values)
-      @results = input_values
+      if variable_to_solve_for.nil?
+        if vars['variable_to_solve_for'].nil?
+          flash[:evaluator_error] = 'Variable to solve for can\'t be blank.' # TODO: Check for this case at the beginning of the function.
+        else
+          flash[:evaluator_error] = "You tried to solve for the variable #{vars['variable_to_solve_for']}, but that variable doesn't exist."
+        end
+      else
+        if variable_to_solve_for.array?
+          min_index = vars['min_index'].to_i
+          max_index = vars['max_index'].to_i
+          variables_to_solve_for = [{:name => variable_to_solve_for.name, :indices => {:min => min_index, :max => max_index}}]
+        else
+          variables_to_solve_for = [{:name => variable_to_solve_for.name}]
+        end
+        evaluator = Evaluator.new
+        logger.debug(variables_to_solve_for.inspect)
+        logger.debug(input_values_hash.inspect)
+        evaluator.eval_all(variables_to_solve_for, input_values_hash)
+        @output_variables = input_values_hash
+      end
     else
-      @results = []
+      @output_variables = []
     end
     render 'evaluator'
   end
@@ -55,5 +79,13 @@ class WorkflowController < ApplicationController
     end
     return index_names_from_table
   end
+  
+  def to_i_safely(str)
+    return nil unless str.instance_of?(String)
+    return 0 if str == '0'
+    str_as_integer = str.to_i
+    return (str_as_integer == 0) ? nil : str_as_integer
+  end
+
   
 end

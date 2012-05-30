@@ -23,20 +23,24 @@ class Variable < ActiveRecord::Base
  
   # The variable type is represented as an integer in range [0, 3] according to this mapping.
   def variable_type_string
-	var = case variable_type
-			when 0
-			   'Categorical'
-			when 1
-			   'Integer'
-			when 2
-			   'Real'
-			when 3
-			  'Date and Time'
-			end
-	if array == 1
-		var += " Array"
-	 end
-	 return var
+    var = case variable_type
+          when 0
+            'Categorical'
+          when 1
+            'Integer'
+          when 2
+            'Real'
+          when 3
+            'Date and Time'
+          end
+    if array?
+      var += ' Array'
+    end
+    return var
+  end
+  
+  def array?
+    return array == 1
   end
 
   def self.create_from_form(form_hash, user_id)

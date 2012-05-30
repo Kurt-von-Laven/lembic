@@ -329,16 +329,3 @@ class Parser
   end
   
 end
-
-=begin
-input_string = ""
-p = Parser.new
-while input_string != "q"
-  print "Enter something to parse, or q to quit: "
-  input_string = gets.chomp
-  if input_string != "q"
-    puts p.prefix_form(input_string)
-  end
-end
-=end
-

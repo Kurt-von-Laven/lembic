@@ -38,6 +38,10 @@ class Variable < ActiveRecord::Base
 	 end
 	 return var
   end
+  
+  def name_with_indices
+    return "#{name.split(/\s*\[\s*/)[0]}[#{index_names().collect{|i| i.name}.join(",")}]"
+  end
 
   def self.create_from_form(form_hash, user_id)
     Permission.where(:user_id => user_id).first_or_create({'workflow_id' => user_id, 'permissions' => 4})
@@ -46,8 +50,7 @@ class Variable < ActiveRecord::Base
     merged_var['workflow_id'] = user_id # TODO: Grab the workflow ID out of the session state.
     merged_var['variable_type'] = merged_var['variable_type'].to_i
     merged_var['array'] = merged_var['array'].to_i
-    puts "MERGED VAR = "+merged_var.inspect
-    #merged_var['name'] = merged_var['name'].split(/\s*\[/)[0]
+    merged_var['name'] = merged_var['name'].split(/\s*\[/)[0]
     if merged_var['expression_string'].empty?
       merged_var['expression_string'] = nil
     else
@@ -57,9 +60,9 @@ class Variable < ActiveRecord::Base
       rescue SystemCallError, IOError, RuntimeError
 	raise ArgumentError, "An unexpected error occured saving your variable. Please try again."
       end
-      newvar = Variable.create(merged_var)
-      IndexName.create_from_declaration(form_hash[:name], newvar.id)
-    end       
+    end
+    newvar = Variable.create(merged_var)
+    IndexName.create_from_declaration(form_hash[:name], newvar.id)
   end
   
   def self.create_constant_array(form_hash, user_id)

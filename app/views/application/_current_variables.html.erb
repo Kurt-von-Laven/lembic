@@ -15,10 +15,10 @@
 <tbody>
   <% for variable in @variables %>
     <tr>
-        <td><%= variable.name %> </td>
+        <td><%= variable.name_with_indices %> </td>
         <td><%= variable.description %></td>
 		<td><%= variable.variable_type_string %>
-		<td><%= variable.name %> = <%= truncate(variable.expression_string, :length =>17, :omission => '...(continued)') %></td>
+		<td><%= variable.name_with_indices %> = <%= truncate(variable.expression_string, :length =>17, :omission => '...(continued)') %></td>
         <td>
         <%= link_to "Show All!", fullvariable_path(:name => variable.name), :target => "_blank"%>
         

@@ -30,12 +30,15 @@
 	  <!--Concat block_input fields into a string -->
 	  <% inputs = "" %>
 	  <% for bi in block.block_inputs %>
-	    <% inputs += "#{bi.sort_index}) " + bi.variable.name + ", " %>
+	    <% inputs += "#{bi.sort_index}) "  %>
 	  <% end %>
 	  <% inputs = inputs.strip.chomp(",") %>
 	
 	  <!--Concat block_connection fields into a string -->
 	  <% connections = ""%>
+      <% if block.block_connections.size == 0 %>
+            nope
+        <% end %>
 	  <% for bc in block.block_connections %>
 		<% conn_str = "#{bc.sort_index}) " + bc.next_block.name + " => " + bc.expression_string %>
 		<% connections += conn_str + ", " %>

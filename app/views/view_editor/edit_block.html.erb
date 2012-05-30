@@ -9,49 +9,64 @@
 	</div>
 	
 	<div class = "right_column">
-	<%= form_for(@block, :html => {:class => "input_form"}) do |f| %>
-			<div>
-				<%= f.label(:name, "Name of Block: ") %>
-				<%= f.text_field :name %>
-			</div>
-			
 			<div id="tabs">
 			  <ul>
-				<li><a href="#tabs-1">Add Variables</a></li>
-				<li><a href="#tabs-2">Add Connections</a></li>
-				<li><a href="#tabs-3">Choose Output </a></li>
+				<li><a href="#tabs-1">Create Block</a></li>
+                <li><a href="#tabs-2">Add Measurements</a></li>
+				<li><a href="#tabs-3">Add Connections</a></li>
+				<li><a href="#tabs-4">Choose Output </a></li>
 			  </ul>
+                <!-- TAB 1 -->
 				<div id="tabs-1">
-				Measure these variables: 
-						<div>
-							<%= f.text_area :inputs_string %>
-						</div>
-				</div>
-				<div id="tabs-2">
+                    <%= form_for(:create_block_form) do |f| %>
+                        <%= f.label(:name, "Name of Block: ") %><br/>
+                        <%= f.text_field :name %><br/>
+                        <%= f.submit("Create Block", :class => "button") %><br/>
+                    <% end %>
+                </div>
+                
+                 <!-- TAB2 -->
+                <div id = "tabs-2">
+                    Please enter one per line. <br />
+                    <%= form_for(:create_block_inputs_form) do |f| %>
+                        <%= f.label(:block_name, "Name of Block: ") %><br/>
+                        <%= f.text_field :block_name %><br/>
+                        <%= f.label(:inputs_string, "Input Variables: ") %><br/>
+                        <%= f.text_area :inputs_string %><br/>
+                        <%= f.submit("Create Block Inputs", :class => "button") %><br/>
+                    <% end %>
+                </div>
+                
+                <!-- TAB3 -->
+				<div id="tabs-3">
 					Enter connections to get to next block after this one, one per line.<br/>
 					Each connection has a block name, an arrow (=>), and a boolean expression<br/>
 					Example: 'AC_Block => has_ac == true' or 'FINISH => 1'
+                    Please do not whitespace.
 					Block connections, one per line: 
-						<div>
-							<%= f.text_area :connections_string %>
-						</div>
-				</div>      
-				<div id="tabs-3">
-				 	 Output these variables: 
-					 <div>
-						<%= f.text_area (:outputs_string) %>
-					 </div>
-					 Display Type: 
-					 <div>
-						<%= f.select(:display_type, [['Graph', 'graph'], ['Integer', 'integer'], ['Percentage', 'percent']]) %>
-					 </div>
-				</div>
-		</div>
-		<div style="text-align: center">
-		<%= f.submit('Submit', :class => "button") %>
-				<% end %>
-		</div>
-	</div>
+                    <%= form_for(:create_block_connections_form) do |f| %>
+                        <%= f.label(:block_name, "Name of Block: ") %><br/>
+                        <%= f.text_field :block_name %><br/>
+                        <%= f.label(:connections_string, "Block Connections: ") %><br/>
+                        <%= f.text_area :connections_string %><br/>
+                        <%= f.submit("Create Block", :class => "button") %><br/>
+                    <% end %>
+                </div>
+                
+                <!--TAB4 -->      
+				<div id="tabs-4">
+                <%= form_for(:create_output_block_form) do |f| %>
+                    <%= f.label(:name, "Name of Block: ") %><br/>
+                    <%= f.text_field :name %><br/>
+                    <%= f.label(:outputs_string, "Output these variables: ") %><br/>
+                    <%= f.text_area (:outputs_string) %><br/>
+                    <%= f.label(:display_type, "Display Type:") %><br/>
+                    <%= f.select(:display_type, [['Graph', 'graph'], ['Integer', 'integer'], ['Percentage', 'percent']])    %><br/>
+                <%= f.submit('Add Output', :class => "button") %><br/>
+                <% end %>
+                </div>
+                </div>
+    </div>
 </div>
 
 

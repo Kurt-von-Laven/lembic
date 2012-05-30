@@ -12,9 +12,17 @@
     <tr>
 		<% 
 		description = variable.description
+        type = variable.variable_type_string
+        expression = variable.expression_string
+        if expression == nil
+            expression = ""
+        end
+        if type == nil
+            type = ""
+        end
 		myString = variable.name + 
-		 " | " + description + " | " + variable.variable_type_string	+  " | " +
-		 truncate(variable.expression_string, :length =>17, :omission => '...(continued)')	%>
+		 " | " + description + " | " + type	+  " | " +
+		 truncate(expression, :length =>17, :omission => '...(continued)')	%>
 		 
         <td onClick="alert('<%= myString %>')"><%= variable.name %> </td>
     </tr>

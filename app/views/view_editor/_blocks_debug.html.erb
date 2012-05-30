@@ -1,0 +1,52 @@
+<br/><br/><br/><br/><br/><br/><br/><br/><br/>
+vvvvvv
+Temporary stuff added by Tom to help with input/output for debugging the back-end
+Please don't delete until we push these features to Heroku
+<h1>Debug stuff</h1>
+<%= render "current_variables" %>
+
+<%= render "current_blocks" %>
+
+<h3>Create Block (form_for @block)</h3>
+<%= form_for(@block) do |f| %>
+	<%= f.label(:name, "Name of Block: ") %><br/>
+	<%= f.text_field :name %><br/>
+	<%= f.submit('Submit', :class => "button") %><br/>
+<% end %>
+
+<h3>Create Block (form_for :create_block_form)</h3>
+<%= form_for(:create_block_form) do |f| %>
+	<%= f.label(:name, "Name of Block: ") %><br/>
+	<%= f.text_field :name %><br/>
+	<%= f.submit("Create Block", :class => "button") %><br/>
+<% end %>
+
+<h3>Create Block Input</h3>
+<%= form_for(:create_block_inputs_form) do |f| %>
+	<%= f.label(:block_name, "Name of Block: ") %><br/>
+	<%= f.text_field :block_name %><br/>
+	<%= f.label(:inputs_string, "Input Variables: ") %><br/>
+	<%= f.text_area :inputs_string %><br/>
+	<%= f.submit("Create Block Inputs", :class => "button") %><br/>
+<% end %>
+
+<h3>Create Block Connection</h3>
+<%= form_for(:create_block_connections_form) do |f| %>
+	<%= f.label(:block_name, "Name of Block: ") %><br/>
+	<%= f.text_field :block_name %><br/>
+	<%= f.label(:connections_string, "Block Connections: ") %><br/>
+	<%= f.text_area :connections_string %><br/>
+	<%= f.submit("Create Block", :class => "button") %><br/>
+<% end %>
+
+<%= render "current_output_blocks" %>
+<h3>Create Output Block</h3>
+<%= form_for(:create_output_block_form) do |f| %>
+	<%= f.label(:name, "Name of Block: ") %><br/>
+	<%= f.text_field :name %><br/>
+	<%= f.label(:outputs_string, "Output these variables: ") %><br/>
+	<%= f.text_area (:outputs_string) %><br/>
+	<%= f.label(:display_type, "Display Type:") %><br/>
+	<%= f.select(:display_type, [['Graph', 'graph'], ['Integer', 'integer'], ['Percentage', 'percent']]) %><br/>
+	<%= f.submit('Add Output', :class => "button") %><br/>
+<% end %>

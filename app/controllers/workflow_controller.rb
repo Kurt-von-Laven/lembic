@@ -31,6 +31,7 @@ class WorkflowController < ApplicationController
         else
           flash[:evaluator_error] = "You tried to solve for the variable #{vars['variable_to_solve_for']}, but that variable doesn't exist."
         end
+        @output_variables = []
       else
         if variable_to_solve_for.array?
           min_index = vars['min_index'].to_i
@@ -40,10 +41,12 @@ class WorkflowController < ApplicationController
           variables_to_solve_for = [{:name => variable_to_solve_for.name}]
         end
         evaluator = Evaluator.new
+        logger.debug('hello')
         logger.debug(variables_to_solve_for.inspect)
         logger.debug(input_values_hash.inspect)
         evaluator.eval_all(variables_to_solve_for, input_values_hash)
         @output_variables = input_values_hash
+        logger.debug(@output_variables.inspect)
       end
     else
       @output_variables = []

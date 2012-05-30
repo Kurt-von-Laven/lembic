@@ -12,12 +12,15 @@ class BlockInput < ActiveRecord::Base
   belongs_to :block
   belongs_to :variable
   
-  after_destroy do |block_input|
+  after_destroy do |destroyed|
     # Decrement higher sort_indexs to prevent sparseness
     # NOTE: I'm not quite sure if this is atomic, may need to wrap in a transaction -Tom
-    BlockInput.where("sort_index > ?", block_input.sort_index) do |bi|
-      bi.sort_index = bi.sort_index - 1
+    BlockInput.transaction do
+      BlockInput.where("block_id = #{destroyed.block_id} AND sort_index > #{destroyed.sort_index}").each do |bi|
+        bi.sort_index = bi.sort_index - 1
+        bi.save :validate => false # Validation was causing problems since it may not go in order
+      end
     end
   end
-  
+    
 end

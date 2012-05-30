@@ -19,20 +19,34 @@ class Block < ActiveRecord::Base
 	myString = String.new
   end
 
-  def inputs_string=(string) 
-	string.lines do |line|
-          
-    # Trim the line to get a variable name
-    variable_name = line.strip
-	 if variable_name.empty? # TODO: get better input validation
+  # Create a block_input for the variable named on each line of the input string
+  def inputs_string=(string)
+    
+    # Iterate through each line of the input string
+    string.lines do |line|
+
+      # Trim the line to get a variable name
+      variable_name = line.strip
+      if variable_name.empty? # TODO: get better input validation
         next
-     end
-          
-     # Determine sort_index
-     sort_index = 0
-          
+      end
+      
+      # Find the variable
+      variable = Variable.find_by_name(variable_name)
+      if variable.nil?
+        logger.debug "Could not find variable '#{variable_name}' by name"
+        next
+      end
+
+      # Determine sort_index
+      sort_index = block_inputs.size
+
       # Create a block input with the specified variable
-      block_inputs.create({:variable => variable_name, :sort_index => sort_index})
-	end
+      bi = block_inputs.create({:variable_id => variable.id, :sort_index => sort_index})
+      if bi.nil?
+        # TODO: Return an error to the user
+        logger.debug "Failed to create block_input with variable_id => #{variable.id} and sort_index => #{sort_index}"
+      end
+    end
   end
 end

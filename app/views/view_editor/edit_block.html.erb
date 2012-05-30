@@ -88,7 +88,15 @@ Please don't delete until we push these features to Heroku
 <%= render "current_variables" %>
 
 <%= render "current_blocks" %>
-<h3>Create Block</h3>
+
+<h3>Create Block (form_for @block)</h3>
+<%= form_for(@block) do |f| %>
+	<%= f.label(:name, "Name of Block: ") %><br/>
+	<%= f.text_field :name %><br/>
+	<%= f.submit('Submit', :class => "button") %><br/>
+<% end %>
+
+<h3>Create Block (form_for :create_block_form)</h3>
 <%= form_for(:create_block_form) do |f| %>
 	<%= f.label(:name, "Name of Block: ") %><br/>
 	<%= f.text_field :name %><br/>

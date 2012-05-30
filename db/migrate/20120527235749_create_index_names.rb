@@ -24,12 +24,13 @@ class CreateIndexNames < ActiveRecord::Migration
           new_index_name.save
         end
       end
-      #v.name = v.name.split(/\s*\[/)[0]
-      #v.save
     end
+    
+    Variable.reset_column_information
   end
   
   def down
     drop_table :index_names
+    Variable.reset_column_information
   end
 end

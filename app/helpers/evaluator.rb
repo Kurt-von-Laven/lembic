@@ -288,7 +288,7 @@ class Evaluator
 
     formula = globals[varname][:formula]
     
-    raise ArgumentError, "Error: formula for a variable must be an expression object." if !formula.instance_of?(Expression)
+    raise ArgumentError, "Error: formula for variable `#{varname}` must be an expression object.  Was #{formula.class}" if !formula.instance_of?(Expression)
     
     # check if variable is an array or a singleton, and evaluate accordingly
     if globals[varname][:index_names].nil?

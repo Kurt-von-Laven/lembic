@@ -10,7 +10,13 @@
 <tbody>
   <% for variable in @variables %>
     <tr>
-        <td><%= variable.name %> </td>
+		<% 
+		description = variable.description
+		myString = variable.name + 
+		 " | " + description + " | " + variable.variable_type_string	+  " | " +
+		 truncate(variable.expression_string, :length =>17, :omission => '...(continued)')	%>
+		 
+        <td onClick="alert('<%= myString %>')"><%= variable.name %> </td>
     </tr>
   <% end %>
 </tbody>  

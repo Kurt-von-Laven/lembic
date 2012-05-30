@@ -1,11 +1,15 @@
 <% @title = "Edit Block" %>
 <h1>View Editor: Edit Block</h1>
-<h4> FYI, this doesn't work yet. </h4>
 <p> Think of a block as a set of variables that are connected in relationships, or are generally measured together. For instance, you might have a block of general measurements, or a block that is only filled out in certain circumstance. Add variables to the "Measure" Box to add the variables to the block. Define relationships using the "Logic" Box. For instance you might use the logic box to say "If VAR1 = TRUE and VAR2 > 10, DO Block <name>", or "If VAR1 = TRUE, FIND VAR2".</p>
-<div style="width: 100%; height: 650px">
+<div style="width: 100%; height: 600px">
 	<div class = "left_column">
 		<%= render "current_variables_truncated" %>
 		<%= render "current_blocks_truncated" %>
+        <br />
+        <%= button_to "View Workflow", "/workflow",
+              {:confirm => "Are you sure you are ready to leave this page?",
+               :method => :delete, :class => "button"} %>
+
 	</div>
 	
 	<div class = "right_column">
@@ -68,72 +72,3 @@
                 </div>
     </div>
 </div>
-
-
-<div>
-<%= render "current_output_blocks" %>
-</div>
-
-<h3> See the Workflow </h3>
-<h4> Currently redirects to the empty expert workflow page. </h4>
-<h5> Implementation: </h5>
-<p>
-Each block appears in its own tab, using JQuery. All blocks appear, but some will be grayed out. This means that logic statements have be parsed and translated. As the associated variables are filled in, the if statements are evaluated. If the statement is true, the view updates to include a new  section(google form style if we can make it happen), or ungrays a block. Blocks that do not have all necessary variables filled in will be red. As soon as all variables are satisified, it will turn blue. The finish button will always be present (maybe at the bottom left) but will be disabled until all necessary values have been filled in. Time and date variables will have associated sliders (Jquery). Categorial will have check boxes (Jquery). Done will redirect simplified evaluator page. 
-</p>
-<%= button_to "View Workflow", "/workflow",
-              {:confirm => "Are you sure you are ready to leave this page?",
-               :method => :delete, :class => "button"} %>
-
-
-<br/><br/><br/><br/><br/><br/><br/><br/><br/>
-vvvvvv
-Temporary stuff added by Tom to help with input/output for debugging the back-end
-Please don't delete until we push these features to Heroku
-<h1>Debug stuff</h1>
-<%= render "current_variables" %>
-
-<%= render "current_blocks" %>
-
-<h3>Create Block (form_for @block)</h3>
-<%= form_for(@block) do |f| %>
-	<%= f.label(:name, "Name of Block: ") %><br/>
-	<%= f.text_field :name %><br/>
-	<%= f.submit('Submit', :class => "button") %><br/>
-<% end %>
-
-<h3>Create Block (form_for :create_block_form)</h3>
-<%= form_for(:create_block_form) do |f| %>
-	<%= f.label(:name, "Name of Block: ") %><br/>
-	<%= f.text_field :name %><br/>
-	<%= f.submit("Create Block", :class => "button") %><br/>
-<% end %>
-
-<h3>Create Block Input</h3>
-<%= form_for(:create_block_inputs_form) do |f| %>
-	<%= f.label(:block_name, "Name of Block: ") %><br/>
-	<%= f.text_field :block_name %><br/>
-	<%= f.label(:inputs_string, "Input Variables: ") %><br/>
-	<%= f.text_area :inputs_string %><br/>
-	<%= f.submit("Create Block Inputs", :class => "button") %><br/>
-<% end %>
-
-<h3>Create Block Connection</h3>
-<%= form_for(:create_block_connections_form) do |f| %>
-	<%= f.label(:block_name, "Name of Block: ") %><br/>
-	<%= f.text_field :block_name %><br/>
-	<%= f.label(:connections_string, "Block Connections: ") %><br/>
-	<%= f.text_area :connections_string %><br/>
-	<%= f.submit("Create Block", :class => "button") %><br/>
-<% end %>
-
-<%= render "current_output_blocks" %>
-<h3>Create Output Block</h3>
-<%= form_for(:create_output_block_form) do |f| %>
-	<%= f.label(:name, "Name of Block: ") %><br/>
-	<%= f.text_field :name %><br/>
-	<%= f.label(:outputs_string, "Output these variables: ") %><br/>
-	<%= f.text_area (:outputs_string) %><br/>
-	<%= f.label(:display_type, "Display Type:") %><br/>
-	<%= f.select(:display_type, [['Graph', 'graph'], ['Integer', 'integer'], ['Percentage', 'percent']]) %><br/>
-	<%= f.submit('Add Output', :class => "button") %><br/>
-<% end %>

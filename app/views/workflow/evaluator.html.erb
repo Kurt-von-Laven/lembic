@@ -9,6 +9,7 @@
 <p>Specify array outputs with min and max indices in this form: {:name => 'varName', :indices => {:min => 0, :max => 8759}}</p>
 <%= form_for(:evaluator) do |f| %>
   <div>
+    <h2>Input Values</h2>
     <ul class="input_values">
       <% i = 0 %>
       <% for input_variable in @input_variables %>
@@ -19,6 +20,7 @@
         <% i += 1 %>
       <% end %>
     </ul>
+    <h2>Output Values</h2>
     <ul class="output_values">
       <% i = 0 %>
         <% for output_variable_name, output_variable_value in @output_variables %>

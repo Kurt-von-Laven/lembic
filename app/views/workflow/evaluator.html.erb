@@ -34,18 +34,13 @@
       <%= f.label(:max_index, 'For arrays, input the maximum index to solve for:') %>
       <%= f.text_field(:max_index, :class => 'numeric_input') %>
     </div>
-    <h2>Output Values</h2>
-    <ul class="output_values">
-      <% i = 0 %>
-        <% for output_variable_name, output_variable_value in @output_variables %>
-          <li>
-            <%= f.label(:output_values, output_variable_name + ' = ', :for => "evaluator_output_value_#{i}") %>
-            <%= f.text_field(:output_values, :id => "evaluator_output_value_#{i}", :name =>
-            'evaluator[output_values][]', :value =>
-            output_variable_value[:value] ) %>
-          </li>
-        <% end %>
-    </ul>
     <%= f.submit('Run Model', :class => "button") %>
   </div>
 <% end %>
+<h2>Output Values</h2>
+<ul class="output_values">
+  <% i = 0 %>
+  <% for output_variable_name, output_variable_value in @output_variables %>
+    <li><%= output_variable_name + ' = ' + output_variable_value %></li>
+  <% end %>
+</ul>

@@ -1,5 +1,5 @@
 class EditorController < ApplicationController
-    autocomplete :variable, :name
+  autocomplete :variable, :name
   def equations
     user_id = session[:user_id]
     new_equation = params[:new_equation]
@@ -26,13 +26,13 @@ class EditorController < ApplicationController
     @variables = Variable.where(:workflow_id => user_id).order(:name)
     render 'equations'
   end
-    
-    def find_variablenames
-        @variablenames = Variable.where('(workflow_id = ?) AND (name LIKE ?)', session[:user_id], "#{params[:term]}%").order(:name)
-        respond_to do |format|
-            format.js { render :layout => false }
-        end
+  
+  def find_variablenames
+    @variablenames = Variable.where('(workflow_id = ?) AND (name LIKE ?)', session[:user_id], "#{params[:term]}%").order(:name)
+    respond_to do |format|
+      format.js { render :layout => false }
     end
+  end
   
   def delete_variable
     variable = Variable.where(:id => params[:id], :workflow_id => session[:user_id]).first
@@ -51,9 +51,9 @@ class EditorController < ApplicationController
     end
     redirect_to :back
   end
-    
-    def full_variable
-        @var = Variable.where(:name => params[:name], :workflow_id => session[:user_id]).first
-    end
+  
+  def full_variable
+    @var = Variable.where(:name => params[:name], :workflow_id => session[:user_id]).first
+  end
   
 end

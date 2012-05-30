@@ -44,7 +44,8 @@ class Variable < ActiveRecord::Base
   end
   
   def name_with_indices
-    return "#{name.split(/\s*\[\s*/)[0]}[#{index_names().collect{|i| i.name}.join(",")}]"
+    return "#{name}[#{index_names().collect{|i| i.name}.join(",")}]"
+    #return "#{name.split(/\s*\[\s*/)[0]}[#{index_names().collect{|i| i.name}.join(",")}]"
   end
 
   def self.create_from_form(form_hash, user_id)

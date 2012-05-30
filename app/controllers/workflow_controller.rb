@@ -57,8 +57,8 @@ class WorkflowController < ApplicationController
               end
               @output_variables[variable_name] = array.inspect
             end
-          else
-            @output_variables[variable_name] = scalar_value.to_s
+          elsif scalar_value != ''
+            @output_variables[variable_name] = scalar_value
           end
         end
       end

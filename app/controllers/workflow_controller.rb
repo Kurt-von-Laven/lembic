@@ -1,4 +1,3 @@
-require 'yaml'
 require Rails.root.join('app/helpers/expression')
 
 class WorkflowController < ApplicationController
@@ -23,7 +22,7 @@ class WorkflowController < ApplicationController
         varname = variable.name.split(/\s*\[/)[0]
         index_names = get_index_names(variable)
         input_values_hash[varname] ||= {}
-        input_values_hash[varname][:formula] = YAML::load(expression_object) unless expression_object.nil?
+        input_values_hash[varname][:formula] = expression_object unless expression_object.nil?
         input_values_hash[varname][:index_names] = index_names if index_names
       end
       if variable_to_solve_for.nil?

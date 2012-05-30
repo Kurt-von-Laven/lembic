@@ -4,39 +4,48 @@
 <%= render "current_variables" %>
 
 <%= render "current_equations" %>
-  <p>Enter input variables in this form: {'varName' => value, 'varName2' => value2}</p>
-  <p>Enter output variables in this form: [{:name => 'varName'}, {:name => 'varName2'}]</p>
-  <p>Specify array outputs with min and max indices in this form: {:name => 'varName', :indices => {:min => 0, :max => 8759}}</p>
-  <table>
-    <tr>
-      <th>Input</th>
-      <th>Output</th>
-    </tr>
-    
-    <tr>
-      <td>
-        <%= form_for(:evaluator) do |f| %>
-          <div>
-            <%= f.label(:input_variables, "Input Variable Values") %><br/>
-            <%= f.text_area :input_values %><br/>
-            <%= f.label(:output_variables, "Variables to Solve For") %><br/>
-            <%= f.text_area :output_variables %><br/>
-            <%= f.submit('Run Model', :class => "button") %>
-          </div>
-        <% end %>
-      </td>
-      <% if !@results.empty? %>
-        <td>
-          <ul>
-            <% for variable_name, variable_result in @results %>
-              <% if variable_result[:values] %>
-              <li><%= variable_name %>: <%= variable_result[:values].inspect %></li>
-              <% else %>
-              <li><%= variable_name %>: <%= variable_result[:value] %></li>
-              <% end %>
-            <% end %>
-          </ul>
-        </td>
+<p>Enter input variables in this form: {'varName' => value, 'varName2' => value2}</p>
+<p>Enter output variables in this form: [{:name => 'varName'}, {:name => 'varName2'}]</p>
+<p>Specify array outputs with min and max indices in this form: {:name => 'varName', :indices => {:min => 0, :max => 8759}}</p>
+<%= form_for(:evaluator) do |f| %>
+  <div>
+    <%= render(:partial => 'flash_message', :locals => {:flash_symbol => :evaluator_error, :tag => 'p', :class_name => 'error'}) %>
+    <h2>Input Values</h2>
+    <ul class="input_values">
+      <% i = 0 %>
+      <% for input_variable in @input_variables %>
+        <li>
+          <%= f.label(:input_values, input_variable.name + ' = ', :for => "evaluator_input_value_#{i}") %>
+          <%= f.text_field(:input_values, :id => "evaluator_input_value_#{i}", :name => 'evaluator[input_values][]') %>
+        </li>
+        <% i += 1 %>
       <% end %>
-    </tr>
-</table>
+    </ul>
+    <h2>Variable to Solve For</h2>
+    <div>
+      <%= f.label(:variable_to_solve_for, 'Variable to solve for: ') %>
+      <%= f.text_field(:variable_to_solve_for) %>
+    </div>
+    <div>
+      <%= f.label(:min_index, 'For arrays, input the minimum index to solve for:') %>
+      <%= f.text_field(:min_index, :class => 'numeric_input') %>
+    </div>
+    <div>
+      <%= f.label(:max_index, 'For arrays, input the maximum index to solve for:') %>
+      <%= f.text_field(:max_index, :class => 'numeric_input') %>
+    </div>
+    <h2>Output Values</h2>
+    <ul class="output_values">
+      <% i = 0 %>
+        <% for output_variable_name, output_variable_value in @output_variables %>
+          <li>
+            <%= f.label(:output_values, output_variable_name + ' = ', :for => "evaluator_output_value_#{i}") %>
+            <%= f.text_field(:output_values, :id => "evaluator_output_value_#{i}", :name =>
+            'evaluator[output_values][]', :value =>
+            output_variable_value[:value] ) %>
+          </li>
+        <% end %>
+    </ul>
+    <%= f.submit('Run Model', :class => "button") %>
+  </div>
+<% end %>

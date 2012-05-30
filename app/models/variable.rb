@@ -1,6 +1,6 @@
 require 'csv'
-require './app/helpers/expression'
-require './app/models/index_name'
+require Rails.root.join('app/helpers/expression')
+require Rails.root.join('app/models/index_name')
 
 class Variable < ActiveRecord::Base
   attr_accessible :id, :name, :description, :workflow_id, :variable_type, :array, :created_at, :updated_at, :expression_string, :expression_object
@@ -23,20 +23,24 @@ class Variable < ActiveRecord::Base
  
   # The variable type is represented as an integer in range [0, 3] according to this mapping.
   def variable_type_string
-	var = case variable_type
-			when 0
-			   'Categorical'
-			when 1
-			   'Integer'
-			when 2
-			   'Real'
-			when 3
-			  'Date and Time'
-			end
-	if array == 1
-		var += " Array"
-	 end
-	 return var
+    var = case variable_type
+          when 0
+            'Categorical'
+          when 1
+            'Integer'
+          when 2
+            'Real'
+          when 3
+            'Date and Time'
+          end
+    if array?
+      var += ' Array'
+    end
+    return var
+  end
+  
+  def array?
+    return array == 1
   end
   
   def name_with_indices

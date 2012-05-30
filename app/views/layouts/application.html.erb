@@ -165,15 +165,15 @@
     </div>
     <div id="container">
       <ul id="menu">
-          <li><%= link_to "Home",  home_path, {:style=>'color:#dee6ed;', :class => "css_class"} %></li>
-          <li><%= link_to "Equation Editor", equations_path, {:style=>'color:#dee6ed;', :class => "css_class"} %></li>
-          <li><%= link_to "View Editor", blocks_path, {:style=>'color:#dee6ed;', :class => "css_class"} %></li>
-          <li><%= link_to "Evaluator", evaluator_path, {:style=>'color:#dee6ed;', :class => "css_class"} %></li>
-		  <li><%= link_to "Help", help_path, {:style=>'color:#dee6ed;', :class => "css_class"} %></li>
+          <li><%= link_to "Home",  home_path, { :class => "css_class"} %></li>
+          <li><%= link_to "Equation Editor", equations_path, {:class => "css_class"} %></li>
+          <li><%= link_to "View Editor", blocks_path, {:class => "css_class"} %></li>
+          <li><%= link_to "Evaluator", evaluator_path, {:class => "css_class"} %></li>
+		  <li><%= link_to "Help", help_path, {:class => "css_class"} %></li>
           <% if User.where(:id => session[:user_id]).empty? %>
-            <li><%= link_to "Login", login_path, {:style=>'color:#dee6ed;', :class => "css_class"} %></li>
+            <li><%= link_to "Login", login_path, { :class => "css_class"} %></li>
           <% else %>
-            <li><%= link_to "Logout", logout_path, {:style=>'color:#dee6ed;', :class => "css_class"} %></li>
+            <li><%= link_to "Logout", logout_path, {:class => "css_class"} %></li>
           <% end %>
         </ul>
       <div id="content">

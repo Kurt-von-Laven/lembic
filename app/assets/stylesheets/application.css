@@ -13,14 +13,12 @@
  *= require_tree .
 */
 
+
 a {
     text-decoration: none;
     color: #113855;
 }
 
-a:hover{
-    
-}
 
 a:visited{
     color:#008A8A;
@@ -255,6 +253,12 @@ li {
     padding-right: 15px;
 }
 
+#menu a {
+	color: #dee6ed;
+}
+#menu a:hover {
+	color: #95b7d0;
+}
 .preserve_whitespace {
     white-space: pre;
 }

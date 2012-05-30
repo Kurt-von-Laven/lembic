@@ -25,26 +25,31 @@ class ViewEditorController < ApplicationController
         
         # Iterate through lines in the inputs string
         form_hash[:inputs_string].lines do |line|
-          
+
           # Trim the line to get a variable name
           variable_name = line.strip
           if variable_name.empty? # TODO: get better input validation
             logger.debug "Empty line in input"
             next
           end
-          
+
           # Find the variable
           variable = Variable.find_by_name(variable_name)
           if variable.nil?
             logger.debug "Could not find variable '#{variable_name}' by name"
             next
           end
-          
+
           # Determine sort_index
-          sort_index = 0
-          
+          sort_index = block.block_inputs.size
+
           # Create a block input with the specified variable
-          block.block_inputs.create({:variable_id => variable.id, :sort_index => sort_index})
+          # NOTE: this may fail for various reasons (i.e. sort_index collision from race condition)
+          bi = block.block_inputs.create({:variable_id => variable.id, :sort_index => sort_index})
+          if bi.nil?
+            # TODO: Return an error to the user
+            logger.debug "Failed to create block_input with variable_id => #{variable.id} and sort_index => #{sort_index}"
+          end
         end
       end
       
@@ -82,11 +87,15 @@ class ViewEditorController < ApplicationController
           expression_object = parser.parse(expression_string) # TODO: Catch and handle parser errors.
           
           # Determine the sort_index
-          sort_index = 0
+          sort_index = block.block_connections.size
           
           # Create a block connection with the specified next_block and expression
           block_connection_hash = {:next_block_id => next_block.id, :expression_string => expression_string, :expression_object => expression_object, :sort_index => sort_index}
-          block.block_connections.create(block_connection_hash)
+          bc = block.block_connections.create(block_connection_hash)
+          if bc.nil?
+            # TODO: return an error to the user
+            logger.debug "Failed to create block_connection from hash => #{block_connection_hash}"
+          end
         end
       end
       
@@ -129,10 +138,14 @@ class ViewEditorController < ApplicationController
           end
           
           # Determine sort_index
-          sort_index = 0
+          sort_index = block.block_inputs.size
           
           # Create a "block input" with the specified variable
-          block.block_inputs.create({:variable_id => variable.id, :sort_index => sort_index})
+          bi = block.block_inputs.create({:variable_id => variable.id, :sort_index => sort_index})
+          if bi.nil?
+            # TODO: Return an error to the user
+            logger.debug "Failed to create block_input with variable_id => #{variable.id} and sort_index => #{sort_index}"
+          end
         end
       end
       

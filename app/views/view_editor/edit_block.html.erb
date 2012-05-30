@@ -19,6 +19,7 @@
 			  <ul>
 				<li><a href="#tabs-1">Add Variables</a></li>
 				<li><a href="#tabs-2">Add Connections</a></li>
+				<li><a href="#tabs-3">Choose Output </a></li>
 			  </ul>
 				<div id="tabs-1">
 				Measure these variables: 
@@ -35,9 +36,21 @@
 							<%= f.text_area :connections_string %>
 						</div>
 				</div>      
+				<div id="tabs-3">
+				 	 Output these variables: 
+					 <div>
+						<%= f.text_area (:outputs_string) %>
+					 </div>
+					 Display Type: 
+					 <div>
+						<%= f.select(:display_type, [['Graph', 'graph'], ['Integer', 'integer'], ['Percentage', 'percent']]) %>
+					 </div>
+				</div>
 		</div>
+		<div style="text-align: center">
 		<%= f.submit('Submit', :class => "button") %>
 				<% end %>
+		</div>
 	</div>
 </div>
 
@@ -45,29 +58,6 @@
 <div>
 <%= render "current_output_blocks" %>
 </div>
-<h3> Done Creating Blocks? Choose Output </h3>
-
-
-
-<%= form_for(:create_output_block_form) do |f| %>
-	<div>
-		<%= f.label(:name, "Name of Block: ") %><br/>
-		<%= f.text_field :name %><br/>
-		
-		<%= f.label(:outputs_string, "Output these variables: ") %><br/>
-		<%= f.text_area (:outputs_string) %><br/>
-	</div>
-	<div>   
-		<%= f.label(:display_type, "Display Type:") %><br/>
-		<%= f.select(:display_type, [['Graph', 'graph'], ['Integer',
-            'integer'], ['Percentage', 'percent']]) %><br/>
-    <!--</p>
-    <p>-->
-	</div>
-	<%= f.submit('Add Output', :class => "button") %><br/>
-<% end %>
-
-
 
 <h3> See the Workflow </h3>
 <h4> Currently redirects to the empty expert workflow page. </h4>

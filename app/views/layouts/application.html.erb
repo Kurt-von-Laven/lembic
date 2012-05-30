@@ -1,8 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+  
     <title><%= @title %></title>
-
+	<link rel="SHORTCUT ICON" type="image/x-icon" href="/assets/lembic_icon_clear.ico" />
     <%= javascript_include_tag "jquery-ui-1.8.20.custom.min" %>
     <%= javascript_include_tag "jquery-1.7.2.min" %>
     <%= javascript_include_tag "jquery.tablesorter.min" %>
@@ -154,26 +155,25 @@
 		</script>
       
 
-        
+         
     <%= csrf_meta_tags %>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   </head>
   <body>
-    
     <div id="logo">
       <%= image_tag "lembic_blue.png" %>
     </div>
     <div id="container">
       <ul id="menu">
-          <li><%= link_to "Home",  home_path, {:style=>'color:#dee6ed;', :class => "css_class"} %></li>
-          <li><%= link_to "Help", help_path, {:style=>'color:#dee6ed;', :class => "css_class"} %></li>
-          <li><%= link_to "Equation Editor", equations_path, {:style=>'color:#dee6ed;', :class => "css_class"} %></li>
-          <li><%= link_to "View Editor", blocks_path, {:style=>'color:#dee6ed;', :class => "css_class"} %></li>
-          <li><%= link_to "Evaluator", evaluator_path, {:style=>'color:#dee6ed;', :class => "css_class"} %></li>
+          <li><%= link_to "Home",  home_path, { :class => "css_class"} %></li>
+          <li><%= link_to "Equation Editor", equations_path, {:class => "css_class"} %></li>
+          <li><%= link_to "View Editor", blocks_path, {:class => "css_class"} %></li>
+          <li><%= link_to "Evaluator", evaluator_path, {:class => "css_class"} %></li>
+		  <li><%= link_to "Help", help_path, {:class => "css_class"} %></li>
           <% if User.where(:id => session[:user_id]).empty? %>
-            <li><%= link_to "Login", login_path, {:style=>'color:#dee6ed;', :class => "css_class"} %></li>
+            <li><%= link_to "Login", login_path, { :class => "css_class"} %></li>
           <% else %>
-            <li><%= link_to "Logout", logout_path, {:style=>'color:#dee6ed;', :class => "css_class"} %></li>
+            <li><%= link_to "Logout", logout_path, {:class => "css_class"} %></li>
           <% end %>
         </ul>
       <div id="content">

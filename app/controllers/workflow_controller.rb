@@ -33,20 +33,34 @@ class WorkflowController < ApplicationController
         end
         @output_variables = []
       else
+        name_of_variable_to_solve_for = vars['variable_to_solve_for'].split(/\s*\[/)[0]
         if variable_to_solve_for.array?
           min_index = vars['min_index'].to_i
           max_index = vars['max_index'].to_i
-          variables_to_solve_for = [{:name => variable_to_solve_for.name, :indices => {:min => min_index, :max => max_index}}]
+          variables_to_solve_for = [{:name => name_of_variable_to_solve_for, :indices => {:min => min_index, :max => max_index}}]
         else
-          variables_to_solve_for = [{:name => variable_to_solve_for.name}]
+          variables_to_solve_for = [{:name => name_of_variable_to_solve_for}]
         end
         evaluator = Evaluator.new
-        logger.debug('hello')
-        logger.debug(variables_to_solve_for.inspect)
-        logger.debug(input_values_hash.inspect)
         evaluator.eval_all(variables_to_solve_for, input_values_hash)
-        @output_variables = input_values_hash
-        logger.debug(@output_variables.inspect)
+        @output_variables = {}
+        logger.debug(input_values_hash.inspect)
+        for variable_name, variable_properties in input_values_hash
+          logger.debug(variable_properties.inspect)
+          scalar_value = variable_properties[:value]
+          if scalar_value.nil?
+            array_value = variable_properties[:values]
+            array = []
+            if !array_value.nil?
+              for index, value in array_value
+                array[index.to_i - 1] = value # TODO: Handle multi-dimensional arrays.
+              end
+              @output_variables[variable_name] = array.inspect
+            end
+          else
+            @output_variables[variable_name] = scalar_value.to_s
+          end
+        end
       end
     else
       @output_variables = []

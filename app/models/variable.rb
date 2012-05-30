@@ -1,6 +1,6 @@
 require 'csv'
-require './app/helpers/expression'
-require './app/models/index_name'
+require Rails.root.join('app/helpers/expression')
+require Rails.root.join('app/models/index_name')
 
 class Variable < ActiveRecord::Base
   attr_accessible :id, :name, :description, :workflow_id, :variable_type, :array, :created_at, :updated_at, :expression_string, :expression_object
@@ -50,7 +50,6 @@ class Variable < ActiveRecord::Base
     merged_var['workflow_id'] = user_id # TODO: Grab the workflow ID out of the session state.
     merged_var['variable_type'] = merged_var['variable_type'].to_i
     merged_var['array'] = merged_var['array'].to_i
-    puts "MERGED VAR = "+merged_var.inspect
     #merged_var['name'] = merged_var['name'].split(/\s*\[/)[0]
     if merged_var['expression_string'].empty?
       merged_var['expression_string'] = nil

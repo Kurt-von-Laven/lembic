@@ -24,6 +24,12 @@ Lembic::Application.routes.draw do
             get :find_variablenames
         end
     end
+    
+    resources :view_editor do
+        collection do
+            get :find_blocknames
+        end
+    end
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -49,6 +49,10 @@
 			<div id="tabs-2">
             <%= form_for(:event, :html => {:class => "input_form"}) do |f| %>
     <div id="var_input_block">
+        <div>
+            <%= f.label(:name, "Name: ") %>
+            <%= f.text_field :name %>
+        </div>
         <!-- Type of day -->
         <div>
             <%= f.label(:day_week, "Type of Day:") %>
@@ -61,6 +65,7 @@
             <label for="time">Time range (in military time):</label>
             <input type="text" id="time" />
         </div>
+        <br />
 		<div id="slider-style">
 			<div id="slider-range"></div>
         </div>

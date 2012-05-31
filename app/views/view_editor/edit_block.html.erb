@@ -1,5 +1,5 @@
 <% @title = "Edit Block" %>
-<h1>View Editor: Edit Block</h1>
+<h1>Edit Blocks</h1>
 <p> Think of a block as a set of variables that are connected in relationships, or are generally measured together. For instance, you might have a block of general measurements, or a block that is only filled out in certain circumstance. Add variables to the "Measure" Box to add the variables to the block. Define relationships using the "Logic" Box. For instance you might use the logic box to say "If VAR1 = TRUE and VAR2 > 10, DO Block <name>", or "If VAR1 = TRUE, FIND VAR2".</p>
 <div style="width: 100%; height: 600px">
 	<div class = "left_column">
@@ -16,7 +16,7 @@
 			<div id="tabs">
 			  <ul>
 				<li><a href="#tabs-1">Create Block</a></li>
-                <li><a href="#tabs-2">Add Measurements</a></li>
+                <li><a href="#tabs-2">Add Measures</a></li>
 				<li><a href="#tabs-3">Add Connections</a></li>
 				<li><a href="#tabs-4">Choose Output </a></li>
 			  </ul>
@@ -73,4 +73,3 @@
     </div>
 </div>
 
-<%=render "blocks_debug" %>

@@ -158,7 +158,7 @@ class ViewEditorController < ApplicationController
       id = form_hash[:id]
       
       # Redirect to the show block page. I know, this is kind of hacky.
-      redirect_to :controller => :block, :action => :show, :id => id
+      redirect_to block_show_path(id)
     end
 
 

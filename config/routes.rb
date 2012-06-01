@@ -32,7 +32,8 @@ Lembic::Application.routes.draw do
   end
 
   # Block controller routes
-  match '/block/show', to: 'block#show'
+  match '/block/show.:id', to: 'block#show', as:'block_show'
+  match '/block/input', to:'block#input', as:'block_input'
   
   
 

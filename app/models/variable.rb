@@ -1,6 +1,7 @@
 require 'csv'
 require Rails.root.join('app/helpers/expression')
 require Rails.root.join('app/models/index_name')
+require Rails.root.join('app/helpers/lembic_datetime')
 
 class Variable < ActiveRecord::Base
   attr_accessible :id, :name, :description, :workflow_id, :variable_type, :array, :created_at, :updated_at, :expression_string, :expression_object
@@ -46,6 +47,10 @@ class Variable < ActiveRecord::Base
   def name_with_indices
     return "#{name.split(/\s*\[\s*/)[0]}" + ((index_names().empty?) ? '' : "[#{index_names().collect{|i| i.name}.join(",")}]")
     #return "#{name.split(/\s*\[\s*/)[0]}[#{index_names().collect{|i| i.name}.join(",")}]"
+  end
+  
+  def index_name_strings
+    return index_names().order("position").collect { |i| i.name }
   end
 
   def self.create_from_form(form_hash, user_id)
@@ -112,8 +117,40 @@ class Variable < ActiveRecord::Base
     desired_rows = parsed_data[start_row, num_rows_desired]
     desired_column = desired_rows.map {|r| r[column_number]}
     desired_column_with_nans = desired_column.map {|v| (v.nil? or (v == '')) ? Float::NAN : v}
+    if converter == :date_time
+      #convert to Lembic datetime
+      desired_column_with_nans = desired_column_with_nans.collect{|i| date_convert(i)}
+    end
     desired_values_as_str = desired_column_with_nans.join(', ')
     return "[ #{INDEX} | #{desired_values_as_str}]"
+  end
+  
+  def self.date_convert(input)
+    # converts an Excel-formatted date/time string to Lembic format.
+    puts "DATE CONVERTER INPUT = #{input}"
+    date = nil
+    #try a bunch of different formats
+    date = try_date_conversion_format(input, "%m/%d/%y %H:%M") if date.nil?
+    date = try_date_conversion_format(input, "%m/%d/%Y %H:%M") if date.nil?
+    date = try_date_conversion_format(input, "%m/%d/%y %l:%M %p") if date.nil?
+    date = try_date_conversion_format(input, "%m/%d/%Y %l:%M %p") if date.nil?
+    date = try_date_conversion_format(input, "%H:%M") if date.nil?
+    date = try_date_conversion_format(input, "%l:%M %p") if date.nil?
+    date = try_date_conversion_format(input, "%H:%M:%S") if date.nil?
+    date = try_date_conversion_format(input, "%l:%M:%S %p") if date.nil?
+    conv = date.strftime("%Y_%m_%d_%H_%M_%S")
+    puts "CONVERTED = #{conv}"
+    return conv
+    
+  end
+  
+  def self.try_date_conversion_format(input, fmt)
+    date = nil
+    begin
+      date = DateTime.strptime(input, fmt)
+    rescue
+    end
+    return date
   end
   
 end

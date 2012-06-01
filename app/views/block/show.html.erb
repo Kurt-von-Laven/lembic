@@ -1,0 +1,8 @@
+<h1>Show Block</h1>
+
+<!--Display form for entering values into this block's input_variables -->
+
+<% for bi in @block.block_inputs %>
+	<%=bi.variable.name %><br/>
+<% end %>
+

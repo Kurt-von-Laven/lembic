@@ -151,6 +151,15 @@ class ViewEditorController < ApplicationController
         end
       end
     end
+    
+    ## Check for form data for showing a block
+    form_hash = params[:show_block_form]
+    if !form_hash.nil?
+      id = form_hash[:id]
+      
+      # Redirect to the show block page. I know, this is kind of hacky.
+      redirect_to :controller => :block, :action => :show, :id => id
+    end
 
 
 

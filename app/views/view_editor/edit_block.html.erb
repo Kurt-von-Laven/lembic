@@ -1,3 +1,5 @@
+
+
 <% @title = "Edit Block" %>
 <h1>Edit Blocks</h1>
 <p> Think of a block as a set of variables that are connected in relationships, or are generally measured together. For instance, you might have a block of general measurements, or a block that is only filled out in certain circumstance. Add variables to the "Measure" Box to add the variables to the block. Define relationships using the "Logic" Box. For instance you might use the logic box to say "If VAR1 = TRUE and VAR2 > 10, DO Block <name>", or "If VAR1 = TRUE, FIND VAR2".</p>
@@ -35,8 +37,10 @@
                     <%= form_for(:create_block_inputs_form) do |f| %>
                         <%= f.label(:block_name, "Name of Block: ") %><br/>
                         <%= f.text_field :block_name, :class => "auto_complete_blocks" %><br/>
-                        <%= f.label(:inputs_string, "Input Variables: ") %><br/>
-                        <%= f.text_area :inputs_string %><br/>
+                        <%= f.label(:inputs_string, "Input Variables:") %><br/>
+                        
+                        <%= f.text_area :inputs_string, :id =>"drop_var" %>
+                       
                         <%= f.submit("Create Block Inputs", :class => "button") %><br/>
                     <% end %>
                 </div>

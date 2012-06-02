@@ -69,7 +69,7 @@
 				<div id="tabs-4">
                 <%= form_for(:create_output_block_form) do |f| %>
                     <%= f.label(:name, "Name of Block: ") %><br/>
-                    <%= f.text_field :block_name, :class => "auto_complete_blocks" %><br/>
+                    <%= f.text_field :name, :class => "auto_complete_blocks" %><br/>
                     <%= f.label(:outputs_string, "Output these variables: ") %><br/>
                     <%= f.text_area (:outputs_string) %><br/>
                     <%= f.label(:display_type, "Display Type:") %><br/>

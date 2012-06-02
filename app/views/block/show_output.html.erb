@@ -1,0 +1,17 @@
+<% @title = @block.name %>
+
+<h1><%=@title %></h1>
+
+<!--Display values of this block's variables -->
+<% for bi in @block.block_inputs.order(:sort_index) %>
+	
+	<!--Get values for this block_input to include on the page -->
+	<%
+		name = bi.variable.name
+		value = ''# TODO: call the appropriate class to get this variable's value
+	%>
+	
+	<!--Display this variable's value -->
+	<%=name %> = <%=value %><br/>
+	
+<% end %>

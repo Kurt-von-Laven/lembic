@@ -9,6 +9,11 @@ class BlockController < ApplicationController
     # Locate the block specified by id
     @block = Block.find(id)
     
+    # If this is an output block, render it with the output page
+    if !@block.display_type.nil?
+      render 'show_output'
+    end
+    
   end
   
   # Record data entered into this block, redirect to the appropriate next block
@@ -51,9 +56,9 @@ class BlockController < ApplicationController
       end
     end
     
-    # Redirect to default block (output)
-    # TODO: select the correct default block
-    redirect_to block_show_path(1)
+    # Default: Redirect to the first output block
+    block = Block.where("display_type IS NOT NULL").first
+    redirect_to block_show_path(block.id)
     
   end
   

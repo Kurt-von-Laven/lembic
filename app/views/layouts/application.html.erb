@@ -8,6 +8,7 @@
     <%= javascript_include_tag "jquery-1.7.2.min" %>
     <%= javascript_include_tag "jquery.tablesorter.min" %>
     <%= javascript_include_tag "autocomplete-rails" %>
+    <%= javascript_include_tag "jquery.tablednd.0.7.min" %>
     <%= javascript_include_tag "application" %>
     <%= stylesheet_link_tag   "jquery-ui-1.8.20.custom", :media => "all" %>
     <%= stylesheet_link_tag   "application", :media => "all" %>
@@ -205,7 +206,8 @@
                             
                         }
                     });
-
+                    
+                    $("#variables_table").tableDnD();
                 
                 $('select').selectmenu();
                 

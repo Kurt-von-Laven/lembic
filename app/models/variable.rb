@@ -83,7 +83,7 @@ class Variable < ActiveRecord::Base
     merged_array['variable_type'] = merged_array['variable_type'].to_i
     merged_array['array'] = 1
     data = merged_array['data_file'].read
-    merged_array['expression_string'] = self.parse_csv_expression(data, merged_array['start_row'].to_i, merged_array['column_number'].to_i,
+    merged_array['expression_string'] = self.parse_csv_expression(data, merged_array['start_row'].to_i, self.convert_letter_column_labels_to_numbers(merged_array['column_number']),
                                                                   merged_array['variable_type'])
     parser = Parser.new
     begin
@@ -96,6 +96,26 @@ class Variable < ActiveRecord::Base
     merged_array.delete('column_number')
     newvar = Variable.create(merged_array)
     IndexName.create_from_declaration("[#{INDEX}]", newvar.id)
+  end
+  
+  def self.convert_letter_column_labels_to_numbers(input)
+    puts "INPUT: "+input
+    raise ArgumentError, "parameter of convert_letter_column_labels_to_numbers must be a string" if !input.instance_of?(String)
+    if input.match(/^[0-9]$/)
+      return input.to_i
+    end
+    if input.match(/^[a-zA-Z]$/)
+      multiplier = 1
+      output = 0
+      input.upcase.reverse.each_byte do |b|
+	index_in_alphabet = b - 'A'[0].ord + 1
+	output += index_in_alphabet * multiplier
+	multiplier *= 26
+      end
+      puts "OUTPUT: #{output}"
+      return output
+    end
+    raise ArgumentError, "Column label must be specified as a decimal number or an Excel-style letter label."
   end
   
   def self.parse_csv_expression(csv_data, start_row_one_indexed, column_number_one_indexed, variable_type)

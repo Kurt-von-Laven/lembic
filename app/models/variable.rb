@@ -79,7 +79,6 @@ class Variable < ActiveRecord::Base
     Permission.where(:user_id => user_id).first_or_create({'workflow_id' => user_id, 'permissions' => 4})
     Workflow.where(:id => user_id, :name => 'Sample Workflow').first_or_create({'description' => 'This record should be removed eventually and is just for test purposes.'})
     merged_array = {'array' => 0, 'start_row' => 1, 'column_number' => 1}.merge(form_hash)
-    merged_array['name'] += "[#{INDEX}]"
     merged_array['workflow_id'] = user_id # TODO: Grab the workflow ID out of the session state.
     merged_array['variable_type'] = merged_array['variable_type'].to_i
     merged_array['array'] = 1

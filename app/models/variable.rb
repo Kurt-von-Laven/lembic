@@ -58,7 +58,8 @@ class Variable < ActiveRecord::Base
     merged_var = {'array' => 0}.merge(form_hash)
     merged_var['workflow_id'] = user_id # TODO: Grab the workflow ID out of the session state.
     merged_var['variable_type'] = merged_var['variable_type'].to_i
-    merged_var['array'] = merged_var['array'].to_i
+    merged_var['array'] = merged_var['name'].match(/\[.+\]/) ? 1 : 0
+    puts "CREATED VARIABLE: ARRAY = #{merged_var['array']}"
     merged_var['name'] = merged_var['name'].split(/\s*\[/)[0]
     if merged_var['expression_string'].empty?
       merged_var['expression_string'] = nil
@@ -78,7 +79,6 @@ class Variable < ActiveRecord::Base
     Permission.where(:user_id => user_id).first_or_create({'workflow_id' => user_id, 'permissions' => 4})
     Workflow.where(:id => user_id, :name => 'Sample Workflow').first_or_create({'description' => 'This record should be removed eventually and is just for test purposes.'})
     merged_array = {'array' => 0, 'start_row' => 1, 'column_number' => 1}.merge(form_hash)
-    merged_array['name'] += "[#{INDEX}]"
     merged_array['workflow_id'] = user_id # TODO: Grab the workflow ID out of the session state.
     merged_array['variable_type'] = merged_array['variable_type'].to_i
     merged_array['array'] = 1

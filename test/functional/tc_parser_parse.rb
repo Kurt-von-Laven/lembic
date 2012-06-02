@@ -295,6 +295,11 @@ class TestParserParse < Test::Unit::TestCase
     assert_equal(:cat, @e.eval_expression(@p.parse("@cat"), {}, {}))
   end
   
+  def test_expression_replace_identifier
+    assert_equal("+(replaced, bar)", @p.parse("foo+bar").replace_identifier("foo", "replaced").inspect)
+    assert_equal("+(b, -(babies, cheese))", @p.parse("a+(b-c)").replace_identifier("b", "babies").replace_identifier("a", "b").replace_identifier("c", "cheese").inspect)
+  end
+  
 =begin
   def test_large_model
     output = @e.eval_all([{:name => "o", :indices => {:min => 0, :max => 9999}}],

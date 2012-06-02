@@ -75,7 +75,7 @@
                     <%= f.label(:name, "Name of Block: ") %><br/>
                     <%= f.text_field :name, :class => "auto_complete_blocks" %><br/>
                     <%= f.label(:outputs_string, "Output these variables: ") %><br/>
-                    <%= f.text_area (:outputs_string) %><br/>
+                    <%= f.text_area :outputs_string, :id =>"drop_var_output" %><br/>
                     <%= f.label(:display_type, "Display Type:") %><br/>
                     <%= f.select(:display_type, [['Graph', 'graph'], ['Integer', 'integer'], ['Percentage', 'percent']])    %><br/>
                 <%= f.submit('Add Output', :class => "button") %><br/>

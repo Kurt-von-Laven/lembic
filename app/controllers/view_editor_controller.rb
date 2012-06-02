@@ -14,7 +14,8 @@ class ViewEditorController < ApplicationController
       name = form_hash[:name]
       workflow_id = session[:user_id]
       display_type = nil # display_type is nil for regular input blocks
-      Block.create({:name => name, :workflow_id => workflow_id, :display_type => display_type})
+      sort_index = Block.where(:workflow_id => workflow_id).size
+      Block.create({:name => name, :workflow_id => workflow_id, :display_type => display_type, :sort_index => sort_index})
     end
 
     ## Check for form data for creating a block_input
@@ -121,7 +122,8 @@ class ViewEditorController < ApplicationController
       name = form_hash[:name]
       workflow_id = session[:user_id]
       display_type = form_hash[:display_type]
-      block = Block.create({:name => name, :workflow_id => workflow_id, :display_type => display_type})
+      sort_index = Block.where(:workflow_id => workflow_id).size
+      block = Block.create({:name => name, :workflow_id => workflow_id, :display_type => display_type, :sort_index => sort_index})
 
       # Iterate through lines in the outputs string
       form_hash[:outputs_string].lines do |line|
@@ -165,7 +167,7 @@ class ViewEditorController < ApplicationController
 
     ## Set variables used by views for rendering
     @variables = Variable.where(:workflow_id => session[:user_id]).order(:name)
-    @blocks = Block.where(:workflow_id => session[:user_id]).order(:name)
+    @blocks = Block.where(:workflow_id => session[:user_id]).order(:sort_index)
 
   end
 

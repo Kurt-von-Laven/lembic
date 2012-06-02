@@ -4,7 +4,7 @@
 
 <!--Display form for entering values into this block's input_variables -->
 <%=form_for :block_inputs, :url => block_input_path do |f| %>
-	<% for bi in @block.block_inputs %>
+	<% for bi in @block.block_inputs.order(:sort_index) %>
 	
 		<!--Get values for this block_input to include in the form -->
 		<%

@@ -8,7 +8,15 @@
 		<%= render "current_variables_truncated" %>
 		<%= render "current_blocks_truncated" %>
         <br />
-        <%= button_to "View Workflow", "/workflow",
+
+		<!--This form is for showing a specific block and entering data into it -->
+		<%= form_for(:show_block_form) do |f| %>
+			<%= f.label(:id, "Block: ") %>
+			<%= f.collection_select(:id, @blocks, :id, :name, :prompt => true)%><br/>
+			<%= f.submit("View Block", :class => "button") %><br/>
+		<% end %><br/><br/>
+
+        <%= button_to "View Expert Workflow", "/workflow",
               {:confirm => "Are you sure you are ready to leave this page?",
                :method => :delete, :class => "button"} %>
 
@@ -65,7 +73,7 @@
 				<div id="tabs-4">
                 <%= form_for(:create_output_block_form) do |f| %>
                     <%= f.label(:name, "Name of Block: ") %><br/>
-                    <%= f.text_field :block_name, :class => "auto_complete_blocks" %><br/>
+                    <%= f.text_field :name, :class => "auto_complete_blocks" %><br/>
                     <%= f.label(:outputs_string, "Output these variables: ") %><br/>
                     <%= f.text_area (:outputs_string) %><br/>
                     <%= f.label(:display_type, "Display Type:") %><br/>

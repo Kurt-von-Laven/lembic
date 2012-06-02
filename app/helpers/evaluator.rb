@@ -319,7 +319,7 @@ class Evaluator
       end
       result = eval_expression(formula, globals, indices)
       globals[varname][:values] = {} if globals[varname][:values].nil?
-      globals[varname][:values][index_values.join(",")] = result
+      globals[varname][:values][index_values] = result
     end
     return result
   end

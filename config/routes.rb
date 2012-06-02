@@ -16,21 +16,27 @@ Lembic::Application.routes.draw do
   match '/equation_editor/delete_relationship', to: 'editor#delete_relationship', as: 'delete_relationship'
   match '/evaluator', to: 'workflow#evaluate', as: 'evaluator'
   match '/workflow', to: 'workflow#expert_workflow', as: 'workflow'
-    
-    match '/fullvariable', to: 'editor#full_variable', as: 'fullvariable'
-    
-    resources :editor do
-        collection do
-            get :find_variablenames
-        end
+
+  match '/fullvariable', to: 'editor#full_variable', as: 'fullvariable'
+
+  resources :editor do
+    collection do
+      get :find_variablenames
     end
-    
-    resources :view_editor do
-        collection do
-            get :find_blocknames
-        end
+  end
+
+  resources :view_editor do
+    collection do
+      get :find_blocknames
     end
+  end
+
+  # Block controller routes
+  match '/block/show.:id', to: 'block#show', as:'block_show'
+  match '/block/input', to:'block#input', as:'block_input'
   
+  
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
   

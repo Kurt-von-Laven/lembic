@@ -58,7 +58,8 @@ class Variable < ActiveRecord::Base
     merged_var = {'array' => 0}.merge(form_hash)
     merged_var['workflow_id'] = user_id # TODO: Grab the workflow ID out of the session state.
     merged_var['variable_type'] = merged_var['variable_type'].to_i
-    merged_var['array'] = merged_var['array'].to_i
+    merged_var['array'] = merged_var['name'].match(/\[.+\]/) ? 1 : 0
+    puts "CREATED VARIABLE: ARRAY = #{merged_var['array']}"
     merged_var['name'] = merged_var['name'].split(/\s*\[/)[0]
     if merged_var['expression_string'].empty?
       merged_var['expression_string'] = nil

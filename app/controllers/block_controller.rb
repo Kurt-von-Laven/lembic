@@ -20,6 +20,15 @@ class BlockController < ApplicationController
     inputs_hash = form_hash[:inputs]
     
     # Record the input values
+    inputs_hash.each do |variable_id, value|
+      
+      logger.debug "+++++++++++++Received input for variable_id #{variable_id}: #{value}"
+      
+      # Record the value for the variable specified by variable_id
+      # TODO: make a call to the right class for doing this
+      
+      
+    end
     
     # Determine which block_connection to follow
     block = Block.find(block_id)
@@ -27,12 +36,14 @@ class BlockController < ApplicationController
       
       block_name = bc.next_block.name
       str = bc.expression_string
-      logger.debug "++++++++++++Testing block_connection to #{block_name}: #{str}"
+      logger.debug "++++++++++++Testing block_connection to block #{block_name}: #{str}"
       
-      # Get expression object
+      # Test boolean expression object
+      expression = bc.expression_object
+      expression_value = false #TODO: replace with a call to the Evaluator
       
-      # Test boolean expression
-      if false
+      # If true, follow that connection
+      if expression_value == true
         
         # Redirect to next block
         next_block_id = bc.next_block.id

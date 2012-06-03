@@ -20,7 +20,7 @@
 		<td><%= variable.variable_type_string %>
 		<td><%= variable.name_with_indices %> = <%= truncate(variable.expression_string, :length =>17, :omission => '...(continued)') %></td>
         <td>
-        <%= link_to "Show All!", fullvariable_path(:name => variable.name), :target => "_blank"%>
+        <%= link_to "Show All!", fullvariable_path(:name => variable.name_with_indices), :target => "_blank"%>
         
         </td>
 		<td align="center">

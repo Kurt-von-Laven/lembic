@@ -296,8 +296,15 @@ class TestParserParse < Test::Unit::TestCase
   end
   
   def test_expression_replace_identifier
-    assert_equal("+(replaced, bar)", @p.parse("foo+bar").replace_identifier("foo", "replaced").inspect)
-    assert_equal("+(b, -(babies, cheese))", @p.parse("a+(b-c)").replace_identifier("b", "babies").replace_identifier("a", "b").replace_identifier("c", "cheese").inspect)
+    assert_equal("+(replaced, bar)", @p.parse("foo+bar").replace_identifier!("foo", "replaced").inspect)
+    assert_equal("+(b, -(babies, cheese))", @p.parse("a+(b-c)").replace_identifier!("b", "babies").replace_identifier!("a", "b").replace_identifier!("c", "cheese").inspect)
+  end
+  
+  def test_parser_does_not_modify_input
+    s = "a +    b + c    * d"
+    s_copy = s
+    @p.parse(s)
+    assert_equal(s_copy, s)
   end
   
 =begin

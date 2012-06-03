@@ -69,7 +69,7 @@ class Expression
     newargs = []
     @args.each do |arg|
       if arg.instance_of?(Expression)
-        arg.replace_identifier(find, replace)
+        arg.replace_identifier!(find, replace)
       elsif arg.instance_of?(String) && arg === find
         arg = replace
       end

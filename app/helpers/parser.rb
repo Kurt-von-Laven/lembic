@@ -133,12 +133,13 @@ class Parser
   end
   
   def tokenize (s)
+    s_copy = s
     #neg_expressions = /([\+\-\*\/\^%\(\{\[:;^])\s*(\-[\d]+(\.[\d]*){0,1}|\-\.[\d]+)/
     #pos_numbers = /([\d]+(\.[\d]*){0,1}|\.[\d]+)/
     ops = /(==|<=|>=|!=|&&|\|\||[;:\*\+\-\/\^%\(\)\[\]\{\}=<>,\|])/
-    s.gsub!(ops, " \\1 ")
-    s.gsub!(/^\s+|\s+$/, "") #remove leading and trailing whitespace
-    return s.split(/\s+/)
+    s_copy.gsub!(ops, " \\1 ")
+    s_copy.gsub!(/^\s+|\s+$/, "") #remove leading and trailing whitespace
+    return s_copy.split(/\s+/)
   end
   
   # returns true iff token parameter matches the comparee parameter by the given criterion

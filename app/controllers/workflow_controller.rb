@@ -44,9 +44,7 @@ class WorkflowController < ApplicationController
         evaluator = Evaluator.new
         evaluator.eval_all(variables_to_solve_for, input_values_hash)
         @output_variables = {}
-        logger.debug(input_values_hash.inspect)
         for variable_name, variable_properties in input_values_hash
-          logger.debug(variable_properties.inspect)
           scalar_value = variable_properties[:value]
           if scalar_value.nil?
             array_value = variable_properties[:values]

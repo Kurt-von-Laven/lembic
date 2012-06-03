@@ -1,5 +1,6 @@
 class EditorController < ApplicationController
   autocomplete :variable, :name
+  
   def equations
     user_id = session[:user_id]
     new_equation = params[:new_equation]
@@ -34,6 +35,27 @@ class EditorController < ApplicationController
     end
   end
   
+  def variable
+    variable_form = params[:variable]
+    if !variable_form.nil?
+      variable_name = variable_form[:name]
+      expression_string = variable_form[:expression_string]
+      variable_record = Variable.where(:id => variable_form[:id]).first
+      if variable_record.nil?
+        flash[:unrecognized_variable] = "The variable you tried to edit, #{variable_name}, was probably recently" +
+          " deleted by a member of your team. Your equation, #{expression_string}, was not saved."
+      else
+        variable_record.name = variable_name
+        variable_record.expression_string = expression_string
+        logger.debug(variable_record.expression_string)
+        if !variable_record.save
+          flash[:variable_errors] = variable_record.errors.full_messages
+        end
+      end
+    end
+    redirect_to :back
+  end
+  
   def delete_variable
     variable = Variable.where(:id => params[:id], :workflow_id => session[:user_id]).first
     if !variable.nil?
@@ -46,7 +68,6 @@ class EditorController < ApplicationController
     variable = Variable.where(:id => params[:id], :workflow_id => session[:user_id]).first
     if !variable.nil?
       variable.expression_string = nil
-      variable.expression_object = nil
       variable.save
     end
     redirect_to :back

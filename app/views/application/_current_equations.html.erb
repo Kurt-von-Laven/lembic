@@ -1,18 +1,29 @@
 <h3>Current Equations</h3>
 
+<%= render(:partial => 'flash_message', :locals => {:flash_symbol => :unrecognized_variable, :tag => 'p', :class_name => 'error'}) %>
+<% if !flash[:variable_errors].nil? %>
+  <% for error_message in flash[:variable_errors] %>
+    <p class="error"><%= error_message %></p>
+  <% end %>
+<% end %>
 <table cellpadding="0" cellspacing="0" class="sortable">
   <tr>
     <th>Equation</th>
     <th></th>
+    <th></th>
   </tr>
   <% for variable in @variables %>
     <tr>
-      <td class="preserve_whitespace"><%= variable.name %> = <%=truncate(variable.expression_string, :length => 75, :omission => '... (continued)') %></td>
-      <td class="delete">
-        <%= button_to "x", "#{delete_relationship_path}?id=#{variable.id}",
-           {:confirm => "Are you sure you want to delete the equation for the variable named #{variable.name}?",
-            :method => :delete} %>
-      </td>
+      <%= form_for(variable) do |f| %>
+        <%= f.hidden_field(:id) %>
+        <td class="preserve_whitespace"><%= f.text_field(:name) %> = <%= f.text_field(:expression_string) %></td>
+        <td><%= f.submit('Save Changes for this Variable Only') %></td>
+        <td class="delete">
+          <%= button_to "x", "#{delete_relationship_path}?id=#{variable.id}",
+             {:confirm => "Are you sure you want to delete the equation for the variable named #{variable.name}?",
+              :method => :delete} %>
+        </td>
+      <% end %>
     </tr>
   <% end %>
 </table>

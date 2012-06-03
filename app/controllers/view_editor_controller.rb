@@ -77,7 +77,7 @@ class ViewEditorController < ApplicationController
           next
         end
         next_block_name = tokens[0].strip
-        expression_string = tokens[1].strip
+        expression_string = tokens[1].strip # TODO: catch and handle parser errors
 
         # Find the next block
         next_block = Block.find_by_name(next_block_name)
@@ -85,15 +85,12 @@ class ViewEditorController < ApplicationController
           logger.debug "Could not find next block '#{next_block_name}' by name"
           next
         end
-
-        # Parse the expression into an object, using parser
-        expression_object = parser.parse(expression_string) # TODO: Catch and handle parser errors.
-
+        
         # Determine the sort_index
         sort_index = block.block_connections.size
 
         # Create a block connection with the specified next_block and expression
-        block_connection_hash = {:next_block_id => next_block.id, :expression_string => expression_string, :expression_object => expression_object, :sort_index => sort_index}
+        block_connection_hash = {:next_block_id => next_block.id, :expression_string => expression_string, :sort_index => sort_index}
         bc = block.block_connections.create(block_connection_hash)
         if bc.nil?
           # TODO: return an error to the user

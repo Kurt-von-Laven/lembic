@@ -121,6 +121,10 @@ class Variable < ActiveRecord::Base
                 end
     parsed_data = CSV.parse(csv_data, :converters => converter)
     num_rows_desired = parsed_data.length - start_row
+    if num_rows_desired < 1
+      #start_row was greater than the greatest index in the array
+      raise ArgumentError, "Start row out of bounds; can be at most #{parsed_data.length}" #remember that the user inputs one-indexed values!
+    end
     desired_rows = parsed_data[start_row, num_rows_desired]
     desired_column = desired_rows.map {|r| r[column_number]}
     desired_column_with_nans = desired_column.map {|v| (v.nil? or (v == '')) ? Float::NAN : v}
@@ -133,6 +137,10 @@ class Variable < ActiveRecord::Base
   end
   
   def self.date_convert(input)
+    puts "DATE CONVERTER INPUT #{input.inspect}"
+    if !input.instance_of?(String)
+      return input
+    end
     # converts an Excel-formatted date/time string to Lembic format.
     puts "DATE CONVERTER INPUT = #{input}"
     date = nil

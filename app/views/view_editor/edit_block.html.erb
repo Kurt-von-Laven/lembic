@@ -4,6 +4,8 @@
 
 <h1>Edit Blocks</h1>
 
+<%= render(:partial => 'flash_message', :locals => {:flash_symbol => :block_failed, :tag => 'div', :class_name => 'error'}) %>
+
 <p> Think of a block as a set of variables that are connected in relationships, or are generally measured together. For instance, you might have a block of general measurements, or a block that is only filled out in certain circumstance. Add variables to the "Measure" Box to add the variables to the block. Define relationships using the "Logic" Box. For instance you might use the logic box to say "If VAR1 = TRUE and VAR2 > 10, DO Block <name>", or "If VAR1 = TRUE, FIND VAR2".</p>
 <div style="width: 100%; height: 600px">
 	<div class = "left_column">

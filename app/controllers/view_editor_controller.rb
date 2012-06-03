@@ -24,8 +24,12 @@ class ViewEditorController < ApplicationController
 
       # Find the block these inputs are for
       block_name = form_hash[:block_name]
-      block = Block.find_by_name(block_name)
-      # TODO: check for error finding block
+        begin
+            block = Block.find_by_name(block_name)
+        rescue ArgumentError, IOError, RuntimeError => e
+            flash[:block_failed] = "Sorry, we could not find the block."
+        end
+     
 
       # Iterate through lines in the inputs string
       form_hash[:inputs_string].lines do |line|
@@ -33,14 +37,14 @@ class ViewEditorController < ApplicationController
         # Trim the line to get a variable name
         variable_name = line.strip
         if variable_name.empty? # TODO: get better input validation
-          logger.debug "Empty line in input"
+            flash[:block_failed]='Your variable name was empty. Please try again.'
           next
         end
 
         # Find the variable
         variable = Variable.find_by_name(variable_name)
         if variable.nil?
-          logger.debug "Could not find variable '#{variable_name}' by name"
+            flash[:block_failed] = "Could not find variable '#{variable_name}' by name"
           next
         end
 
@@ -51,8 +55,7 @@ class ViewEditorController < ApplicationController
         # NOTE: this may fail for various reasons (i.e. sort_index collision from race condition)
         bi = block.block_inputs.create({:variable_id => variable.id, :sort_index => sort_index})
         if bi.nil?
-          # TODO: Return an error to the user
-          logger.debug "Failed to create block_input with variable_id => #{variable.id} and sort_index => #{sort_index}"
+            flash[:block_failed] = "Failed to create block_input with variable_id => #{variable.id} and sort_index => #{sort_index}"
         end
       end
     end
@@ -63,8 +66,11 @@ class ViewEditorController < ApplicationController
 
       # Find the block these inputs are for
       block_name = form_hash[:block_name]
-      block = Block.find_by_name(block_name)
-      # TODO: check for error finding block
+        begin
+            block = Block.find_by_name(block_name)
+        rescue ArgumentError, IOError, RuntimeError => e
+            flash[:block_failed] = e.message
+        end    
 
       # Create parser for parsing expression strings
       parser = Parser.new
@@ -83,7 +89,7 @@ class ViewEditorController < ApplicationController
         # Find the next block
         next_block = Block.find_by_name(next_block_name)
         if next_block.nil?
-          logger.debug "Could not find next block '#{next_block_name}' by name"
+          flash[:block_failed] =  "Could not find next block '#{next_block_name}' by name"
           next
         end
         
@@ -94,8 +100,7 @@ class ViewEditorController < ApplicationController
         block_connection_hash = {:next_block_id => next_block.id, :expression_string => expression_string, :sort_index => sort_index}
         bc = block.block_connections.create(block_connection_hash)
         if bc.nil?
-          # TODO: return an error to the user
-          logger.debug "Failed to create block_connection from hash => #{block_connection_hash}"
+          flash[:block_failed] =  "Failed to create block_connection from hash => #{block_connection_hash}"
         end
       end
     end
@@ -128,14 +133,14 @@ class ViewEditorController < ApplicationController
         # Trim the line to get a variable name
         variable_name = line.strip
         if variable_name.empty? # TODO: get better input validation
-          logger.debug "Empty line in input"
+          flash[:block_failed] =  "Empty line in input"
           next
         end
 
         # Find the variable
         variable = Variable.find_by_name(variable_name)
         if variable.nil?
-          logger.debug "Could not find variable '#{variable_name}' by name"
+          flash[:block_failed] =  "Could not find variable '#{variable_name}' by name"
           next
         end
 
@@ -145,8 +150,7 @@ class ViewEditorController < ApplicationController
         # Create a "block input" with the specified variable
         bi = block.block_inputs.create({:variable_id => variable.id, :sort_index => sort_index})
         if bi.nil?
-          # TODO: Return an error to the user
-          logger.debug "Failed to create block_input with variable_id => #{variable.id} and sort_index => #{sort_index}"
+          flash[:block_failed] =  "Failed to create block_input with variable_id => #{variable.id} and sort_index => #{sort_index}"
         end
       end
     end

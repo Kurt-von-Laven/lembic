@@ -1,4 +1,4 @@
-class DestroyAllBlocks < ActiveRecord::Migration
+class DeleteAllBlocks < ActiveRecord::Migration
   def up
     Block.delete_all
     BlockInput.delete_all

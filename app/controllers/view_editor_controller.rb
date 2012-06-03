@@ -44,7 +44,6 @@ class ViewEditorController < ApplicationController
         # Find the variable
         variable = Variable.find_by_name(variable_name)
         if variable.nil?
-            flash[:block_failed] = "Could not find variable '#{variable_name}' by name"
           next
         end
 

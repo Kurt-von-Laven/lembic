@@ -9,7 +9,8 @@
   </tr>
 </thead>
 <tbody>
-  <% for variable in @variables %>
+  <% num = 0
+  for variable in @variables %>
     <tr>
 		<% 
 		description = variable.description
@@ -23,23 +24,24 @@
         end
 		myString = variable.name_with_indices + 
 		 " | " + description + " | " + type	+  " | " +
-		 truncate(expression, :length =>17, :omission => '...(continued)')	%>
+		 truncate(expression, :length =>17, :omission => '...(continued)')
+	%>
 		 <td>
 			<%= variable.name_with_indices %>
-			 <div class="trigger"><input type="image" src="/assets/asc.gif" value=""></div>
+			<a class = "dialog_link" index=<%=num%>>more</a></h3>
 		 </td>
-			 <div class="popupContact">
-				<!-- <a class="popupContactClose">x</a>-->
+		 <% d_id = "dialog_#{num}"%>
+			 <div id = "<%=d_id%>" style="display: none">
 				<h1><%= variable.name_with_indices %></h1>
 				<p>
-					<%=myString %></br></br>
+					<%=myString %>
 				</p>
 			 </div>
-	         <div class="backgroundPopup"></div>
 		 
         <!-- <td onClick="alert('<%= myString %>')"><%= variable.name_with_indices %> <button class="opener">expand </button></td> -->
     </tr>
-  <% end %>
+  <% num += 1
+  end %>
 </tbody>  
 </table>
 </div>

@@ -57,8 +57,8 @@ class Block < ActiveRecord::Base
     end
   end
   
+  # Decrement higher sort_indexs to prevent sparseness
   after_destroy do |destroyed|
-    # Decrement higher sort_indexs to prevent sparseness
     # NOTE: I'm not quite sure if this is atomic, may need to wrap in a transaction -Tom
     Block.transaction do
       Block.where("workflow_id = ? AND sort_index > ?", destroyed.workflow_id, destroyed.sort_index).each do |b|

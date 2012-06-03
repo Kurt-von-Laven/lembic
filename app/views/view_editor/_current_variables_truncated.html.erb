@@ -24,8 +24,20 @@
 		myString = variable.name_with_indices + 
 		 " | " + description + " | " + type	+  " | " +
 		 truncate(expression, :length =>17, :omission => '...(continued)')	%>
+		 <td>
+			<%= variable.name_with_indices %>
+			 <div id="trigger"><input type="image" src="/assets/asc.gif" value=""></div>
+		</td>
+			 <div id="popupContact">
+				<a id="popupContactClose">x</a>
+				<h1><%= variable.name_with_indices %></h1>
+				<p id="contactArea">
+					<%= myString %>
+				</p>
+			 </div>
+	         <div id="backgroundPopup"></div>
 		 
-        <td onClick="alert('<%= myString %>')"><%= variable.name_with_indices %> </td>
+        <!-- <td onClick="alert('<%= myString %>')"><%= variable.name_with_indices %> <button id="opener">expand </button></td> -->
     </tr>
   <% end %>
 </tbody>  

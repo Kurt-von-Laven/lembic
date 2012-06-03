@@ -13,11 +13,11 @@ var popupStatus = 0;
 function loadPopup(){
 	//loads popup only if it is disabled
 	if(popupStatus==0){
-		$("#backgroundPopup").css({
+		$(".backgroundPopup").css({
 			"opacity": "0.7"
 		});
-		$("#backgroundPopup").fadeIn("slow");
-		$("#popupContact").fadeIn("slow");
+		$(".backgroundPopup").fadeIn("slow");
+		$(".popupContact").fadeIn("slow");
 		popupStatus = 1;
 	}
 }
@@ -26,8 +26,8 @@ function loadPopup(){
 function disablePopup(){
 	//disables popup only if it is enabled
 	if(popupStatus==1){
-		$("#backgroundPopup").fadeOut("slow");
-		$("#popupContact").fadeOut("slow");
+		$(".backgroundPopup").fadeOut("slow");
+		$(".popupContact").fadeOut("slow");
 		popupStatus = 0;
 	}
 }
@@ -37,17 +37,17 @@ function centerPopup(){
 	//request data for centering
 	var windowWidth = document.documentElement.clientWidth;
 	var windowHeight = document.documentElement.clientHeight;
-	var popupHeight = $("#popupContact").height();
-	var popupWidth = $("#popupContact").width();
+	var popupHeight = $(".popupContact").height();
+	var popupWidth = $(".popupContact").width();
 	//centering
-	$("#popupContact").css({
+	$(".popupContact").css({
 		"position": "absolute",
 		"top": windowHeight/2-popupHeight/2,
 		"left": windowWidth/2-popupWidth/2
 	});
 	//only need force for IE6
 	
-	$("#backgroundPopup").css({
+	$(".backgroundPopup").css({
 		"height": windowHeight
 	});
 	
@@ -59,7 +59,7 @@ $(document).ready(function(){
 	
 	//LOADING POPUP
 	//Click the button event!
-	$("#trigger").click(function(){
+	$(".trigger").click(function(){
 		//centering with css
 		centerPopup();
 		//load popup
@@ -68,11 +68,11 @@ $(document).ready(function(){
 				
 	//CLOSING POPUP
 	//Click the x event!
-	$("#popupContactClose").click(function(){
+	$(".popupContactClose").click(function(){
 		disablePopup();
 	});
 	//Click out event!
-	$("#backgroundPopup").click(function(){
+	$(".backgroundPopup").click(function(){
 		disablePopup();
 	});
 	//Press Escape event!

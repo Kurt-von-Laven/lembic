@@ -12,11 +12,7 @@ module PersistableExpressions
   def expression_string=(new_expression_string)
     parser = Parser.new
     begin
-      logger.debug('BEGINNING ASSIGNMENT')
-      logger.debug(new_expression_string)
       new_expression_object = parser.parse(new_expression_string)
-      logger.debug('ENDING ASSIGNMENT')
-      logger.debug(new_expression_string)
     rescue ArgumentError => e
       self.expression_object_error = e
     else

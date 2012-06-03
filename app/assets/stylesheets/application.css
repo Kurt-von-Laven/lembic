@@ -444,7 +444,7 @@ ul {
 	padding: 0px 20px 10px 20px;
 }
 
-#backgroundPopup{
+.backgroundPopup{
 	display:none;
 	position:fixed;
 	_position:absolute; /* hack for internet explorer 6*/
@@ -456,7 +456,7 @@ ul {
 	border:1px solid #cecece;
 	z-index:1;
 }
-#popupContact{
+.popupContact{
 	display:none;
 	position:fixed;
 	_position:absolute; /* hack for internet explorer 6*/
@@ -469,7 +469,7 @@ ul {
 	font-size:13px;
 	
 }
-#popupContact h1{
+.popupContact h1{
 	text-align:left;
 	color:#6FA5FD;
 	font-size:22px;
@@ -478,7 +478,7 @@ ul {
 	padding-bottom:2px;
 	margin-bottom:20px;
 }
-#popupContactClose{
+.popupContactClose{
 	font-size:14px;
 	line-height:14px;
 	right:6px;
@@ -489,6 +489,6 @@ ul {
 	display:block;
 }
 
-#trigger {
+.trigger {
 	float: left;
 }

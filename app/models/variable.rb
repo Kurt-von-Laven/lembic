@@ -1,6 +1,6 @@
 require 'csv'
-require Rails.root.join('app/helpers/expression')
-require Rails.root.join('app/models/index_name')
+require './app/helpers/expression'
+require './app/models/index_name'
 
 class Variable < ActiveRecord::Base
   attr_accessible :id, :name, :description, :workflow_id, :variable_type, :array, :created_at, :updated_at, :expression_string, :expression_object
@@ -99,12 +99,11 @@ class Variable < ActiveRecord::Base
   end
   
   def self.convert_letter_column_labels_to_numbers(input)
-    puts "INPUT: "+input
     raise ArgumentError, "parameter of convert_letter_column_labels_to_numbers must be a string" if !input.instance_of?(String)
-    if input.match(/^[0-9]$/)
+    if input.match(/^[0-9]+$/)
       return input.to_i
     end
-    if input.match(/^[a-zA-Z]$/)
+    if input.match(/^[a-zA-Z]+$/)
       multiplier = 1
       output = 0
       input.upcase.reverse.each_byte do |b|
@@ -112,7 +111,6 @@ class Variable < ActiveRecord::Base
 	output += index_in_alphabet * multiplier
 	multiplier *= 26
       end
-      puts "OUTPUT: #{output}"
       return output
     end
     raise ArgumentError, "Column label must be specified as a decimal number or an Excel-style letter label."

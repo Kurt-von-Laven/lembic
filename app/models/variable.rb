@@ -47,7 +47,7 @@ class Variable < ActiveRecord::Base
   end
   
   def name_with_indices
-    return "#{name.split(/\s*\[\s*/)[0]}" + (array? ? '' : "[#{index_names.collect{|i| i.name}.join(",")}]")
+    return "#{name.split(/\s*\[\s*/)[0]}" + (array? ? "[#{index_names.collect{|i| i.name}.join(",")}]" : '')
   end
   
   def index_name_strings

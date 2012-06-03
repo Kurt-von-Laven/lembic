@@ -21,11 +21,11 @@
         if type == nil
             type = ""
         end
-		myString = variable.name + 
+		myString = variable.name_with_indices + 
 		 " | " + description + " | " + type	+  " | " +
 		 truncate(expression, :length =>17, :omission => '...(continued)')	%>
 		 
-        <td onClick="alert('<%= myString %>')"><%= variable.name %> </td>
+        <td onClick="alert('<%= myString %>')"><%= variable.name_with_indices %> </td>
     </tr>
   <% end %>
 </tbody>  

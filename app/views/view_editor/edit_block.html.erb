@@ -1,12 +1,22 @@
+
+
 <% @title = "Edit Block" %>
-<h1>View Editor: Edit Block</h1>
+<h1>Edit Blocks</h1>
 <p> Think of a block as a set of variables that are connected in relationships, or are generally measured together. For instance, you might have a block of general measurements, or a block that is only filled out in certain circumstance. Add variables to the "Measure" Box to add the variables to the block. Define relationships using the "Logic" Box. For instance you might use the logic box to say "If VAR1 = TRUE and VAR2 > 10, DO Block <name>", or "If VAR1 = TRUE, FIND VAR2".</p>
 <div style="width: 100%; height: 600px">
 	<div class = "left_column">
 		<%= render "current_variables_truncated" %>
 		<%= render "current_blocks_truncated" %>
         <br />
-        <%= button_to "View Workflow", "/workflow",
+
+		<!--This form is for showing a specific block and entering data into it -->
+		<%= form_for(:show_block_form) do |f| %>
+			<%= f.label(:id, "Block: ") %>
+			<%= f.collection_select(:id, @blocks, :id, :name, :prompt => true)%><br/>
+			<%= f.submit("View Block", :class => "button") %><br/>
+		<% end %><br/><br/>
+
+        <%= button_to "View Expert Workflow", "/workflow",
               {:confirm => "Are you sure you are ready to leave this page?",
                :method => :delete, :class => "button"} %>
 
@@ -16,7 +26,7 @@
 			<div id="tabs">
 			  <ul>
 				<li><a href="#tabs-1">Create Block</a></li>
-                <li><a href="#tabs-2">Add Measurements</a></li>
+                <li><a href="#tabs-2">Add Measures</a></li>
 				<li><a href="#tabs-3">Add Connections</a></li>
 				<li><a href="#tabs-4">Choose Output </a></li>
 			  </ul>
@@ -34,9 +44,11 @@
                     Please enter one per line. <br />
                     <%= form_for(:create_block_inputs_form) do |f| %>
                         <%= f.label(:block_name, "Name of Block: ") %><br/>
-                        <%= f.text_field :block_name %><br/>
-                        <%= f.label(:inputs_string, "Input Variables: ") %><br/>
-                        <%= f.text_area :inputs_string %><br/>
+                        <%= f.text_field :block_name, :class => "auto_complete_blocks" %><br/>
+                        <%= f.label(:inputs_string, "Input Variables:") %><br/>
+                        
+                        <%= f.text_area :inputs_string, :id =>"drop_var" %>
+                       
                         <%= f.submit("Create Block Inputs", :class => "button") %><br/>
                     <% end %>
                 </div>
@@ -50,7 +62,7 @@
 					Block connections, one per line: 
                     <%= form_for(:create_block_connections_form) do |f| %>
                         <%= f.label(:block_name, "Name of Block: ") %><br/>
-                        <%= f.text_field :block_name %><br/>
+                        <%= f.text_field :block_name, :class => "auto_complete_blocks" %><br/>
                         <%= f.label(:connections_string, "Block Connections: ") %><br/>
                         <%= f.text_area :connections_string %><br/>
                         <%= f.submit("Create Block", :class => "button") %><br/>
@@ -61,9 +73,9 @@
 				<div id="tabs-4">
                 <%= form_for(:create_output_block_form) do |f| %>
                     <%= f.label(:name, "Name of Block: ") %><br/>
-                    <%= f.text_field :name %><br/>
+                    <%= f.text_field :name, :class => "auto_complete_blocks" %><br/>
                     <%= f.label(:outputs_string, "Output these variables: ") %><br/>
-                    <%= f.text_area (:outputs_string) %><br/>
+                    <%= f.text_area :outputs_string, :id =>"drop_var_output" %><br/>
                     <%= f.label(:display_type, "Display Type:") %><br/>
                     <%= f.select(:display_type, [['Graph', 'graph'], ['Integer', 'integer'], ['Percentage', 'percent']])    %><br/>
                 <%= f.submit('Add Output', :class => "button") %><br/>
@@ -72,3 +84,4 @@
                 </div>
     </div>
 </div>
+

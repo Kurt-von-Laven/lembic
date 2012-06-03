@@ -29,10 +29,6 @@
         <%= f.label(:description, "Description:") %>
         <%= f.text_field(:description, :size => 20) %>
       </div>
-      <div>
-        <%= f.check_box(:array) %>
-        <%= f.label(:array, "Is this an array?") %>
-      </div>
     </div>
     <div id = "expression">
       <%= f.text_field(:name) %> = 
@@ -49,11 +45,15 @@
 			<div id="tabs-2">
             <%= form_for(:event, :html => {:class => "input_form"}) do |f| %>
     <div id="var_input_block">
+        <div>
+            <%= f.label(:name, "Name: ") %>
+            <%= f.text_field :name %>
+        </div>
         <!-- Type of day -->
         <div>
             <%= f.label(:day_week, "Type of Day:") %>
             <%= f.select(:day_week, [['Weekday', '0'], ['Weekend',
-            '1'], ['Holiday', '2'], ['Other', '3']]) %>
+            '1'], ['Holiday', '2'], ['Monday-Sunday', '3'], ['Other', '4']]) %>
         </div>
   
         <!-- Slider -->
@@ -61,6 +61,7 @@
             <label for="time">Time range (in military time):</label>
             <input type="text" id="time" />
         </div>
+        <br />
 		<div id="slider-style">
 			<div id="slider-range"></div>
         </div>
@@ -168,5 +169,3 @@
 		</div>
 
 <%= render "current_variables" %>
-
-<%= render "current_equations" %>

@@ -43,19 +43,28 @@ class WorkflowController < ApplicationController
         end
         evaluator = Evaluator.new
         evaluator.eval_all(variables_to_solve_for, input_values_hash)
+        
+        #get evaluator output
         @output_variables = {}
         for variable_name, variable_properties in input_values_hash
           scalar_value = variable_properties[:value]
           if scalar_value.nil?
+            #variable is an array
             array_value = variable_properties[:values]
             array = []
             if !array_value.nil?
-              for index, value in array_value
-                array[index.to_i - 1] = value # TODO: Handle multi-dimensional arrays.
+              #populate array with the output values
+              for indices, value in array_value
+                if indices.length == 1
+                  array[indices[0] - 1] = value # TODO: Handle multi-dimensional arrays.
+                else
+                  raise "multidimensional variable output not supported"
+                end
               end
               @output_variables[variable_name] = array.inspect
             end
           elsif scalar_value != ''
+            #variable is a scalar
             @output_variables[variable_name] = scalar_value
           end
         end
@@ -73,25 +82,7 @@ class WorkflowController < ApplicationController
   private
   
   def get_index_names(variable)
-    #temporary method to make sure the index names table is working by getting the index names from multiple sources
-    variable_name_components = variable.name.split(/[\[\]]/)
-    #index_names_string = variable_name_components[1]
-    index_names_from_table = variable.index_names().order("position").collect { |i| i.name }
-    #if index_names_string
-    #  index_names = index_names_string.split(',')
-    #else
-    #  index_names = nil
-    #end
-    #if !index_names.nil? && index_names_from_table[0].nil?
-    #  raise "index names didn't work.  Variable had index names #{index_names_string}, but index names table had nothing."
-    #end
-    #if index_names_string.to_s != index_names_from_table.join(",")
-    #  raise "index names didn't match.  Variable had index names #{index_names_string.inspect}, but index names table had #{index_names_from_table.join(",").inspect}."
-    #end
-    if index_names_from_table.length == 0
-      return nil
-    end
-    return index_names_from_table
+    return variable.index_name_strings
   end
   
   def to_i_safely(str)

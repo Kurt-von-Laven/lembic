@@ -1,6 +1,6 @@
 
-require Rails.root.join("app/helpers/expression")
-require Rails.root.join("app/helpers/parser")
+require ("./app/helpers/expression")
+require ("./app/helpers/parser")
 require "date"
 
 # Class Evaluator
@@ -256,6 +256,9 @@ class Evaluator
   end
   
   def error_check_eval_variable_params(varname, globals, index_values)
+    if !varname.instance_of?(String)
+      raise ArgumentError, "Internal Error: Variable name must be specified as a string, but was a #{varname.class}.  Please notify Lembic of this error."
+    end
     raise ArgumentError, "Error: second parameter to eval_variable cannot be nil." if globals.nil?
     raise ArgumentError, "Error: variable #{varname} doesn't exist." if globals[varname].nil?
   end
@@ -316,7 +319,7 @@ class Evaluator
       end
       result = eval_expression(formula, globals, indices)
       globals[varname][:values] = {} if globals[varname][:values].nil?
-      globals[varname][:values][index_values.join(",")] = result
+      globals[varname][:values][index_values] = result
     end
     return result
   end

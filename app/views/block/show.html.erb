@@ -1,0 +1,29 @@
+<% @title = @block.name %>
+
+<h1><%=@title %></h1>
+
+<!--Display form for entering values into this block's input_variables -->
+<%=form_for :block_inputs, :url => block_input_path do |f| %>
+	<% for bi in @block.block_inputs.order(:sort_index) %>
+	
+		<!--Get values for this block_input to include in the form -->
+		<%
+			id = bi.variable.id
+			name = bi.variable.name
+			value = ''# Put current/default value here
+		%>
+		
+		<!--Create tags for this block_input -->
+		<%=f.label "inputs[#{id}]", "#{name}: " %>
+		<%=f.text_field "inputs[#{id}]", :value => value %>
+		<br/>
+		
+	<% end %>
+	
+	<!--Hidden tag for including the block_id -->
+	<%=f.hidden_field 'block_id', :value => @block.id %>
+	
+	<!--Submit tag for submitting inputted data -->
+	<%=f.submit("Submit", :class => "button") %>
+	
+<% end %>

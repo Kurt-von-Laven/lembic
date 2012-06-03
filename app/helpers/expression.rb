@@ -64,78 +64,19 @@ class Expression
     end
   end
   
-  def eval_deprecated(me, globals, indices)
-    
-    arg_cache = []
-    
+  # searches this expression's subexpressions for strings matching the given identifier.  If any are found, replace them.
+  def replace_identifier!(find, replace)
+    newargs = []
     @args.each do |arg|
       if arg.instance_of?(Expression)
-        arg_cache << arg.eval(nil, globals, nil)
-      elsif arg.match(/^(\-){0,1}[\d]+(\.[\d]*){0,1}|\.[\d]+$/) then
-        arg_cache << arg.to_f
-      else
-        # arg is a variable name
-        if !indices.nil? && !indices[arg].nil?
-          arg_cache << indices[arg]
-        elsif !globals[arg][:value].nil?
-          arg_cache << globals[arg][:value]
-        elsif !globals[arg][:formula].nil?
-          arg_cache << globals[arg][:formula].eval(arg, globals, nil)
-        else
-          raise "ERROR: undefined variable #{arg} in formula for #{me}"
-        end
+        arg.replace_identifier(find, replace)
+      elsif arg.instance_of?(String) && arg === find
+        arg = replace
       end
+      newargs << arg
     end
-    
-    ## bunch of if-elsif statements go here, with logic for each possible operator
-    
-    if @op.nil?
-      result = arg_cache[0]
-    elsif @op == "+"
-      result = arg_cache[0] + arg_cache[1]
-    elsif @op == "*"
-      result = arg_cache[0] * arg_cache[1]
-    elsif @op == "-"
-      result = arg_cache[0] - arg_cache[1]
-    elsif @op == "/"
-      result = arg_cache[0] / arg_cache[1]
-    elsif @op == "%"
-      result = arg_cache[0] % arg_cache[1]
-    elsif @op == "^"
-      result = arg_cache[0] ** arg_cache[1]
-    elsif @op == "<"
-      result = Expression.bool_to_i (arg_cache[0] < arg_cache[1])
-    elsif @op == ">"
-      result = Expression.bool_to_i (arg_cache[0] > arg_cache[1])
-    elsif @op == "=="
-      puts "arg_cache = #{arg_cache.inspect}"
-      result = Expression.bool_to_i (arg_cache[0] == arg_cache[1])
-    elsif @op == ">="
-      result = Expression.bool_to_i (arg_cache[0] >= arg_cache[1])
-    elsif @op == "<="
-      result = Expression.bool_to_i (arg_cache[0] <= arg_cache[1])
-    elsif @op == "[]"
-      puts "arg_cache = #{arg_cache}"
-      array_indices = {}
-      arg_cache[1..arg_cache.length-1].each_with_index do |arg, i|
-        index_name = globals[me][:index_names][i]
-        array_indices[index_name] = arg
-      end
-      result = arg_cache[0].eval(nil, globals, array_indices)
-    else
-      puts "operator #{@op} doesn't exist or not yet implemented"
-    end
-
-    if !me.nil?
-      globals[me] = {} if globals[me].nil?
-      if indices.nil?
-        globals[me][:value] = result
-      else
-        globals[me.to_s+"#"+indices.join("#")] = result
-      end
-    end
-    return result
-    
+    @args = newargs
+    return self
   end
   
 end

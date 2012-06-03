@@ -4,14 +4,15 @@ Lembic::Application.routes.draw do
   
   match '/logout', to: 'user#logout', as: 'logout'
 
-  match '/register', to: 'user#register', as: 'register' # Uncommented by Tom
+  match '/register', to: 'user#register', as: 'register'
   match '/view_editor/edit_block', to: 'view_editor#edit_block', as: 'blocks'
 
   match '/view_editor/edit_question', to: 'view_editor#edit_question', as: 'edit_question'
-  match '/view_editor/delete_block.:id', to: 'view_editor#delete_block', as: 'delete_block'
+  match '/view_editor/delete_block.:id', to: 'view_editor#delete_block', as: 'delete_block' # TODO: Figure out if we need the dot.
   match '/home', to: 'home#home', as: 'home'
   match '/help', to: 'help#help', as: 'help'
   match '/equation_editor/equations', to: 'editor#equations', as: 'equations'
+  match '/equation_editor/variable', to: 'editor#variable', as: 'variable'
   match '/equation_editor/delete_variable', to: 'editor#delete_variable', as: 'delete_variable'
   match '/equation_editor/delete_relationship', to: 'editor#delete_relationship', as: 'delete_relationship'
   match '/evaluator', to: 'workflow#evaluate', as: 'evaluator'

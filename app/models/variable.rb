@@ -3,6 +3,9 @@ require './app/helpers/expression'
 require './app/models/index_name'
 
 class Variable < ActiveRecord::Base
+  
+  include PersistableExpressions
+  
   attr_accessible :id, :name, :description, :workflow_id, :variable_type, :array, :created_at, :updated_at, :expression_string, :expression_object
   
   validates_presence_of :name, :workflow_id, :variable_type, :array
@@ -44,12 +47,11 @@ class Variable < ActiveRecord::Base
   end
   
   def name_with_indices
-    return "#{name.split(/\s*\[\s*/)[0]}" + ((index_names().empty?) ? '' : "[#{index_names().collect{|i| i.name}.join(",")}]")
-    #return "#{name.split(/\s*\[\s*/)[0]}[#{index_names().collect{|i| i.name}.join(",")}]"
+    return "#{name.split(/\s*\[\s*/)[0]}" + (array? ? "[#{index_names.collect{|i| i.name}.join(",")}]" : '')
   end
   
   def index_name_strings
-    return index_names().order("position").collect { |i| i.name }
+    return index_names.order("position").collect { |i| i.name }
   end
 
   def self.create_from_form(form_hash, user_id)
@@ -63,16 +65,10 @@ class Variable < ActiveRecord::Base
     merged_var['name'] = merged_var['name'].split(/\s*\[/)[0]
     if merged_var['expression_string'].empty?
       merged_var['expression_string'] = nil
-    else
-      parser = Parser.new
-      begin
-	merged_var['expression_object'] = parser.parse(merged_var['expression_string'])
-      rescue SystemCallError, IOError, RuntimeError
-	raise ArgumentError, "An unexpected error occured saving your variable. Please try again."
-      end
     end
-    newvar = Variable.create(merged_var)
-    IndexName.create_from_declaration(form_hash[:name], newvar.id)
+    new_var = Variable.new(merged_var)
+    new_var.save
+    IndexName.create_from_declaration(form_hash['name'], new_var.id)
   end
   
   def self.create_constant_array(form_hash, user_id)
@@ -85,12 +81,6 @@ class Variable < ActiveRecord::Base
     data = merged_array['data_file'].read
     merged_array['expression_string'] = self.parse_csv_expression(data, merged_array['start_row'].to_i, self.convert_letter_column_labels_to_numbers(merged_array['column_number']),
                                                                   merged_array['variable_type'])
-    parser = Parser.new
-    begin
-        merged_array['expression_object'] = parser.parse(merged_array['expression_string'])
-    rescue ArgumentError, SystemCallError, IOError, RuntimeError
-        raise ArgumentError, "An unexpected error occured saving your variable. Please try again."
-    end
     merged_array.delete('data_file')
     merged_array.delete('start_row')
     merged_array.delete('column_number')

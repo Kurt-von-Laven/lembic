@@ -24,6 +24,12 @@ a:visited{
     color:#008A8A;
 }
 
+#array_output{
+	padding: 5px 0 10px 0;
+	text-align: center;
+	font-size: 2em;
+	color: #1e3652;
+}
 body {
 	margin: 50px 0px; 
 	padding:0px;
@@ -46,6 +52,13 @@ body {
     text-align: center;
 }
 
+#col_header {
+	text-align: center;
+	background-color: #fff;
+	color:  #5c7e99;
+	font-size: 1.2em;
+	font-weight: bold;
+}
 .comment{
     color: #1e3652;
 }
@@ -379,7 +392,7 @@ td {
     border-top:2px solid #fff;
     border-collapse: collapse;
     border-spacing: 0px;
-    padding-left: 10px;
+    padding: 0 10px 5px 10px;
 }
 
 th {

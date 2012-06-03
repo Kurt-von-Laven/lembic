@@ -1,5 +1,4 @@
 <% variable = @var %>
-<!-- <div id="array_output">  <%= variable.name.split('[i]')[1] %> </div> -->
 <div>
 <%  if variable.array == 1
 		truncated_array = variable.expression_string.split(/\[\s*i\s*\|\s*/)[1][0..-2]

@@ -302,9 +302,8 @@ class TestParserParse < Test::Unit::TestCase
   
   def test_parser_does_not_modify_input
     s = "a +    b + c    * d"
-    s_copy = s
     @p.parse(s)
-    assert_equal(s_copy, s)
+    assert_equal("a +    b + c    * d", s)
   end
   
 =begin

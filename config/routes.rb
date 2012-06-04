@@ -16,6 +16,7 @@ Lembic::Application.routes.draw do
   match '/equation_editor/delete_variable', to: 'editor#delete_variable', as: 'delete_variable'
   match '/equation_editor/delete_relationship', to: 'editor#delete_relationship', as: 'delete_relationship'
   match '/evaluator', to: 'workflow#evaluate', as: 'evaluator'
+  match '/run/:id', to: 'workflow#start_run', as: 'run'
   match '/workflow', to: 'workflow#expert_workflow', as: 'workflow'
 
   match '/fullvariable', to: 'editor#full_variable', as: 'fullvariable'

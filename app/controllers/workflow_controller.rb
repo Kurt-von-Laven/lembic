@@ -109,6 +109,9 @@ class WorkflowController < ApplicationController
                       :completed_at => nil
                       })
     @block = start_block
+    @run = newrun
+    @variables_hash = variables_hash_for_run(@run)
+    @evaluator = Evaluator.new
     render "block"
   end
   
@@ -122,22 +125,13 @@ class WorkflowController < ApplicationController
     currblock = Block.find(params[:id])
     @run = Run.find(params[:run_id])
     for var_id, val in params[:input_values] do
-      RunValue.create({:run_id => @run.id, :variable_id => var_id, :value => val)
+      RunValue.create({:run_id => @run.id, :variable_id => var_id, :value => val})
     end
     workflow = run.workflow
     model = workflow.model
     block_connections = currblock.block_connections()
     run_values = run.run_values
-    @variables_hash = {} #stores formulas and values to be passed to the evaluator
-    for v in model.variables do
-      @variables_hash[v.name] = {:formula => v.expression_object}
-      @variables_hash[v.name][:index_names] = v.index_names.order(:sort_index).collect{|i| i.name}
-    end
-    for v in run_values do
-      varname = v.variable.name
-      value = v.value
-      @variables_hash[varname] = {:value => value}
-    end
+    @variables_hash = variables_hash_for_run(run)
     @evaluator = Evaluator.new
     
     #figure out which block to display next
@@ -164,6 +158,21 @@ class WorkflowController < ApplicationController
     return 0 if str == '0'
     str_as_integer = str.to_i
     return (str_as_integer == 0) ? nil : str_as_integer
+  end
+  
+  def variables_hash_for_run(run)
+    run_values = run.run_values
+    variables_hash = {} #stores formulas and values to be passed to the evaluator
+    for v in model.variables do
+      variables_hash[v.name] = {:formula => v.expression_object}
+      variables_hash[v.name][:index_names] = v.index_names.order(:sort_index).collect{|i| i.name}
+    end
+    for v in run_values do
+      varname = v.variable.name
+      value = v.value
+      variables_hash[varname] = {:value => value}
+    end
+    return variables_hash
   end
 
   

@@ -1,0 +1,15 @@
+<% block_variables = @block.block_variables().order(:sort_index) %>
+<%= form_for :input_values, :url => "/workflow/post_block_input" %>
+<%= hidden_field_tag "run_id", @run.id %>
+<% for v in block_variables %>
+  <div>
+    <% if v.display_type == :input %>
+      <%= text_field_tag v.variable_id %>
+    <% else %>
+      <p>
+        <%= v.variable.name %> = 
+        <%= @evaluator.eval_variable(v.variable.name, @variables_hash, nil) %>
+      </p>
+    <% end %>
+  </div>
+<% end %>

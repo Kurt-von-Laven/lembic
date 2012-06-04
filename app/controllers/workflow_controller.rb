@@ -1,4 +1,5 @@
 require Rails.root.join('app/helpers/expression')
+require Rails.root.join('app/helpers/evaluator')
 
 class WorkflowController < ApplicationController
   
@@ -83,8 +84,77 @@ class WorkflowController < ApplicationController
     render 'evaluator'
   end
   
+  def run
+    #get blocks for this workflow
+    #find first block in workflow
+    #
+  end
+  
   def expert_workflow
     
+  end
+  
+  ##
+  # creates a new run object for the workflow id specified in params[:id]
+  # sets the run's current block to the start block of the workflow
+  # redirects to show the first block
+  def start_run
+    workflow = Workflow.find(params[:id])
+    start_block = Block.find(Workflow.workflow_blocks().order(:sort_index).first.block_id)
+    #start_block = WorkflowBlock.find_all(["workflow_id = ?", workflow.id])
+    newrun = Run.create({:user_id => session[:user_id],
+                      :workflow_id => workflow.id,
+                      :current_block_id => start_block.id,
+                      :description => "",
+                      :completed_at => nil
+                      })
+    @block = start_block
+    render "block"
+  end
+  
+  ##
+  # params[:id] is the id of the block being submitted
+  # get the run id from a hidden field
+  # store the user-entered values in run_values
+  # build a hash of variable names to values and formulas to be run through the evaluator
+  # display the next block based on transition logic
+  def post_block_input
+    currblock = Block.find(params[:id])
+    @run = Run.find(params[:run_id])
+    for var_id, val in params[:input_values] do
+      RunValue.create({:run_id => @run.id, :variable_id => var_id, :value => val)
+    end
+    workflow = run.workflow
+    model = workflow.model
+    block_connections = currblock.block_connections()
+    run_values = run.run_values
+    @variables_hash = {} #stores formulas and values to be passed to the evaluator
+    for v in model.variables do
+      @variables_hash[v.name] = {:formula => v.expression_object}
+      @variables_hash[v.name][:index_names] = v.index_names.order(:sort_index).collect{|i| i.name}
+    end
+    for v in run_values do
+      varname = v.variable.name
+      value = v.value
+      @variables_hash[varname] = {:value => value}
+    end
+    @evaluator = Evaluator.new
+    
+    #figure out which block to display next
+    connections = currblock.block_connections
+    nextblock = nil
+    for b in connections
+      if evaluator.eval_expression(b.expression_object, variables_hash, nil) != 0
+        #expression evaluates to true
+        nextblock = Block.find(b.block_id)
+        break
+      end
+    end
+    if nextblock
+      @block = nextblock
+      #@block_variables = nextblock.block_variables().order(:sort_index)
+      render "block"
+    end
   end
   
   private

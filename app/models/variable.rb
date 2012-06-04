@@ -58,7 +58,6 @@ class Variable < ActiveRecord::Base
   end
 
   def self.create_from_form(form_hash, user_id)
-    Model.where(:id => user_id, :name => 'Sample Workflow').first_or_create({'description' => 'This record should be removed eventually and is just for test purposes.'})
     merged_var = {'array' => 0}.merge(form_hash)
     merged_var['model_id'] = user_id # TODO: Grab the workflow ID out of the session state.
     merged_var['variable_type'] = merged_var['variable_type'].to_i

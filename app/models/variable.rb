@@ -20,10 +20,10 @@ class Variable < ActiveRecord::Base
   belongs_to :model
   
   has_many :index_names
-  has_many :block_inputs, :dependent => :destroy
+  has_many :block_variables, :dependent => :destroy
   has_many :run_values
   
-  validates_associated :index_names, :block_inputs, :run_values
+  validates_associated :index_names, :block_variables, :run_values
   
   INDEX = 'i' # The index used for constant arrays.
  

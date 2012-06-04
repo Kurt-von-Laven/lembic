@@ -1,4 +1,4 @@
-class BlockInput < ActiveRecord::Base
+class BlockVariable < ActiveRecord::Base
   attr_accessible :id, :block_id, :sort_index, :variable_id, :created_at, :updated_at, :prompt, :description, :formatting
   
   validates_presence_of :block_id, :sort_index, :variable_id, :display_type
@@ -38,8 +38,8 @@ class BlockInput < ActiveRecord::Base
   after_destroy do |destroyed|
     # Decrement higher sort_indexs to prevent sparseness
     # NOTE: I'm not quite sure if this is atomic, may need to wrap in a transaction -Tom
-    BlockInput.transaction do
-      BlockInput.where("block_id = ? AND sort_index > ?", destroyed.block_id, destroyed.sort_index).each do |bi|
+    BlockVariable.transaction do
+      BlockVariable.where("block_id = ? AND sort_index > ?", destroyed.block_id, destroyed.sort_index).each do |bi|
         bi.sort_index = bi.sort_index - 1
         bi.save :validate => false # Validation was causing problems since it may not go in order
       end

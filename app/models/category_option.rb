@@ -3,9 +3,7 @@ class CategoryOption < ActiveRecord::Base
   
   belongs_to :block_variable
   
-  validates_presence_of :name
-  validates_presence_of :value
-  validates_presence_of :description
+  validates_presence_of :name, :value, :description
   validates_uniqueness_of :name, :scope => [:block_variable_id]
   validates_uniqueness_of :value, :scope => [:block_variable_id]
   

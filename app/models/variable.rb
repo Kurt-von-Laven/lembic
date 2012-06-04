@@ -1,6 +1,6 @@
 require 'csv'
-require './app/helpers/expression'
-require './app/models/index_name'
+require Rails.root.join('app/helpers/expression')
+require Rails.root.join('app/models/index_name')
 
 class Variable < ActiveRecord::Base
   

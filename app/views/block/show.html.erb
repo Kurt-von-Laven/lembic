@@ -2,20 +2,27 @@
 
 <h1><%=@title %></h1>
 
-<!--Display form for entering values into this block's input_variables -->
+<!--Display form for entering values into this block's input block_variables -->
 <%=form_for :block_inputs, :url => block_input_path do |f| %>
-	<% for bi in @block.block_inputs.order(:sort_index) %>
+	<% for bv in @block.block_variables.order(:sort_index) %>
 	
-		<!--Get values for this block_input to include in the form -->
+		<!--Lookup data -->
 		<%
-			id = bi.variable.id
-			name = bi.variable.name
+			id = bv.variable.id
+			name = bv.variable.name
 			value = ''# Put current/default value here
+			display_type = bv.display_type
 		%>
 		
-		<!--Create tags for this block_input -->
-		<%=f.label "inputs[#{id}]", "#{name}: " %>
-		<%=f.text_field "inputs[#{id}]", :value => value %>
+		<!--Check if this block_variable is input or output -->
+		<% if display_type == :input %>
+			<!--Create tags for form input -->
+			<%=f.label "inputs[#{id}]", "#{name}: " %>
+			<%=f.text_field "inputs[#{id}]", :value => value %>
+		<% else %>
+			<!--Create tags for basic output display -->
+			<%=name %> = <%=value %>
+		<% end %>
 		<br/>
 		
 	<% end %>

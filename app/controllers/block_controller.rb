@@ -9,11 +9,6 @@ class BlockController < ApplicationController
     # Locate the block specified by id
     @block = Block.find(id)
     
-    # If this is an output block, render it with the output page
-    if !@block.display_type.nil?
-      render 'show_output'
-    end
-    
   end
   
   # Record data entered into this block, redirect to the appropriate next block

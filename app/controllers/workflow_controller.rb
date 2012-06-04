@@ -7,7 +7,7 @@ class WorkflowController < ApplicationController
     @input_variables = Variable.where(:workflow_id => session[:user_id], :expression_string => nil).order(:name)
     vars = params[:evaluator]
     if !vars.nil?
-      input_values = vars['input_values']
+      input_values = (vars['input_values'].nil?) ? [] : vars['input_values']
       input_values_hash = {}
       i = 0
       for input_value in input_values

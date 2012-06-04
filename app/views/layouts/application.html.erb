@@ -18,6 +18,17 @@
       
 			$(function(){
             
+            
+                String.prototype.trim = function() {
+                    return this.replace(/^\s+|\s+$/g,"");
+                }
+                String.prototype.ltrim = function() {
+                    return this.replace(/^\s+/,"");
+                }
+                String.prototype.rtrim = function() {
+                    return this.replace(/\s+$/,"");
+                }
+            
                 function split( val ) {
                     return val.split(" ");
                 }
@@ -27,9 +38,10 @@
                 }
                 
                 function addtext( text, area ){
-            
+                    text = text.trim();
+                    terms = text.split(/\s/);
                     var val = document.getElementById( area ).value;
-                    var updated_val = (val + text + "\n");
+                    var updated_val = (val + terms[0] + "\n");
                     
                     document.getElementById(area).value = updated_val;
                 
@@ -49,7 +61,11 @@
                     modal: true
                 });
 				
-
+				  $('.dialog_link').live("click", function(){
+					var i = this.getAttribute("index");
+					$('#dialog_'+i).dialog().dialog('open');
+					return false;
+				});
 
                 $( ".opener" ).click(function() {
                     $( ".dialog" ).dialog( "open" );

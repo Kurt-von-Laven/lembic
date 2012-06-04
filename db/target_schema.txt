@@ -1,0 +1,83 @@
+Users
+	pwd_hash
+	salt
+	first_name
+	last_name
+	email
+	organization
+
+Models
+	name
+	description
+
+ModelPermissions
+	model_id
+	user_id
+	permissions
+	
+Variables
+	model_id
+	type
+	array?
+	expression_string
+	expression_object
+	name
+	description
+
+IndexNames
+	variable_id
+	name
+	position (change to sort_index)
+
+Workflows
+	model_id
+	name
+	description
+
+WorkflowPermissions
+	workflow_id
+	user_id
+	permissions
+
+Blocks
+	name
+	
+BlockVariables
+	block_id
+	variable_id
+	sort_index
+	display_type
+	prompt
+	description
+	formatting
+	
+BlockConnections
+	block_id
+	next_block_id
+	sort_index
+	expression_string
+	expression_object
+	
+CategoryOptions
+	block_variable_id
+	name
+	value
+	description
+	
+WorkflowBlocks
+	workflow_id
+	block_id
+	sort_index
+	
+Runs
+	user_id
+	workflow_id
+	current_block_id
+	description
+	completed_at (in addition to other timestamps)
+	
+RunValues
+	run_id
+	variable_id
+	index_values
+	value

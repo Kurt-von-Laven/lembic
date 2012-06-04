@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   
   validates_uniqueness_of :email
   
-  has_many :workflows, :through => :permissions
+  has_many :workflows, :through => :workflow_permissions
   has_many :runs
   has_many :model_permissions
   

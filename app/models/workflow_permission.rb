@@ -1,4 +1,4 @@
-class Permission < ActiveRecord::Base
+class WorkflowPermission < ActiveRecord::Base
   attr_accessible :id, :user_id, :workflow_id, :permissions, :created_at, :updated_at
   
   validates_presence_of :user_id, :workflow_id, :permissions

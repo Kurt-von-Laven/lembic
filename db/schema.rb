@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120604034931) do
+ActiveRecord::Schema.define(:version => 20120604042146) do
 
   create_table "block_connections", :force => true do |t|
     t.string   "expression_string", :limit => 1048576, :null => false
@@ -80,14 +80,6 @@ ActiveRecord::Schema.define(:version => 20120604034931) do
     t.datetime "updated_at",                :null => false
   end
 
-  create_table "permissions", :force => true do |t|
-    t.integer  "workflow_id", :null => false
-    t.integer  "user_id",     :null => false
-    t.integer  "permissions", :null => false
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
   create_table "run_values", :force => true do |t|
     t.integer  "variable_id",  :null => false
     t.integer  "run_id",       :null => false
@@ -148,7 +140,7 @@ ActiveRecord::Schema.define(:version => 20120604034931) do
   create_table "variables", :force => true do |t|
     t.string   "name",              :limit => 64,      :null => false
     t.string   "description",                          :null => false
-    t.integer  "workflow_id",                          :null => false
+    t.integer  "model_id",                             :null => false
     t.integer  "variable_type",                        :null => false
     t.integer  "array",                                :null => false
     t.datetime "created_at",                           :null => false
@@ -168,6 +160,14 @@ ActiveRecord::Schema.define(:version => 20120604034931) do
     t.integer  "workflow_id", :null => false
     t.integer  "block_id",    :null => false
     t.integer  "sort_index",  :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "workflow_permissions", :force => true do |t|
+    t.integer  "workflow_id", :null => false
+    t.integer  "user_id",     :null => false
+    t.integer  "permissions", :null => false
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end

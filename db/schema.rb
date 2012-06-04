@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120602010742) do
+ActiveRecord::Schema.define(:version => 20120604024915) do
 
   create_table "block_connections", :force => true do |t|
     t.string   "expression_string", :limit => 1048576, :null => false
@@ -54,6 +54,15 @@ ActiveRecord::Schema.define(:version => 20120602010742) do
     t.integer  "permissions", :null => false
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "run_values", :force => true do |t|
+    t.integer  "variable_id",  :null => false
+    t.integer  "run_id",       :null => false
+    t.string   "index_values"
+    t.binary   "value",        :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "sessions", :force => true do |t|

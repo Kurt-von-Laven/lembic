@@ -98,6 +98,12 @@ body {
   margin: 10px;
 }
 
+.dialog_link {
+	cursor: pointer;
+}
+.dialog_link:hover{
+	color: #95b7d0;
+}
 .error {
     color: red;
 }
@@ -119,6 +125,28 @@ body {
 	text-align: left;
 }
 
+#full_array {
+	font-size: .5em;
+}
+#full_array table {
+	width: 600px;
+	height: 600px;
+}
+#full_array td {
+	width: 10px;
+	padding: 0px;
+	margin: 0px;
+}
+#full_array th {
+	text-align: center;
+	width: 10px;
+	padding: 0px;
+	margin: 0px;
+}
+#full_array h1{
+	width: 100%;
+	margin: 0 0 10px 0;
+}
 .help {
 	padding: 0 20px 0 20px;
 }

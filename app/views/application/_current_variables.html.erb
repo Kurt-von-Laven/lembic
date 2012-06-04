@@ -36,7 +36,7 @@
  
  <% for variable in @variables %>
   	<% d_id = "dialog_#{variable.id}"%>
-	<div id = "<%=d_id%>" style="display: none;">
+	<div id = "<%=d_id%>" style="display: none; width: 600px">
 		<%= render( :partial =>"full_variable", :locals => {:variable => variable}) %>
 	</div>
 <% end %>

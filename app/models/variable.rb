@@ -76,7 +76,9 @@ class Variable < ActiveRecord::Base
     merged_array['variable_type'] = merged_array['variable_type'].to_i
     merged_array['array'] = 1
     data = merged_array['data_file'].read
-    merged_array['expression_string'] = self.parse_csv_expression(data, merged_array['start_row'].to_i, self.convert_letter_column_labels_to_numbers(merged_array['column_number']),
+    merged_array['expression_string'] = self.parse_csv_expression(data,
+                                                                  merged_array['start_row'].to_i,
+                                                                  self.convert_letter_column_labels_to_numbers(merged_array['column_number']),
                                                                   merged_array['variable_type'])
     merged_array.delete('data_file')
     merged_array.delete('start_row')

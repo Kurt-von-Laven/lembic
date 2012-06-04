@@ -5,12 +5,12 @@ class Workflow < ActiveRecord::Base
   
   validates_uniqueness_of :name
   
+  has_many :users, :through => :workflow_permissions
+  
   has_many :variables
-  validates_associated :variables
-  
-  has_many :users, :through => :permissions
-  
   has_many :blocks
-  validates_associated :blocks
+  has_many :runs
+  has_many :workflow_blocks
+  validates_associated :variables, :blocks, :runs, :workflow_blocks
   
 end

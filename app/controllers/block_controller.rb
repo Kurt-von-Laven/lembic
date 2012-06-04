@@ -17,6 +17,7 @@ class BlockController < ApplicationController
   end
   
   # Record data entered into this block, redirect to the appropriate next block
+  # This should happen when the user clicks SUBMIT after entering input data in a block
   def input
     
     # Get block_id and hash of input values

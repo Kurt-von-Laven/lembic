@@ -1,26 +1,29 @@
 require 'csv'
-require './app/helpers/expression'
-require './app/models/index_name'
+require Rails.root.join('app/helpers/expression')
+require Rails.root.join('app/models/index_name')
 
 class Variable < ActiveRecord::Base
   
   include PersistableExpressions
   
-  attr_accessible :id, :name, :description, :workflow_id, :variable_type, :array, :created_at, :updated_at, :expression_string, :expression_object
+  attr_accessible :id, :name, :description, :model_id, :variable_type, :array, :created_at, :updated_at, :expression_string, :expression_object
   
-  validates_presence_of :name, :workflow_id, :variable_type, :array
-  validates_numericality_of :workflow_id, :only_integer => true, :greater_than => 0
+  validates_presence_of :name, :model_id, :variable_type, :array
+  validates_numericality_of :model_id, :only_integer => true, :greater_than => 0
   validates_numericality_of :variable_type, :only_integer => true, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 3
   validates_numericality_of :array, :only_integer => true, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 1
   
-  validates_uniqueness_of :name, :scope => :workflow_id, :message => "must be unique; delete the existing variable first."
+  validates_uniqueness_of :name, :scope => :model_id, :message => "must be unique; delete the existing variable first."
   
   serialize :expression_object
   
-  belongs_to :workflow
+  belongs_to :model
   
   has_many :index_names
-  has_many :block_inputs, :dependent => :destroy
+  has_many :block_variables, :dependent => :destroy
+  has_many :run_values
+  
+  validates_associated :index_names, :block_variables, :run_values
   
   INDEX = 'i' # The index used for constant arrays.
  
@@ -51,14 +54,12 @@ class Variable < ActiveRecord::Base
   end
   
   def index_name_strings
-    return index_names.order("position").collect { |i| i.name }
+    return index_names.order("sort_index").collect { |i| i.name }
   end
 
   def self.create_from_form(form_hash, user_id)
-    Permission.where(:user_id => user_id).first_or_create({'workflow_id' => user_id, 'permissions' => 4})
-    Workflow.where(:id => user_id, :name => 'Sample Workflow').first_or_create({'description' => 'This record should be removed eventually and is just for test purposes.'})
     merged_var = {'array' => 0}.merge(form_hash)
-    merged_var['workflow_id'] = user_id # TODO: Grab the workflow ID out of the session state.
+    merged_var['model_id'] = user_id # TODO: Grab the model ID out of the session state.
     merged_var['variable_type'] = merged_var['variable_type'].to_i
     merged_var['array'] = merged_var['name'].match(/\[.+\]/) ? 1 : 0
     puts "CREATED VARIABLE: ARRAY = #{merged_var['array']}"
@@ -72,14 +73,14 @@ class Variable < ActiveRecord::Base
   end
   
   def self.create_constant_array(form_hash, user_id)
-    Permission.where(:user_id => user_id).first_or_create({'workflow_id' => user_id, 'permissions' => 4})
-    Workflow.where(:id => user_id, :name => 'Sample Workflow').first_or_create({'description' => 'This record should be removed eventually and is just for test purposes.'})
     merged_array = {'array' => 0, 'start_row' => 1, 'column_number' => 1}.merge(form_hash)
-    merged_array['workflow_id'] = user_id # TODO: Grab the workflow ID out of the session state.
+    merged_array['model_id'] = user_id # TODO: Grab the model ID out of the session state.
     merged_array['variable_type'] = merged_array['variable_type'].to_i
     merged_array['array'] = 1
     data = merged_array['data_file'].read
-    merged_array['expression_string'] = self.parse_csv_expression(data, merged_array['start_row'].to_i, self.convert_letter_column_labels_to_numbers(merged_array['column_number']),
+    merged_array['expression_string'] = self.parse_csv_expression(data,
+                                                                  merged_array['start_row'].to_i,
+                                                                  self.convert_letter_column_labels_to_numbers(merged_array['column_number']),
                                                                   merged_array['variable_type'])
     merged_array.delete('data_file')
     merged_array.delete('start_row')
@@ -121,6 +122,10 @@ class Variable < ActiveRecord::Base
                 end
     parsed_data = CSV.parse(csv_data, :converters => converter)
     num_rows_desired = parsed_data.length - start_row
+    if num_rows_desired < 1
+      #start_row was greater than the greatest index in the array
+      raise ArgumentError, "Start row out of bounds; can be at most #{parsed_data.length}" #remember that the user inputs one-indexed values!
+    end
     desired_rows = parsed_data[start_row, num_rows_desired]
     desired_column = desired_rows.map {|r| r[column_number]}
     desired_column_with_nans = desired_column.map {|v| (v.nil? or (v == '')) ? Float::NAN : v}
@@ -133,6 +138,10 @@ class Variable < ActiveRecord::Base
   end
   
   def self.date_convert(input)
+    puts "DATE CONVERTER INPUT #{input.inspect}"
+    if !input.instance_of?(String)
+      return input
+    end
     # converts an Excel-formatted date/time string to Lembic format.
     puts "DATE CONVERTER INPUT = #{input}"
     date = nil

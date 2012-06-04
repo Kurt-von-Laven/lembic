@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120602010742) do
+ActiveRecord::Schema.define(:version => 20120604044010) do
 
   create_table "block_connections", :force => true do |t|
     t.string   "expression_string", :limit => 1048576, :null => false
@@ -23,12 +23,16 @@ ActiveRecord::Schema.define(:version => 20120602010742) do
     t.integer  "next_block_id",                        :null => false
   end
 
-  create_table "block_inputs", :force => true do |t|
-    t.integer  "block_id",    :null => false
-    t.integer  "sort_index",  :null => false
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-    t.integer  "variable_id", :null => false
+  create_table "block_variables", :force => true do |t|
+    t.integer  "block_id",     :null => false
+    t.integer  "sort_index",   :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.integer  "variable_id",  :null => false
+    t.integer  "display_type"
+    t.string   "prompt"
+    t.string   "description"
+    t.integer  "formatting"
   end
 
   create_table "blocks", :force => true do |t|
@@ -40,20 +44,59 @@ ActiveRecord::Schema.define(:version => 20120602010742) do
     t.integer  "sort_index",   :null => false
   end
 
+  create_table "category_options", :force => true do |t|
+    t.integer  "block_variable_id", :null => false
+    t.string   "name",              :null => false
+    t.string   "value",             :null => false
+    t.string   "description"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
   create_table "index_names", :force => true do |t|
     t.string   "name"
-    t.integer  "position"
+    t.integer  "sort_index"
     t.integer  "variable_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
 
-  create_table "permissions", :force => true do |t|
-    t.integer  "workflow_id", :null => false
+  create_table "model_permissions", :force => true do |t|
+    t.integer  "model_id",    :null => false
     t.integer  "user_id",     :null => false
+    t.integer  "sort_index",  :null => false
     t.integer  "permissions", :null => false
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  add_index "model_permissions", ["model_id"], :name => "index_model_permissions_on_model_id"
+  add_index "model_permissions", ["user_id"], :name => "index_model_permissions_on_user_id"
+
+  create_table "models", :force => true do |t|
+    t.string   "name",        :limit => 64, :null => false
+    t.string   "description",               :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  create_table "run_values", :force => true do |t|
+    t.integer  "variable_id",  :null => false
+    t.integer  "run_id",       :null => false
+    t.string   "index_values"
+    t.binary   "value",        :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  create_table "runs", :force => true do |t|
+    t.integer  "user_id",      :null => false
+    t.integer  "workflow_id",  :null => false
+    t.integer  "block_id",     :null => false
+    t.string   "description"
+    t.datetime "completed_at"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "sessions", :force => true do |t|
@@ -97,7 +140,7 @@ ActiveRecord::Schema.define(:version => 20120602010742) do
   create_table "variables", :force => true do |t|
     t.string   "name",              :limit => 64,      :null => false
     t.string   "description",                          :null => false
-    t.integer  "workflow_id",                          :null => false
+    t.integer  "model_id",                             :null => false
     t.integer  "variable_type",                        :null => false
     t.integer  "array",                                :null => false
     t.datetime "created_at",                           :null => false
@@ -111,6 +154,22 @@ ActiveRecord::Schema.define(:version => 20120602010742) do
     t.string   "value"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "workflow_blocks", :force => true do |t|
+    t.integer  "workflow_id", :null => false
+    t.integer  "block_id",    :null => false
+    t.integer  "sort_index",  :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "workflow_permissions", :force => true do |t|
+    t.integer  "workflow_id", :null => false
+    t.integer  "user_id",     :null => false
+    t.integer  "permissions", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "workflows", :force => true do |t|

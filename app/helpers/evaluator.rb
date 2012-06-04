@@ -1,6 +1,6 @@
 
-require ("./app/helpers/expression")
-require ("./app/helpers/parser")
+require Rails.root.join('app/helpers/expression')
+require Rails.root.join('app/helpers/parser')
 require "date"
 
 # Class Evaluator

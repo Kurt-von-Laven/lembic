@@ -24,12 +24,13 @@ class EditorController < ApplicationController
         end
       end
     end
-    @variables = Variable.where(:workflow_id => user_id).order(:name)
+    @variables = Variable.where(:model_id => user_id).order(:name)
     render 'equations'
   end
   
   def find_variablenames
-    @variablenames = Variable.where('(workflow_id = ?) AND (name LIKE ?)', session[:user_id], "#{params[:term]}%").order(:name)
+    # TODO: This will break if params[:term] contains a percent symbol. It needs to use escaping.
+    @variablenames = Variable.where('(:model_id = ?) AND (name LIKE ?)', session[:user_id], "#{params[:term]}%").order(:name)
     respond_to do |format|
       format.js { render :layout => false }
     end
@@ -57,7 +58,7 @@ class EditorController < ApplicationController
   end
   
   def delete_variable
-    variable = Variable.where(:id => params[:id], :workflow_id => session[:user_id]).first
+    variable = Variable.where(:id => params[:id], :model_id => session[:user_id]).first
     if !variable.nil?
       variable.destroy
     end
@@ -65,7 +66,7 @@ class EditorController < ApplicationController
   end
   
   def delete_relationship
-    variable = Variable.where(:id => params[:id], :workflow_id => session[:user_id]).first
+    variable = Variable.where(:id => params[:id], :model_id => session[:user_id]).first
     if !variable.nil?
       variable.expression_string = nil
       variable.save
@@ -74,7 +75,7 @@ class EditorController < ApplicationController
   end
   
   def full_variable
-    @var = Variable.where(:name => params[:name], :workflow_id => session[:user_id]).first
+    @var = Variable.where(:name => params[:name], :model_id => session[:user_id]).first
   end
   
 end

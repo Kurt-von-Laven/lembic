@@ -10,7 +10,9 @@ class Block < ActiveRecord::Base
   has_many :originating_connections, :class_name => "BlockConnection", :foreign_key => "next_block_id", :dependent => :destroy
   has_many :block_inputs, :dependent => :destroy
   has_many :block_connections, :dependent => :destroy
-  validates_associated :block_inputs, :block_connections
+  has_many :runs
+  has_many :workflow_blocks, :dependent => :destroy
+  validates_associated :originating_connections, :block_inputs, :block_connections, :runs, :workflow_blocks
   belongs_to :workflow
   
   def outputs_string # getter returnsempty string. TODO: Fix this and create a setter 
@@ -57,8 +59,8 @@ class Block < ActiveRecord::Base
     end
   end
   
+  # Decrement higher sort_indexs to prevent sparseness
   after_destroy do |destroyed|
-    # Decrement higher sort_indexs to prevent sparseness
     # NOTE: I'm not quite sure if this is atomic, may need to wrap in a transaction -Tom
     Block.transaction do
       Block.where("workflow_id = ? AND sort_index > ?", destroyed.workflow_id, destroyed.sort_index).each do |b|

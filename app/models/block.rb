@@ -8,11 +8,11 @@ class Block < ActiveRecord::Base
   validates_numericality_of :sort_index, :only_integer => true, :greater_than_or_equal_to => 0
   
   has_many :originating_connections, :class_name => "BlockConnection", :foreign_key => "next_block_id", :dependent => :destroy
-  has_many :block_inputs, :dependent => :destroy
+  has_many :block_variables, :dependent => :destroy
   has_many :block_connections, :dependent => :destroy
   has_many :runs
   has_many :workflow_blocks, :dependent => :destroy
-  validates_associated :originating_connections, :block_inputs, :block_connections, :runs, :workflow_blocks
+  validates_associated :originating_connections, :block_variables, :block_connections, :runs, :workflow_blocks
   belongs_to :workflow
   
   def outputs_string # getter returnsempty string. TODO: Fix this and create a setter 
@@ -23,11 +23,11 @@ class Block < ActiveRecord::Base
   end 
   
   def inputs_string  # TODO: Needs to return string of input variables -Kseniya
-	block_inputs.order(:sort_index)
+	block_variables.order(:sort_index)
 	myString = String.new
   end
 
-  # Create a block_input for the variable named on each line of the input string
+  # Create a block_variable for the variable named on each line of the input string
   def inputs_string=(string)
     
     # Iterate through each line of the input string
@@ -48,13 +48,13 @@ class Block < ActiveRecord::Base
       end
 
       # Determine sort_index
-      sort_index = block_inputs.size
+      sort_index = block_variables.size
 
       # Create a block input with the specified variable
-      bi = block_inputs.create({:variable_id => variable.id, :sort_index => sort_index})
+      bi = block_variables.create({:variable_id => variable.id, :sort_index => sort_index})
       if bi.nil?
         # TODO: Return an error to the user
-        logger.debug "Failed to create block_input with variable_id => #{variable.id} and sort_index => #{sort_index}"
+        logger.debug "Failed to create block_variable with variable_id => #{variable.id} and sort_index => #{sort_index}"
       end
     end
   end

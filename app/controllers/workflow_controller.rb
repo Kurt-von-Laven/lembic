@@ -20,10 +20,10 @@ class WorkflowController < ApplicationController
       Variable.find(:all).each do |variable|
         expression_object = variable.expression_object
         varname = variable.name.split(/\s*\[/)[0]
-        index_names = get_index_names(variable)
+        index_names = variable.index_name_strings
         input_values_hash[varname] ||= {}
-        input_values_hash[varname][:formula] = expression_object unless expression_object.nil?
-        input_values_hash[varname][:index_names] = index_names if index_names
+        input_values_hash[varname][:formula] = expression_object unless expression_object.nil? # This unless just saves some space in the Hash.
+        input_values_hash[varname][:index_names] = index_names unless index_names.nil? # This unless just saves some space in the Hash.
       end
       if variable_to_solve_for.nil?
         if vars['variable_to_solve_for'].nil?
@@ -88,10 +88,6 @@ class WorkflowController < ApplicationController
   end
   
   private
-  
-  def get_index_names(variable)
-    return variable.index_name_strings
-  end
   
   def to_i_safely(str)
     return nil unless str.instance_of?(String)

@@ -27,10 +27,13 @@
 		 truncate(expression, :length =>17, :omission => '...(continued)')
 	%>
 		 <td>
-			<%= variable.name_with_indices %>
-			<a class = "dialog_link" index=<%=num%>>more</a></h3>
+			<span style="width: 50px">
+			<%= truncate(variable.name_with_indices, :length =>20, :omission => '...') %>
+			</span>
 		 </td>
-         
+         <td style="text-align: left;"> 
+			<a class = "dialog_link" index=<%=num%>> more </a></h3>
+		 </td>
 		 <% d_id = "dialog_#{num}"%>
 			 <div id = "<%=d_id%>" style="display: none">
              				<h1><%= variable.name_with_indices %></h1>

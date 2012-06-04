@@ -54,7 +54,7 @@ class Variable < ActiveRecord::Base
   end
   
   def index_name_strings
-    return index_names.order("position").collect { |i| i.name }
+    return index_names.order("sort_index").collect { |i| i.name }
   end
 
   def self.create_from_form(form_hash, user_id)

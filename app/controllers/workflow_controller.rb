@@ -151,6 +151,15 @@ class WorkflowController < ApplicationController
     end
   end
   
+  def create_workflow
+    Workflow.create(params[:workflow])
+    # TODO: give current user permissions for this workflow in WorkflowPermissions table
+  end
+  
+  def add_block_to_workflow
+    WorkflowBlock.create(params[:workflow_block])
+  end
+  
   private
   
   def to_i_safely(str)

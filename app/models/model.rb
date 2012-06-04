@@ -11,6 +11,6 @@ class Model < ActiveRecord::Base
   validates_associated :permissions, :variables, :workflows
   
   # Attribute accessors
-  attr_accessible :description, :name
+  attr_accessible :id, :description, :name
   
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120604032936) do
+ActiveRecord::Schema.define(:version => 20120604034658) do
 
   create_table "block_connections", :force => true do |t|
     t.string   "expression_string", :limit => 1048576, :null => false
@@ -56,6 +56,18 @@ ActiveRecord::Schema.define(:version => 20120604032936) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
+
+  create_table "model_permissions", :force => true do |t|
+    t.integer  "model_id",    :null => false
+    t.integer  "user_id",     :null => false
+    t.integer  "sort_index",  :null => false
+    t.integer  "permissions", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "model_permissions", ["model_id"], :name => "index_model_permissions_on_model_id"
+  add_index "model_permissions", ["user_id"], :name => "index_model_permissions_on_user_id"
 
   create_table "models", :force => true do |t|
     t.string   "name",        :limit => 64, :null => false

@@ -9,6 +9,7 @@ Users
 Models
 	name
 	description
+        sort_index
 
 ModelPermissions
 	model_id

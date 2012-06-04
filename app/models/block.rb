@@ -10,7 +10,9 @@ class Block < ActiveRecord::Base
   has_many :originating_connections, :class_name => "BlockConnection", :foreign_key => "next_block_id", :dependent => :destroy
   has_many :block_inputs, :dependent => :destroy
   has_many :block_connections, :dependent => :destroy
-  validates_associated :originating_connections, :block_inputs, :block_connections
+  has_many :runs
+  has_many :workflow_blocks, :dependent => :destroy
+  validates_associated :originating_connections, :block_inputs, :block_connections, :runs, :workflow_blocks
   belongs_to :workflow
   
   def outputs_string # getter returnsempty string. TODO: Fix this and create a setter 

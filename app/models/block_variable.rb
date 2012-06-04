@@ -12,6 +12,10 @@ class BlockInput < ActiveRecord::Base
   belongs_to :block
   belongs_to :variable
   
+  has_many :category_options
+  
+  validates_associated :category_options
+  
   def display_type #returns :input or :output
     if self[:display_type] == 0
       return :input

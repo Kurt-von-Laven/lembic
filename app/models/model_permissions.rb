@@ -10,6 +10,6 @@ class ModelPermissions < ActiveRecord::Base
   validates_numericality_of :sort_index, :only_integer => true, :greater_than_or_equal_to => 0
   
   # Attribut accessors
-  attr_accessible :permissions, :sort_index, :model_id, :user_id
+  attr_accessible :id, :permissions, :sort_index, :model_id, :user_id
   
 end

@@ -53,6 +53,14 @@ class Variable < ActiveRecord::Base
     return "#{name.split(/\s*\[\s*/)[0]}" + (array? ? "[#{index_names.collect{|i| i.name}.join(",")}]" : '')
   end
   
+  def name_with_indices=(new_name)
+    name = new_name.split(/\s*\[\s*/)[0]
+    if new_name.match(/\[.+\]/)
+      IndexName.delete_all(["variable_id = ?", self.id])
+      IndexName.create_from_declaration(new_name, self.id)
+    end
+  end
+  
   def index_name_strings
     sorted_index_names = index_names.order(:sort_index)
     if sorted_index_names.empty?

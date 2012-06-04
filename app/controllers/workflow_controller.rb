@@ -3,8 +3,8 @@ require Rails.root.join('app/helpers/expression')
 class WorkflowController < ApplicationController
   
   def evaluate
-    @variables = Variable.where(:workflow_id => session[:user_id]).order(:name)
-    @input_variables = Variable.where(:workflow_id => session[:user_id], :expression_string => nil).order(:name)
+    @variables = Variable.where(:model_id => session[:user_id]).order(:name)
+    @input_variables = Variable.where(:model_id => session[:user_id], :expression_string => nil).order(:name)
     vars = params[:evaluator]
     if !vars.nil?
       input_values = (vars['input_values'].nil?) ? [] : vars['input_values']

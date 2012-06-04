@@ -41,6 +41,6 @@
 <ul class="output_values">
   <% i = 0 %>
   <% for output_variable_name, output_variable_value in @output_variables %>
-    <li><%= output_variable_name + ' = ' + output_variable_value %></li>
+    <li><%= output_variable_name + ' = ' + output_variable_value.to_s %></li>
   <% end %>
 </ul>

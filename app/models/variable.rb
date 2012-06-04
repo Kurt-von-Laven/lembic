@@ -58,7 +58,6 @@ class Variable < ActiveRecord::Base
   end
 
   def self.create_from_form(form_hash, user_id)
-    Permission.where(:user_id => user_id).first_or_create({'model_id' => user_id, 'permissions' => 4})
     Model.where(:id => user_id, :name => 'Sample Workflow').first_or_create({'description' => 'This record should be removed eventually and is just for test purposes.'})
     merged_var = {'array' => 0}.merge(form_hash)
     merged_var['model_id'] = user_id # TODO: Grab the workflow ID out of the session state.
@@ -75,7 +74,6 @@ class Variable < ActiveRecord::Base
   end
   
   def self.create_constant_array(form_hash, user_id)
-    Permission.where(:user_id => user_id).first_or_create({'model_id' => user_id, 'permissions' => 4})
     Model.where(:id => user_id, :name => 'Sample Workflow').first_or_create({'description' => 'This record should be removed eventually and is just for test purposes.'})
     merged_array = {'array' => 0, 'start_row' => 1, 'column_number' => 1}.merge(form_hash)
     merged_array['model_id'] = user_id # TODO: Grab the workflow ID out of the session state.

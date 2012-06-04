@@ -166,13 +166,13 @@ class ViewEditorController < ApplicationController
 
 
     ## Set variables used by views for rendering
-    @variables = Variable.where(:workflow_id => session[:user_id]).order(:name)
+    @variables = Variable.where(:model_id => session[:user_id]).order(:name)
     @blocks = Block.where(:workflow_id => session[:user_id]).order(:sort_index)
 
   end
 
   def edit_question
-      @variables = Variable.where(:workflow_id => session[:user_id]).order(:name)
+      @variables = Variable.where(:model_id => session[:user_id]).order(:name)
   end
     
     def find_blocknames

@@ -6,6 +6,9 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email
   
   has_many :workflows, :through => :permissions
+  has_many :runs
+  
+  validates_associated :runs
   
   SHA512_REGEX = Regexp.new('[a-f0-9]{128}')
   SALT_LENGTH = 128

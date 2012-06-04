@@ -21,8 +21,9 @@ class Variable < ActiveRecord::Base
   
   has_many :index_names
   has_many :block_inputs, :dependent => :destroy
+  has_many :run_values
   
-  validates_associated :index_names, :block_inputs
+  validates_associated :index_names, :block_inputs, :run_values
   
   INDEX = 'i' # The index used for constant arrays.
  

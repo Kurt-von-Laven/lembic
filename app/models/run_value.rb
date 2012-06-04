@@ -8,4 +8,6 @@ class RunValue < ActiveRecord::Base
   validates_presence_of :value
   validates_uniqueness_of :index_values, :scope => [:variable_id, :run_id]
   
+  belongs_to :run
+  belongs_to :variable
 end

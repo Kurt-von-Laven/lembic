@@ -1,7 +1,5 @@
 require "./app/models/variable"
 
-#TODO: this leaves variables with duplicate names untouched.
-
 class StripIndicesFromVariableNames < ActiveRecord::Migration
   def change
     all_variables = Variable.find(:all)

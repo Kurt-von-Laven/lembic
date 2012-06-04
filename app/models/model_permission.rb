@@ -1,4 +1,4 @@
-class ModelPermissions < ActiveRecord::Base
+class ModelPermission < ActiveRecord::Base
   
   # Associations
   belongs_to :model

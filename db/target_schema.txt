@@ -13,6 +13,7 @@ Models
 ModelPermissions
 	model_id
 	user_id
+	model_sort_index (ordering used when sorting all models available to a single user)
 	permissions
 	
 Variables

@@ -41,12 +41,12 @@ WorkflowPermissions
 
 Blocks
 	name
-	display_type
 	
 BlockVariables
 	block_id
 	variable_id
 	sort_index
+	display_type
 	prompt
 	description
 	formatting

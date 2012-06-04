@@ -39,14 +39,14 @@ class EditorController < ApplicationController
   def variable
     variable_form = params[:variable]
     if !variable_form.nil?
-      variable_name = variable_form[:name]
+      variable_name_with_indices = variable_form[:name_with_indices]
       expression_string = variable_form[:expression_string]
       variable_record = Variable.where(:id => variable_form[:id]).first
       if variable_record.nil?
         flash[:unrecognized_variable] = "The variable you tried to edit, #{variable_name}, was probably recently" +
           " deleted by a member of your team. Your equation, #{expression_string}, was not saved."
       else
-        variable_record.name = variable_name
+        variable_record.name_with_indices = variable_name_with_indices
         variable_record.expression_string = expression_string
         logger.debug(variable_record.expression_string)
         if !variable_record.save

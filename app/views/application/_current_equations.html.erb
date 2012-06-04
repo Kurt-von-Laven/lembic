@@ -16,7 +16,7 @@
     <tr>
       <%= form_for(variable) do |f| %>
         <%= f.hidden_field(:id) %>
-        <td class="preserve_whitespace"><%= f.text_field(:name) %> = <%= f.text_field(:expression_string) %></td>
+        <td class="preserve_whitespace"><%= f.text_field(:name_with_indices) %> = <%= f.text_field(:expression_string) %></td>
         <td><%= f.submit('Save Changes for this Variable Only') %></td>
         <td class="delete">
           <%= button_to "x", "#{delete_relationship_path}?id=#{variable.id}",

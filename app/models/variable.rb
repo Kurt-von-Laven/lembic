@@ -54,15 +54,12 @@ class Variable < ActiveRecord::Base
   end
   
   def index_name_strings
-    return index_names.order("position").collect { |i| i.name }
+    return index_names.order("sort_index").collect { |i| i.name }
   end
 
   def self.create_from_form(form_hash, user_id)
-<<<<<<< HEAD
     merged_var = {'array' => 0}.merge(form_hash)
-    merged_var['model_id'] = user_id # TODO: Grab the workflow ID out of the session state.
-=======
->>>>>>> bd5dfe61ca3a7f17aaa15faee3ca46dd74ffb103
+    merged_var['model_id'] = user_id # TODO: Grab the model ID out of the session state.
     merged_var['variable_type'] = merged_var['variable_type'].to_i
     merged_var['array'] = merged_var['name'].match(/\[.+\]/) ? 1 : 0
     puts "CREATED VARIABLE: ARRAY = #{merged_var['array']}"

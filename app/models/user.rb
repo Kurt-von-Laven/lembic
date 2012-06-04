@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   has_many :runs
   has_many :model_permissions
   
-  validates_associated :runs, :model_permissions
+  validates_associated :runs
   
   SHA512_REGEX = Regexp.new('[a-f0-9]{128}')
   SALT_LENGTH = 128

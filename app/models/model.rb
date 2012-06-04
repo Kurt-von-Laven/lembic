@@ -8,7 +8,7 @@ class Model < ActiveRecord::Base
   # Validators
   validates_presence_of :name, :description
   validates_uniqueness_of :name
-  validates_associated :model_permissions, :variables, :workflows
+  validates_associated :variables, :workflows
   
   # Attribute accessors
   attr_accessible :id, :description, :name

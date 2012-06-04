@@ -22,6 +22,8 @@ class Variable < ActiveRecord::Base
   has_many :index_names
   has_many :block_inputs, :dependent => :destroy
   
+  validates_associated :index_names, :block_inputs
+  
   INDEX = 'i' # The index used for constant arrays.
  
   # The variable type is represented as an integer in range [0, 3] according to this mapping.

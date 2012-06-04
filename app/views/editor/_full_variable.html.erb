@@ -1,20 +1,12 @@
-
-<% if variable.array == 0 %>
-
-<h1> <%= variable.name %> </h1>
-<%= variable.name %> = <%=variable.expression_string %>
-<% end %>
- 
-<%	if variable.array?
-
-		temp = variable.expression_string.split(/\[\s*i\s*\|\s*/)[1]
-		truncated_array = temp[0..-2]
+<% truncated_array = variable.expression_string.split(/\|\s*/)[1] %>
+<%	if variable.array? and !truncated_array.nil?
+		truncated_array = truncated_array[0..-2]
 		comma_separated_array = truncated_array.split(/\s*,\s*/)
 		num = comma_separated_array.size()
 %>
 	<div id = "full_array">
 	
-<h1> <%= variable.name %> </h1>
+<h1><%= variable.name %></h1>
 		<table>
 		<th> index </th>
 		<% for k in 1..10 %>
@@ -35,6 +27,7 @@
 	%>
 	</table>
 	</div>
+<% else %>
+<h1><%= variable.name %></h1>
+<%= variable.name %> = <%=variable.expression_string %>
 <% end %>
-
-

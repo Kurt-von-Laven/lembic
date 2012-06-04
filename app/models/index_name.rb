@@ -7,11 +7,8 @@ class IndexName < ActiveRecord::Base
   def self.create_from_declaration(dec, variable_id)
     #dec is a string like myvar[i, j, k]
     index_list = dec.split(/\s*\[\s*|\s*\]\s*/)[1]
-    indices = nil
     if index_list
       indices = index_list.split(/\s*,\s*/)
-    end
-    if indices
       indices.each_with_index do |index, i|
         new_index_name = IndexName.new({:name => index, :sort_index => i, :variable_id => variable_id})
         new_index_name.save

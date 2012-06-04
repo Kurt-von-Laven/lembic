@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120604032936) do
+ActiveRecord::Schema.define(:version => 20120604034931) do
 
   create_table "block_connections", :force => true do |t|
     t.string   "expression_string", :limit => 1048576, :null => false
@@ -23,12 +23,16 @@ ActiveRecord::Schema.define(:version => 20120604032936) do
     t.integer  "next_block_id",                        :null => false
   end
 
-  create_table "block_inputs", :force => true do |t|
-    t.integer  "block_id",    :null => false
-    t.integer  "sort_index",  :null => false
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-    t.integer  "variable_id", :null => false
+  create_table "block_variables", :force => true do |t|
+    t.integer  "block_id",     :null => false
+    t.integer  "sort_index",   :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.integer  "variable_id",  :null => false
+    t.integer  "display_type"
+    t.string   "prompt"
+    t.string   "description"
+    t.integer  "formatting"
   end
 
   create_table "blocks", :force => true do |t|

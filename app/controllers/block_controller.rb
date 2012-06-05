@@ -11,6 +11,7 @@ class BlockController < ApplicationController
     
   end
   
+  # TODO: This code is essentially duplicated in workflow_controller#expert_workflow.
   # Record data entered into this block, redirect to the appropriate next block
   # This should happen when the user clicks SUBMIT after entering variables in a block
   def variables

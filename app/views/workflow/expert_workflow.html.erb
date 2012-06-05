@@ -1,14 +1,14 @@
 <h1> Workflow </h1>
 
 <% block_variables = @block.block_variables().order(:sort_index) %>
-<%= form_for :input_values, :url => "/workflow/post_block_input" %>
-    <%= hidden_field_tag "run_id", @run.id %>
+<%= form_for :input_values, :url => "/workflow/post_block_input" do |f| %>
+    <%= f.hidden_field "run_id", @run.id %>
     <% for v in block_variables %>
    
     <% if v.display_type == :input %>
     <div>
         <p>
-      <%= text_field_tag v.variable_id %>
+      <%= f.text_field v.variable_id %>
       </p>
     </div>
     <% else %>
@@ -20,6 +20,6 @@
     </div>
      
     <% end %>
-    <%= submit_tag ("Next") %>
+    <%= f.submit ("Next") %>
 <% end %>
 

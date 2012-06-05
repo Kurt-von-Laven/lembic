@@ -104,6 +104,12 @@ body {
 .dialog_link:hover{
 	color: #95b7d0;
 }
+#display_workflow{
+	text-align:center; 
+	padding-bottom: 10px;
+	display: block;
+	height: 200px;
+}
 .error {
     color: red;
 }
@@ -183,8 +189,9 @@ h3 {
     font-family: Garamond, Baskerville, "Times New Roman", serif;
     text-align:center;
     margin-left:auto;
-    margin-right:auto;
-    padding:10px;
+    margin-right:6uto;
+	padding-top: 10px;
+	padding-bottom: 10px;
     border-radius:10px;
     -moz-border-radius:10px; /* Firefox 3.6 and earlier */
 }
@@ -389,7 +396,7 @@ border-radius:10px;
 
 .right_column textarea{
 	width: 60%;
-	height: 300px;
+	height: 200px;
 }
 #serial {
 	margin:  0 150px 0 120px;

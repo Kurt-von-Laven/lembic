@@ -16,9 +16,9 @@
 			<div id="tabs">
 			  <ul>
 				<li><a href="#tabs-1">Create Block</a></li>
-                <li><a href="#tabs-2">Add Measures</a></li>
-				<li><a href="#tabs-3">Add Connections</a></li>
-				<li><a href="#tabs-4">Choose Output</a></li>
+                                <li><a href="#tabs-2">Add Inputs</a></li>
+                                <li><a href="#tabs-3">Add Outputs</a></li>
+				<li><a href="#tabs-4">Add Connections</a></li>
 			  </ul>
                 <!-- TAB 1 -->
 				<div id="tabs-1">
@@ -50,13 +50,36 @@
 						</div>
                     </div>
 					<div id="input_button">
-                        <%= f.submit("Create Block Variables", :class => "button") %>
+                        <%= f.submit("Create Input Variables", :class => "button") %>
 					</div>
                     <% end %>
                 </div>
-                
-                <!-- TAB3 -->
+
+                <!--TAB3 -->      
 				<div id="tabs-3">
+                <%= form_for(:create_output_block_form, :html => {:class => "input_formB"}) do |f| %>
+					<div id="var_input_block">
+						<div>
+							<%= f.label(:name, "Name of Block: ") %>
+							<%= f.text_field :name, :class => "auto_complete_blocks" %>
+						</div>
+						<div>
+							<%= f.label(:outputs_string, "Output these variables: ") %>
+							<%= f.text_area :outputs_string, :id =>"drop_var_output" %>
+						</div>
+						<div>
+							<%= f.label(:display_type, "Display Type:") %>
+							<%= f.select(:display_type, [['Graph', 'graph'], ['Integer', 'integer'], ['Percentage', 'percent']])    %>
+						</div>
+					</div>
+					<div id="input_button">
+						<%= f.submit('Add Output', :class => "button") %>
+					</div>
+                <% end %>
+                </div>
+                
+                <!-- TAB4 -->
+				<div id="tabs-4">
 					Enter connections to get to next block after this one, one per line.<br/>
 					Each connection has a block name, an arrow (=>), and a boolean expression<br/>
 					Example: 'AC_Block => has_ac == true' or 'FINISH => 1'
@@ -79,28 +102,6 @@
                     <% end %>
                 </div>
                 
-                <!--TAB4 -->      
-				<div id="tabs-4">
-                <%= form_for(:create_output_block_form, :html => {:class => "input_formB"}) do |f| %>
-					<div id="var_input_block">
-						<div>
-							<%= f.label(:name, "Name of Block: ") %>
-							<%= f.text_field :name, :class => "auto_complete_blocks" %>
-						</div>
-						<div>
-							<%= f.label(:outputs_string, "Output these variables: ") %>
-							<%= f.text_area :outputs_string, :id =>"drop_var_output" %>
-						</div>
-						<div>
-							<%= f.label(:display_type, "Display Type:") %>
-							<%= f.select(:display_type, [['Graph', 'graph'], ['Integer', 'integer'], ['Percentage', 'percent']])    %>
-						</div>
-					</div>
-					<div id="input_button">
-						<%= f.submit('Add Output', :class => "button") %>
-					</div>
-                <% end %>
-                </div>
              </div>
 			   </br>
 			 <div id="display_workflow">

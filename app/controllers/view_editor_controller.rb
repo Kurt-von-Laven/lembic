@@ -51,8 +51,8 @@ class ViewEditorController < ApplicationController
         
         # Create a block variable
         # NOTE: this may fail for various reasons (i.e. sort_index collision from race condition)
-        bi = block.block_variables.create({:display_type => :input, :variable_id => variable.id, :sort_index => sort_index})
-        if bi.nil?
+        bv = block.block_variables.create({:display_type => :input, :variable_id => variable.id, :sort_index => sort_index})
+        if bv.nil?
             flash[:block_failed] = "Failed to create block_variable with variable_id => #{variable.id} and sort_index => #{sort_index}"
         end
       end
@@ -133,8 +133,8 @@ class ViewEditorController < ApplicationController
         sort_index = block.block_variables.size
 
         # Create a block variable
-        bi = block.block_variables.create({:display_type => :output, :variable_id => variable.id, :sort_index => sort_index})
-        if bi.nil?
+        bv = BlockVariable.create({:block_id => block.id, :display_type => :output, :variable_id => variable.id, :sort_index => sort_index})
+        if bv.nil?
           flash[:block_failed] =  "Failed to create block_variable with variable_id => #{variable.id} and sort_index => #{sort_index}"
         end
       end

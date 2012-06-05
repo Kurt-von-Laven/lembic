@@ -91,20 +91,13 @@ class WorkflowController < ApplicationController
   # sets the run's current block to the start block of the workflow
   # redirects to show the first block
   def start_run
-    workflow = Workflow.find(params[:id])
-    start_block = Block.find(Workflow.workflow_blocks().order(:sort_index).first.block_id)
-    #start_block = WorkflowBlock.find_all(["workflow_id = ?", workflow.id])
-    newrun = Run.create({:user_id => session[:user_id],
-                      :workflow_id => workflow.id,
-                      :current_block_id => start_block.id,
-                      :description => "",
-                      :completed_at => nil
-                      })
-    @block = start_block
-    @run = newrun
-    @variables_hash = variables_hash_for_run(@run)
-    @evaluator = Evaluator.new
-    render "block"
+    workflow = Workflow.where(:id => params[:id]).first
+    start_block = Block.where(:id => workflow.workflow_blocks().where(:sort_index => 0).block_id).first
+    new_run = Run.create({:user_id => session[:user_id],
+                          :workflow_id => workflow.id,
+                          :current_block_id => start_block.id
+                        })
+    redirect_to :action => 'block', :id => start_block.id, :run_id => new_run.id
   end
   
   ##
@@ -113,7 +106,7 @@ class WorkflowController < ApplicationController
   # store the user-entered values in run_values
   # build a hash of variable names to values and formulas to be run through the evaluator
   # display the next block based on transition logic
-  def post_block_input
+  def block
     currblock = Block.find(params[:id])
     @run = Run.find(params[:run_id])
     for var_id, val in params[:input_values] do
@@ -138,7 +131,7 @@ class WorkflowController < ApplicationController
     end
     if nextblock
       @block = nextblock
-      #@block_variables = nextblock.block_variables().order(:sort_index)
+      @block_variables = nextblock.block_variables().order(:sort_index)
       render "block"
     end
   end

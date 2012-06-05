@@ -1,4 +1,9 @@
-<% truncated_array = variable.expression_string.split(/\|\s*/)[1] %>
+
+<% if !variable.expression_string.nil?
+        truncated_array = variable.expression_string.split(/\|\s*/)[1]
+    else 
+        truncated_array = ""
+    end %>
 <%	if variable.array? and !truncated_array.nil?
 		truncated_array = truncated_array[0..-2]
 		comma_separated_array = truncated_array.split(/\s*,\s*/)

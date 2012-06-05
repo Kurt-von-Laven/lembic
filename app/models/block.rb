@@ -40,7 +40,6 @@ class Block < ActiveRecord::Base
       variable_name = line.strip
       if variable_name.empty? # TODO: get better input validation
         next
-        
       end
       
       # Find the variable

@@ -36,14 +36,14 @@ class ViewEditorController < ApplicationController
         # Trim the line to get a variable name
         variable_name = line.strip
         if variable_name.empty? # TODO: get better input validation
-            flash[:block_failed]='Your variable name was empty. Please try again.'
+            flash[:block_failed] = 'Your variable name was empty. Please try again.'
           next
         end
 
         # Find the variable
         variable = Variable.find_by_name(variable_name)
         if variable.nil?
-            flash[:block_failed]="Sorry, we couldn't find that variable! Please try again"
+            flash[:block_failed] = "Sorry, we couldn't find that variable! Please try again"
           next
         end
 

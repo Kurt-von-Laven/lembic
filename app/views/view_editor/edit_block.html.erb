@@ -105,16 +105,6 @@
                 </div>
     </div>
 	
-	<!--This form is for showing a specific block and entering data into it -->
-	</br></br>
-		<%= form_for(:show_block_form) do |f| %>
-				<div>
-					<%= f.label(:id, "Block: ") %>
-					<%= f.collection_select(:id, @blocks, :id, :name, :prompt => true)%>
-				</div>
-				<%= f.submit("View Block", :class => "button") %>
-		<% end %>
-	</br></br>
 	<div style="text-align:center">
         <%= button_to "View Expert Workflow", "/workflow",
               {:confirm => "Are you sure you are ready to leave this page?",

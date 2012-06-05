@@ -93,10 +93,11 @@ class WorkflowController < ApplicationController
   # redirects to show the first block
   def start_run
     workflow = Workflow.where(:id => params[:id]).first
-    start_block = Block.where(:id => workflow.workflow_blocks().where(:sort_index => 0).block_id).first
+    puts "ALL WORKFLOWS = "+Workflow.find(:all).inspect
+    start_block = Block.where(["workflow_id = ? and sort_index = 0", workflow.id]).first
     new_run = Run.create({:user_id => session[:user_id],
                           :workflow_id => workflow.id,
-                          :current_block_id => start_block.id
+                          :block_id => start_block.id
                         })
     redirect_to :action => 'block', :id => start_block.id, :run_id => new_run.id
   end

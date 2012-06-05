@@ -11,12 +11,6 @@
 	<div class = "left_column">
 		<%= render "current_variables_truncated" %>
 		<%= render "current_blocks_truncated" %>
-        <br />
-
-        <%= button_to "View Expert Workflow", "/workflow",
-              {:confirm => "Are you sure you are ready to leave this page?",
-               :method => :delete, :class => "button"} %>
-
 	</div>
 	
 	<div class = "right_column">
@@ -29,24 +23,36 @@
 			  </ul>
                 <!-- TAB 1 -->
 				<div id="tabs-1">
-                    <%= form_for(:create_block_form) do |f| %>
-                        <%= f.label(:name, "Name of Block: ") %><br/>
-                        <%= f.text_field :name %><br/>
-                        <%= f.submit("Create Block", :class => "button") %><br/>
+                    <%= form_for(:create_block_form, :html => {:class => "input_formB"}) do |f| %>
+					 <div id="var_input_block">
+						<div>
+							<%= f.label(:name, "Name of Block: ") %>
+							<%= f.text_field :name %>
+						</div>
+					 </div>
+					 <div id="input_button">
+                        <%= f.submit("Create Block", :class => "button") %>
+					 </div>
                     <% end %>
                 </div>
                 
                  <!-- TAB2 -->
                 <div id = "tabs-2">
                     Please enter one per line. <br />
-                    <%= form_for(:create_block_inputs_form) do |f| %>
-                        <%= f.label(:block_name, "Name of Block: ") %><br/>
-                        <%= f.text_field :block_name, :class => "auto_complete_blocks" %><br/>
-                        <%= f.label(:inputs_string, "Input Variables:") %><br/>
-                        
-                        <%= f.text_area :inputs_string, :id =>"drop_var" %>
-                       
-                        <%= f.submit("Create Block Inputs", :class => "button") %><br/>
+                    <%= form_for(:create_block_inputs_form, :html => {:class => "input_formB"}) do |f| %>
+					<div id="var_input_block">
+						<div>
+							<%= f.label(:block_name, "Name of Block: ") %>
+							<%= f.text_field :block_name, :class => "auto_complete_blocks" %>
+						</div>
+						<div>
+							<%= f.label(:inputs_string, "Input Variables:") %>
+							<%= f.text_area :inputs_string, :id =>"drop_var" %>
+						</div>
+                    </div>
+					<div id="input_button">
+                        <%= f.submit("Create Block Inputs", :class => "button") %>
+					</div>
                     <% end %>
                 </div>
                 
@@ -57,28 +63,62 @@
 					Example: 'AC_Block => has_ac == true' or 'FINISH => 1'
                     Please do not whitespace.
 					Block connections, one per line: 
-                    <%= form_for(:create_block_connections_form) do |f| %>
-                        <%= f.label(:block_name, "Name of Block: ") %><br/>
-                        <%= f.text_field :block_name, :class => "auto_complete_blocks" %><br/>
-                        <%= f.label(:connections_string, "Block Connections: ") %><br/>
-                        <%= f.text_area :connections_string %><br/>
-                        <%= f.submit("Create Block", :class => "button") %><br/>
+                    <%= form_for(:create_block_connections_form, :html => {:class => "input_formB"}) do |f| %>
+					<div id="var_input_block">
+						<div>
+							<%= f.label(:block_name, "Name of Block: ") %>
+							<%= f.text_field :block_name, :class => "auto_complete_blocks" %>
+						</div>
+						<div>
+							<%= f.label(:connections_string, "Block Connections: ") %>
+							<%= f.text_area :connections_string %>
+						</div>
+					</div>
+					<div id="input_button">
+                        <%= f.submit("Create Block", :class => "button") %>
+					</div>
                     <% end %>
                 </div>
                 
                 <!--TAB4 -->      
 				<div id="tabs-4">
-                <%= form_for(:create_output_block_form) do |f| %>
-                    <%= f.label(:name, "Name of Block: ") %><br/>
-                    <%= f.text_field :name, :class => "auto_complete_blocks" %><br/>
-                    <%= f.label(:outputs_string, "Output these variables: ") %><br/>
-                    <%= f.text_area :outputs_string, :id =>"drop_var_output" %><br/>
-                    <%= f.label(:display_type, "Display Type:") %><br/>
-                    <%= f.select(:display_type, [['Graph', 'graph'], ['Integer', 'integer'], ['Percentage', 'percent']])    %><br/>
-                <%= f.submit('Add Output', :class => "button") %><br/>
+                <%= form_for(:create_output_block_form, :html => {:class => "input_formB"}) do |f| %>
+					<div id="var_input_block">
+						<div>
+							<%= f.label(:name, "Name of Block: ") %>
+							<%= f.text_field :name, :class => "auto_complete_blocks" %>
+						</div>
+						<div>
+							<%= f.label(:outputs_string, "Output these variables: ") %>
+							<%= f.text_area :outputs_string, :id =>"drop_var_output" %>
+						</div>
+						<div>
+							<%= f.label(:display_type, "Display Type:") %>
+							<%= f.select(:display_type, [['Graph', 'graph'], ['Integer', 'integer'], ['Percentage', 'percent']])    %>
+						</div>
+					</div>
+					<div id="input_button">
+						<%= f.submit('Add Output', :class => "button") %>
+					</div>
                 <% end %>
                 </div>
                 </div>
     </div>
+	
+	<!--This form is for showing a specific block and entering data into it -->
+	</br></br>
+		<%= form_for(:show_block_form) do |f| %>
+				<div>
+					<%= f.label(:id, "Block: ") %>
+					<%= f.collection_select(:id, @blocks, :id, :name, :prompt => true)%>
+				</div>
+				<%= f.submit("View Block", :class => "button") %>
+		<% end %>
+	</br></br>
+	<div style="text-align:center">
+        <%= button_to "View Expert Workflow", "/workflow",
+              {:confirm => "Are you sure you are ready to leave this page?",
+               :method => :delete, :class => "button"} %>
+	</div>
 </div>
 

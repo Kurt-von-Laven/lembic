@@ -50,12 +50,9 @@ class ViewEditorController < ApplicationController
         # Determine sort_index
         sort_index = block.block_variables.size
         
-        # TODO: This will fall out of sync with the Variable if an expression_string is added to it.
-        display_type = (variable.expression_string.nil?) ? :input : :output
-        
         # Create a block variable
         # NOTE: this may fail for various reasons (i.e. sort_index collision from race condition)
-        bi = block.block_variables.create({:display_type => display_type, :variable_id => variable.id, :sort_index => sort_index})
+        bi = block.block_variables.create({:display_type => :input, :variable_id => variable.id, :sort_index => sort_index})
         if bi.nil?
             flash[:block_failed] = "Failed to create block_variable with variable_id => #{variable.id} and sort_index => #{sort_index}"
         end
@@ -101,7 +98,7 @@ class ViewEditorController < ApplicationController
         block_connection_hash = {:next_block_id => next_block.id, :expression_string => expression_string, :sort_index => sort_index}
         bc = block.block_connections.create(block_connection_hash)
         if bc.nil?
-          flash[:block_failed] =  "Failed to create block_connection from hash => #{block_connection_hash}"
+          flash[:block_failed] = "Failed to create block_connection from hash => #{block_connection_hash}"
         end
       end
     end

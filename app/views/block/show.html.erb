@@ -17,8 +17,8 @@
 		<!--Check if this block_variable is input or output -->
 		<% if display_type == :input %>
 			<!--Create tags for form input -->
-			<%=f.label "inputs[#{id}]", "#{name}: " %>
-			<%=f.text_field "inputs[#{id}]", :value => value %>
+			<%=f.label "variables[#{id}]", "#{name}: " %>
+			<%=f.text_field "variables[#{id}]", :value => value %>
 		<% else %>
 			<!--Create tags for basic output display -->
 			<%=name %> = <%=value %>

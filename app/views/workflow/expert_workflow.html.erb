@@ -5,20 +5,21 @@
     <%= f.hidden_field "run_id", @run.id %>
     <% for v in block_variables %>
    
-    <% if v.display_type == :input %>
-    <div>
-        <p>
-      <%= f.text_field v.variable_id %>
-      </p>
-    </div>
-    <% else %>
-    <div id = "centered">
-      <p>
-        <%= v.variable.name %> = 
-        <%= @evaluator.eval_variable(v.variable.name, @variables_hash, nil) %>
-      </p>
-    </div>
-     
+        <% if v.display_type == :input %>
+        <div>
+            <p>
+          <%= f.text_field v.variable_id %>
+          </p>
+        </div>
+        <% else %>
+        <div class="centered">
+          <p>
+            <%= v.variable().name %> = 
+            <%= @evaluator.eval_variable(v.variable().name, @variables_hash, nil) %>
+          </p>
+        </div>
+         
+        <% end %>
     <% end %>
     <%= f.submit ("Next") %>
 <% end %>

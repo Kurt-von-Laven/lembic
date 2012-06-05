@@ -68,8 +68,8 @@
 							<%= f.text_area :outputs_string, :id =>"drop_var_output" %>
 						</div>
 						<div>
-							<%= f.label(:display_type, "Display Type:") %>
-							<%= f.select(:display_type, [['Graph', 'graph'], ['Integer', 'integer'], ['Percentage', 'percent']])    %>
+							<%= f.label(:formatting, "Format:") %>
+							<%= f.select(:formatting, [['Graph', 'graph'], ['Integer', 'integer'], ['Percentage', 'percent']]) %>
 						</div>
 					</div>
 					<div id="input_button">

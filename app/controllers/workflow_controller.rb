@@ -131,7 +131,11 @@ class WorkflowController < ApplicationController
                           :workflow_id => workflow.id,
                           :block_id => start_block.id
                         })
-    redirect_to :action => 'expert_workflow', :id => start_block.id, :run_id => new_run.id # TODO: This should be a POST request, but all redirects are GET requests.
+    @block = start_block
+    @block_variables = start_block.block_variables().order(:sort_index)
+    @evaluator = Evaluator.new
+    @variables_hash = variables_hash_for_run(new_run)
+    render 'expert_workflow'
   end
     
   def create_workflow

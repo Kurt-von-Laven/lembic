@@ -12,4 +12,7 @@ class ModelPermission < ActiveRecord::Base
   # Attribut accessors
   attr_accessible :id, :permissions, :sort_index, :model_id, :user_id
   
+  # sort_index stores the index of the block within the user (and not the other way around).
+  CondenseSortIndices::condense_sort_indices(:user_id)
+  
 end

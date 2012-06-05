@@ -10,6 +10,6 @@ class Workflow < ActiveRecord::Base
   has_many :variables
   has_many :blocks, :dependent => :destroy
   has_many :runs
-  validates_associated :variables, :blocks, :runs, :workflow_blocks
+  validates_associated :variables, :blocks, :runs
   
 end

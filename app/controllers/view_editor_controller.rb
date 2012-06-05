@@ -44,9 +44,9 @@ class ViewEditorController < ApplicationController
         if tokens.length != 2 # TODO: get better input validation
           next
         end
-        next_block_name = tokens[0].strip
-        expression_string = tokens[1].strip # TODO: catch and handle parser errors
-
+        expression_string = tokens[0].strip # TODO: catch and handle parser errors
+        next_block_name = tokens[1].strip
+        
         # Find the next block
         next_block = Block.find_by_name(next_block_name)
         if next_block.nil?

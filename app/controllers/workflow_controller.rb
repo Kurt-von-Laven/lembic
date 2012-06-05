@@ -43,17 +43,11 @@ class WorkflowController < ApplicationController
           variables_to_solve_for = [{:name => name_of_variable_to_solve_for}]
         end
         evaluator = Evaluator.new
-        logger.debug('variables_to_solve_for')
-        logger.debug(variables_to_solve_for)
         evaluator.eval_all(variables_to_solve_for, input_values_hash)
         
         #get evaluator output
         @output_variables = {}
         for variable_name, variable_properties in input_values_hash
-          if variable_name == 'b'
-            logger.debug('FREEDOM')
-            logger.debug(variable_properties)
-          end
           scalar_value = variable_properties[:value]
           if scalar_value.nil?
             #variable is an array
@@ -79,8 +73,6 @@ class WorkflowController < ApplicationController
     else
       @output_variables = []
     end
-    logger.debug('MEESE')
-    logger.debug(@output_variables)
     render 'evaluator'
   end
   

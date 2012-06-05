@@ -1,5 +1,3 @@
-
-
 <% @title = "Edit Block" %>
 
 <h1>Edit Blocks</h1>
@@ -38,15 +36,15 @@
                  <!-- TAB2 -->
                 <div id = "tabs-2">
                     Please enter one per line. <br />
-                    <%= form_for(:create_block_variables_form, :html => {:class => "input_formB"}) do |f| %>
+                    <%= form_for(:create_block_inputs_form, :html => {:class => "input_formB"}) do |f| %>
 					<div id="var_input_block">
 						<div>
 							<%= f.label(:block_name, "Name of Block: ") %>
 							<%= f.text_field :block_name, :class => "auto_complete_blocks" %>
 						</div>
 						<div>
-							<%= f.label(:variables_string, "Variables:") %>
-							<%= f.text_area :variables_string, :id =>"drop_var" %>
+							<%= f.label(:inputs_string, "Variables:") %>
+							<%= f.text_area :inputs_string, :id =>"drop_var" %>
 						</div>
                     </div>
 					<div id="input_button">

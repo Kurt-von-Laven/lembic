@@ -18,7 +18,7 @@ class ViewEditorController < ApplicationController
     end
 
     ## Check for form data for creating a block_variable
-    form_hash = params[:create_block_variables_form]
+    form_hash = params[:create_block_inputs_form]
     if !form_hash.nil?
 
       # Find the block these variables are for
@@ -30,8 +30,8 @@ class ViewEditorController < ApplicationController
         end
              
 
-      # Iterate through lines in the variables string
-      form_hash[:variables_string].lines do |line|
+      # Iterate through lines in the input string
+      form_hash[:inputs_string].lines do |line|
 
         # Trim the line to get a variable name
         variable_name = line.strip

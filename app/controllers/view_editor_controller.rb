@@ -133,7 +133,7 @@ class ViewEditorController < ApplicationController
         sort_index = block.block_variables.size
 
         # Create a block variable
-        bi = block.block_variables.create({:variable_id => variable.id, :sort_index => sort_index})
+        bi = block.block_variables.create({:display_type => :output, :variable_id => variable.id, :sort_index => sort_index})
         if bi.nil?
           flash[:block_failed] =  "Failed to create block_variable with variable_id => #{variable.id} and sort_index => #{sort_index}"
         end

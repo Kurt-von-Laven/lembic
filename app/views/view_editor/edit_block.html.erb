@@ -39,12 +39,12 @@
                     <%= form_for(:create_block_inputs_form, :html => {:class => "input_formB"}) do |f| %>
 					<div id="var_input_block">
 						<div>
-							<%= f.label(:block_name, "Name of Block: ") %>
-							<%= f.text_field :block_name, :class => "auto_complete_blocks" %>
+							<%= f.label(:name, "Name of Block: ") %>
+							<%= f.text_field :name, :class => "auto_complete_blocks" %>
 						</div>
 						<div>
-							<%= f.label(:inputs_string, "Input Variables: ") %>
-							<%= f.text_area :inputs_string, :id =>"drop_var" %>
+							<%= f.label(:variables_string, "Input Variables: ") %>
+							<%= f.text_area :variables_string, :id =>"drop_var" %>
 						</div>
 						<div>
 							<%= f.label(:formatting, "Format:") %>
@@ -66,8 +66,8 @@
 							<%= f.text_field :name, :class => "auto_complete_blocks" %>
 						</div>
 						<div>
-							<%= f.label(:outputs_string, "Output Variables: ") %>
-							<%= f.text_area :outputs_string, :id =>"drop_var_output" %>
+							<%= f.label(:variables_string, "Output Variables: ") %>
+							<%= f.text_area :variables_string, :id =>"drop_var_output" %>
 						</div>
 						<div>
 							<%= f.label(:formatting, "Format:") %>
@@ -90,8 +90,8 @@
                     <%= form_for(:create_block_connections_form, :html => {:class => "input_formB"}) do |f| %>
 					<div id="var_input_block">
 						<div>
-							<%= f.label(:block_name, "Name of Block: ") %>
-							<%= f.text_field :block_name, :class => "auto_complete_blocks" %>
+							<%= f.label(:name, "Name of Block: ") %>
+							<%= f.text_field :name, :class => "auto_complete_blocks" %>
 						</div>
 						<div>
 							<%= f.label(:connections_string, "Block Connections: ") %>

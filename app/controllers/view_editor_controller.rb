@@ -15,55 +15,19 @@ class ViewEditorController < ApplicationController
       sort_index = Block.where(:workflow_id => workflow_id).size
       Block.create({:name => name, :workflow_id => workflow_id, :sort_index => sort_index})
     end
-
-    ## Check for form data for creating a block_variable
+    
     form_hash = params[:create_block_inputs_form]
-    if !form_hash.nil?
-
-      # Find the block these variables are for
-      block_name = form_hash[:block_name]
-        
-        block = Block.find_by_name(block_name)
-        if block.nil?
-            flash[:block_failed] = "We couldn't find that block! Oops! Please try again."
-        end
-             
-
-      # Iterate through lines in the input string
-      form_hash[:inputs_string].lines do |line|
-
-        # Trim the line to get a variable name
-        variable_name = line.strip
-        if variable_name.empty? # TODO: get better input validation
-            flash[:block_failed] = 'Your variable name was empty. Please try again.'
-          next
-        end
-
-        # Find the variable
-        variable = Variable.find_by_name(variable_name)
-        if variable.nil?
-            flash[:block_failed] = "Sorry, we couldn't find that variable! Please try again"
-          next
-        end
-
-        # Determine sort_index
-        sort_index = block.block_variables.size
-        
-        # Create a block variable
-        # NOTE: this may fail for various reasons (i.e. sort_index collision from race condition)
-        bv = block.block_variables.create({:display_type => :input, :variable_id => variable.id, :sort_index => sort_index})
-        if bv.nil?
-            flash[:block_failed] = "Failed to create block_variable with variable_id => #{variable.id} and sort_index => #{sort_index}"
-        end
-      end
-    end
+    create_block_variables(form_hash, :input)
+    
+    form_hash = params[:create_block_outputs_form]
+    create_block_variables(form_hash, :output)
 
     ## Check for form data for creating a block_connection
     form_hash = params[:create_block_connections_form]
     if !form_hash.nil?
 
       # Find the block these variables are for
-      block_name = form_hash[:block_name]
+      block_name = form_hash[:name]
         block = Block.find_by_name(block_name)
         if block.nil?
             flash[:block_failed] = "Sorry, we could not find that block. Please try again."
@@ -101,44 +65,6 @@ class ViewEditorController < ApplicationController
         end
       end
     end
-
-    ## Check for form data for creating an output block
-    form_hash = params[:create_block_outputs_form]
-    if !form_hash.nil?
-
-      # Create a block with the specified name, workflow_id, and formatting
-      name = form_hash[:name]
-      workflow_id = session[:user_id]
-      sort_index = Block.where(:workflow_id => workflow_id).size
-      block = Block.create({:name => name, :workflow_id => workflow_id, :sort_index => sort_index})
-
-      # Iterate through lines in the outputs string
-      form_hash[:outputs_string].lines do |line|
-
-        # Trim the line to get a variable name
-        variable_name = line.strip
-        if variable_name.empty? # TODO: get better input validation
-          flash[:block_failed] =  "Empty line in input"
-          next
-        end
-
-        # Find the variable
-        variable = Variable.find_by_name(variable_name)
-        if variable.nil?
-          flash[:block_failed] =  "Could not find variable '#{variable_name}' by name"
-          next
-        end
-
-        # Determine sort_index
-        sort_index = block.block_variables.size
-
-        # Create a block variable
-        bv = BlockVariable.create({:block_id => block.id, :display_type => :output, :variable_id => variable.id, :sort_index => sort_index})
-        if bv.nil?
-          flash[:block_failed] =  "Failed to create block_variable with variable_id => #{variable.id} and sort_index => #{sort_index}"
-        end
-      end
-    end
     
     ## Check for form data for showing a block
     form_hash = params[:show_block_form]
@@ -165,23 +91,67 @@ class ViewEditorController < ApplicationController
     end
     @current_workflows = Workflow.find_all_by_()
   end
-
+  
   def edit_question
-      @variables = Variable.where(:model_id => session[:user_id]).order(:name)
+    @variables = Variable.where(:model_id => session[:user_id]).order(:name)
+  end
+  
+  def find_blocknames
+    @blocknames = Block.where('(workflow_id = ?) AND (name LIKE ?)', session[:user_id], "#{params[:term]}%").order(:name)
+    respond_to do |format|
+      format.js { render :layout => false }
+    end
+  end
+  
+  # Check for form data for creating a block_variable
+  def create_block_variables(form_hash, display_type)
+    if !form_hash.nil?
+      
+      # Find the block these variables are for
+      block_name = form_hash[:name]
+      
+      block = Block.find_by_name(block_name)
+      if block.nil?
+        flash[:block_failed] = "We couldn't find that block! Oops! Please try again."
+        return
+      end
+      
+      
+      # Iterate through lines in the input string
+      form_hash[:variables_string].lines do |line|
+        
+        # Trim the line to get a variable name
+        variable_name = line.strip
+        if variable_name.empty? # TODO: get better input validation
+          flash[:block_failed] = 'Your variable name was empty. Please try again.'
+          next
+        end
+        
+        # Find the variable
+        variable = Variable.find_by_name(variable_name)
+        if variable.nil?
+          flash[:block_failed] = "Sorry, we couldn't find that variable! Please try again"
+          next
+        end
+        
+        # Determine sort_index
+        sort_index = block.block_variables.size
+        
+        # Create a block variable
+        # NOTE: this may fail for various reasons (i.e. sort_index collision from race condition)
+        bv = block.block_variables.create({:display_type => display_type, :variable_id => variable.id, :sort_index => sort_index})
+        if bv.nil?
+          flash[:block_failed] = "Failed to create block_variable with variable_id => #{variable.id} and sort_index => #{sort_index}"
+        end
+      end
+    end
   end
     
-    def find_blocknames
-        @blocknames = Block.where('(workflow_id = ?) AND (name LIKE ?)', session[:user_id], "#{params[:term]}%").order(:name)
-        respond_to do |format|
-            format.js { render :layout => false }
-        end
-    end
-  
   # Delete a block by id
   def delete_block
     #begin
-      block = Block.find(params[:id])
-      block.destroy
+    block = Block.find(params[:id])
+    block.destroy
     #rescue RecordNotFound => e
     #  logger.debug "Block not found by id"
     #end

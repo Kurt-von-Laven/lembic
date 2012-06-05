@@ -1,5 +1,5 @@
 class Block < ActiveRecord::Base
-  attr_accessible :id, :name, :workflow_id, :created_at, :updated_at, :display_type, :sort_index
+  attr_accessible :id, :name, :workflow_id, :created_at, :updated_at, :sort_index
   
   SORT_INDEX_SCOPE = :workflow_id
   

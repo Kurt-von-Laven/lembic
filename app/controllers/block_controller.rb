@@ -52,10 +52,6 @@ class BlockController < ApplicationController
       end
     end
     
-    # Default: Redirect to the first output block
-    block = Block.where("display_type IS NOT NULL").first
-    redirect_to block_show_path(block.id)
-    
   end
   
 end

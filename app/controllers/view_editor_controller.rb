@@ -103,17 +103,6 @@ class ViewEditorController < ApplicationController
     end
 
     ## Check for form data for creating an output block
-    # Currently, "output" blocks are stored as the same type of
-    # object, and do not have any associated block_connections
-    # (this is how we know it is an output or terminal block).
-    # The variables associated with this block will have
-    # their computed values displayed in the format specified by
-    # display_type, instead of displaying form prompts for input.
-
-    # Note that with output blocks, the block name and block variables
-    # are specified together in the same form, instead of independently
-    # like with regular blocks.
-
     form_hash = params[:create_output_block_form]
     if !form_hash.nil?
 

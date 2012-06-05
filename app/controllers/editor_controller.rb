@@ -1,12 +1,16 @@
 class EditorController < ApplicationController
   autocomplete :variable, :name
   
+  def select
+    @models = Model.all
+  end
+  
   def equations
-    user_id = session[:user_id]
+    model_id = params[:model_id]
     new_equation = params[:new_equation]
     if !new_equation.nil?
       begin
-        Variable.create_from_form(new_equation, user_id)
+        Variable.create_from_form(new_equation, model_id)
       rescue ArgumentError => e
         flash[:variable_not_saved] = e.message
       else
@@ -16,7 +20,7 @@ class EditorController < ApplicationController
       new_constant_array = params[:new_constant_array]
       if !new_constant_array.nil?
         begin
-          Variable.create_constant_array(new_constant_array, user_id)
+          Variable.create_constant_array(new_constant_array, model_id)
         rescue ArgumentError => e
           flash[:variable_not_saved] = e.message
         else
@@ -24,13 +28,14 @@ class EditorController < ApplicationController
         end
       end
     end
-    @variables = Variable.where(:model_id => user_id).order(:name)
+    @variables = Variable.where(:model_id => model_id).order(:name)
     render 'equations'
   end
   
   def find_variablenames
     # TODO: This will break if params[:term] contains a percent symbol. It needs to use escaping.
-    @variablenames = Variable.where('(:model_id = ?) AND (name LIKE ?)', session[:user_id], "#{params[:term]}%").order(:name)
+    model_id = session[:user_id] # TODO: get model_id from params[:model_id]
+    @variablenames = Variable.where('(:model_id = ?) AND (name LIKE ?)', model_id, "#{params[:term]}%").order(:name)
     respond_to do |format|
       format.js { render :layout => false }
     end
@@ -57,7 +62,7 @@ class EditorController < ApplicationController
   end
   
   def delete_variable
-    variable = Variable.where(:id => params[:id], :model_id => session[:user_id]).first
+    variable = Variable.where(:id => params[:id], :model_id => params[:model_id]).first
     if !variable.nil?
       variable.destroy
     end
@@ -65,8 +70,9 @@ class EditorController < ApplicationController
   end
   
   def delete_relationship
-    variable = Variable.where(:id => params[:id], :model_id => session[:user_id]).first
+    variable = Variable.where(:id => params[:id]).first
     if !variable.nil?
+      logger.debug "+++++++++++Set expression string to nil"
       variable.expression_string = nil
       variable.save
     end
@@ -74,7 +80,7 @@ class EditorController < ApplicationController
   end
   
   def full_variable
-    @var = Variable.where(:name => params[:name], :model_id => session[:user_id]).first
+    @var = Variable.where(:name => params[:name], :model_id => params[:model_id]).first
   end
   
 end

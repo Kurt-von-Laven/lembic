@@ -68,9 +68,9 @@ class Variable < ActiveRecord::Base
     return sorted_index_names.collect { |i| i.name }
   end
 
-  def self.create_from_form(form_hash, user_id)
+  def self.create_from_form(form_hash, model_id)
     merged_var = {'array' => 0}.merge(form_hash)
-    merged_var['model_id'] = user_id # TODO: Grab the model ID out of the session state.
+    merged_var['model_id'] = model_id
     merged_var['variable_type'] = merged_var['variable_type'].to_i
     merged_var['array'] = merged_var['name'].match(/\[.+\]/) ? 1 : 0
     puts "CREATED VARIABLE: ARRAY = #{merged_var['array']}"
@@ -83,9 +83,9 @@ class Variable < ActiveRecord::Base
     IndexName.create_from_declaration(form_hash['name'], new_var.id)
   end
   
-  def self.create_constant_array(form_hash, user_id)
+  def self.create_constant_array(form_hash, model_id)
     merged_array = {'array' => 0, 'start_row' => 1, 'column_number' => 1}.merge(form_hash)
-    merged_array['model_id'] = user_id # TODO: Grab the model ID out of the session state.
+    merged_array['model_id'] = model_id
     merged_array['variable_type'] = merged_array['variable_type'].to_i
     merged_array['array'] = 1
     data = merged_array['data_file'].read

@@ -25,7 +25,7 @@ class Block < ActiveRecord::Base
 	result = String.new
   end 
   
-  def inputs_string  # TODO: Needs to return string of input variables -Kseniya
+  def variables_string  # TODO: Needs to return string of block variables -Kseniya
 	block_variables.order(:sort_index)
 	myString = String.new
   end

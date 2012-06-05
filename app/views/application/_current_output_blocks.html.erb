@@ -27,12 +27,12 @@
 	  <!--Prepare strings to be displayed in HTML for this block -->
 	  <% name = block.name %>
 	
-	  <!--Concat block_input fields into a string -->
-	  <% inputs = "" %>
-	  <% for bi in block.block_inputs %>
-	    <% inputs += "#{bi.sort_index}) " + bi.variable.name + ", " %>
+	  <!--Concat block variables fields into a string -->
+	  <% variables = "" %>
+	  <% for bi in block.block_variables %>
+	    <% variables += "#{bi.sort_index}) " + bi.variable.name + ", " %>
 	  <% end %>
-	  <% inputs = inputs.strip.chomp(",") %>
+	  <% variables = variables.strip.chomp(",") %>
 	
 	  <!--Get display_type -->
 	  <% display_type = block.display_type %>
@@ -41,7 +41,7 @@
 	  <% buttonHTML = button_to "Delete", delete_block_path(block.id), :confirm => "Are you sure?", :method => :delete %>
 	  
 	  <!--Render this block in HTML -->
-      <tr><td><%=name %></td><td><%=inputs %></td><td><%=display_type %></td><td><%=buttonHTML %></td></tr>
+      <tr><td><%=name %></td><td><%= variables %></td><td><%=display_type %></td><td><%=buttonHTML %></td></tr>
 	<% end %>
 	
 </tbody>  

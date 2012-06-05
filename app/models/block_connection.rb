@@ -1,7 +1,6 @@
 class BlockConnection < ActiveRecord::Base
   
   include PersistableExpressions
-  include CondenseSortIndices
   
   attr_accessible :id, :block_id, :expression_string, :expression_object, :next_block_id, :created_at, :updated_at, :sort_index
   
@@ -17,7 +16,5 @@ class BlockConnection < ActiveRecord::Base
   
   belongs_to :block
   belongs_to :next_block, :class_name => "Block"
-  
-  condense_sort_indices(:block_id)
   
 end

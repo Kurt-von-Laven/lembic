@@ -1,7 +1,5 @@
 class ModelPermission < ActiveRecord::Base
   
-  include CondenseSortIndices
-  
   # Associations
   belongs_to :model
   belongs_to :user
@@ -15,6 +13,5 @@ class ModelPermission < ActiveRecord::Base
   attr_accessible :id, :permissions, :sort_index, :model_id, :user_id
   
   # sort_index stores the index of the block within the user (and not the other way around).
-  condense_sort_indices(:user_id)
   
 end

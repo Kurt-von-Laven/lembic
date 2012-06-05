@@ -1,8 +1,6 @@
 class BlockVariable < ActiveRecord::Base
   attr_accessible :id, :block_id, :sort_index, :variable_id, :created_at, :updated_at, :prompt, :description, :formatting
   
-  include CondenseSortIndices
-  
   validates_presence_of :block_id, :sort_index, :variable_id, :display_type
   
   # Prevent 2 records from getting the same sort_index
@@ -36,7 +34,5 @@ class BlockVariable < ActiveRecord::Base
       raise ArgumentError "parameter to display_type=() must be :input or :output"
     end
   end
-  
-  condense_sort_indices(:block_id)
     
 end

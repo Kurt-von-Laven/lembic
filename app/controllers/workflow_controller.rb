@@ -44,17 +44,11 @@ class WorkflowController < ApplicationController
           variables_to_solve_for = [{:name => name_of_variable_to_solve_for}]
         end
         evaluator = Evaluator.new
-        logger.debug('variables_to_solve_for')
-        logger.debug(variables_to_solve_for)
         evaluator.eval_all(variables_to_solve_for, input_values_hash)
         
         #get evaluator output
         @output_variables = {}
         for variable_name, variable_properties in input_values_hash
-          if variable_name == 'b'
-            logger.debug('FREEDOM')
-            logger.debug(variable_properties)
-          end
           scalar_value = variable_properties[:value]
           if scalar_value.nil?
             #variable is an array
@@ -80,8 +74,6 @@ class WorkflowController < ApplicationController
     else
       @output_variables = []
     end
-    logger.debug('MEESE')
-    logger.debug(@output_variables)
     render 'evaluator'
   end
   
@@ -100,20 +92,13 @@ class WorkflowController < ApplicationController
   # sets the run's current block to the start block of the workflow
   # redirects to show the first block
   def start_run
-    workflow = Workflow.find(params[:id])
-    start_block = Block.find(workflow.workflow_blocks().order(:sort_index).first.block_id)
-    #start_block = WorkflowBlock.find_all(["workflow_id = ?", workflow.id])
-    newrun = Run.create({:user_id => session[:user_id],
-                      :workflow_id => workflow.id,
-                      :current_block_id => start_block.id,
-                      :description => "",
-                      :completed_at => nil
-                      })
-    @block = start_block
-    @run = newrun
-    @variables_hash = variables_hash_for_run(@run)
-    @evaluator = Evaluator.new
-    render "block"
+    workflow = Workflow.where(:id => params[:id]).first
+    start_block = Block.where(:id => workflow.workflow_blocks().where(:sort_index => 0).block_id).first
+    new_run = Run.create({:user_id => session[:user_id],
+                          :workflow_id => workflow.id,
+                          :current_block_id => start_block.id
+                        })
+    redirect_to :action => 'block', :id => start_block.id, :run_id => new_run.id
   end
   
   ##
@@ -122,34 +107,34 @@ class WorkflowController < ApplicationController
   # store the user-entered values in run_values
   # build a hash of variable names to values and formulas to be run through the evaluator
   # display the next block based on transition logic
-  def post_block_input
-    currblock = Block.find(params[:id])
-    @run = Run.find(params[:run_id])
+  def block
+    curr_block = Block.where(:id => params[:id]).first
+    @run = Run.where(:id => params[:run_id]).first
     for var_id, val in params[:input_values] do
       RunValue.create({:run_id => @run.id, :variable_id => var_id, :value => val})
     end
     workflow = run.workflow
     model = workflow.model
-    block_connections = currblock.block_connections()
+    block_connections = curr_block.block_connections()
     run_values = run.run_values
     @variables_hash = variables_hash_for_run(run)
-    @evaluator = Evaluator.new
     
-    #figure out which block to display next
-    connections = currblock.block_connections
-    nextblock = nil
+    # figure out which block to display next
+    connections = curr_block.block_connections
+    next_block = nil
     for b in connections
       if evaluator.eval_expression(b.expression_object, variables_hash, nil) != 0
-        #expression evaluates to true
-        nextblock = Block.find(b.block_id)
+        # expression evaluates to true
+        next_block = Block.where(:id => b.block_id).first
         break
       end
     end
-    if nextblock
-      @block = nextblock
-      #@block_variables = nextblock.block_variables().order(:sort_index)
-      render "block"
+    if next_block
+      @block = next_block
+      @block_variables = next_block.block_variables().order(:sort_index)
+      render 'block'
     end
+    # TODO: Show an error if next_block is nil.
   end
   
   def create_workflow

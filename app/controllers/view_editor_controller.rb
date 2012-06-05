@@ -118,12 +118,12 @@ class ViewEditorController < ApplicationController
     form_hash = params[:create_output_block_form]
     if !form_hash.nil?
 
-      # Create a block with the specified name, workflow_id, and display_type
+      # Create a block with the specified name, workflow_id, and formatting
       name = form_hash[:name]
       workflow_id = session[:user_id]
-      display_type = form_hash[:display_type]
+      formatting = form_hash[:formatting]
       sort_index = Block.where(:workflow_id => workflow_id).size
-      block = Block.create({:name => name, :workflow_id => workflow_id, :display_type => display_type, :sort_index => sort_index})
+      block = Block.create({:name => name, :workflow_id => workflow_id, :display_type => :output, :formatting => formatting, :sort_index => sort_index})
 
       # Iterate through lines in the outputs string
       form_hash[:outputs_string].lines do |line|

@@ -11,7 +11,6 @@ class Block < ActiveRecord::Base
   has_many :block_variables, :dependent => :destroy
   has_many :block_connections, :dependent => :destroy
   has_many :runs
-  has_many :workflow_blocks, :dependent => :destroy
   validates_associated :originating_connections, :block_variables, :block_connections, :runs, :workflow_blocks
   belongs_to :workflow
   

@@ -1,0 +1,364 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+  
+    <title><%= @title %></title>
+	<link rel="SHORTCUT ICON" type="image/x-icon" href="/assets/lembic_icon_clear.ico" />
+    <%= javascript_include_tag "jquery-ui-1.8.20.custom.min" %>
+    <%= javascript_include_tag "jquery-1.7.2.min" %>
+    <%= javascript_include_tag "jquery.tablesorter.min" %>
+    <%= javascript_include_tag "autocomplete-rails" %>
+    <%= javascript_include_tag "jquery.tablednd.0.7.min" %>
+    <%= javascript_include_tag "application" %>
+	<%= javascript_include_tag "popup.js" %>
+    <%= stylesheet_link_tag   "jquery-ui-1.8.20.custom", :media => "all" %>
+    <%= stylesheet_link_tag   "application", :media => "all" %>
+    
+    <script type="text/javascript">
+      
+			$(function(){
+            
+            
+                String.prototype.trim = function() {
+                    return this.replace(/^\s+|\s+$/g,"");
+                }
+                String.prototype.ltrim = function() {
+                    return this.replace(/^\s+/,"");
+                }
+                String.prototype.rtrim = function() {
+                    return this.replace(/\s+$/,"");
+                }
+            
+                function split( val ) {
+                    return val.split(" ");
+                }
+                
+                function extractLast( term ) {
+                    return split( term ).pop();
+                }
+                
+                function addtext( text, area ){
+                    text = text.trim();
+                    terms = text.split(/\s/);
+                    var val = document.getElementById( area ).value;
+                    var updated_val = (val + terms[0] + "\n");
+                    
+                    document.getElementById(area).value = updated_val;
+                
+                }
+
+				// Accordion
+				$("#accordion").accordion({ header: "h3" });
+
+				// Tabs
+				$('#tabs').tabs();
+
+				//Dialog
+                $( ".dialog" ).dialog({
+                    autoOpen: false,
+                    show: "blind",
+                    hide: "explode",
+                    modal: true
+                });
+				
+				  $('.dialog_link').live("click", function(){
+					var i = this.getAttribute("index");
+					$('#dialog_'+i).dialog().dialog('open');
+					return false;
+				});
+                
+                $('.dialog_link_block').live("click", function(){
+					var i = this.getAttribute("index");
+					$('#dialog_block_'+i).dialog().dialog('open');
+					return false;
+				});
+
+
+                $( ".opener" ).click(function() {
+                    $( ".dialog" ).dialog( "open" );
+                    return false;
+                });
+
+				// Datepicker
+				$('.datepicker').datepicker({
+					inline: true
+				});
+                
+                $( "#format" ).change(function() {
+                    $( "#datepicker" ).datepicker( "option", "dateFormat", $( this ).val() );
+                });
+                
+                $(".hide").click(function(){
+                    $(".hello").toggle();
+                });
+
+				// Slider
+				$("#slider").slider({
+					range: true,
+					values: [17, 67]
+				});
+                
+                // Range Slider
+                $( "#slider-range" ).slider({
+                    range: true,
+                    min: 0,
+                    max: 24,
+                    values: [ 9, 17 ],
+                    slide: function( event, ui ) {
+                        $( "#time" ).val( ui.values[ 0 ] + " - " + ui.values[ 1 ]);
+                    }
+                });
+                
+                $( ".button" ).button();
+                
+                $(".tablesorter").tablesorter({
+                    headers:{
+                        4: {
+                            sorter:false
+                        },
+                        5: {
+                            sorter:false
+                        }
+                    }
+                
+                });
+                
+                $("#sortable").sortable();
+                $("#sortable").disableSelection();
+                
+                $( "#time" ).val( $( "#slider-range" ).slider( "values", 0 ) +
+                    " - " + $( "#slider-range" ).slider( "values", 1 ));
+
+				// Progressbar
+				$("#progressbar").progressbar({
+					value: 20
+				});
+
+				//hover states on the static widgets
+				$('#dialog_link, ul#icons li').hover(
+					function() { $(this).addClass('ui-state-hover'); },
+					function() { $(this).removeClass('ui-state-hover'); }
+				);
+                
+                
+                $('.auto_complete_variables')
+                .bind( "keydown", function( event ) {
+                    if ( event.keyCode === $.ui.keyCode.TAB &&
+						$( this ).data( "autocomplete" ).menu.active ) {
+					event.preventDefault();
+				}
+                })
+                .autocomplete({ 
+                    multiple: true,
+                    multipleSeparator: " ", 
+                    source : function (request, response){
+                        $.getJSON('/editor/find_variablenames', {
+                            term:extractLast(request.term)
+                        }, response);
+                    },
+                    search: function() {
+                        // custom minLength
+                        var term = extractLast( this.value );
+                    },
+                    focus: function() {
+                        // prevent value inserted on focus
+                        return false;
+                    },
+                    select: function(event,ui){
+                    
+                        var terms = split( this.value );
+                        // remove the current input
+                        terms.pop();
+                        // add the selected item
+                        terms.push( ui.item.value );
+                        // add placeholder to get the comma-and-space at th end
+                        terms.push( "" );
+                        this.value = terms.join( " " );
+                        return false;
+                        }
+                        
+                    });
+                    
+                    $('.auto_complete_blocks')
+                        .bind( "keydown", function( event ) {
+                            if ( event.keyCode === $.ui.keyCode.TAB &&
+                                $( this ).data( "autocomplete" ).menu.active ) {
+                                event.preventDefault();
+                    }
+                    })
+                        .autocomplete({ 
+                            multiple: true,
+                            multipleSeparator: " ", 
+                            source : function (request, response){
+                            $.getJSON('/view_editor/find_blocknames', {
+                                    term:extractLast(request.term)
+                            }, response);
+                            },
+                            search: function() {
+                                // custom minLength
+                                var term = extractLast( this.value );
+                            },
+                            focus: function() {
+                                // prevent value inserted on focus
+                                return false;
+                            },
+                            select: function(event,ui){
+                    
+                                var terms = split( this.value );
+                                // remove the current input
+                                terms.pop();
+                                // add the selected item
+                                terms.push( ui.item.value );
+                                // add placeholder to get the comma-and-space at th end
+                                terms.push( "" );
+                                this.value = terms.join( "" );
+                                return false;
+                        }
+                        
+                    });
+                    
+                    $( "#truncated_variables td" ).draggable({
+                            appendTo: "body",
+                            helper: "clone"
+                    });
+                    
+                    $( "#drop_var" ).droppable({
+                        activeClass: "ui-state-default",
+                        hoverClass: "ui-state-hover",
+                        accept: ":not(.ui-sortable-helper)",
+                        drop: function( event, ui ) {
+                            var text = ui.draggable.text();
+                            addtext(text, "drop_var");
+                            
+                        }
+                    });
+                    
+                    $( "#drop_var_output" ).droppable({
+                        activeClass: "ui-state-default",
+                        hoverClass: "ui-state-hover",
+                        accept: ":not(.ui-sortable-helper)",
+                        drop: function( event, ui ) {
+                            var text = ui.draggable.text();
+                            addtext(text, "drop_var_output");
+                            
+                        }
+                    });
+
+                    
+                    
+                    
+                    $("#variables_table").tableDnD();
+                
+                $('select').selectmenu();
+                
+                
+		
+		
+			});
+			
+
+	</script>
+       <style>
+
+		a {
+    text-decoration: none;
+    color: #113855;
+}
+
+
+a:visited{
+    color:#008A8A;
+}
+body {
+	margin: 50px 0px; 
+	padding:0px;
+	text-align:center;
+	background-color:#dee6ed;
+}
+
+#container {
+	width:800px;
+	margin:0px auto;
+	padding:15px;
+	text-align:left;
+	border-radius:10px;
+    -moz-border-radius:10px; /* Firefox 3.6 and earlier */
+	background-color:#dee6ed;
+}
+
+#content {
+	margin: 10px;
+	padding:15px;
+	text-align:left;
+	border-radius:10px;
+    -moz-border-radius:10px; /* Firefox 3.6 and earlier */
+	background-color: #fff;
+    font-family: Garamond, Baskerville, "Times New Roman", serif;
+}
+h1 {
+	color: #1e3652;
+	font-size: 2.5em;
+	text-align: center;
+}
+#menu {
+    width:750px;
+    padding:10px;
+    border-radius:10px;
+    -moz-border-radius:10px; /* Firefox 3.6 and earlier */
+    border-color:#dee6ed;
+    margin:0px auto;
+    text-align: center;
+    background-color:#1e3652;
+    font-family: Garamond, Baskerville, "Times New Roman", serif;
+    color:#fdde8c;
+}
+
+#menu > li {
+    width: 200px;
+    font-size: 22px;
+    height: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+#menu a {
+	color: #dee6ed;
+}
+#menu a:hover {
+	color: #95b7d0;
+}
+li {
+  display: inline;
+}
+ul {
+  list-style-type: none;
+  padding-left: 0px;
+}
+    
+    
+    </style>
+         
+    <%= csrf_meta_tags %>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  </head>
+  <body>
+    <div id="logo">
+      <%= image_tag "lembic_blue.png" %>
+    </div>
+    <div id="container">
+      <ul id="menu">
+          <li><%= link_to "Home",  home_path, { :class => "css_class"} %></li>
+          <% if User.where(:id => session[:user_id]).empty? %>
+            <li><%= link_to "Login", login_path, { :class => "css_class"} %></li>
+          <% else %>
+            <li><%= link_to "Logout", logout_path, {:class => "css_class"} %></li>
+          <% end %>
+        </ul>
+      <div id="content">
+        <%= yield %>
+      </div>
+    </div>
+  </body>
+  
+</html>

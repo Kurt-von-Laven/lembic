@@ -2,8 +2,9 @@ require Rails.root.join('app/helpers/expression')
 require Rails.root.join('app/helpers/evaluator')
 require Rails.root.join('app/helpers/parser')
 
+
 class WorkflowController < ApplicationController
-  
+  layout "workflow"
   def evaluate
     @variables = Variable.where(:model_id => session[:user_id]).order(:name)
     @input_variables = Variable.where(:model_id => session[:user_id], :expression_string => nil).order(:name)

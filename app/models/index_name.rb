@@ -16,4 +16,6 @@ class IndexName < ActiveRecord::Base
     end
   end
   
+  CondenseSortIndices::condense_sort_indices(:variable_id)
+  
 end

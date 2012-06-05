@@ -59,14 +59,6 @@ class Block < ActiveRecord::Base
     end
   end
   
-  # Decrement higher sort_indexs to prevent sparseness
-  after_destroy do |destroyed|
-    # NOTE: I'm not quite sure if this is atomic, may need to wrap in a transaction -Tom
-    Block.transaction do
-      Block.where("workflow_id = ? AND sort_index > ?", destroyed.workflow_id, destroyed.sort_index).each do |b|
-        b.sort_index = b.sort_index - 1
-        b.save :validate => false # Validation was causing problems since it may not go in order
-      end
-    end
-  end
+  CondenseSortIndices::condense_sort_indices(:workflow_id)
+  
 end

@@ -18,7 +18,16 @@
     <script type="text/javascript">
       
 			$(function(){
-            
+           
+            var $items = $('#vtab>ul>li');
+               $items.mouseover(function() {
+                $items.removeClass('selected');
+                $(this).addClass('selected');
+
+                var index = $items.index($(this));
+                $('#vtab>div').hide().eq(index).show();
+            }).eq(1).mouseover();
+      
             
                 String.prototype.trim = function() {
                     return this.replace(/^\s+|\s+$/g,"");
@@ -300,6 +309,7 @@ h1 {
 	color: #1e3652;
 	font-size: 2.5em;
 	text-align: center;
+	background-color: #fff;
 }
 #menu {
     width:750px;

@@ -12,7 +12,7 @@ class BlockVariable < ActiveRecord::Base
   belongs_to :block
   belongs_to :variable
   
-  has_many :category_options
+  has_many :category_options, :dependent => :destroy
   
   validates_associated :category_options
   

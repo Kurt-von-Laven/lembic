@@ -8,9 +8,8 @@ class Workflow < ActiveRecord::Base
   has_many :users, :through => :workflow_permissions
   
   has_many :variables
-  has_many :blocks
+  has_many :blocks, :dependent => :destroy
   has_many :runs
-  has_many :workflow_blocks
   validates_associated :variables, :blocks, :runs, :workflow_blocks
   
 end

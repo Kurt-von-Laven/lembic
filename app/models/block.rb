@@ -28,11 +28,6 @@ class Block < ActiveRecord::Base
   
   def connections_string # getter returns empty string. TODO: Fix this and create a setter 
     return ''
-  end 
-  
-  def variables_string  # TODO: Needs to return string of block variables -Kseniya
-    block_variables.order(:sort_index)
-    myString = String.new
   end
 
   # Create a block_variable for the variable named on each line of the input string

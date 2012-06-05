@@ -207,6 +207,30 @@ h3 {
 	text-align: left;
 	margin: 0 0 0 50px;
 }
+
+.input_formB{
+	border-radius:10px;
+    -moz-border-radius:10px; /* Firefox 3.6 and earlier */
+	border-color: #ccc;
+	padding: 20px;
+	margin: 10px;
+}
+.input_formB div {
+	margin: 5px;
+	text-align: left;
+}
+.input_formB label{
+	width: 30%;
+	display: block;
+	float: left;
+	text-align: left;
+	margin: 0 0 0 10px;
+}
+
+
+#input_button {
+	text-align: center;
+}
 .left_column{
 	width: 180px;
 	float: left;

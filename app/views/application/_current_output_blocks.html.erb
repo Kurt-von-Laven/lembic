@@ -19,11 +19,6 @@
 	<!--TODO: Come up with a better way to display the blocks -->
 	<% for block in @blocks %>
 	
-	  <!--Skip regular blocks with a nil display_type -->
-	  <% if block.display_type.nil? %>
-		<% next %>
-	  <% end %>
-	
 	  <!--Prepare strings to be displayed in HTML for this block -->
 	  <% name = block.name %>
 	

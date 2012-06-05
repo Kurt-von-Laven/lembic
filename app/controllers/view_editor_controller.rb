@@ -103,7 +103,7 @@ class ViewEditorController < ApplicationController
     end
 
     ## Check for form data for creating an output block
-    form_hash = params[:create_output_block_form]
+    form_hash = params[:create_block_outputs_form]
     if !form_hash.nil?
 
       # Create a block with the specified name, workflow_id, and formatting

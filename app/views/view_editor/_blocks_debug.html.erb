@@ -40,8 +40,8 @@ Please don't delete until we push these features to Heroku
 <% end %>
 
 <%= render "current_output_blocks" %>
-<h3>Create Output Block</h3>
-<%= form_for(:create_output_block_form) do |f| %>
+<h3>Create Block Outputs</h3>
+<%= form_for(:create_block_outputs_form) do |f| %>
 	<%= f.label(:name, "Name of Block: ") %><br/>
 	<%= f.text_field :name %><br/>
 	<%= f.label(:outputs_string, "Output these variables: ") %><br/>

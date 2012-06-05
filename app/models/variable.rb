@@ -19,7 +19,7 @@ class Variable < ActiveRecord::Base
   
   belongs_to :model
   
-  has_many :index_names
+  has_many :index_names, :dependent => :destroy
   has_many :block_variables, :dependent => :destroy
   has_many :run_values
   

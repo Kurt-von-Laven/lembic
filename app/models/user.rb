@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   
   has_many :workflows, :through => :workflow_permissions
   has_many :runs
-  has_many :model_permissions
+  has_many :model_permissions, :dependent => :destroy
   
   validates_associated :runs
   

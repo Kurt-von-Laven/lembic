@@ -1,8 +1,9 @@
 <h1> Workflow </h1>
 
+<% id = @run.id %>
 <% block_variables = @block.block_variables().order(:sort_index) %>
 <%= form_for :input_values, :url => "/workflow/post_block_input" do |f| %>
-    <%= f.hidden_field "run_id", @run.id %>
+    <%= f.hidden_field :run_id, :value =>id %>
     <% for v in block_variables %>
    
         <% if v.display_type == :input %>

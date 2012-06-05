@@ -1,1 +1,25 @@
-<h3> Eventually, this will be the expert workflow when we actually have the backend to show you this. </h3>
+<h1> Workflow </h1>
+
+<% block_variables = @block.block_variables().order(:sort_index) %>
+<%= form_for :input_values, :url => "/workflow/post_block_input" do |f| %>
+    <%= f.hidden_field "run_id", @run.id %>
+    <% for v in block_variables %>
+   
+    <% if v.display_type == :input %>
+    <div>
+        <p>
+      <%= f.text_field v.variable_id %>
+      </p>
+    </div>
+    <% else %>
+    <div id = "centered">
+      <p>
+        <%= v.variable.name %> = 
+        <%= @evaluator.eval_variable(v.variable.name, @variables_hash, nil) %>
+      </p>
+    </div>
+     
+    <% end %>
+    <%= f.submit ("Next") %>
+<% end %>
+

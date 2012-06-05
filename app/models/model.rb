@@ -1,4 +1,5 @@
 class Model < ActiveRecord::Base
+  attr_accessible :id, :description, :name
   
   # Associations
   has_many :model_permissions, :dependent => :destroy
@@ -9,8 +10,5 @@ class Model < ActiveRecord::Base
   validates_presence_of :name, :description
   validates_uniqueness_of :name
   validates_associated :variables, :workflows
-  
-  # Attribute accessors
-  attr_accessible :id, :description, :name
   
 end

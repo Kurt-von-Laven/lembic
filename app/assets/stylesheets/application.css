@@ -104,6 +104,64 @@ body {
 .dialog_link:hover{
 	color: #95b7d0;
 }
+#display_workflow{
+	text-align:center; 
+	padding-bottom: 10px;
+	display: block;
+	height: 200px;
+}
+
+#evaluator_block {
+	background-color: #dee6ed;
+	border-radius:6px;
+    -moz-border-radius:6px; /* Firefox 3.6 and earlier */
+}
+#evaluator_output {
+	width: 450px;
+	margin: 0px 0px 10px 150px;
+	padding: 0px 0px 5px 0px;
+	background-color: #b9d987;
+	border-radius:6px;
+    -moz-border-radius:6px; /* Firefox 3.6 and earlier */
+}
+#evaluator_output h2 {
+	padding: 4px 6px 4px 6px;
+	text-align: center;
+	color: #dee6ed;
+	background: #4f794e;
+	border-radius:6px;
+    -moz-border-radius:6px; /* Firefox 3.6 and earlier */
+}
+#evaluator_output ul {
+	margin-left: 10px;
+	color: #1e3652;
+	font-size: 1.2em;
+}
+.evaluator {
+	margin: 10px 0px 10px 150px;
+	width: 450px;
+}
+.evaluator div {
+	padding-bottom: 10px;
+}
+.evaluator label{
+	width: 200px;
+	diplay: block;
+	float: left;
+	margin-left: 20px;
+}
+.evaluator li {
+	padding-bottom: 10px;
+}
+
+.evaluator h2 {
+	text-align: center;
+	padding: 4px;
+	background-color: #5c7e99;
+	color: #dee6ed;
+	border-radius:6px;
+    -moz-border-radius:6px; /* Firefox 3.6 and earlier */
+}
 .error {
     color: red;
 }
@@ -172,7 +230,7 @@ h1 {
     text-align: center;
     margin-left:auto;
     margin-right:auto;
-        padding:10px;
+    padding:10px;
     border-radius:10px;
     -moz-border-radius:10px; /* Firefox 3.6 and earlier */
 }
@@ -183,8 +241,9 @@ h3 {
     font-family: Garamond, Baskerville, "Times New Roman", serif;
     text-align:center;
     margin-left:auto;
-    margin-right:auto;
-    padding:10px;
+    margin-right:6uto;
+	padding-top: 10px;
+	padding-bottom: 10px;
     border-radius:10px;
     -moz-border-radius:10px; /* Firefox 3.6 and earlier */
 }
@@ -389,7 +448,7 @@ border-radius:10px;
 
 .right_column textarea{
 	width: 60%;
-	height: 300px;
+	height: 200px;
 }
 #serial {
 	margin:  0 150px 0 120px;

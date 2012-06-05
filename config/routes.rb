@@ -1,5 +1,7 @@
 Lembic::Application.routes.draw do
   
+  resources :models
+  
   root to: 'user#login', as: 'login'
   
   match '/logout', to: 'user#logout', as: 'logout'
@@ -35,7 +37,7 @@ Lembic::Application.routes.draw do
 
   # Block controller routes
   match '/block/show.:id', to: 'block#show', as:'block_show'
-  match '/block/input', to:'block#input', as:'block_input'
+  match '/block/variable', to:'block#variable', as:'block_variable'
   
   
 

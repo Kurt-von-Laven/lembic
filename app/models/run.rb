@@ -7,8 +7,8 @@ class Run < ActiveRecord::Base
   belongs_to :workflow
   belongs_to :block
   
-  has_many :runs
+  has_many :run_values
   
-  validates_associated :runs
+  validates_associated :run_values
   
 end

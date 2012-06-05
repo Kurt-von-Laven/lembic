@@ -2,8 +2,9 @@ require Rails.root.join('app/helpers/expression')
 require Rails.root.join('app/helpers/evaluator')
 require Rails.root.join('app/helpers/parser')
 
+
 class WorkflowController < ApplicationController
-  
+  layout "workflow"
   def evaluate
     @variables = Variable.where(:model_id => session[:user_id]).order(:name)
     @input_variables = Variable.where(:model_id => session[:user_id], :expression_string => nil).order(:name)
@@ -83,8 +84,39 @@ class WorkflowController < ApplicationController
     #
   end
   
+  # params[:id] is the id of the block being submitted
+  # get the run id from a hidden field
+  # store the user-entered values in run_values
+  # build a hash of variable names to values and formulas to be run through the evaluator
+  # display the next block based on transition logic
   def expert_workflow
+    curr_block = Block.where(:id => params[:id]).first
+    @run = Run.where(:id => params[:run_id]).first
+    input_values = params[:input_values]
+    if !input_values.nil?
+      for var_id, val in input_values do
+        RunValue.create({:run_id => @run.id, :variable_id => var_id, :value => val})
+      end
+    end
+    @variables_hash = variables_hash_for_run(@run)
     
+    # figure out which block to display next
+    block_connections = curr_block.block_connections
+    next_block = nil
+    @evaluator = Evaluator.new
+    for b in block_connections
+      if @evaluator.eval_expression(b.expression_object, @variables_hash, nil) != 0
+        # expression evaluates to true
+        next_block = Block.where(:id => b.block_id).first
+        break
+      end
+    end
+    if !next_block.nil?
+      @block = next_block
+      @block_variables = next_block.block_variables().order(:sort_index)
+      render 'expert_workflow'
+    end
+    # TODO: Show an error if next_block is nil.
   end
   
   ##
@@ -92,55 +124,16 @@ class WorkflowController < ApplicationController
   # sets the run's current block to the start block of the workflow
   # redirects to show the first block
   def start_run
-    workflow = Workflow.where(:id => params[:id]).first
-    puts "ALL WORKFLOWS = "+Workflow.find(:all).inspect
-    if workflow.nil?
-      raise "The workflow you requested doesn't appear to exist"
-    end
-    start_block = Block.where(["workflow_id = ? and sort_index = 0", workflow.id]).first
+    Model.where(:id => 1).first_or_create(:name => 'Default Model', :description => 'This model should eventually be deleted.')
+    workflow = Workflow.where(:id => params[:id]).first_or_create(:name => 'Default Workflow', :description => 'This workflow should eventually be deleted.', :model_id => 1)
+    start_block = Block.where('workflow_id = ? and sort_index = 0', workflow.id).first
     new_run = Run.create({:user_id => session[:user_id],
                           :workflow_id => workflow.id,
                           :block_id => start_block.id
                         })
-    redirect_to :action => 'block', :id => start_block.id, :run_id => new_run.id
+    redirect_to :action => 'expert_workflow', :id => start_block.id, :run_id => new_run.id # TODO: This should be a POST request, but all redirects are GET requests.
   end
-  
-  ##
-  # params[:id] is the id of the block being submitted
-  # get the run id from a hidden field
-  # store the user-entered values in run_values
-  # build a hash of variable names to values and formulas to be run through the evaluator
-  # display the next block based on transition logic
-  def block
-    curr_block = Block.where(:id => params[:id]).first
-    @run = Run.where(:id => params[:run_id]).first
-    for var_id, val in params[:input_values] do
-      RunValue.create({:run_id => @run.id, :variable_id => var_id, :value => val})
-    end
-    workflow = run.workflow
-    model = workflow.model
-    block_connections = curr_block.block_connections()
-    run_values = run.run_values
-    @variables_hash = variables_hash_for_run(run)
     
-    # figure out which block to display next
-    connections = curr_block.block_connections
-    next_block = nil
-    for b in connections
-      if evaluator.eval_expression(b.expression_object, variables_hash, nil) != 0
-        # expression evaluates to true
-        next_block = Block.where(:id => b.block_id).first
-        break
-      end
-    end
-    if next_block
-      @block = next_block
-      @block_variables = next_block.block_variables().order(:sort_index)
-      render 'block'
-    end
-    # TODO: Show an error if next_block is nil.
-  end
-  
   def create_workflow
     Workflow.create(params[:workflow])
     # TODO: give current user permissions for this workflow in WorkflowPermissions table
@@ -166,6 +159,8 @@ class WorkflowController < ApplicationController
   end
   
   def variables_hash_for_run(run)
+    workflow = run.workflow
+    model = workflow.model
     run_values = run.run_values
     variables_hash = {} #stores formulas and values to be passed to the evaluator
     for v in model.variables do

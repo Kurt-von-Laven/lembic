@@ -25,10 +25,22 @@ Please don't delete until we push these features to Heroku
 <%= form_for(:create_block_inputs_form) do |f| %>
 	<%= f.label(:block_name, "Name of Block: ") %><br/>
 	<%= f.text_field :block_name %><br/>
-	<%= f.label(:inputs_string, "Input Variables: ") %><br/>
-	<%= f.text_area :inputs_string %><br/>
+	<%= f.label(:variables_string, "Input Variables: ") %><br/>
+	<%= f.text_area :variables_string %><br/>
 	<%= f.submit("Create Block Inputs", :class => "button") %><br/>
 <% end %>
+
+<h3>Create Block Outputs</h3>
+<%= form_for(:create_block_outputs_form) do |f| %>
+	<%= f.label(:name, "Name of Block: ") %><br/>
+	<%= f.text_field :name %><br/>
+	<%= f.label(:variables_string, "Output these variables: ") %><br/>
+	<%= f.text_area (:variables_string) %><br/>
+	<%= f.label(:formatting, "Formatting: ") %><br/>
+	<%= f.select(:formatting, [['Graph', 'graph'], ['Integer', 'integer'], ['Percentage', 'percent']]) %><br/>
+	<%= f.submit('Add Output', :class => "button") %><br/>
+<% end %>
+
 
 <h3>Create Block Connection</h3>
 <%= form_for(:create_block_connections_form) do |f| %>
@@ -37,16 +49,4 @@ Please don't delete until we push these features to Heroku
 	<%= f.label(:connections_string, "Block Connections: ") %><br/>
 	<%= f.text_area :connections_string %><br/>
 	<%= f.submit("Create Block", :class => "button") %><br/>
-<% end %>
-
-<%= render "current_output_blocks" %>
-<h3>Create Output Block</h3>
-<%= form_for(:create_output_block_form) do |f| %>
-	<%= f.label(:name, "Name of Block: ") %><br/>
-	<%= f.text_field :name %><br/>
-	<%= f.label(:outputs_string, "Output these variables: ") %><br/>
-	<%= f.text_area (:outputs_string) %><br/>
-	<%= f.label(:display_type, "Display Type:") %><br/>
-	<%= f.select(:display_type, [['Graph', 'graph'], ['Integer', 'integer'], ['Percentage', 'percent']]) %><br/>
-	<%= f.submit('Add Output', :class => "button") %><br/>
 <% end %>

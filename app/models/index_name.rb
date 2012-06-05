@@ -1,4 +1,5 @@
 class IndexName < ActiveRecord::Base
+  
   attr_accessible :name, :variable_id, :sort_index
   belongs_to :variable
   validates_uniqueness_of :name, :scope => :variable_id

@@ -11,8 +11,7 @@ class Block < ActiveRecord::Base
   has_many :block_variables, :dependent => :destroy
   has_many :block_connections, :dependent => :destroy
   has_many :runs
-  has_many :workflow_blocks, :dependent => :destroy
-  validates_associated :originating_connections, :block_variables, :block_connections, :runs, :workflow_blocks
+  validates_associated :originating_connections, :block_variables, :block_connections, :runs
   belongs_to :workflow
   
   def outputs_string # getter returnsempty string. TODO: Fix this and create a setter 
@@ -59,14 +58,4 @@ class Block < ActiveRecord::Base
     end
   end
   
-  # Decrement higher sort_indexs to prevent sparseness
-  after_destroy do |destroyed|
-    # NOTE: I'm not quite sure if this is atomic, may need to wrap in a transaction -Tom
-    Block.transaction do
-      Block.where("workflow_id = ? AND sort_index > ?", destroyed.workflow_id, destroyed.sort_index).each do |b|
-        b.sort_index = b.sort_index - 1
-        b.save :validate => false # Validation was causing problems since it may not go in order
-      end
-    end
-  end
 end

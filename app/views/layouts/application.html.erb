@@ -67,6 +67,13 @@
 					$('#dialog_'+i).dialog().dialog('open');
 					return false;
 				});
+                
+                $('.dialog_link_block').live("click", function(){
+					var i = this.getAttribute("index");
+					$('#dialog_block_'+i).dialog().dialog('open');
+					return false;
+				});
+
 
                 $( ".opener" ).click(function() {
                     $( ".dialog" ).dialog( "open" );

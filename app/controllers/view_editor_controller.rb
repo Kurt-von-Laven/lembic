@@ -24,12 +24,12 @@ class ViewEditorController < ApplicationController
 
       # Find the block these inputs are for
       block_name = form_hash[:block_name]
-        begin
-            block = Block.find_by_name(block_name)
-        rescue ArgumentError, IOError, RuntimeError => e
-            flash[:block_failed] = "Sorry, we could not find the block."
+        
+        block = Block.find_by_name(block_name)
+        if block.nil?
+            flash[:block_failed] = "We couldn't find that block! Oops! Please try again."
         end
-     
+             
 
       # Iterate through lines in the inputs string
       form_hash[:inputs_string].lines do |line|
@@ -44,6 +44,7 @@ class ViewEditorController < ApplicationController
         # Find the variable
         variable = Variable.find_by_name(variable_name)
         if variable.nil?
+            flash[:block_failed]="Sorry, we couldn't find that variable! Please try again"
           next
         end
 
@@ -65,11 +66,10 @@ class ViewEditorController < ApplicationController
 
       # Find the block these inputs are for
       block_name = form_hash[:block_name]
-        begin
-            block = Block.find_by_name(block_name)
-        rescue ArgumentError, IOError, RuntimeError => e
-            flash[:block_failed] = e.message
-        end    
+        block = Block.find_by_name(block_name)
+        if block.nil?
+            flash[:block_failed] = "Sorry, we could not find that block. Please try again."
+        end
 
       # Create parser for parsing expression strings
       parser = Parser.new
@@ -169,6 +169,15 @@ class ViewEditorController < ApplicationController
     @variables = Variable.where(:model_id => session[:user_id]).order(:name)
     @blocks = Block.where(:workflow_id => session[:user_id]).order(:sort_index)
 
+  end
+  
+  def edit_workflows
+    form_hash = params[:workflow]
+    @workflow = Workflow.new(form_hash)
+    if form_hash
+      @workflow.save
+    end
+    @current_workflows = Workflow.find_all_by_()
   end
 
   def edit_question

@@ -12,7 +12,7 @@ class BlockVariable < ActiveRecord::Base
   belongs_to :block
   belongs_to :variable
   
-  has_many :category_options
+  has_many :category_options, :dependent => :destroy
   
   validates_associated :category_options
   
@@ -32,17 +32,6 @@ class BlockVariable < ActiveRecord::Base
       self[:display_type] = 1
     else
       raise ArgumentError "parameter to display_type=() must be :input or :output"
-    end
-  end
-  
-  after_destroy do |destroyed|
-    # Decrement higher sort_indexs to prevent sparseness
-    # NOTE: I'm not quite sure if this is atomic, may need to wrap in a transaction -Tom
-    BlockVariable.transaction do
-      BlockVariable.where("block_id = ? AND sort_index > ?", destroyed.block_id, destroyed.sort_index).each do |bi|
-        bi.sort_index = bi.sort_index - 1
-        bi.save :validate => false # Validation was causing problems since it may not go in order
-      end
     end
   end
     

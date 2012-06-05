@@ -164,6 +164,9 @@ class Evaluator
   def eval_expression(exp, globals, indices)
     if !indices.nil?
     end
+    if exp.nil?
+      return 0.0/0.0 #NaN
+    end
     if exp.instance_of?(Expression)
       args = exp.args
       op = exp.op

@@ -1,4 +1,7 @@
 class IndexName < ActiveRecord::Base
+  
+  include CondenseSortIndices
+  
   attr_accessible :name, :variable_id, :sort_index
   belongs_to :variable
   validates_uniqueness_of :name, :scope => :variable_id
@@ -16,6 +19,6 @@ class IndexName < ActiveRecord::Base
     end
   end
   
-  CondenseSortIndices::condense_sort_indices(:variable_id)
+  condense_sort_indices(:variable_id)
   
 end

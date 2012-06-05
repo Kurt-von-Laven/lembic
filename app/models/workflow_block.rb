@@ -1,6 +1,8 @@
 class WorkflowBlock < ActiveRecord::Base
   attr_accessible :id, :workflow_id, :block_id, :sort_index
   
+  include CondenseSortIndices
+  
   belongs_to :block
   belongs_to :workflow
   validates_presence_of :workflow_id, :block_id, :sort_index
@@ -8,6 +10,6 @@ class WorkflowBlock < ActiveRecord::Base
   validates_uniqueness_of :sort_index, :scope => [:workflow_id]
   
   # sort_index stores the index of the block within the workflow (and not the other way around).
-  CondenseSortIndices::condense_sort_indices(:workflow_id)
+  condense_sort_indices(:workflow_id)
   
 end

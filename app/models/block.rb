@@ -1,6 +1,8 @@
 class Block < ActiveRecord::Base
   attr_accessible :id, :name, :workflow_id, :created_at, :updated_at, :display_type, :sort_index
   
+  include CondenseSortIndices
+  
   validates_presence_of :name, :workflow_id, :sort_index
   validates_numericality_of :workflow_id, :only_integer => true, :greater_than => 0
   
@@ -59,6 +61,6 @@ class Block < ActiveRecord::Base
     end
   end
   
-  CondenseSortIndices::condense_sort_indices(:workflow_id)
+  condense_sort_indices(:workflow_id)
   
 end

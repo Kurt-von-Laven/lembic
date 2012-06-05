@@ -1,5 +1,6 @@
 require Rails.root.join('app/helpers/expression')
 require Rails.root.join('app/helpers/evaluator')
+require Rails.root.join('app/helpers/parser')
 
 class WorkflowController < ApplicationController
   
@@ -143,6 +144,12 @@ class WorkflowController < ApplicationController
   
   def add_block_to_workflow
     WorkflowBlock.create(params[:workflow_block])
+  end
+  
+  def connect_blocks
+    connection_hash = params[:block_connection]
+    connection_hash[:expression_object] = Parser.new.parse(connection_hash[:expression_string])
+    BlockConnections.create(connection_hash)
   end
   
   private

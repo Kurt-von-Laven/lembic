@@ -72,15 +72,6 @@ class ViewEditorController < ApplicationController
 
   end
   
-  def edit_workflows
-    form_hash = params[:workflow]
-    @workflow = Workflow.new(form_hash)
-    if form_hash
-      @workflow.save
-    end
-    @current_workflows = Workflow.find_all_by_()
-  end
-  
   def edit_question
     @variables = Variable.where(:model_id => session[:user_id]).order(:name)
   end

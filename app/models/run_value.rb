@@ -1,5 +1,6 @@
 class RunValue < ActiveRecord::Base
   attr_accessible :id, :run_id, :variable_id, :index_values, :value
+  
   serialize :index_values
   
   validates_presence_of :variable_id, :run_id, :value

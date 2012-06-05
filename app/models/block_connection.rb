@@ -1,8 +1,10 @@
 class BlockConnection < ActiveRecord::Base
-  
-  include PersistableExpressions
-  
   attr_accessible :id, :block_id, :expression_string, :expression_object, :next_block_id, :created_at, :updated_at, :sort_index
+  
+  SORT_INDEX_SCOPE = :block_id
+  
+  include CondenseSortIndices
+  include PersistableExpressions
   
   validates_presence_of :block_id, :expression_string, :expression_object, :next_block_id, :sort_index
   

@@ -3,10 +3,9 @@ require Rails.root.join('app/helpers/expression')
 require Rails.root.join('app/models/index_name')
 
 class Variable < ActiveRecord::Base
+  attr_accessible :id, :name, :description, :model_id, :variable_type, :array, :created_at, :updated_at, :expression_string, :expression_object
   
   include PersistableExpressions
-  
-  attr_accessible :id, :name, :description, :model_id, :variable_type, :array, :created_at, :updated_at, :expression_string, :expression_object
   
   validates_presence_of :name, :model_id, :variable_type, :array
   validates_numericality_of :model_id, :only_integer => true, :greater_than => 0

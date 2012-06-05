@@ -1,6 +1,10 @@
 class BlockVariable < ActiveRecord::Base
   attr_accessible :id, :block_id, :sort_index, :variable_id, :created_at, :updated_at, :prompt, :description, :formatting
   
+  SORT_INDEX_SCOPE = :block_id
+  
+  include CondenseSortIndices
+  
   validates_presence_of :block_id, :sort_index, :variable_id, :display_type
   
   # Prevent 2 records from getting the same sort_index

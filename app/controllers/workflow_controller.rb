@@ -107,33 +107,33 @@ class WorkflowController < ApplicationController
   # build a hash of variable names to values and formulas to be run through the evaluator
   # display the next block based on transition logic
   def block
-    currblock = Block.find(params[:id])
-    @run = Run.find(params[:run_id])
+    curr_block = Block.where(:id => params[:id]).first
+    @run = Run.where(:id => params[:run_id]).first
     for var_id, val in params[:input_values] do
       RunValue.create({:run_id => @run.id, :variable_id => var_id, :value => val})
     end
     workflow = run.workflow
     model = workflow.model
-    block_connections = currblock.block_connections()
+    block_connections = curr_block.block_connections()
     run_values = run.run_values
     @variables_hash = variables_hash_for_run(run)
-    @evaluator = Evaluator.new
     
-    #figure out which block to display next
-    connections = currblock.block_connections
-    nextblock = nil
+    # figure out which block to display next
+    connections = curr_block.block_connections
+    next_block = nil
     for b in connections
       if evaluator.eval_expression(b.expression_object, variables_hash, nil) != 0
-        #expression evaluates to true
-        nextblock = Block.find(b.block_id)
+        # expression evaluates to true
+        next_block = Block.where(:id => b.block_id).first
         break
       end
     end
-    if nextblock
-      @block = nextblock
-      @block_variables = nextblock.block_variables().order(:sort_index)
-      render "block"
+    if next_block
+      @block = next_block
+      @block_variables = next_block.block_variables().order(:sort_index)
+      render 'block'
     end
+    # TODO: Show an error if next_block is nil.
   end
   
   def create_workflow

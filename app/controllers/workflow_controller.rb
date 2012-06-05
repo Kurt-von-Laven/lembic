@@ -94,6 +94,9 @@ class WorkflowController < ApplicationController
   def start_run
     workflow = Workflow.where(:id => params[:id]).first
     puts "ALL WORKFLOWS = "+Workflow.find(:all).inspect
+    if workflow.nil?
+      raise "The workflow you requested doesn't appear to exist"
+    end
     start_block = Block.where(["workflow_id = ? and sort_index = 0", workflow.id]).first
     new_run = Run.create({:user_id => session[:user_id],
                           :workflow_id => workflow.id,

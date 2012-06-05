@@ -1,5 +1,7 @@
 class CreateDefaultModelAndWorkflow < ActiveRecord::Migration
   def up
+    #this is not the migration you're looking for
+=begin
     drop_table :workflow_blocks
     default_model = Model.new({:name => "default model", :description => "default description"})
     default_workflow = Workflow.new({:name => "default workflow", :description => "default description"})
@@ -14,7 +16,7 @@ class CreateDefaultModelAndWorkflow < ActiveRecord::Migration
       next_sort_index += 1
       b.save
     end
-    
+=end
   end
 
   def down

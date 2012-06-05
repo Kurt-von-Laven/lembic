@@ -19,16 +19,31 @@ class Block < ActiveRecord::Base
   validates_associated :originating_connections, :block_variables, :block_connections, :runs
   belongs_to :workflow
   
-  def outputs_string # getter returns empty string. TODO: Fix this and create a setter 
-    return ''
+  def output_variables_as_string # TODO: Create a corresponding setter. 
+    return variables_as_string(false)
   end
   
-  def inputs_string
-    return ''
+  def input_variables_as_string # TODO: Create a corresponding setter.
+    return variables_as_string(true)
   end
   
-  def connections_string # getter returns empty string. TODO: Fix this and create a setter 
-    return ''
+  def variables_as_string(is_input)
+    display_type = is_input ? 0 : 1
+    sorted_block_variables = block_variables.where(:display_type => display_type).order(:sort_index)
+    variable_names = sorted_block_variables.collect do |block_variable|
+        block_variable.variable.name
+    end
+    return variable_names.join("\n")
+  end
+  
+  def connections_as_string # TODO: Create a corresponding setter.
+    to_return = ''
+    sorted_block_connections = block_connections.order(:sort_index)
+    for block_connection in sorted_block_connections
+      next_block_name = Block.find(block_connection.next_block_id).name
+      to_return += "#{block_connection.expression_string} => #{next_block_name}\n"
+    end
+    return to_return
   end
   
 end

@@ -12,18 +12,18 @@ class BlockController < ApplicationController
   end
   
   # Record data entered into this block, redirect to the appropriate next block
-  # This should happen when the user clicks SUBMIT after entering input data in a block
-  def input
+  # This should happen when the user clicks SUBMIT after entering variables in a block
+  def variables
     
-    # Get block_id and hash of input values
-    form_hash = params[:block_inputs]
+    # Get block_id and hash of variable values
+    form_hash = params[:block_variables]
     block_id = form_hash[:block_id]
-    inputs_hash = form_hash[:inputs]
+    variables_hash = form_hash[:variables]
     
-    # Record the input values
-    inputs_hash.each do |variable_id, value|
+    # Record the variable values
+    variables_hash.each do |variable_id, value|
       
-      logger.debug "+++++++++++++Received input for variable_id #{variable_id}: #{value}"
+      logger.debug "+++++++++++++Received value for variable_id #{variable_id}: #{value}"
       
       # Record the value for the variable specified by variable_id
       # TODO: make a call to the right class for doing this

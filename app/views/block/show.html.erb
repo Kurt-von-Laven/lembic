@@ -3,7 +3,7 @@
 <h1><%=@title %></h1>
 
 <!--Display form for entering values into this block's input block_variables -->
-<%=form_for :block_inputs, :url => block_input_path do |f| %>
+<%=form_for :block_variables, :url => block_variable_path do |f| %>
 	<% for bv in @block.block_variables.order(:sort_index) %>
 	
 		<!--Lookup data -->

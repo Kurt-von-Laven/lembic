@@ -17,11 +17,11 @@ class ViewEditorController < ApplicationController
       Block.create({:name => name, :workflow_id => workflow_id, :display_type => display_type, :sort_index => sort_index})
     end
 
-    ## Check for form data for creating a block_input
-    form_hash = params[:create_block_inputs_form]
+    ## Check for form data for creating a block_variable
+    form_hash = params[:create_block_variables_form]
     if !form_hash.nil?
 
-      # Find the block these inputs are for
+      # Find the block these variables are for
       block_name = form_hash[:block_name]
         
         block = Block.find_by_name(block_name)
@@ -30,8 +30,8 @@ class ViewEditorController < ApplicationController
         end
              
 
-      # Iterate through lines in the inputs string
-      form_hash[:inputs_string].lines do |line|
+      # Iterate through lines in the variables string
+      form_hash[:variables_string].lines do |line|
 
         # Trim the line to get a variable name
         variable_name = line.strip
@@ -48,13 +48,13 @@ class ViewEditorController < ApplicationController
         end
 
         # Determine sort_index
-        sort_index = block.block_inputs.size
+        sort_index = block.block_variables.size
 
-        # Create a block input with the specified variable
+        # Create a block variable
         # NOTE: this may fail for various reasons (i.e. sort_index collision from race condition)
-        bi = block.block_inputs.create({:variable_id => variable.id, :sort_index => sort_index})
+        bi = block.block_variables.create({:variable_id => variable.id, :sort_index => sort_index})
         if bi.nil?
-            flash[:block_failed] = "Failed to create block_input with variable_id => #{variable.id} and sort_index => #{sort_index}"
+            flash[:block_failed] = "Failed to create block_variable with variable_id => #{variable.id} and sort_index => #{sort_index}"
         end
       end
     end
@@ -63,7 +63,7 @@ class ViewEditorController < ApplicationController
     form_hash = params[:create_block_connections_form]
     if !form_hash.nil?
 
-      # Find the block these inputs are for
+      # Find the block these variables are for
       block_name = form_hash[:block_name]
         block = Block.find_by_name(block_name)
         if block.nil?
@@ -107,11 +107,11 @@ class ViewEditorController < ApplicationController
     # Currently, "output" blocks are stored as the same type of
     # object, and do not have any associated block_connections
     # (this is how we know it is an output or terminal block).
-    # The input_variables associated with this block will have
+    # The variables associated with this block will have
     # their computed values displayed in the format specified by
     # display_type, instead of displaying form prompts for input.
 
-    # Note that with output blocks, the block name and input_variables
+    # Note that with output blocks, the block name and block variables
     # are specified together in the same form, instead of independently
     # like with regular blocks.
 
@@ -143,12 +143,12 @@ class ViewEditorController < ApplicationController
         end
 
         # Determine sort_index
-        sort_index = block.block_inputs.size
+        sort_index = block.block_variables.size
 
-        # Create a "block input" with the specified variable
-        bi = block.block_inputs.create({:variable_id => variable.id, :sort_index => sort_index})
+        # Create a block variable
+        bi = block.block_variables.create({:variable_id => variable.id, :sort_index => sort_index})
         if bi.nil?
-          flash[:block_failed] =  "Failed to create block_input with variable_id => #{variable.id} and sort_index => #{sort_index}"
+          flash[:block_failed] =  "Failed to create block_variable with variable_id => #{variable.id} and sort_index => #{sort_index}"
         end
       end
     end

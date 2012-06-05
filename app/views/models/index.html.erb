@@ -1,0 +1,32 @@
+<h1>Model#index</h1>
+<p>Find me in app/views/models/index.html.erb</p>
+
+
+<table class = "tablesorter">
+
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Description</th>
+			<th><!--Show Button--></th>
+			<th><!--Edit Button--></th>
+			<th><!--Destroy Button--></th>
+		</tr>
+	</thead>
+
+	<tbody>
+		<% @models.each do |model| %>
+			<tr>
+				<td><%= model.name %></td>
+				<td><%= model.description %></td>
+				<td><%= button_to 'Show', model, :method => :get %></td>
+				<td><%= button_to 'Edit', edit_model_path(model), :method => :get %></td>
+				<td><%= button_to 'Destroy', model, :confirm => 'Are you sure you want to delete this model and all its associated data, including variables and relations? This cannot be undone...', :method => :delete %></td>
+			</tr>
+		<% end %>
+	</tbody>  
+</table>
+
+<br/>
+
+<%= button_to 'New Model', new_model_path, :method => :get %>

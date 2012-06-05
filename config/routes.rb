@@ -1,5 +1,7 @@
 Lembic::Application.routes.draw do
   
+  resources :models
+  
   root to: 'user#login', as: 'login'
   
   match '/logout', to: 'user#logout', as: 'logout'

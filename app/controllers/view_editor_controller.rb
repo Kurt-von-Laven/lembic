@@ -5,7 +5,7 @@ class ViewEditorController < ApplicationController
     @block = Block.new
     
     ## Check for form data for creating new block
-    form_hash = params[:create_block_form]
+    form_hash = params[:create_block]
     if !form_hash.nil?
 
       #### BUG: this code for creating blocks doesn't work right now
@@ -16,14 +16,14 @@ class ViewEditorController < ApplicationController
       Block.create({:name => name, :workflow_id => workflow_id, :sort_index => sort_index})
     end
     
-    form_hash = params[:create_block_inputs_form]
+    form_hash = params[:create_block_inputs]
     create_block_variables(form_hash, :input)
     
-    form_hash = params[:create_block_outputs_form]
+    form_hash = params[:create_block_outputs]
     create_block_variables(form_hash, :output)
 
     ## Check for form data for creating a block_connection
-    form_hash = params[:create_block_connections_form]
+    form_hash = params[:create_block_connections]
     if !form_hash.nil?
 
       # Find the block these variables are for
@@ -66,17 +66,6 @@ class ViewEditorController < ApplicationController
       end
     end
     
-    ## Check for form data for showing a block
-    form_hash = params[:show_block_form]
-    if !form_hash.nil?
-      id = form_hash[:id]
-      
-      # Redirect to the show block page. I know, this is kind of hacky.
-      redirect_to block_show_path(id)
-    end
-
-
-
     ## Set variables used by views for rendering
     @variables = Variable.where(:model_id => session[:user_id]).order(:name)
     @blocks = Block.where(:workflow_id => session[:user_id]).order(:sort_index)

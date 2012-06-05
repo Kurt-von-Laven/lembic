@@ -20,7 +20,7 @@
 			  </ul>
                 <!-- TAB 1 -->
 				<div id="tabs-1">
-                    <%= form_for(:create_block_form, :html => {:class => "input_formB"}) do |f| %>
+                    <%= form_for(:create_block, :html => {:class => "input_formB"}) do |f| %>
 					 <div id="var_input_block">
 						<div>
 							<%= f.label(:name, "Name of Block: ") %>
@@ -36,7 +36,7 @@
                  <!-- TAB2 -->
                 <div id = "tabs-2">
                     Please enter one per line. <br />
-                    <%= form_for(:create_block_inputs_form, :html => {:class => "input_formB"}) do |f| %>
+                    <%= form_for(:create_block_inputs, :html => {:class => "input_formB"}) do |f| %>
 					<div id="var_input_block">
 						<div>
 							<%= f.label(:name, "Name of Block: ") %>
@@ -59,7 +59,7 @@
 
                 <!--TAB3 -->      
 				<div id="tabs-3">
-                <%= form_for(:create_block_outputs_form, :html => {:class => "input_formB"}) do |f| %>
+                <%= form_for(:create_block_outputs, :html => {:class => "input_formB"}) do |f| %>
 					<div id="var_input_block">
 						<div>
 							<%= f.label(:name, "Name of Block: ") %>
@@ -84,10 +84,10 @@
 				<div id="tabs-4">
 					Enter connections to get to next block after this one, one per line.<br/>
 					Each connection has a block name, an arrow (=>), and a boolean expression<br/>
-					Example: 'AC_Block => has_ac == true' or 'FINISH => 1'
+					Example: 'has_ac == true => AC_Block'
 					Please do not add empty lines.
 					Block connections, one per line: 
-                    <%= form_for(:create_block_connections_form, :html => {:class => "input_formB"}) do |f| %>
+                    <%= form_for(:create_block_connections, :html => {:class => "input_formB"}) do |f| %>
 					<div id="var_input_block">
 						<div>
 							<%= f.label(:name, "Name of Block: ") %>

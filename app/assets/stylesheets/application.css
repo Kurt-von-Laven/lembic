@@ -110,6 +110,58 @@ body {
 	display: block;
 	height: 200px;
 }
+
+#evaluator_block {
+	background-color: #dee6ed;
+	border-radius:6px;
+    -moz-border-radius:6px; /* Firefox 3.6 and earlier */
+}
+#evaluator_output {
+	width: 450px;
+	margin: 0px 0px 10px 150px;
+	padding: 0px 0px 5px 0px;
+	background-color: #b9d987;
+	border-radius:6px;
+    -moz-border-radius:6px; /* Firefox 3.6 and earlier */
+}
+#evaluator_output h2 {
+	padding: 4px 6px 4px 6px;
+	text-align: center;
+	color: #dee6ed;
+	background: #4f794e;
+	border-radius:6px;
+    -moz-border-radius:6px; /* Firefox 3.6 and earlier */
+}
+#evaluator_output ul {
+	margin-left: 10px;
+	color: #1e3652;
+	font-size: 1.2em;
+}
+.evaluator {
+	margin: 10px 0px 10px 150px;
+	width: 450px;
+}
+.evaluator div {
+	padding-bottom: 10px;
+}
+.evaluator label{
+	width: 200px;
+	diplay: block;
+	float: left;
+	margin-left: 20px;
+}
+.evaluator li {
+	padding-bottom: 10px;
+}
+
+.evaluator h2 {
+	text-align: center;
+	padding: 4px;
+	background-color: #5c7e99;
+	color: #dee6ed;
+	border-radius:6px;
+    -moz-border-radius:6px; /* Firefox 3.6 and earlier */
+}
 .error {
     color: red;
 }

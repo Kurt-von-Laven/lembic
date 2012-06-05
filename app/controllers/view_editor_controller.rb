@@ -12,9 +12,8 @@ class ViewEditorController < ApplicationController
       # Create a block with the specified name and workflow_id
       name = form_hash[:name]
       workflow_id = session[:user_id]
-      display_type = nil # display_type is nil for regular input blocks
       sort_index = Block.where(:workflow_id => workflow_id).size
-      Block.create({:name => name, :workflow_id => workflow_id, :display_type => display_type, :sort_index => sort_index})
+      Block.create({:name => name, :workflow_id => workflow_id, :sort_index => sort_index})
     end
 
     ## Check for form data for creating a block_variable

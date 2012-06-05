@@ -8,6 +8,7 @@ class Block < ActiveRecord::Base
   validates_presence_of :name, :workflow_id, :sort_index
   validates_numericality_of :workflow_id, :only_integer => true, :greater_than => 0
   
+  validates_uniqueness_of :name, :scope => :workflow_id
   validates_uniqueness_of :sort_index, :scope => :workflow_id
   validates_numericality_of :sort_index, :only_integer => true, :greater_than_or_equal_to => 0
   

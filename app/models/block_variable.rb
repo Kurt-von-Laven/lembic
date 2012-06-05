@@ -1,5 +1,5 @@
 class BlockVariable < ActiveRecord::Base
-  attr_accessible :id, :block_id, :sort_index, :variable_id, :created_at, :updated_at, :prompt, :description, :formatting
+  attr_accessible :id, :block_id, :sort_index, :variable_id, :created_at, :updated_at, :prompt, :description, :formatting, :display_type
   
   SORT_INDEX_SCOPE = :block_id
   

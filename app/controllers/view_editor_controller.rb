@@ -49,10 +49,13 @@ class ViewEditorController < ApplicationController
 
         # Determine sort_index
         sort_index = block.block_variables.size
-
+        
+        # TODO: This will fall out of sync with the Variable if an expression_string is added to it.
+        display_type = (variable.expression_string.nil?) ? :input : :output
+        
         # Create a block variable
         # NOTE: this may fail for various reasons (i.e. sort_index collision from race condition)
-        bi = block.block_variables.create({:variable_id => variable.id, :sort_index => sort_index})
+        bi = block.block_variables.create({:display_type => display_type, :variable_id => variable.id, :sort_index => sort_index})
         if bi.nil?
             flash[:block_failed] = "Failed to create block_variable with variable_id => #{variable.id} and sort_index => #{sort_index}"
         end

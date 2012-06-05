@@ -1,6 +1,5 @@
 class DeleteAllFixturesForReal < ActiveRecord::Migration
   def up
-    WorkflowBlock.delete_all
     WorkflowPermission.delete_all
     ModelPermission.delete_all
     Workflow.delete_all

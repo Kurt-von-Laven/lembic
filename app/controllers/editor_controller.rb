@@ -48,7 +48,6 @@ class EditorController < ApplicationController
       else
         variable_record.name_with_indices = variable_name_with_indices
         variable_record.expression_string = expression_string
-        logger.debug(variable_record.expression_string)
         if !variable_record.save
           flash[:variable_errors] = variable_record.errors.full_messages
         end

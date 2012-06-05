@@ -30,36 +30,5 @@ class Block < ActiveRecord::Base
   def connections_string # getter returns empty string. TODO: Fix this and create a setter 
     return ''
   end
-
-  # Create a block_variable for the variable named on each line of the input string
-  def inputs_string=(string)
-    
-    # Iterate through each line of the input string
-    string.lines do |line|
-
-      # Trim the line to get a variable name
-      variable_name = line.strip
-      if variable_name.empty? # TODO: get better input validation
-        next
-      end
-      
-      # Find the variable
-      variable = Variable.find_by_name(variable_name)
-      if variable.nil?
-        logger.debug "Could not find variable '#{variable_name}' by name"
-        next
-      end
-
-      # Determine sort_index
-      sort_index = block_variables.size
-
-      # Create a block input with the specified variable
-      bi = block_variables.create({:variable_id => variable.id, :sort_index => sort_index})
-      if bi.nil?
-        # TODO: Return an error to the user
-        logger.debug "Failed to create block_variable with variable_id => #{variable.id} and sort_index => #{sort_index}"
-      end
-    end
-  end
   
 end

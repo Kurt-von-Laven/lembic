@@ -31,6 +31,13 @@
             myString = myString + name + " \n"
         end
     %>
+    
+    <% myString2 = ""
+        for bc in block.block_connections.order(:sort_index) 
+            express = bc.expression_string
+            myString2 = myString2 + express +  " \n"
+        end
+    %>
         
 	
 	  <!--Prepare strings to be displayed in HTML for this block -->
@@ -46,8 +53,11 @@
 			 <div id = "<%=d_id%>" style="display: none">
              				<h1><%=name %></h1>
 				<p>
-					<%=myString %>
+					Variables contained in this block: <%=myString %>
 				</p>
+                <p>
+                 Connections: <%=myString2 %>
+                </p>
 			 </div>
       </tr>
       <% num += 1

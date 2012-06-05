@@ -13,7 +13,7 @@
     <%= javascript_include_tag "application" %>
 	<%= javascript_include_tag "popup.js" %>
     <%= stylesheet_link_tag   "jquery-ui-1.8.20.custom", :media => "all" %>
-    <%= stylesheet_link_tag   "workflow", :media => "all" %>
+    <%= stylesheet_link_tag   "application", :media => "all" %>
     
     <script type="text/javascript">
       
@@ -259,10 +259,85 @@
 			
 
 	</script>
+       <style>
 
-		</script>
-      
+		a {
+    text-decoration: none;
+    color: #113855;
+}
 
+
+a:visited{
+    color:#008A8A;
+}
+body {
+	margin: 50px 0px; 
+	padding:0px;
+	text-align:center;
+	background-color:#dee6ed;
+}
+
+#container {
+	width:800px;
+	margin:0px auto;
+	padding:15px;
+	text-align:left;
+	border-radius:10px;
+    -moz-border-radius:10px; /* Firefox 3.6 and earlier */
+	background-color:#dee6ed;
+}
+
+#content {
+	margin: 10px;
+	padding:15px;
+	text-align:left;
+	border-radius:10px;
+    -moz-border-radius:10px; /* Firefox 3.6 and earlier */
+	background-color: #fff;
+    font-family: Garamond, Baskerville, "Times New Roman", serif;
+}
+h1 {
+	color: #1e3652;
+	font-size: 2.5em;
+	text-align: center;
+}
+#menu {
+    width:750px;
+    padding:10px;
+    border-radius:10px;
+    -moz-border-radius:10px; /* Firefox 3.6 and earlier */
+    border-color:#dee6ed;
+    margin:0px auto;
+    text-align: center;
+    background-color:#1e3652;
+    font-family: Garamond, Baskerville, "Times New Roman", serif;
+    color:#fdde8c;
+}
+
+#menu > li {
+    width: 200px;
+    font-size: 22px;
+    height: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+#menu a {
+	color: #dee6ed;
+}
+#menu a:hover {
+	color: #95b7d0;
+}
+li {
+  display: inline;
+}
+ul {
+  list-style-type: none;
+  padding-left: 0px;
+}
+    
+    
+    </style>
          
     <%= csrf_meta_tags %>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />

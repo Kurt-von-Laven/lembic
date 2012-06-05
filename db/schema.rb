@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120604060822) do
+ActiveRecord::Schema.define(:version => 20120605031707) do
 
   create_table "block_connections", :force => true do |t|
     t.string   "expression_string", :limit => 1048576, :null => false
@@ -154,14 +154,6 @@ ActiveRecord::Schema.define(:version => 20120604060822) do
     t.string   "value"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-  end
-
-  create_table "workflow_blocks", :force => true do |t|
-    t.integer  "workflow_id", :null => false
-    t.integer  "block_id",    :null => false
-    t.integer  "sort_index",  :null => false
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
   end
 
   create_table "workflow_permissions", :force => true do |t|

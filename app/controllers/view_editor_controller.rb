@@ -1,5 +1,4 @@
 class ViewEditorController < ApplicationController
-
   def edit_block
     
     # Create block to be used by form_for

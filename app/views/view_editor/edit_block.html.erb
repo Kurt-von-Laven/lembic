@@ -27,10 +27,6 @@
 							<%= f.text_field :name %>
 						</div>
 					 </div>
-						<div>
-							<%= f.label(:formatting, "Format:") %>
-							<%= f.select(:formatting, [['Graph', 'graph'], ['Integer', 'integer'], ['Percentage', 'percent']]) %>
-						</div>
 					 <div id="input_button">
                         <%= f.submit("Create Block", :class => "button") %>
 					 </div>
@@ -72,6 +68,10 @@
 						<div>
 							<%= f.label(:outputs_string, "Output these variables: ") %>
 							<%= f.text_area :outputs_string, :id =>"drop_var_output" %>
+						</div>
+						<div>
+							<%= f.label(:formatting, "Format:") %>
+							<%= f.select(:formatting, [['Graph', 'graph'], ['Integer', 'integer'], ['Percentage', 'percent']]) %>
 						</div>
 					</div>
 					<div id="input_button">

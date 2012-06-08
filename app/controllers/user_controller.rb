@@ -1,6 +1,7 @@
 class UserController < ApplicationController
   
   skip_before_filter :verify_login
+  skip_before_filter :verify_model
   before_filter :verify_logout, :except => ['logout']
   
   def login

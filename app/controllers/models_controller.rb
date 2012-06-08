@@ -10,14 +10,12 @@ class ModelsController < ApplicationController
   end
 
   def create
-    puts "IN CREATE: PARAMS[:model]="+params[:model].inspect
     @model = Model.new(params["model"])
     save_successful = false
     ActiveRecord::Base.transaction do
       save_successful = @model.save
       model_permissions = ModelPermission.new({:user_id => session[:user_id], :model_id => @model.id, :sort_index => User.find(session[:user_id]).models.length, :permissions => 0})
       save_successful &&= model_permissions.save
-      puts "MODEL PERMISSIONS ERRORS : "+model_permissions.errors.full_messages.inspect
     end
     if save_successful
       redirect_to :action => "index", :notice => 'Model was successfully created.'

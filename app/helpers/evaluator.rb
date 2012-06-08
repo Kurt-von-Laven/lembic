@@ -285,7 +285,6 @@ class Evaluator
   # globals format: { "varname1" => { :formula => <Expression> :value => <Numeric> }, "varname2" => ... , ... "varnameN" => ... }
   #
   def eval_variable (varname, globals, index_values)
-    puts "IN EVAL_VARIABLE"
     error_check_eval_variable_params(varname, globals, index_values)
     #  if variable value was cached previously, return the cached value
     if !globals[varname][:value].nil?
@@ -294,7 +293,6 @@ class Evaluator
 
     formula = globals[varname][:formula]
     
-    puts "EVALUATE VARIABLE FORMULA: "+formula.inspect
     if formula.nil?
       if index_values
         globals[varname][:values][index_values] = 0.0/0.0 #NaN
@@ -308,13 +306,10 @@ class Evaluator
     raise ArgumentError, "Error: formula for variable `#{varname}` must be an expression object.  Was #{formula.class}" if !formula.instance_of?(Expression)
     
     # check if variable is an array or a singleton, and evaluate accordingly
-    puts "globals[varname]: "+globals[varname].inspect
-    puts "globals[varname][:index_names]: "+globals[varname][:index_names].inspect
     index_names = globals[varname][:index_names]
     if index_names.nil? || (index_names.instance_of?(Array) && index_names.length == 0)      #variable is a singleton
       result = eval_expression(formula, globals, nil)
       globals[varname][:value] = result
-      puts "globals[varname][:value]: "+globals[varname][:value].inspect
     else
       #variable is an array; need to pass in index name-value mapping for expression evaluator
       indices = {}
@@ -343,8 +338,6 @@ class Evaluator
   # [{:name => "myvar"}, {:name => "myarray", :indices => {:min => 0, :max => 100 }}, ... ]
   #
   def eval_all(outputs, globals)
-    puts "GLOBALS: "+globals.inspect
-    puts "OUTPUTS: "+outputs.inspect
     outputs.each do |output|
       if output[:indices].nil?
         # output variable is a singleton

@@ -1,7 +1,6 @@
 class ActuallyCreateDefaultModelAndWorkflow < ActiveRecord::Migration
   def up
-    default_model = Model.create({:name => "default model", :description => "default description"})
-    default_workflow = Workflow.create({:name => "default workflow", :description => "default description"})
+    # This actually shouldn't do anything because these fixtures get created on the fly in the workflow controller.
   end
 
   def down

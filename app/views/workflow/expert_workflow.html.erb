@@ -17,14 +17,12 @@
         <div class="centered">
           <p>
             <%= v.variable().name %> =
-            <% puts "VARIABLE NAME : "+v.variable().name.inspect %>
-            <% puts "VARIABLES_HASH : "+@variables_hash.inspect %>
             <%= @evaluator.eval_variable(v.variable().name, @variables_hash, nil) %>
           </p>
         </div>
          
         <% end %>
     <% end %>
-    <%= f.submit ("Next") %>
+    <%= f.submit "Next", :class =>"button" %>
 <% end %>
 

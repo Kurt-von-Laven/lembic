@@ -1,7 +1,6 @@
 
 ### TODO
 ### Throw exceptions for tokens like "1x" that start with a number but aren't numeric
-### Instead of using puts for error handling, throw exceptions.  Otherwise users who mess up will not know about it.
 
 require './app/helpers/parser_patterns'
 require './app/helpers/expression'

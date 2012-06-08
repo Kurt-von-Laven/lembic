@@ -73,7 +73,6 @@ class Variable < ActiveRecord::Base
     merged_var['model_id'] = model_id
     merged_var['variable_type'] = merged_var['variable_type'].to_i
     merged_var['array'] = merged_var['name'].match(/\[.+\]/) ? 1 : 0
-    puts "CREATED VARIABLE: ARRAY = #{merged_var['array']}"
     merged_var['name'] = merged_var['name'].split(/\s*\[/)[0]
     if merged_var['expression_string'].empty?
       merged_var['expression_string'] = nil
@@ -150,12 +149,10 @@ class Variable < ActiveRecord::Base
   end
   
   def self.date_convert(input)
-    puts "DATE CONVERTER INPUT #{input.inspect}"
     if !input.instance_of?(String)
       return input
     end
     # converts an Excel-formatted date/time string to Lembic format.
-    puts "DATE CONVERTER INPUT = #{input}"
     date = nil
     #try a bunch of different formats
     date = try_date_conversion_format(input, "%m/%d/%y %H:%M") if date.nil?
@@ -167,7 +164,6 @@ class Variable < ActiveRecord::Base
     date = try_date_conversion_format(input, "%H:%M:%S") if date.nil?
     date = try_date_conversion_format(input, "%l:%M:%S %p") if date.nil?
     conv = date.strftime("%Y_%m_%d_%H_%M_%S")
-    puts "CONVERTED = #{conv}"
     return conv
     
   end

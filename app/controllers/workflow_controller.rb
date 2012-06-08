@@ -6,8 +6,8 @@ require Rails.root.join('app/helpers/parser')
 class WorkflowController < ApplicationController
   layout "workflow"
   def evaluate
-    @variables = Variable.where(:model_id => session[:user_id]).order(:name)
-    @input_variables = Variable.where(:model_id => session[:user_id], :expression_string => nil).order(:name)
+    @variables = Variable.where(:model_id => session[:model_id]).order(:name)
+    @input_variables = Variable.where(:model_id => session[:model_id], :expression_string => nil).order(:name)
     vars = params[:evaluator]
     if !vars.nil?
       input_values = (vars['input_values'].nil?) ? [] : vars['input_values']
@@ -90,24 +90,37 @@ class WorkflowController < ApplicationController
   # build a hash of variable names to values and formulas to be run through the evaluator
   # display the next block based on transition logic
   def expert_workflow
-    curr_block = Block.where(:id => params[:id]).first
-    @run = Run.where(:id => params[:run_id]).first
+    puts "EXPERT WORKFLOW PARAMS = "+params.inspect
+    curr_block = Block.where(:id => params[:input_values][:id]).first
+    run_id = params[:run_id] 
+    run_id = params[:input_values]["run_id"] if run_id.nil?
+    @run = Run.where(:id => run_id).first
+    puts "RUN = "+run.inspect
     input_values = params[:input_values]
     if !input_values.nil?
       for var_id, val in input_values do
+        next if var_id == "run_id" || var_id == "id" #THIS IS SO GROSS EWWWW EW EW EW
         RunValue.create({:run_id => @run.id, :variable_id => var_id, :value => val})
       end
     end
     @variables_hash = variables_hash_for_run(@run)
     
+    if params[:first_block]
+      @block = curr_block
+      @block_variables = @block.block_variables().order(:sort_index)
+      render 'expert_workflow'
+      return
+    end
+    
     # figure out which block to display next
-    block_connections = curr_block.block_connections
+    block_connections = curr_block.block_connections.order(:sort_index)
     next_block = nil
     @evaluator = Evaluator.new
+    puts "BLOCK CONNECTIONS: "+block_connections.inspect
     for b in block_connections
       if @evaluator.eval_expression(b.expression_object, @variables_hash, nil) != 0
         # expression evaluates to true
-        next_block = Block.where(:id => b.block_id).first
+        next_block = Block.where(:id => b.next_block_id).first
         break
       end
     end
@@ -125,13 +138,14 @@ class WorkflowController < ApplicationController
   # redirects to show the first block
   def start_run
     Model.where(:id => 1).first_or_create(:name => 'Default Model', :description => 'This model should eventually be deleted.')
-    workflow = Workflow.where(:id => params[:id]).first_or_create(:name => 'Default Workflow', :description => 'This workflow should eventually be deleted.', :model_id => 1)
+    #TODO: use Workflow.where(:id => params[:id]) instead of using the user id for the workflow id
+    workflow = Workflow.where(:id => session[:user_id]).first_or_create(:name => 'Default Workflow', :description => 'This workflow should eventually be deleted.', :model_id => 1)
     start_block = Block.where('workflow_id = ? and sort_index = 0', workflow.id).first
     new_run = Run.create({:user_id => session[:user_id],
                           :workflow_id => workflow.id,
                           :block_id => start_block.id
                         })
-    redirect_to :action => 'expert_workflow', :id => start_block.id, :run_id => new_run.id # TODO: This should be a POST request, but all redirects are GET requests.
+    redirect_to :action => 'expert_workflow', :input_values => {:id => start_block.id, :run_id => new_run.id}, :first_block => true # TODO: This should be a POST request, but all redirects are GET requests.
   end
     
   def create_workflow
@@ -159,18 +173,20 @@ class WorkflowController < ApplicationController
   end
   
   def variables_hash_for_run(run)
-    workflow = run.workflow
-    model = workflow.model
+    workflow = Workflow.find(session[:user_id])#run.workflow
+    #model = Model.find(:all, :order=>:id).last #TODO: THIS IS HORRIBLE
+    model = Model.find(4)
     run_values = run.run_values
     variables_hash = {} #stores formulas and values to be passed to the evaluator
     for v in model.variables do
       variables_hash[v.name] = {:formula => v.expression_object}
       variables_hash[v.name][:index_names] = v.index_names.order(:sort_index).collect{|i| i.name}
     end
+    puts "VARIABLES HASH FOR RUN: RUN_VALUES: "+run_values.inspect
     for v in run_values do
       varname = v.variable.name
       value = v.value
-      variables_hash[varname] = {:value => value}
+      variables_hash[varname] = {:value => value.to_f}
     end
     return variables_hash
   end

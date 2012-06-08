@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
     layout "application"
   
-  before_filter :prevent_caching, :verify_login
+  before_filter :prevent_caching, :verify_login, :verify_model
   
   def prevent_caching
     response.headers['Cache-Control'] = 'no-cache, no-store, max-age=0, must-revalidate'
@@ -13,6 +13,12 @@ class ApplicationController < ActionController::Base
   def verify_login
     if User.where(:id => session[:user_id]).empty?
       redirect_to login_path
+    end
+  end
+  
+  def verify_model
+    if session[:model_id].nil?
+      redirect_to :controller => "models", :action => "new"
     end
   end
   

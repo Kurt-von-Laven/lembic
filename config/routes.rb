@@ -21,6 +21,9 @@ Lembic::Application.routes.draw do
   match '/evaluator', to: 'workflow#evaluate', as: 'evaluator'
   match '/run/:id', to: 'workflow#start_run', as: 'run'
   match '/workflow', to: 'workflow#expert_workflow', as: 'workflow'
+  match '/workflow/post_block_input', to: 'workflow#expert_workflow', as: 'post_block_input'
+  match '/models/create', to:'models#create', as: 'create'
+  match '/models/show', to:'models#show', as: 'show'
 
   match '/fullvariable', to: 'editor#full_variable', as: 'fullvariable'
 

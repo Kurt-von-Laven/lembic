@@ -1,6 +1,6 @@
 
-require Rails.root.join('app/helpers/expression')
-require Rails.root.join('app/helpers/parser')
+require './app/helpers/expression'
+require './app/helpers/parser'
 require "date"
 
 # Class Evaluator
@@ -293,6 +293,17 @@ class Evaluator
     end
 
     formula = globals[varname][:formula]
+    
+    puts "EVALUATE VARIABLE FORMULA: "+formula.inspect
+    if formula.nil?
+      if index_values
+        globals[varname][:values][index_values] = 0.0/0.0 #NaN
+      else
+        #scalar
+        globals[varname][:value] = 0.0/0.0
+      end
+      return 0.0/0.0
+    end
     
     raise ArgumentError, "Error: formula for variable `#{varname}` must be an expression object.  Was #{formula.class}" if !formula.instance_of?(Expression)
     

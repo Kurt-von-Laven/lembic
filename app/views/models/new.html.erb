@@ -1,5 +1,29 @@
 <h1>New Model</h1>
 
-<%= render 'form' %>
+<%= form_for(@model, :url => "/models/create") do |f| %>
+	
+	<!--Server-side errors, if any-->
+	<% if @model.errors.any? %>
+		<div>
+			<h2><%= pluralize(@model.errors.count, "error") %> prohibited this post from being saved:</h2>
+			<ul>
+				<% @model.errors.full_messages.each do |msg| %>
+					<li><%= msg %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+	
+	<!--Form fields-->
+	<%= f.label :name %><br/>
+	<%= f.text_field :name %><br/>
+	
+	<%= f.label :description %><br/>
+	<%= f.text_area :description %><br/>
+	
+	<%= f.submit :class => "button" %><br/>
+	
+<% end %>
+
 
 <%= link_to 'Back', models_path %>

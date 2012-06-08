@@ -28,10 +28,11 @@ class ViewEditorController < ApplicationController
 
       # Find the block these variables are for
       block_name = form_hash[:name]
-        block = Block.find_by_name(block_name)
-        if block.nil?
-            flash[:block_failed] = "Sorry, we could not find that block. Please try again."
-        end
+      block = Block.find_by_name(block_name)
+      if block.nil?
+          flash[:block_failed] = "Sorry, we could not find that block. Please try again."
+          return
+      end
 
       # Create parser for parsing expression strings
       parser = Parser.new

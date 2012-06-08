@@ -79,8 +79,9 @@ class Variable < ActiveRecord::Base
       merged_var['expression_string'] = nil
     end
     new_var = Variable.new(merged_var)
-    new_var.save
+    save_succeeded = new_var.save
     IndexName.create_from_declaration(form_hash['name'], new_var.id)
+    return save_succeeded
   end
   
   def self.create_constant_array(form_hash, model_id)

@@ -1,0 +1,29 @@
+<%= form_for(@model, :url => "/models/create", :html => {:class => "input_form"}) do |f| %>
+	
+	<!--Server-side errors, if any-->
+	<% if @model.errors.any? %>
+		<div>
+			<h2><%= pluralize(@model.errors.count, "error") %> prohibited this post from being saved:</h2>
+			<ul>
+				<% @model.errors.full_messages.each do |msg| %>
+					<li><%= msg %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+	
+	<!--Form fields-->
+	<div id="var_input_block">
+		<div>
+			<%= f.label :name %>
+			<%= f.text_field :name %>
+		</div>
+		<div>
+			<%= f.label :description %>
+			<%= f.text_area :description %>
+		</div>
+	</div>
+	<div id="input_button">
+		<%= f.submit :class => "button" %><br/>
+	</div>
+<% end %>

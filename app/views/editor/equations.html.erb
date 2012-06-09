@@ -9,6 +9,14 @@
 
 <h1>Equation Editor</h1>
 <div id="current_model">
+	<% logger.debug(@user_models.nil?)%>
+	
+	<%= form_tag(current_model_path) do |f| %>
+		<%= select_tag(:user_models, options_from_collection_for_select(@user_models, 'id', 'name', 
+											:selected => session[:model_id]), :prompt => 'Select Model') %>
+		<%= submit_tag() %>
+	<% end %>
+
 	Current Model: <span style="font-weight: bold"> <%= Model.find(session[:model_id]).name %> </span>
 </div>
 <%= render(:partial => 'flash_message', :locals => {:flash_symbol => :variable_not_saved, :tag => 'div', :class_name => 'error'}) %>

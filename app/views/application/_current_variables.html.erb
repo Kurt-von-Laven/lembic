@@ -19,7 +19,6 @@
 		<td><%= variable.variable_type_string %>
 		<td><%= variable.name_with_indices %> = <%= truncate(variable.expression_string, :length =>17, :omission => '...(continued)') %></td>
         <td>
-       <!-- <%= link_to "Show All!", fullvariable_path(:name => variable.name_with_indices, :model_id => variable.model_id), :target => "_blank"%> -->
 		<a class = "dialog_link" index="<%=variable.id%>">Show All</a>
         </td>
 		

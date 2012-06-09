@@ -11,7 +11,7 @@ Lembic::Application.routes.draw do
 
   match '/view_editor/edit_question', to: 'view_editor#edit_question', as: 'edit_question'
   match '/view_editor/delete_block', to: 'view_editor#delete_block', as: 'delete_block'
-  match '/view_editor/delete_block/:id', to: 'view_editor#delete_block', as: 'delete_block' # TODO: Figure out if we need the dot.
+  match '/view_editor/delete_block/:id', to: 'view_editor#delete_block', as: 'delete_block'
   match '/home', to: 'home#home', as: 'home'
   match '/help', to: 'help#help', as: 'help'
   match '/equation_editor/equations', to: 'editor#equations', as: 'equations'

@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
     layout "application"
   
-  before_filter :prevent_caching, :verify_login, :verify_model
+  before_filter :prevent_caching, :verify_login, :verify_model, :user_models
   
   def prevent_caching
     response.headers['Cache-Control'] = 'no-cache, no-store, max-age=0, must-revalidate'
@@ -43,7 +43,6 @@ class ApplicationController < ActionController::Base
     else
       session[:model_id] = new_model_id
     end
-    @user_models = User.find(session[:user_id]).models.sort
   end
   
 end

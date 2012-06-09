@@ -1,4 +1,6 @@
 class ModelsController < ApplicationController
+  
+  skip_before_filter :verify_model, :only => ["create", "new"]
   def index
     @models = Model.all # TODO: only load models for which this user has a valid model_permission
   end
@@ -8,10 +10,16 @@ class ModelsController < ApplicationController
   end
 
   def create
-    @model = Model.new(params[:model])
-    
-    if @model.save
-      redirect_to @model, :notice => 'Model was successfully created.'
+    @model = Model.new(params["model"])
+    save_successful = false
+    ActiveRecord::Base.transaction do
+      save_successful = @model.save
+      model_permissions = ModelPermission.new({:user_id => session[:user_id], :model_id => @model.id, :sort_index => User.find(session[:user_id]).models.length, :permissions => 0})
+      save_successful &&= model_permissions.save
+    end
+    if save_successful
+      redirect_to :action => "index", :notice => 'Model was successfully created.'
+      session[:model_id] = @model.id
     else
       render :action => "new"
     end

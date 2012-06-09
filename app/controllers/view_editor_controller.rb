@@ -28,10 +28,11 @@ class ViewEditorController < ApplicationController
 
       # Find the block these variables are for
       block_name = form_hash[:name]
-        block = Block.find_by_name(block_name)
-        if block.nil?
-            flash[:block_failed] = "Sorry, we could not find that block. Please try again."
-        end
+      block = Block.find_by_name(block_name)
+      if block.nil?
+          flash[:block_failed] = "Sorry, we could not find that block. Please try again."
+          return
+      end
 
       # Create parser for parsing expression strings
       parser = Parser.new
@@ -67,13 +68,13 @@ class ViewEditorController < ApplicationController
     end
     
     ## Set variables used by views for rendering
-    @variables = Variable.where(:model_id => session[:user_id]).order(:name)
-    @blocks = Block.where(:workflow_id => session[:user_id]).order(:sort_index)
+    @variables = Variable.where(:model_id => session[:model_id]).order(:name)
+    @blocks = Block.where(:workflow_id => session[:user_id]).order(:sort_index) # TODO: workflow_id should eventually be set correctly.
 
   end
   
   def edit_question
-    @variables = Variable.where(:model_id => session[:user_id]).order(:name)
+    @variables = Variable.where(:model_id => session[:model_id]).order(:name)
   end
   
   def find_blocknames

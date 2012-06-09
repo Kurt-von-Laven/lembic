@@ -3,19 +3,20 @@
 <% id = @run.id %>
 <% block_variables = @block.block_variables().order(:sort_index) %>
 <%= form_for :input_values, :url => "/workflow/post_block_input" do |f| %>
-    <%= f.hidden_field :run_id, :value =>id %>
+    <%= f.hidden_field :run_id, :value=>id %>
+    <%= f.hidden_field :id, :value=>@block.id %>
     <% for v in block_variables %>
    
         <% if v.display_type == :input %>
         <div>
-            <p>
+            <p><%= v.variable.name %>: 
           <%= f.text_field v.variable_id %>
           </p>
         </div>
         <% else %>
         <div class="centered">
           <p>
-            <%= v.variable().name %> = 
+            <%= v.variable().name %> =
             <%= @evaluator.eval_variable(v.variable().name, @variables_hash, nil) %>
           </p>
         </div>

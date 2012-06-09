@@ -267,6 +267,10 @@ h3 {
 	margin: 0 0 0 50px;
 }
 
+.input_form textarea{
+	width:35%;
+	height: 300px;
+}
 .input_formB{
 	border-radius:10px;
     -moz-border-radius:10px; /* Firefox 3.6 and earlier */

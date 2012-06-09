@@ -18,7 +18,10 @@ class ApplicationController < ActionController::Base
   
   def verify_model
     if session[:model_id].nil?
-      redirect_to :controller => "models", :action => "new"
+      session[:model_id] = User.find(session[:user_id]).models.first
+      if session[:model_id].nil?
+        redirect_to :controller => "models", :action => "new"
+      end
     end
   end
   

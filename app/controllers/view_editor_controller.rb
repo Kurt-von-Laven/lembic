@@ -1,6 +1,10 @@
 class ViewEditorController < ApplicationController
   def edit_block
     
+    ## Set variables used by views for rendering
+    @variables = Variable.where(:model_id => session[:model_id]).order(:name)
+    @blocks = Block.where(:workflow_id => session[:user_id]).order(:sort_index) # TODO: workflow_id should eventually be set correctly.
+    
     # Create block to be used by form_for
     @block = Block.new
     
@@ -21,57 +25,43 @@ class ViewEditorController < ApplicationController
     
     form_hash = params[:create_block_outputs]
     create_block_variables(form_hash, :output)
+    
+    
 
     ## Check for form data for creating a block_connection
     form_hash = params[:create_block_connections]
     if !form_hash.nil?
 
-      # Find the block these variables are for
-      block_name = form_hash[:name]
-      block = Block.find_by_name(block_name)
-      if block.nil?
-          flash[:block_failed] = "Sorry, we could not find that block. Please try again."
+      from_block_name = form_hash[:from_name]
+      from_block = Block.find_by_name(from_block_name)
+      if from_block.nil?
+          flash[:block_failed] = "Could not find block named #{from_block_name}."
           return
       end
-
-      # Create parser for parsing expression strings
-      parser = Parser.new
-
-      # Iterate through lines in the connections string
-      form_hash[:connections_string].lines do |line|
-
-        # Parse the line into a block name and expression
-        tokens = line.split("=>")
-        if tokens.length != 2 # TODO: get better input validation
-          next
-        end
-        expression_string = tokens[0].strip # TODO: catch and handle parser errors
-        next_block_name = tokens[1].strip
+      
+      to_block_name = form_hash[:to_name]
+      to_block = Block.find_by_name(to_block_name)
+      if to_block.nil?
+          flash[:block_failed] = "Could not find block named #{to_block_name}."
+          return
+      end
+      
+      #parser = Parser.new
+      
+      expression_string = form_hash[:expression_string]
         
-        # Find the next block
-        next_block = Block.find_by_name(next_block_name)
-        if next_block.nil?
-          flash[:block_failed] =  "Could not find next block '#{next_block_name}' by name"
-          next
-        end
-        
-        # Determine the sort_index
-        sort_index = block.block_connections.size
+      # Determine the sort_index
+      sort_index = from_block.block_connections.size
 
-        # Create a block connection with the specified next_block and expression
-        block_connection_hash = {:next_block_id => next_block.id, :expression_string => expression_string, :sort_index => sort_index}
-        bc = block.block_connections.create(block_connection_hash)
-        if bc.nil?
-          flash[:block_failed] = "Failed to create block_connection from hash => #{block_connection_hash}"
-        end
+      # Create a block connection with the specified next_block and expression
+      block_connection_hash = {:next_block_id => to_block.id, :expression_string => expression_string, :sort_index => sort_index}
+      bc = from_block.block_connections.create(block_connection_hash)
+      if bc.nil?
+        flash[:block_failed] = "Failed to create block_connection from hash => #{block_connection_hash}"
       end
     end
     
-    ## Set variables used by views for rendering
-    @variables = Variable.where(:model_id => session[:model_id]).order(:name)
-    @blocks = Block.where(:workflow_id => session[:user_id]).order(:sort_index) # TODO: workflow_id should eventually be set correctly.
-
-  end
+  end # edit_block
   
   def edit_question
     @variables = Variable.where(:model_id => session[:model_id]).order(:name)

@@ -306,6 +306,14 @@ class TestParserParse < Test::Unit::TestCase
     assert_equal("a +    b + c    * d", s)
   end
   
+  def test_boolean_true_and_false
+    assert_equal(1, @e.eval_expression(@p.parse("true"), {}, {}))
+    assert_equal(1, @e.eval_expression(@p.parse("True"), {}, {}))
+    assert_equal(0, @e.eval_expression(@p.parse("FALSE"), {}, {}))
+    assert_equal(0, @e.eval_expression(@p.parse("true == false"), {}, {}))
+    assert_equal(1, @e.eval_expression(@p.parse("false == false"), {}, {}))
+  end
+  
 =begin
   def test_large_model
     output = @e.eval_all([{:name => "o", :indices => {:min => 0, :max => 9999}}],

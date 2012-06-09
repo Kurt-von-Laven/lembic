@@ -235,6 +235,12 @@ class Evaluator
       elsif exp == "NaN"
         #exp is nan
         return 0.0/0.0
+      elsif exp.downcase == "true"
+        #exp is boolean true
+        return 1
+      elsif exp.downcase == "false"
+        #exp is boolean false
+        return 0
       elsif exp.match(/^[\d]+(\.[\d]*){0,1}$|^\.[\d]+$/)
         #exp is a number
         return exp.to_f

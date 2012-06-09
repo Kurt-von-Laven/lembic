@@ -125,6 +125,9 @@ class WorkflowController < ApplicationController
       @block = next_block
       @block_variables = next_block.block_variables().order(:sort_index)
       render 'expert_workflow'
+    else
+      #next block is nil, so workflow is done
+      redirect_to '/view_editor/edit_block'
     end
     # TODO: Show an error if next_block is nil.
   end
@@ -134,7 +137,7 @@ class WorkflowController < ApplicationController
   # sets the run's current block to the start block of the workflow
   # redirects to show the first block
   def start_run
-    workflow = Workflow.where(:id => session[:user_id]).first
+    workflow = Workflow.where(:id => session[:user_id]).first_or_create
     start_block = Block.where('workflow_id = ? and sort_index = 0', workflow.id).first
     new_run = Run.create({:user_id => session[:user_id],
                           :workflow_id => workflow.id,

@@ -1,7 +1,0 @@
-<h1>Equation Editor</h1>
-
-Please choose a model to edit equations for:<br/>
-
-<% @models.each do |model| %>
-	<%= link_to model.name, equations_path(model) %><br/>
-<% end %>

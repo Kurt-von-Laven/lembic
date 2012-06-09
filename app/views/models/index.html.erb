@@ -22,12 +22,16 @@
 				<td><%= button_to 'Edit', edit_model_path(model), :method => :get %></td>
 				<td><%= link_to 'Equation Editor', equations_path(model) %></td>
 				<td><%=link_to 'Block Editor' %></td>
-				<td><%= button_to 'Destroy', model, :confirm => 'Are you sure you want to delete this model and all its associated data, including variables and relations? This cannot be undone...', :method => :delete %></td>
+				<td><%= button_to 'x', model, :confirm => 'Are you sure you want to delete this model and all its associated data, including variables and relations? This cannot be undone...', :method => :delete %></td>
 			</tr>
 		<% end %>
 	</tbody>  
 </table>
-
-<br/>
-
-<%= button_to 'New Model', new_model_path, :method => :get %>
+	</
+ <%= form_for(:new, :method => :get,  :url=>"/models/new") do |f| %>
+	<div id="input_button">
+		<%= f.submit("New Model", :class => "button") %>
+	</div>
+ <% end %>
+ 
+	

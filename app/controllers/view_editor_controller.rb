@@ -151,4 +151,32 @@ class ViewEditorController < ApplicationController
     redirect_to :back
   end
   
+  #params[:id] is the id of the block to move
+  #params[:sort_index] is the new sort index for the block.  The other blocks are moved to accomodate the new position of the block.
+  def reorder_block
+    moved_block = Block.find(params[:id])
+    old_sort_index = moved_block.sort_index
+    new_sort_index = params[:sort_index]
+    
+    #shift the sort_indices of the blocks between the old and new sort_index up or down
+    Block.transaction do
+      if new_sort_index < old_sort_index
+        blocks_to_shift = Block.where("sort_index < ? and sort_index >= ? and workflow_id = ? ", old_sort_index, new_sort_index, block.workflow_id)
+        blocks_to_shift.each do |b|
+          b.sort_index += 1
+          b.save :validate => false
+        end
+      elsif new_sort_index > old_sort_index
+        blocks_to_shift = Block.where("sort_index =< ? and sort_index > ? and workflow_id = ? ", new_sort_index, old_sort_index, block.workflow_id)
+        blocks_to_shift.each do |b|
+          b.sort_index -= 1
+          b.save :validate => false
+        end
+      end
+      block.sort_index = new_sort_index
+      block.save
+    end
+    
+  end
+  
 end

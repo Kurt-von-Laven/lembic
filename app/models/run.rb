@@ -1,5 +1,5 @@
 class Run < ActiveRecord::Base
-  attr_accessible :id, :block_id, :user_id, :workflow_id, :description, :completed_at
+  attr_accessible :id, :block_id, :user_id, :workflow_id, :description, :completed_at, :created_at, :updated_at
   
   validates_presence_of :block_id, :user_id, :workflow_id
   

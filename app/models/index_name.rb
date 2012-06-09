@@ -1,5 +1,5 @@
 class IndexName < ActiveRecord::Base
-  attr_accessible :name, :variable_id, :sort_index
+  attr_accessible :id, :name, :variable_id, :sort_index, :created_at, :updated_at
   
   SORT_INDEX_SCOPE = :variable_id
   

@@ -1,5 +1,5 @@
 class RunValue < ActiveRecord::Base
-  attr_accessible :id, :run_id, :variable_id, :index_values, :value
+  attr_accessible :id, :run_id, :variable_id, :index_values, :value, :created_at, :updated_at
   
   serialize :index_values
   

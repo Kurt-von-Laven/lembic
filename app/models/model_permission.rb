@@ -1,5 +1,5 @@
 class ModelPermission < ActiveRecord::Base 
-  attr_accessible :id, :permissions, :sort_index, :model_id, :user_id
+  attr_accessible :id, :permissions, :sort_index, :model_id, :user_id, :created_at, :updated_at
   
   SORT_INDEX_SCOPE = :user_id
   

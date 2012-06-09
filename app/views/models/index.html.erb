@@ -21,7 +21,7 @@
 				<td><%= button_to 'Show', model, :method => :get %></td>
 				<td><%= button_to 'Edit', edit_model_path(model), :method => :get %></td>
 				<td><%= link_to 'Equation Editor', equations_path(model) %></td>
-				<td><%=link_to 'View Editor' %></td>
+				<td><%=link_to 'Block Editor' %></td>
 				<td><%= button_to 'x', model, :confirm => 'Are you sure you want to delete this model and all its associated data, including variables and relations? This cannot be undone...', :method => :delete %></td>
 			</tr>
 		<% end %>

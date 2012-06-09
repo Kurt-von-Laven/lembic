@@ -1,9 +1,20 @@
 <% @title = "Evaluator" %>
 
+
+
 <h1>Evaluate</h1>
 <div id="current_model">
 	Current Model: <span style="font-weight: bold"> <%= Model.find(session[:model_id]).name %> </span>
 </div>
+<div id="evaluator_output">
+		<h2>Output Values</h2>
+		<ul class="output_values">
+		  <% i = 0 %>
+		  <% for output_variable_name, output_variable_value in @output_variables %>
+			<li><%= output_variable_name%> = <span style="font-weight: bold"> <%=output_variable_value.to_s %></span></li>
+		  <% end %>
+		</ul>
+  </div>
 <%= form_for(:evaluator, :html => {:class => "evaluator"}) do |f| %>
   <div>
 	<div style="text-align: center">
@@ -46,15 +57,6 @@
 	</div>
  </div>
 <% end %>
-  <div id="evaluator_output">
-		<h2>Output Values</h2>
-		<ul class="output_values">
-		  <% i = 0 %>
-		  <% for output_variable_name, output_variable_value in @output_variables %>
-			<li><%= output_variable_name%> = <span style="font-weight: bold"> <%=output_variable_value.to_s %></span></li>
-		  <% end %>
-		</ul>
-  </div>
  <div style="margin-top: 60px">
 	<h1> Contents of Current Model </h1>
 	<%= render "current_variables" %>

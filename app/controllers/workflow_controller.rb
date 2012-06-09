@@ -134,9 +134,7 @@ class WorkflowController < ApplicationController
   # sets the run's current block to the start block of the workflow
   # redirects to show the first block
   def start_run
-    Model.where(:id => 1).first_or_create(:name => 'Default Model', :description => 'This model should eventually be deleted.')
-    #TODO: use Workflow.where(:id => params[:id]) instead of using the user id for the workflow id
-    workflow = Workflow.where(:id => session[:user_id]).first_or_create(:name => 'Default Workflow', :description => 'This workflow should eventually be deleted.', :model_id => 1)
+    workflow = Workflow.where(:id => params[:id]).first
     start_block = Block.where('workflow_id = ? and sort_index = 0', workflow.id).first
     new_run = Run.create({:user_id => session[:user_id],
                           :workflow_id => workflow.id,
@@ -170,7 +168,7 @@ class WorkflowController < ApplicationController
   end
   
   def variables_hash_for_run(run)
-    workflow = Workflow.find(session[:user_id])#run.workflow
+    workflow = run.workflow
     model = Model.find(session[:model_id])
     run_values = run.run_values
     variables_hash = {} #stores formulas and values to be passed to the evaluator

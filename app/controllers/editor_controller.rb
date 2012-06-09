@@ -2,7 +2,7 @@ class EditorController < ApplicationController
   autocomplete :variable, :name
   
   def select
-    @models = Model.all
+    @models = Model.find(session[:model_id])
   end
   
   def equations

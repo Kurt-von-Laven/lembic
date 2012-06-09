@@ -1,6 +1,9 @@
 <% @title = "Evaluator" %>
-<h1>Evaluate</h1>
 
+<h1>Evaluate</h1>
+<div id="current_model">
+	Current Model: <span style="font-weight: bold"> <%= Model.find(session[:model_id]).name %> </span>
+</div>
 <%= form_for(:evaluator, :html => {:class => "evaluator"}) do |f| %>
   <div>
 	<div style="text-align: center">

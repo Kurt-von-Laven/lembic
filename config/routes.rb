@@ -13,8 +13,7 @@ Lembic::Application.routes.draw do
   match '/view_editor/delete_block:id', to: 'view_editor#delete_block', as: 'delete_block' # TODO: Figure out if we need the dot.
   match '/home', to: 'home#home', as: 'home'
   match '/help', to: 'help#help', as: 'help'
-  match '/equation_editor/equations/:model_id', to: 'editor#equations', as: 'equations'
-  match '/equation_editor/equations', to: 'editor#select', as: 'equations_select'
+  match '/equation_editor/equations', to: 'editor#equations', as: 'equations'
   match '/equation_editor/variable', to: 'editor#variable', as: 'variable'
   match '/equation_editor/delete_variable', to: 'editor#delete_variable', as: 'delete_variable'
   match '/equation_editor/delete_relationship/:id', to: 'editor#delete_relationship', as: 'delete_relationship'

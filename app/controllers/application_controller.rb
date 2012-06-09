@@ -18,7 +18,10 @@ class ApplicationController < ActionController::Base
   
   def verify_model
     if session[:model_id].nil?
-      redirect_to :controller => "models", :action => "new"
+      session[:model_id] = User.find(session[:user_id]).models.first
+      if session[:model_id].nil?
+        redirect_to :controller => "models", :action => "new"
+      end
     end
   end
   
@@ -26,6 +29,21 @@ class ApplicationController < ActionController::Base
     if !User.where(:id => session[:user_id]).empty?
       redirect_to home_path
     end
+  end
+  
+  def user_models
+    @user_models = User.find(session[:user_id]).models.sort
+  end
+  
+  def set_current_model
+    new_model_id = params[:model_id]
+    new_model = ModelPermission.where(:user_id => session[:user_id], :model_id => new_model_id).first
+    if new_model.nil?
+      flash[:invalid_model_id] = 'You tried to select a model that either doesn\'t exist or that you don\'t have permission to see.'
+    else
+      session[:model_id] = new_model_id
+    end
+    @user_models = User.find(session[:user_id]).models.sort
   end
   
 end

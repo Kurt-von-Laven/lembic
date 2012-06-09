@@ -6,8 +6,7 @@ class EditorController < ApplicationController
   end
   
   def equations
-    model_id = params[:model_id]
-    session[:model_id] = model_id
+    model_id = session[:model_id]
     new_equation = params[:new_equation]
     if !new_equation.nil?
       begin

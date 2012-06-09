@@ -139,4 +139,16 @@ class ViewEditorController < ApplicationController
     redirect_to :back
   end
   
+  def delete_block_connection
+    block_connection = BlockConnection.find(params[:id])
+    block_connection.destroy
+    redirect_to :back
+  end
+  
+  def delete_block_variable
+    block_variable = BlockVariable.find(params[:id])
+    block_variable.destroy
+    redirect_to :back
+  end
+  
 end

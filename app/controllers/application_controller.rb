@@ -43,6 +43,7 @@ class ApplicationController < ActionController::Base
     else
       session[:model_id] = new_model_id
     end
+    redirect_to :back
   end
   
 end

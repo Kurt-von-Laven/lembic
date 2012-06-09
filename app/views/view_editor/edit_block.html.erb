@@ -1,7 +1,9 @@
 <% @title = "Edit Block" %>
 
 <h1>Edit Blocks</h1>
-
+<div id="current_model">
+	Current Model: <span style="font-weight: bold"> <%= Model.find(session[:model_id]).name %> </span>
+</div>
 <%= render(:partial => 'flash_message', :locals => {:flash_symbol => :block_failed, :tag => 'div', :class_name => 'error'}) %>
 
 <div style="width: 100%; height: 700px;">
@@ -18,7 +20,7 @@
                                 <li><a href="#tabs-3">Add Outputs</a></li>
 				<li><a href="#tabs-4">Add Connections</a></li>
 			  </ul>
-                <!-- TAB 1 -->
+                <!-- CREATE BLOCK -->
 				<div id="tabs-1">
                     <%= form_for(:create_block, :html => {:class => "input_formB"}) do |f| %>
 					 <div id="var_input_block">
@@ -33,7 +35,7 @@
                     <% end %>
                 </div>
                 
-                 <!-- TAB2 -->
+                 <!-- ASSIGN VARIABLES -->
                 <div id = "tabs-2">
                     Please enter one per line. <br />
                     <%= form_for(:create_block_inputs, :html => {:class => "input_formB"}) do |f| %>
@@ -57,7 +59,7 @@
                     <% end %>
                 </div>
 
-                <!--TAB3 -->      
+                <!--ADD OUTPUTS -->      
 				<div id="tabs-3">
                 <%= form_for(:create_block_outputs, :html => {:class => "input_formB"}) do |f| %>
 					<div id="var_input_block">
@@ -71,7 +73,7 @@
 						</div>
 						<div>
 							<%= f.label(:formatting, "Format:") %>
-							<%= f.select(:formatting, [['Graph', 'graph'], ['Integer', 'integer'], ['Percentage', 'percent']]) %>
+							<%= f.select(:formatting, [['Integer', 'integer'], ['Percentage', 'percent']]) %>
 						</div>
 					</div>
 					<div id="input_button">
@@ -80,22 +82,25 @@
                 <% end %>
                 </div>
                 
-                <!-- TAB4 -->
+                <!-- ADD CONNECTIONS -->
 				<div id="tabs-4">
-					Enter connections to get to next block after this one, one per line.<br/>
-					Each connection has a block name, an arrow (=>), and a boolean expression<br/>
-					Example: 'has_ac == true => AC_Block'
-					Please do not add empty lines.
-					Block connections, one per line: 
+					
+					Example of Logic for Transition: 'has_ac == true => AC_Block'
                     <%= form_for(:create_block_connections, :html => {:class => "input_formB"}) do |f| %>
 					<div id="var_input_block">
 						<div>
-							<%= f.label(:name, "Name of Block: ") %>
-							<%= f.text_field :name, :class => "auto_complete_blocks" %>
+							<%= f.label(:name, "From Block: ") %>
+							<%= f.text_field :from_name, :class => "auto_complete_blocks" %>
 						</div>
+                        <div>
+                            <%= f.label(:name, "To Block: ") %>
+							<%= f.text_field :to_name, :class => "auto_complete_blocks" %>
+                        
+                        </div>
+                        
 						<div>
-							<%= f.label(:connections_string, "Block Connections: ") %>
-							<%= f.text_area :connections_string %>
+							<%= f.label(:expression_string, "Logic for Transition: ") %>
+							<%= f.text_field :expression_string %>
 						</div>
 					</div>
 					<div id="input_button">

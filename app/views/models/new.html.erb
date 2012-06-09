@@ -1,6 +1,6 @@
 <h1>New Model</h1>
 
-<%= form_for(@model, :url => "/models/create") do |f| %>
+<%= form_for(@model, :url => "/models/create", :html => {:class => "input_form"}) do |f| %>
 	
 	<!--Server-side errors, if any-->
 	<% if @model.errors.any? %>
@@ -15,15 +15,20 @@
 	<% end %>
 	
 	<!--Form fields-->
-	<%= f.label :name %><br/>
-	<%= f.text_field :name %><br/>
-	
-	<%= f.label :description %><br/>
-	<%= f.text_area :description %><br/>
-	
-	<%= f.submit :class => "button" %><br/>
-	
+	<div id="var_input_block">
+		<div>
+			<%= f.label :name %>
+			<%= f.text_field :name %>
+		</div>
+		<div>
+			<%= f.label :description %>
+			<%= f.text_area :description %>
+		</div>
+	</div>
+	<div id="input_button">
+		<%= f.submit :class => "button" %><br/>
+	</div>
 <% end %>
 
 
-<%= link_to 'Back', models_path %>
+<%= link_to '< Back', models_path %>

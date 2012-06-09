@@ -14,7 +14,8 @@ class ModelsController < ApplicationController
     save_successful = false
     ActiveRecord::Base.transaction do
       save_successful = @model.save
-      model_permissions = ModelPermission.new({:user_id => session[:user_id], :model_id => @model.id, :sort_index => User.find(session[:user_id]).models.length, :permissions => 0})
+      model_permissions = ModelPermission.new({:user_id => session[:user_id],
+                                                :model_id => @model.id, :sort_index => User.find(session[:user_id]).models.length, :permissions => 0})
       save_successful &&= model_permissions.save
     end
     if save_successful

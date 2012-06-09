@@ -134,7 +134,7 @@ class WorkflowController < ApplicationController
   # sets the run's current block to the start block of the workflow
   # redirects to show the first block
   def start_run
-    workflow = Workflow.where(:id => params[:id]).first
+    workflow = Workflow.where(:id => session[:user_id]).first
     start_block = Block.where('workflow_id = ? and sort_index = 0', workflow.id).first
     new_run = Run.create({:user_id => session[:user_id],
                           :workflow_id => workflow.id,
@@ -144,8 +144,17 @@ class WorkflowController < ApplicationController
   end
     
   def create_workflow
-    Workflow.create(params[:workflow])
-    # TODO: give current user permissions for this workflow in WorkflowPermissions table
+    Workflow.transaction do
+      new_workflow = Workflow.new(params[:workflow])
+      save_successful = new_workflow.save
+      permission = WorkflowPermission.new(:user_id => session[:user_id], :workflow_id => new_workflow.id, :permissions => 0)
+      save_successful &&= permission.save
+    end
+    if save_successful
+      flash[:workflow_created] = 'Workflow successfully created.'
+    else
+      flash[:workflow_creation_failed] = new_workflow.errors.full_messages.join(' ')
+    end
   end
   
   def add_block_to_workflow

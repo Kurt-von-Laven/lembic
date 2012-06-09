@@ -2,7 +2,7 @@ class ModelsController < ApplicationController
   
   skip_before_filter :verify_model, :only => ["create", "new"]
   def index
-    @models = Model.all # TODO: only load models for which this user has a valid model_permission
+    @models = User.find(session[:user_id]).models
   end
 
   def new
@@ -19,8 +19,8 @@ class ModelsController < ApplicationController
       save_successful &&= model_permissions.save
     end
     if save_successful
-      redirect_to :action => "index", :notice => 'Model was successfully created.'
       session[:model_id] = @model.id
+      redirect_to :action => "index", :notice => 'Model was successfully created.'
     else
       render :action => "new"
     end

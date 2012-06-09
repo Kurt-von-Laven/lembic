@@ -8,6 +8,9 @@
 </script>
 
 <h1>Equation Editor</h1>
+<div id="current_model">
+	Current Model: <span style="font-weight: bold"> <%= Model.find(session[:model_id]).name %> </span>
+</div>
 <%= render(:partial => 'flash_message', :locals => {:flash_symbol => :variable_not_saved, :tag => 'div', :class_name => 'error'}) %>
 <div id="tabs">
   <ul>

@@ -3,8 +3,8 @@ require 'csv'
 module CsvImporter
     
   INDEX = 'i' # The index used for constant arrays.
-    
-  def CsvImporter.parse_csv_expression(csv_data, start_row_one_indexed, column_number_one_indexed, variable_type)
+  
+  def CsvImporter.parse_csv_to_array(csv_data, start_row_one_indexed, column_number_one_indexed, variable_type)
     start_row = start_row_one_indexed - 1
     column_number = column_number_one_indexed - 1
     converter = case variable_type
@@ -30,7 +30,11 @@ module CsvImporter
       #convert to Lembic datetime
       desired_column_with_nans = desired_column_with_nans.collect{|i| date_convert(i)}
     end
-    desired_values_as_str = desired_column_with_nans.join(', ')
+    return desired_column_with_nans()
+  end
+    
+  def CsvImporter.parse_csv_expression(csv_data, start_row_one_indexed, column_number_one_indexed, variable_type)
+    desired_values_as_str = parse_csv_to_array(csv_data, start_row_one_indexed, column_number_one_indexed, variable_type).join(', ')
     return "[ #{INDEX} | #{desired_values_as_str}]"
   end
   

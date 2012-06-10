@@ -6,12 +6,34 @@
     <%= f.hidden_field :run_id, :value=>id %>
     <%= f.hidden_field :id, :value=>@block.id %>
     <% for v in block_variables %>
+        
    
         <% if v.display_type == :input %>
         <div>
-            <p><%= v.variable.name %>: 
-          <%= f.text_field v.variable_id %>
-          </p>
+            <% fields_for "input_values[input_vars][]" do |input_var| %>
+                <%= f.hidden_field :variable_id, :value => v.variable_id %>
+                <div>
+                <% if v.variable.index_names.length > 0 %>
+                    <%= v.variable.name %>
+                    <%= input_var.text_field "start_row" %>
+                    <div>
+                        <%= f.label(:column_number, "Column of array ") %>
+                        <%= f.text_field(:column_number, :class => "numeric_input") %>
+                    </div>
+                    <div>
+                        <%= f.label(:start_row, "First row of array ") %>
+                        <%= f.text_field(:start_row, :class => "numeric_input") %> 
+                    </div>
+                    <div id="choose_file">
+                        <%= f.label(:data_file, "Select a CSV file.") %>
+                        <%= f.file_field(:data_file, :class => "choose_file") %>
+                    </div>
+                <% else %>
+                    <%= v.variable.name %>: 
+                    <%= input_var.text_field "value" %>
+                <% end %>
+                </div>
+            <% end %>
         </div>
         <% else %>
         <div class="centered">

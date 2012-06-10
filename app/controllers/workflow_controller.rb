@@ -1,6 +1,7 @@
 require Rails.root.join('app/helpers/expression')
 require Rails.root.join('app/helpers/evaluator')
 require Rails.root.join('app/helpers/parser')
+require 'csv_importer'
 
 
 class WorkflowController < ApplicationController
@@ -98,7 +99,9 @@ class WorkflowController < ApplicationController
     if !input_values.nil?
       for var_id, val in input_values do
         next if var_id == "run_id" || var_id == "id" #THIS IS SO GROSS EWWWW EW EW EW
+        csv_data = val.read
         RunValue.create({:run_id => @run.id, :variable_id => var_id, :value => val})
+        
       end
     end
     @variables_hash = variables_hash_for_run(@run)
@@ -137,9 +140,10 @@ class WorkflowController < ApplicationController
   # sets the run's current block to the start block of the workflow
   # redirects to show the first block
   def start_run
-    start_block = Block.where('workflow_id = ? and sort_index = 0', workflow.id).first
+    workflow_id = params[:id]
+    start_block = Block.where('workflow_id = ? and sort_index = 0', workflow_id).first
     new_run = Run.create({:user_id => session[:user_id],
-                          :workflow_id => workflow.id,
+                          :workflow_id => workflow_id,
                           :block_id => start_block.id
                         })
     redirect_to :action => 'expert_workflow', :input_values => {:id => start_block.id, :run_id => new_run.id}, :first_block => true # TODO: This should be a POST request, but all redirects are GET requests.
@@ -191,7 +195,14 @@ class WorkflowController < ApplicationController
     for v in run_values do
       varname = v.variable.name
       value = v.value
-      variables_hash[varname] = {:value => value.to_f}
+      if v.index_values
+        #variable is an array
+        variables_hash[varname][:values] ||= {}
+        variables_hash[varname][:values][v.index_values] = value.to_f
+      else
+        #variable is a scalar
+        variables_hash[varname] = {:value => value.to_f}
+      end
     end
     return variables_hash
   end

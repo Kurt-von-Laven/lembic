@@ -52,7 +52,7 @@ body {
     text-align: center;
 }
 
-#col_header {
+.col_header {
 	text-align: center;
 	background-color: #fff;
 	color:  #5c7e99;

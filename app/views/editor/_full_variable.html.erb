@@ -13,14 +13,16 @@
 	
 <h1><%= variable.name %></h1>
 		<table>
+                <tr>
 		<th> index </th>
 		<% for k in 1..10 %>
 				<th> <%= k %> </th>
 		<% end %>
+                </tr>
 		<% i = 0
 		while i < num %>
 			<tr>
-			<td id ="col_header"> <%= i %> </td>
+			<td class ="col_header"> <%= i %> </td>
 			<% for j in 1..10 %>
 				<td>
 				<%=comma_separated_array[i+j] %>

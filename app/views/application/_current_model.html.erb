@@ -9,4 +9,18 @@
 	<% end %>
 
 	Current Model: <span style="font-weight: bold"> <%= Model.find(session[:model_id]).name %> </span>
+
+
+	
+	<%= form_for(:workflow, :url => set_current_workflow_path) do |f| %>
+            <div>
+		<%= f.select(:id,
+		    options_from_collection_for_select(@workflows, 'id', 'name',
+		    :selected => session[:workflow_id]), :prompt => 'Select Workflow') %>
+		<%= f.submit %>
+             </div>
+	<% end %>
+
+	Current Workflow: <span style="font-weight: bold"> <%= Model.find(session[:workflow_id]).name %> </span>
 </div>
+

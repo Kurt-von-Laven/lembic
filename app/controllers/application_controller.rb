@@ -54,7 +54,6 @@ class ApplicationController < ActionController::Base
   
   def model_workflows
     @workflows = Model.find(session[:model_id]).workflows.order(:sort_index)
-    logger.debug("POCAHONTAS: #{@workflows.inspect}")
   end
   
 end

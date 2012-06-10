@@ -1,7 +1,6 @@
 
 <h3>Current Variables</h3>
-<table cellpadding="0" cellspacing="0" class="tablesorter" id =
-       "variables_table">
+<table cellpadding="0" cellspacing="0" class="tablesorter" id="variables_table">
   <thead>
     <tr>
       <th>Name</th>
@@ -29,7 +28,7 @@
             <td><%= variable.description %></td>
             <td><%= variable.variable_type_string %></td>
             <td><%= variable.name_with_indices %> = <%= truncate(variable.expression_string, :length =>17, :omission => '...(continued)') %></td>
-            <td><a class = "dialog_link" index="<%=variable.id%>">Show All</a></td>
+            <td><a class="dialog_link" index="<%=variable.id%>">Show All</a></td>
             
             <td align="center"><%= button_to "x", "#{delete_variable_path}?id=#{variable.id}&model_id=#{variable.model_id}",
                 {:confirm => "Are you sure you want to delete the variable named #{variable.name}?",
@@ -42,7 +41,7 @@
  
  <% for variable in @variables %>
   	<% d_id = "dialog_#{variable.id}"%>
-	<div id = "<%=d_id%>" style="display: none; width: 600px">
+	<div id="<%=d_id%>" style="display: none; width: 600px">
 		<%= render( :partial =>"full_variable", :locals => {:variable => variable}) %>
 	</div>
 <% end %>

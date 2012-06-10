@@ -1,6 +1,6 @@
-<h3> Current Workflows </h3>
-<div id = "truncated blocks">
-<table cellpadding="0" cellspacing="0" class = "tablesorter">
+<h3>Current Workflows</h3>
+<div id="truncated blocks">
+<table cellpadding="0" cellspacing="0" class="tablesorter">
 
 <!--Table Headers -->
 <thead>
@@ -11,7 +11,11 @@
 
 <!--Table Body -->
 <tbody>
-	
+  <% if @workflows.empty? %>
+    <tr>
+      <td>You currently have no workflows defined.</td>
+    </tr>
+  <% else %>
 	<!--Each Block on a row, with all its connections put together into a string -->
 	<!--TODO: Come up with a better way to display the blocks -->
 	<% num = 0
@@ -28,17 +32,17 @@
 	  <!--Render this block in HTML -->
       <td><%= name %></td>
       <td style="text-align: left;">
-        <a class = "dialog_link_workflow" index=<%= num%>> more </a>
+        <a class="dialog_link_workflow" index="<%= num%>">more</a>
         </td>
       <% d_id = "dialog_workflow_#{num}"%>
-			 <div id = "<%=d_id%>" style="display: none">
+			 <div id="<%=d_id%>" style="display: none">
              				<h1><%=name %></h1>
 				<p>Blocks: <%= myString %></p>
             </div>
       </tr>
       <% num += 1
         end %>
-	
+  <% end %>
 </tbody>  
 </table>
 </div>

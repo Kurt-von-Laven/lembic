@@ -108,7 +108,34 @@ body {
 	padding: 2px;
 	border-radius: 6px;
 	font-family: Garamond, Baskerville, "Times New Roman", serif;
-	font-size: 1em;
+	font-size: .8em;
+}
+#current_workflow {
+	padding: 10px;
+   -moz-border-radius: 6px;
+    border-radius: 6px;
+	background-color:  #fff8cb;
+	margin: 0px 5px 0px 5px;
+	text-align: left;
+	font-size: 1.4em;
+	color: #113855;
+}
+
+#current_workflow label {
+	width: 200px;
+	display: block;
+	float: left;
+}
+#current_workflow select {
+	width: 200px;
+	display: block;
+	float: left;
+	margin-right: 20px;
+	background-color: #dee6ed;
+	padding: 2px;
+	border-radius: 6px;
+	font-family: Garamond, Baskerville, "Times New Roman", serif;
+	font-size: .8em;
 }
 #current_model_button{
 	font-size: .7em;

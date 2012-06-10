@@ -10,7 +10,10 @@ module PersistableExpressions
   end
   
   def expression_string=(new_expression_string)
-    if !new_expression_string.nil?
+    if new_expression_string.nil?
+      self[:expression_string] = nil
+      self[:expression_object] = nil
+    else
       parser = Parser.new
       begin
         new_expression_object = parser.parse(new_expression_string)

@@ -27,7 +27,7 @@
         <tr>
             <td><%= variable.name_with_indices %> </td>
             <td><%= variable.description %></td>
-            <td><%= variable.variable_type_string %>
+            <td><%= variable.variable_type_string %></td>
             <td><%= variable.name_with_indices %> = <%= truncate(variable.expression_string, :length =>17, :omission => '...(continued)') %></td>
             <td><a class = "dialog_link" index="<%=variable.id%>">Show All</a></td>
             

@@ -493,6 +493,10 @@ border-radius:10px;
     font-size: .99em !important;
 }
 
+.tabs {
+    font-size: .99em !important;
+}
+
 /* tables */
 
 table.tablesorter thead tr .header {

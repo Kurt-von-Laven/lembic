@@ -8,18 +8,7 @@
 </script>
 
 <h1>Equation Editor</h1>
-<div id="current_model">
-	<%= form_for(:model, :url => set_current_model_path) do |f| %>
-            <div>
-		<%= f.select(:id,
-		    options_from_collection_for_select(@models, 'id', 'name',
-		    :selected => session[:model_id]), :prompt => 'Select Model') %>
-		<%= f.submit %>
-             </div>
-	<% end %>
-
-	Current Model: <span style="font-weight: bold"> <%= Model.find(session[:model_id]).name %> </span>
-</div>
+<%= render "current_model" %>
 <%= render(:partial => 'flash_message', :locals => {:flash_symbol => :variable_not_saved, :tag => 'div', :class_name => 'error'}) %>
 <div id="tabs">
   <ul>

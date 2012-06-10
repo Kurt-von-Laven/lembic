@@ -568,7 +568,7 @@ ul {
 }
 
 
-#var_input_block{
+.var_input_block{
 	margin: auto;
 	width: 80%;
 	text-align: left;

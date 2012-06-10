@@ -119,12 +119,8 @@ class ViewEditorController < ApplicationController
     
   # Delete a block by id
   def delete_block
-    #begin
     block = Block.find(params[:id])
     block.destroy
-    #rescue RecordNotFound => e
-    #  logger.debug "Block not found by id"
-    #end
     render 'edit_block'
   end
   

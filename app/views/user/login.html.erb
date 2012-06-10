@@ -1,6 +1,6 @@
 <% @title = 'Login' %>
 <%= render(:partial => 'flash_message', :locals => {:flash_symbol =>:account_created, :tag => 'p', :class_name => 'success'}) %>
-	<div id = "login_title">
+	<div id="login_title">
 		Login
 	</div>
 <%= form_for(:user, :html => {:class => "login_form"}) do |f| %>
@@ -17,8 +17,7 @@
 		  <%= f.submit('Login', :class => "button") %>
 		</div>
 		
-		<!--Why was this registration button commented out? (-Tom)-->
-        <div class = "register">If you don't already have an account, click <a href="/register">here</a> to register.
+        <div class="register">If you don't already have an account, click <a href="/register">here</a> to register.
 		</div>
         
 <% end %>

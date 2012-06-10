@@ -51,7 +51,7 @@ class ApplicationController < ActionController::Base
   end
   
   def authenticity_token
-    @authenticity_token = CGI::escape(session[:_csrf_token])
+    @authenticity_token = (session[:_csrf_token].nil?) ? '' : CGI::escape(session[:_csrf_token])
   end
   
   def user_models

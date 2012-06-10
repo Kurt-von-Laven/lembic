@@ -9,9 +9,14 @@
   </tr>
 </thead>
 <tbody>
-  <% num = 0
-  for variable in @variables %>
+  <% if @variables.empty? %>
     <tr>
+      <td>You currently have no variables defined.</td>
+    </tr>
+  <% else %>
+    <% num = 0
+    for variable in @variables %>
+      <tr>
 		<% 
 		description = variable.description
         type = variable.variable_type_string
@@ -32,7 +37,7 @@
 			</span>
 		 </td>
          <td style="text-align: left;"> 
-			<a class = "dialog_link" index=<%=num%>> more </a></h3>
+			<a class="dialog_link" index="<%=num%>">more</a></h3>
 		 </td>
 		 <% d_id = "dialog_#{num}"%>
 			 <div id = "<%=d_id%>" style="display: none">
@@ -43,9 +48,10 @@
 			 </div>
 		 
         <!-- <td onClick="alert('<%= myString %>')"><%= variable.name_with_indices %> <button class="opener">expand </button></td> -->
-    </tr>
-  <% num += 1
-  end %>
+      </tr>
+    <% num += 1
+    end %>
+  <% end %>
 </tbody>  
 </table>
 </div>

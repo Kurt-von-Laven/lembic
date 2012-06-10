@@ -1,36 +1,43 @@
 
 <h3>Current Variables</h3>
-<table cellpadding="0" cellspacing="0" class="tablesorter" id = "variables_table">
-<thead>
-  <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Type</th>
-	<th>Equation</th>
-    <th></th>
-	<th></th>
-  </tr>
-</thead>
-<tbody>
-  <% for variable in @variables %>
+<table cellpadding="0" cellspacing="0" class="tablesorter" id =
+       "variables_table">
+  <thead>
     <tr>
-        <td><%= variable.name_with_indices %> </td>
-        <td><%= variable.description %></td>
-		<td><%= variable.variable_type_string %>
-		<td><%= variable.name_with_indices %> = <%= truncate(variable.expression_string, :length =>17, :omission => '...(continued)') %></td>
-        <td>
-		<a class = "dialog_link" index="<%=variable.id%>">Show All</a>
-        </td>
-		
-		<td align="center">
-		<%= button_to "x", "#{delete_variable_path}?id=#{variable.id}&model_id=#{variable.model_id}",
-		{:confirm => "Are you sure you want to delete the variable named #{variable.name}?",
-          :method => :delete} %>
-		</td> 
+      <th>Name</th>
+      <th>Description</th>
+      <th>Type</th>
+      <th>Equation</th>
+      <th></th>
+      <th></th>
     </tr>
-
-  <% end %>
-</tbody>  
+  </thead>
+  <tbody>
+    <% if @variables.empty? %>
+      <tr>
+        <td>You currently have no variables defined.</td>
+        <td />
+        <td />
+        <td />
+        <td />
+        <td />
+      </tr>
+    <% else %>
+      <% for variable in @variables %>
+        <tr>
+            <td><%= variable.name_with_indices %> </td>
+            <td><%= variable.description %></td>
+            <td><%= variable.variable_type_string %>
+            <td><%= variable.name_with_indices %> = <%= truncate(variable.expression_string, :length =>17, :omission => '...(continued)') %></td>
+            <td><a class = "dialog_link" index="<%=variable.id%>">Show All</a></td>
+            
+            <td align="center"><%= button_to "x", "#{delete_variable_path}?id=#{variable.id}&model_id=#{variable.model_id}",
+                {:confirm => "Are you sure you want to delete the variable named #{variable.name}?",
+                 :method => :delete} %></td> 
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
 </table>
  
  <% for variable in @variables %>

@@ -7,21 +7,33 @@
   <% end %>
 <% end %>
 <table cellpadding="0" cellspacing="0" class="sortable">
-  <tr>
-    <th>Equation</th>
-    <th></th>
-    <th></th>
-  </tr>
-  <% for variable in @variables %>
+  <thead>
     <tr>
-      <%= form_for(variable) do |f| %>
-        <%= f.hidden_field(:id) %>
-        <td class="preserve_whitespace"><%= f.text_field(:name_with_indices) %> = <%= f.text_field(:expression_string) %></td>
-        <td><%= f.submit('Save Changes for this Variable Only') %></td>
-      <% end %>
-	  <td class="delete">
-        <%= button_to "x", delete_relationship_path(variable.id), {:confirm => "Are you sure you want to delete the equation for the variable named #{variable.name}?"} %>
-      </td>
+      <th>Equation</th>
+      <th></th>
+      <th></th>
     </tr>
-  <% end %>
+  </thead>
+  <tbody>
+    <% if @variables.empty? %>
+      <tr>
+        <td>You currently have no equations defined.</td>
+        <td />
+        <td />
+      </tr>
+    <% else %>
+      <% for variable in @variables %>
+        <tr>
+          <%= form_for(variable) do |f| %>
+            <%= f.hidden_field(:id) %>
+            <td class="preserve_whitespace"><%= f.text_field(:name_with_indices) %> = <%= f.text_field(:expression_string) %></td>
+            <td><%= f.submit('Save Changes for this Variable Only') %></td>
+          <% end %>
+          <td class="delete"><%= button_to "x",
+                                                  delete_relationship_path(variable.id),
+                                                  {:confirm => "Are you sure you want to delete the equation for the variable named #{variable.name}?"} %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
 </table>

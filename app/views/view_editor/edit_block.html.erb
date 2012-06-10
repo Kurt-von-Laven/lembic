@@ -23,7 +23,7 @@
                 <!-- CREATE BLOCK -->
 				<div id="tabs-1">
                     <%= form_for(:create_block, :html => {:class => "input_formB"}) do |f| %>
-					 <div id="var_input_block">
+					 <div class="var_input_block">
 						<div>
 							<%= f.label(:name, "Name of Block: ") %>
 							<%= f.text_field :name %>
@@ -39,7 +39,7 @@
                 <div id = "tabs-2">
                     Please enter one per line. <br />
                     <%= form_for(:create_block_inputs, :html => {:class => "input_formB"}) do |f| %>
-					<div id="var_input_block">
+					<div class="var_input_block">
 						<div>
 							<%= f.label(:name, "Name of Block: ") %>
 							<%= f.text_field :name, :class => "auto_complete_blocks" %>
@@ -62,7 +62,7 @@
                 <!--ADD OUTPUTS -->      
 				<div id="tabs-3">
                 <%= form_for(:create_block_outputs, :html => {:class => "input_formB"}) do |f| %>
-					<div id="var_input_block">
+					<div class="var_input_block">
 						<div>
 							<%= f.label(:name, "Name of Block: ") %>
 							<%= f.text_field :name, :class => "auto_complete_blocks" %>
@@ -87,7 +87,7 @@
 					
 					Example of Logic for Transition: 'has_ac == true => AC_Block'
                     <%= form_for(:create_block_connections, :html => {:class => "input_formB"}) do |f| %>
-					<div id="var_input_block">
+					<div class="var_input_block">
 						<div>
 							<%= f.label(:name, "From Block: ") %>
 							<%= f.text_field :from_name, :class => "auto_complete_blocks" %>

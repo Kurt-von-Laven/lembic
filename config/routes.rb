@@ -24,7 +24,7 @@ Lembic::Application.routes.draw do
   match '/workflow/post_block_input', to: 'workflow#expert_workflow', as: 'post_block_input'
   match '/models/create', to:'models#create', as: 'create'
   match '/models/show', to:'models#show', as: 'show'
-  match '/application/user_models', to: 'application#set_current_model', as: 'current_model'
+  match '/application/set_current_model', to: 'application#set_current_model', as: 'set_current_model'
   match '/fullvariable', to: 'editor#full_variable', as: 'fullvariable'
 
   resources :editor do

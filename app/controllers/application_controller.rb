@@ -32,7 +32,8 @@ class ApplicationController < ActionController::Base
   end
   
   def user_models
-    @user_models = User.find(session[:user_id]).models.sort
+    @models = Model.joins(:model_permissions).where('model_permissions.user_id = ?', session[:user_id]).order(:sort_index)
+    logger.debug(@models.inspect)
   end
   
   def set_current_model

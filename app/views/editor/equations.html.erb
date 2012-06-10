@@ -8,13 +8,14 @@
 </script>
 
 <h1>Equation Editor</h1>
-<div id="current_model">
-	<% logger.debug(@user_models.nil?)%>
-	
-	<%= form_tag(current_model_path) do |f| %>
-		<%= select_tag(:user_models, options_from_collection_for_select(@user_models, 'id', 'name', 
-											:selected => session[:model_id]), :prompt => 'Select Model') %>
-		<%= submit_tag() %>
+<div id="current_model">	
+	<%= form_for(:model, :url => set_current_model_path) do |f| %>
+            <div>
+		<%= f.select(:id,
+		    options_from_collection_for_select(@models, 'id', 'name',
+		    :selected => session[:model_id]), :prompt => 'Select Model') %>
+		<%= f.submit %>
+             </div>
 	<% end %>
 
 	Current Model: <span style="font-weight: bold"> <%= Model.find(session[:model_id]).name %> </span>
@@ -22,7 +23,7 @@
 <%= render(:partial => 'flash_message', :locals => {:flash_symbol => :variable_not_saved, :tag => 'div', :class_name => 'error'}) %>
 <div id="tabs">
   <ul>
-    <li><a href="#tabs-1">Create Magical Anything You Feel Like</a></li>
+    <li><a href="#tabs-1">Create Variable</a></li>
     <li><a href="#tabs-2">Create Event</a></li>
     <li><a href="#tabs-3">Upload Array</a></li>
   </ul>
@@ -30,7 +31,7 @@
   <!--- CREATE VARIABLE -->
   <div id="tabs-1">
     <%= form_for(:new_equation, :html => {:class => "input_form"}) do |f| %>
-    <div id="var_input_block">
+    <div class="var_input_block">
       <div>
         <%= f.label(:variable_type, "Variable Type:") %>
         <%= f.select(:variable_type, [['Categorical', '0'], ['Integer',
@@ -55,7 +56,7 @@
      <!-- CREATE EVENT -->       
 			<div id="tabs-2">
             <%= form_for(:event, :html => {:class => "input_form"}) do |f| %>
-    <div id="var_input_block">
+    <div class="var_input_block">
         <div>
             <%= f.label(:name, "Name: ") %>
             <%= f.text_field :name %>
@@ -76,21 +77,21 @@
 		<div id="slider-style">
 			<div id="slider-range"></div>
         </div>
-		<br>
+		<br />
         <!-- Repeating -->
           <div> Does this event repeat? </div> 
 		  <div>
-				<%= label_tag(:nil, "From: ")%>
+				<%= label_tag(:from_date, "From: ")%>
 				<!-- Datepicker -->       
-				<div> <input type="text" class="datepicker"></input></div>
+				<div><input id="from_date" type="text" class="datepicker"></input></div>
           </div>
             
           <div>
-				<%= label_tag(:nil, "To: ")%>
+				<%= label_tag(:to_date, "To: ")%>
 				<!-- Datepicker -->       
-				<div><input type="text" class="datepicker"></input></div>
+				<div><input id="to_date" type="text" class="datepicker"></input></div>
           </div>
-		  <br>
+		  <br />
 		  <div id="repeating"> 
 			Repeat every
 		  </div>
@@ -142,7 +143,7 @@
         <!--CREATE ARRAY -->
 			<div id="tabs-3">
             <%= form_for(:new_constant_array, :html => {:multipart => true, :class => "input_form"}) do |f| %>
-  <div id="var_input_block">
+  <div class="var_input_block">
 		<div>
 		  <%= f.label(:name, "Variable Name:") %>
 		  <%= f.text_field(:name) %>

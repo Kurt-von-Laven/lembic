@@ -16,6 +16,7 @@
 			<li><a href="#tabs-1">Create Variable</a></li>
 			<li><a href="#tabs-2">Create Event</a></li>
 			<li><a href="#tabs-3">Upload Array</a></li>
+			<li><a href="#tabs-4">Edit Variables</a></li>
 		  </ul>
 	      <div id="equation_editor_tab_body">
 			  <!--- CREATE VARIABLE -->
@@ -167,9 +168,11 @@
 				  </div>
 				<% end %>
 			 </div>
+			 <div id="tabs-4">
+				<%= render "current_equations" %>
+			 </div>
 		 </div>
 	</div>
 
 	<%= render "current_variables" %>
-	<%= render "current_equations" %>
 </div>

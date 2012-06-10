@@ -3,7 +3,7 @@ class ViewEditorController < ApplicationController
     
     ## Set variables used by views for rendering
     @variables = Variable.where(:model_id => session[:model_id]).order(:name)
-    @blocks = Block.where(:workflow_id => session[:user_id]).order(:sort_index) # TODO: workflow_id should eventually be set correctly.
+    @blocks = Block.where(:workflow_id => session[:workflow_id]).order(:sort_index)
     
     # Create block to be used by form_for
     @block = Block.new
@@ -15,7 +15,7 @@ class ViewEditorController < ApplicationController
       #### BUG: this code for creating blocks doesn't work right now
       # Create a block with the specified name and workflow_id
       name = form_hash[:name]
-      workflow_id = session[:user_id]
+      workflow_id = session[:workflow_id]
       sort_index = Block.where(:workflow_id => workflow_id).size
       Block.create({:name => name, :workflow_id => workflow_id, :sort_index => sort_index})
     end
@@ -68,11 +68,11 @@ class ViewEditorController < ApplicationController
   end
   
   def find_blocknames
-    @blocknames = Block.where('(workflow_id = ?) AND (name LIKE ?)', session[:user_id], "#{params[:term]}%").order(:name)
+    @blocknames = Block.where('(workflow_id = ?) AND (name LIKE ?)', session[:workflow_id], "#{params[:term]}%").order(:name)
     respond_to do |format|
       format.js { render :layout => false }
     end
-  end
+  end #find_blocknames
   
   # Check for form data for creating a block_variable
   def create_block_variables(form_hash, display_type)
@@ -85,7 +85,7 @@ class ViewEditorController < ApplicationController
       if block.nil?
         flash[:block_failed] = "We couldn't find that block! Oops! Please try again."
         return
-      end
+      end #end if
       
       
       # Iterate through lines in the input string
@@ -96,14 +96,14 @@ class ViewEditorController < ApplicationController
         if variable_name.empty? # TODO: get better input validation
           flash[:block_failed] = 'Your variable name was empty. Please try again.'
           next
-        end
+        end #end if
         
         # Find the variable
         variable = Variable.find_by_name(variable_name)
         if variable.nil?
           flash[:block_failed] = "Sorry, we couldn't find that variable! Please try again"
           next
-        end
+        end # end if
         
         # Determine sort_index
         sort_index = block.block_variables.size
@@ -113,10 +113,10 @@ class ViewEditorController < ApplicationController
         bv = block.block_variables.create({:display_type => display_type, :variable_id => variable.id, :sort_index => sort_index})
         if bv.nil?
           flash[:block_failed] = "Failed to create block_variable with variable_id => #{variable.id} and sort_index => #{sort_index}"
-        end
-      end
-    end
-  end
+        end #end if
+      end #end form
+    end # end if
+  end # end create_block_variables
     
   # Delete a block by id
   def delete_block

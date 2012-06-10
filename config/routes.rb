@@ -11,7 +11,7 @@ Lembic::Application.routes.draw do
 
   match '/view_editor/edit_question', to: 'view_editor#edit_question', as: 'edit_question'
   match '/view_editor/delete_block', to: 'view_editor#delete_block', as: 'delete_block'
-  match '/view_editor/delete_block/:id', to: 'view_editor#delete_block', as: 'delete_block'
+    
   match '/home', to: 'home#home', as: 'home'
   match '/help', to: 'help#help', as: 'help'
   match '/equation_editor/equations', to: 'editor#equations', as: 'equations'
@@ -22,9 +22,10 @@ Lembic::Application.routes.draw do
   match '/run/:id', to: 'workflow#start_run', as: 'run'
   match '/workflow', to: 'workflow#expert_workflow', as: 'workflow'
   match '/workflow/post_block_input', to: 'workflow#expert_workflow', as: 'post_block_input'
+  match '/workflow/set_current', to: 'workflow#set_current', as: 'set_current_workflow'
   match '/models/create', to:'models#create', as: 'create'
   match '/models/show', to:'models#show', as: 'show'
-  match '/models/set_current_model', to: 'models#set_current_model', as: 'set_current_model'
+  match '/models/set_current', to: 'models#set_current', as: 'set_current_model'
   match '/fullvariable', to: 'editor#full_variable', as: 'fullvariable'
 
   resources :editor do
@@ -38,6 +39,8 @@ Lembic::Application.routes.draw do
       get :find_blocknames
     end
   end
+    
+    resources :view_editor  
 
   # Block controller routes
   match '/block/show.:id', to: 'block#show', as:'block_show'

@@ -10,7 +10,7 @@
 	<% end %>
     </div>
 	<div>
-	<%= form_for(:workflow, :url => set_current_workflow_path, :html => {:id => "current_model"}) do |f| %>
+	<%= form_for(:workflow, :url => set_current_workflow_path, :html => {:id => "current_workflow"}) do |f| %>
 		<%= f.label(:id, "Current Workflow:") %>
 		<%= f.select(:id, options_from_collection_for_select(@workflows, 'id', 'name',
 		  :selected => session[:workflow_id]), :prompt => 'Select Workflow') %>

@@ -4,22 +4,18 @@
 		Login
 	</div>
 <%= form_for(:user, :html => {:class => "login_form"}) do |f| %>
-	<div>
-		  <%= f.label(:email, 'Email:') %>
-		  <%= f.text_field(:email) %>
-		</div>
-		<div>
-		  <%= f.label(:password, 'Password:') %>
-		  <%= f.password_field(:password) %>
-		</div>
-		<%= render(:partial => 'flash_message', :locals => {:flash_symbol => :wrong_login, :tag => 'div', :class_name => 'error'}) %>
-		<div style="text-align: center; margin: 10px 0 10px 0">
-		  <%= f.submit('Login', :class => "button") %>
-		</div>
-		
-        <div class="register">If you don't already have an account, click <a href="/register">here</a> to register.
-		</div>
+  <div>
+    <%= f.label(:email, 'Email:') %>
+    <%= f.text_field(:email) %>
+  </div>
+  <div>
+    <%= f.label(:password, 'Password:') %>
+    <%= f.password_field(:password) %>
+  </div>
+  <%= render(:partial => 'flash_message', :locals => {:flash_symbol => :wrong_login, :tag => 'div', :class_name => 'error'}) %>
+  <div style="text-align: center; margin: 10px 0 10px 0">
+    <%= f.submit('Login', :class => "button") %>
+  </div>
+  <div class="register">If you don't already have an account, click <a href="/register">here</a> to register.</div>
         
 <% end %>
-
-</div>

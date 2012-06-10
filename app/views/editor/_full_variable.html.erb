@@ -10,7 +10,14 @@
 		num = comma_separated_array.size()
 %>
 	<div id="full_array">
-	<h1><%= variable.name %></h1>
+	<h1><% if variable.input? %>
+				<span class="user_defined_var">
+				 <%= variable.name %> 
+				</span>
+		    <% else %>
+				<%= variable.name %>
+			<% end %>
+	</h1>
 		<table>
             <tr>
 				<th> index </th>
@@ -35,5 +42,12 @@
 	</div>
 <% else %>
 <h1><%= variable.name %></h1>
-<%= variable.name %> = <%=variable.expression_string %>
+<% if variable.input? %>
+	<span class="user_defined_var">
+		<%= variable.name %> 
+	</span>
+<% else %>
+	<%= variable.name %>
+<% end %>
+	= <%=variable.expression_string %>
 <% end %>

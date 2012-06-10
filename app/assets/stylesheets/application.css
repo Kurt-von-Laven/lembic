@@ -613,7 +613,8 @@ ul {
 }
 
 .user_defined_var{
-	color: #b9d987;
+	color: #83025a;
+	font-weight: bold;
 }
 .var_input_block{
 	margin: auto;

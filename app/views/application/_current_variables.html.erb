@@ -24,10 +24,26 @@
     <% else %>
       <% for variable in @variables %>
         <tr>
-            <td><%= variable.name_with_indices %> </td>
+			<td>
+            <% if variable.input? %>
+				<span class="user_defined_var">
+				 <%= variable.name_with_indices %> 
+				</span>
+		    <% else %>
+				<%= variable.name_with_indices %>
+			<% end %>
+			</td>
             <td><%= variable.description %></td>
             <td><%= variable.variable_type_string %></td>
-            <td><%= variable.name_with_indices %> = <%= truncate(variable.expression_string, :length =>17, :omission => '...(continued)') %></td>
+            <td>
+			<% if variable.input? %>
+				<span class="user_defined_var">
+				 <%= variable.name_with_indices %> 
+				</span>
+		    <% else %>
+				<%= variable.name_with_indices %>
+			<% end %> 
+				= <%= truncate(variable.expression_string, :length =>17, :omission => '...(continued)') %></td>
             <td><a class="dialog_link" index="<%=variable.id%>">Show All</a></td>
             
             <td align="center"><%= button_to "x", "#{delete_variable_path}?id=#{variable.id}&model_id=#{variable.model_id}",

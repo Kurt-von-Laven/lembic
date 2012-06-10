@@ -36,15 +36,4 @@ class ApplicationController < ActionController::Base
     logger.debug(@models.inspect)
   end
   
-  def set_current_model
-    new_model_id = params[:model_id]
-    new_model = ModelPermission.where(:user_id => session[:user_id], :model_id => new_model_id).first
-    if new_model.nil?
-      flash[:invalid_model_id] = 'You tried to select a model that either doesn\'t exist or that you don\'t have permission to see.'
-    else
-      session[:model_id] = new_model_id
-    end
-    redirect_to :back
-  end
-  
 end

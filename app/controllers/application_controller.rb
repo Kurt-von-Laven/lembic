@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-    layout "application"
+  layout "application"
   
   before_filter :prevent_caching, :verify_login, :verify_model, :user_models
   
@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   
   def verify_model
     if session[:model_id].nil?
-      session[:model_id] = User.find(session[:user_id]).models.first
+      session[:model_id] = Model.joins(:model_permissions).where('model_permissions.user_id = ?', session[:user_id]).minimum(:sort_index)
       if session[:model_id].nil?
         redirect_to :controller => "models", :action => "new"
       end
@@ -33,18 +33,6 @@ class ApplicationController < ActionController::Base
   
   def user_models
     @models = Model.joins(:model_permissions).where('model_permissions.user_id = ?', session[:user_id]).order(:sort_index)
-    logger.debug(@models.inspect)
-  end
-  
-  def set_current_model
-    new_model_id = params[:model_id]
-    new_model = ModelPermission.where(:user_id => session[:user_id], :model_id => new_model_id).first
-    if new_model.nil?
-      flash[:invalid_model_id] = 'You tried to select a model that either doesn\'t exist or that you don\'t have permission to see.'
-    else
-      session[:model_id] = new_model_id
-    end
-    redirect_to :back
   end
   
 end

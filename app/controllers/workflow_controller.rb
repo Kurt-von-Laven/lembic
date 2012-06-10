@@ -20,7 +20,7 @@ class WorkflowController < ApplicationController
         i += 1
       end
       variable_to_solve_for = Variable.where(:name => vars['variable_to_solve_for']).first
-      Variable.find(:all).each do |variable|
+      Variable.all.each do |variable|
         expression_object = variable.expression_object
         varname = variable.name.split(/\s*\[/)[0]
         index_names = variable.index_name_strings
@@ -147,7 +147,8 @@ class WorkflowController < ApplicationController
   end
     
   def create_workflow
-    Workflow.transaction do
+    save_successful = false
+    ActiveRecord::Base.transaction do
       new_workflow = Workflow.new(params[:workflow])
       save_successful = new_workflow.save
       permission = WorkflowPermission.new(:user_id => session[:user_id], :workflow_id => new_workflow.id, :permissions => 0)

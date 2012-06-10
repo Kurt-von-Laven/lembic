@@ -14,9 +14,9 @@ class ModelsController < ApplicationController
     save_successful = false
     ActiveRecord::Base.transaction do
       save_successful = @model.save
-      model_permissions = ModelPermission.new({:user_id => session[:user_id],
-                                                :model_id => @model.id, :sort_index => User.find(session[:user_id]).models.length, :permissions => 0})
-      save_successful &&= model_permissions.save
+      model_permission = ModelPermission.new({:user_id => session[:user_id],
+                                               :model_id => @model.id, :sort_index => User.find(session[:user_id]).models.length, :permissions => 0})
+      save_successful &&= model_permission.save
     end
     if save_successful
       session[:model_id] = @model.id
@@ -47,7 +47,24 @@ class ModelsController < ApplicationController
   def destroy
     @model = Model.find(params[:id])
     @model.destroy
-    
+    if session[:model_id] == params[:id].to_i
+      session[:model_id] = nil
+    end
     redirect_to models_path
   end
+  
+  def set_current_model
+    model_hash = params[:model]
+    if !model_hash.nil?
+      new_model_id = model_hash[:id]
+      new_model = ModelPermission.where(:user_id => session[:user_id], :model_id => new_model_id).first
+      if new_model.nil?
+        flash[:invalid_model_id] = 'You tried to select a model that either doesn\'t exist or that you don\'t have permission to see.'
+      else
+        session[:model_id] = new_model_id
+      end
+    end
+    redirect_to :back
+  end
+  
 end

@@ -1,6 +1,6 @@
 class UserController < ApplicationController
   
-  skip_before_filter :verify_login, :verify_model, :user_models
+  skip_before_filter :verify_login, :verify_model, :verify_workflow, :user_models, :model_workflows
   before_filter :verify_logout, :except => ['logout']
   
   def login
@@ -11,7 +11,6 @@ class UserController < ApplicationController
       candidate_password = login_form[:password]
       if !user.nil? and !candidate_password.nil? and user.password_valid?(candidate_password)
         session[:user_id] = user.id
-        session[:model_id] = user.models.first.nil? ? nil : user.models.first.id
         redirect_to home_path
         return
       end

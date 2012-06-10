@@ -137,7 +137,6 @@ class WorkflowController < ApplicationController
   # sets the run's current block to the start block of the workflow
   # redirects to show the first block
   def start_run
-    workflow = Workflow.where(:id => session[:user_id]).first_or_create
     start_block = Block.where('workflow_id = ? and sort_index = 0', workflow.id).first
     new_run = Run.create({:user_id => session[:user_id],
                           :workflow_id => workflow.id,
@@ -196,6 +195,19 @@ class WorkflowController < ApplicationController
     end
     return variables_hash
   end
-
+  
+  def set_current
+    workflow_hash = params[:workflow]
+    if !workflow_hash.nil?
+      new_workflow_id = workflow_hash[:id]
+      new_workflow_permission = WorkflowPermission.where(:user_id => session[:user_id], :workflow_id => new_workflow_id).first
+      if new_workflow_permission.nil?
+        flash[:invalid_workflow_id] = 'You tried to select a workflow that either doesn\'t exist or that you don\'t have permission to use.'
+      else
+        session[:workflow_id] = new_workflow_id
+      end
+    end
+    redirect_to :back
+  end
   
 end

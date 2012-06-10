@@ -53,13 +53,13 @@ class ModelsController < ApplicationController
     redirect_to models_path
   end
   
-  def set_current_model
+  def set_current
     model_hash = params[:model]
     if !model_hash.nil?
       new_model_id = model_hash[:id]
-      new_model = ModelPermission.where(:user_id => session[:user_id], :model_id => new_model_id).first
-      if new_model.nil?
-        flash[:invalid_model_id] = 'You tried to select a model that either doesn\'t exist or that you don\'t have permission to see.'
+      new_model_permission = ModelPermission.where(:user_id => session[:user_id], :model_id => new_model_id).first
+      if new_model_permission.nil?
+        flash[:invalid_model_id] = 'You tried to select a model that either doesn\'t exist or that you don\'t have permission to use.'
       else
         session[:model_id] = new_model_id
       end

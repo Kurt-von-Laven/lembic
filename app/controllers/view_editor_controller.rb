@@ -11,12 +11,10 @@ class ViewEditorController < ApplicationController
       ## Check for form data for creating new block
       form_hash = params[:create_block]
       if !form_hash.nil?
-        logger.debug("CARRIER HAS ARRIVED: #{form_hash}")
         # Create a block with the specified name and workflow_id
         name = form_hash[:name]
         workflow_id = session[:workflow_id]
         sort_index = Block.where(:workflow_id => workflow_id).size
-        logger.debug("This is my name: #{name}. This is my number: #{workflow_id}. So call me maybe? #{sort_index}")
         Block.create({:name => name, :workflow_id => workflow_id, :sort_index => sort_index})
       end
       

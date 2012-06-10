@@ -49,6 +49,10 @@ class Variable < ActiveRecord::Base
     return array == 1
   end
   
+  def input?
+    return expression_object.nil?
+  end
+  
   def name_with_indices
     return "#{name.split(/\s*\[\s*/)[0]}" + (array? ? "[#{index_names.collect{|i| i.name}.join(",")}]" : '')
   end

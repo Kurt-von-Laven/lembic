@@ -56,17 +56,17 @@
 									<%= f.select(:day_week, [['Weekday', '0'], ['Weekend',
 									'1'], ['Holiday', '2'], ['Monday-Sunday', '3'], ['Other', '4']]) %>
 								</div>
-						  
+							
 								<!-- Slider -->
 								<div>
 									<label for="time">Time range (in military time):</label>
 									<input type="text" id="time" />
 								</div>
-								</br>
+								
 								<div id="slider-style">
 									<div id="slider-range"></div>
 								</div>
-							
+								
 								<!-- Repeating -->
 								<div> Does this event repeat? </div> 
 								<div>
@@ -85,7 +85,7 @@
 									</div>
 								</div>
 						  
-								<div id="repeating"> 
+								<div> 
 									Repeat every
 								</div>
 								<div id="date_range">
@@ -119,7 +119,7 @@
 									</div>  
 								</div>
 						</div> 
-		  
+						</br>
 						<!--Submit-->
 						<div>
 							<div id="input_button">
@@ -159,6 +159,7 @@
 						  <%= f.file_field(:data_file, :class => "choose_file") %>
 						</div>
 				  </div>
+				  </br>
 				  <div id="input_button">
 					  <%= f.submit("Upload Array", :id => "file_upload_submit", :class => "button") %>
 				  </div>

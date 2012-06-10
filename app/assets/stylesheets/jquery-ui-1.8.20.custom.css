@@ -459,7 +459,7 @@ button.ui-button::-moz-focus-inner { border: 0; padding: 0; } /* reset extra pad
 
 .ui-slider-horizontal { height: .7em; }
 .ui-slider-horizontal .ui-slider-handle { top: -.2em; margin-left: -.6em; }
-.ui-slider-horizontal .ui-slider-range { top: -.3em; height: 100%; }
+.ui-slider-horizontal .ui-slider-range { top: 0em; height: 100%; }
 .ui-slider-horizontal .ui-slider-range-min { left: 0; }
 .ui-slider-horizontal .ui-slider-range-max { right: 0; }
 

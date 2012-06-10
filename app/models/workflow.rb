@@ -1,5 +1,5 @@
 class Workflow < ActiveRecord::Base
-  attr_accessible :id, :name, :description, :model_id, :created_at, :updated_at
+  attr_accessible :id, :name, :description, :model_id, :created_at, :updated_at, :sort_index
   
   SORT_INDEX_SCOPE = :model_id
   

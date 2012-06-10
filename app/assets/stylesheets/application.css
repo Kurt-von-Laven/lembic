@@ -231,25 +231,24 @@ body {
 #full_array {
 	font-size: .5em;
 }
-#full_array table {
-	width: 600px;
-	height: 600px;
-}
-#full_array td {
-	width: 10px;
-	padding: 0px;
-	margin: 0px;
-}
-#full_array th {
-	text-align: center;
-	width: 10px;
-	padding: 0px;
-	margin: 0px;
-}
+
 #full_array h1{
 	width: 100%;
 	margin: 0 0 10px 0;
 }
+
+#full_array td {
+	height: 10px;
+	padding: 2px;
+	margin: 0px;
+}
+#full_array th {
+	text-align: center;
+	height:10px;
+	padding: 2px;
+	margin: 0px;
+}
+
 .help {
 	padding: 0 20px 0 20px;
 }

@@ -1,4 +1,5 @@
 require 'csv'
+require 'csv_importer'
 require Rails.root.join('app/helpers/expression')
 require Rails.root.join('app/models/index_name')
 
@@ -89,9 +90,10 @@ class Variable < ActiveRecord::Base
     merged_array['variable_type'] = merged_array['variable_type'].to_i
     merged_array['array'] = 1
     data = merged_array['data_file'].read
-    merged_array['expression_string'] = self.parse_csv_expression(data,
+    #raise CSVImporter.instance_methods.inspect
+    merged_array['expression_string'] = CsvImporter.parse_csv_expression(data,
                                                                   merged_array['start_row'].to_i,
-                                                                  self.convert_letter_column_labels_to_numbers(merged_array['column_number']),
+                                                                  CsvImporter.convert_letter_column_labels_to_numbers(merged_array['column_number']),
                                                                   merged_array['variable_type'])
     merged_array.delete('data_file')
     merged_array.delete('start_row')
@@ -100,6 +102,7 @@ class Variable < ActiveRecord::Base
     IndexName.create_from_declaration("[#{INDEX}]", newvar.id)
   end
   
+=begin
   def self.convert_letter_column_labels_to_numbers(input)
     raise ArgumentError, "parameter of convert_letter_column_labels_to_numbers must be a string" if !input.instance_of?(String)
     if input.match(/^[0-9]+$/)
@@ -176,5 +179,5 @@ class Variable < ActiveRecord::Base
     end
     return date
   end
-  
+=end
 end

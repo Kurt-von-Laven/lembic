@@ -25,7 +25,7 @@ class Variable < ActiveRecord::Base
   
   validates_associated :index_names, :block_variables, :run_values
   
-  INDEX = 'i' # The index used for constant arrays.
+  
  
   # The variable type is represented as an integer in range [0, 3] according to this mapping.
   def variable_type_string

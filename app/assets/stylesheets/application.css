@@ -83,7 +83,7 @@ body {
     font-family: Garamond, Baskerville, "Times New Roman", serif;
 }
 
-#current_model_header form {
+#current_model_header {
 	padding: 10px;
    -moz-border-radius: 6px;
     border-radius: 6px;
@@ -94,12 +94,16 @@ body {
 	color: #113855;
 }
 
-#current_model_header label {
+#current_model_header form{
+	margin-bottom: 10px;
+}
+#current_model label {
 	width: 200px;
 	display: block;
 	float: left;
+	margin-left: 60px;
 }
-#current_model_header select {
+#current_model select {
 	width: 200px;
 	display: block;
 	float: left;
@@ -110,21 +114,13 @@ body {
 	font-family: Garamond, Baskerville, "Times New Roman", serif;
 	font-size: .8em;
 }
-#current_workflow {
-	padding: 10px;
-   -moz-border-radius: 6px;
-    border-radius: 6px;
-	background-color:  #fff8cb;
-	margin: 0px 5px 0px 5px;
-	text-align: left;
-	font-size: 1.4em;
-	color: #113855;
-}
+
 
 #current_workflow label {
 	width: 200px;
 	display: block;
 	float: left;
+	margin-left: 60px;
 }
 #current_workflow select {
 	width: 200px;

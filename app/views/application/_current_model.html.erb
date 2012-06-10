@@ -3,12 +3,14 @@
 	<%= form_for(:model, :url => set_current_model_path, :html => {:id => "current_model"}) do |f| %>
 		<%= f.label(:id, "Current Model:") %> 
 		<%= f.select(:id,options_from_collection_for_select(@models, 'id', 'name',
-		    :selected => session[:model_id]), :prompt => 'Select Model', :html => {:class=>"select"}) %>
+		    :selected => session[:model_id]), :prompt => 'Select Model') %>
 		<div id="current_model_button">
 			<%= f.submit("Save", :class => "button") %>
 		</div>
 	<% end %>
     </div>
+	
+
 	<div>
 	<%= form_for(:workflow, :url => set_current_workflow_path, :html => {:id => "current_workflow"}) do |f| %>
 		<%= f.label(:id, "Current Workflow:") %>

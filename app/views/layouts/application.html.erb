@@ -160,6 +160,21 @@
 					function() { $(this).removeClass('ui-state-hover'); }
 				);
                 
+                $( "#sortable_blocks" ).sortable({
+                    revert: true
+                });
+                $( "#draggable_blocks" ).draggable({
+                    connectToSortable: "#sortable_blocks",
+                    helper: "clone",
+                    revert: "invalid"
+                });
+                $( "ul, li" ).disableSelection();
+                
+                $('#update_workflow_form').submit(function(){
+     
+                    $('#update_workflow_list').val($( "#sortable_blocks" ).sortable("serialize"));
+                    return false;
+                });
                 
                 $('.auto_complete_variables')
                 .bind( "keydown", function( event ) {

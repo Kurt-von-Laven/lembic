@@ -44,7 +44,22 @@
                 
                 <!-- EDIT WORKFLOW -->
                 <div id = "tabs-2">
-                    <!--todo-->
+                    
+                    <%=form_for(:update_workflow, :html => {:id => "update_workflow_form"}) do |f| %>
+                        <%= hidden_field_tag(:update_workflow_list) %>
+                        <ul id="sortable_blocks">
+                            <% workflow = Workflow.find(session[:workflow_id])
+                                for block in workflow.blocks %>
+                                    <li class="ui-state-default"><%= block.name %></li>
+                                <% end %>
+                            
+                        </ul>
+                        <div id="input_button">
+                                <%= f.submit("Update Workflow", :class => "button") %>
+                            </div>
+                    <% end %>
+                    
+                    
                 </div>
                 
             </div>

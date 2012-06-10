@@ -1,5 +1,5 @@
 <h3>Current Workflows</h3>
-<div id="truncated blocks">
+<div class="truncated">
 <table cellpadding="0" cellspacing="0" class="tablesorter">
 
 <!--Table Headers -->
@@ -34,11 +34,13 @@
       <td style="text-align: left;">
         <a class="dialog_link_workflow" index="<%= num%>">more</a>
         </td>
+      <td>
       <% d_id = "dialog_workflow_#{num}"%>
 			 <div id="<%=d_id%>" style="display: none">
              				<h1><%=name %></h1>
 				<p>Blocks: <%= myString %></p>
             </div>
+       </td>
       </tr>
       <% num += 1
         end %>

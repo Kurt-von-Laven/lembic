@@ -30,13 +30,13 @@ Lembic::Application.routes.draw do
 
   resources :editor do
     collection do
-      get :find_variablenames
+      get :find_variable_names
     end
   end
 
   resources :view_editor do
     collection do
-      get :find_blocknames
+      get :find_block_names
     end
   end
     

@@ -1,0 +1,5 @@
+[
+<% @variable_names.each do |v| %>
+ {"value":"<%= v.name %>","id":<%= v.id %><% if v == @variable_names.last %>}<% else %>},<% end %>
+<% end %>
+]

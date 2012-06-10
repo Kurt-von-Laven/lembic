@@ -32,10 +32,10 @@ class EditorController < ApplicationController
     render 'equations'
   end
   
-  def find_variablenames
+  def find_variable_names
     # TODO: This will break if params[:term] contains a percent symbol. It needs to use escaping.
     model_id = session[:model_id]
-    @variablenames = Variable.where('(model_id = ?) AND (name LIKE ?)', model_id, "#{params[:term]}%").order(:name)
+    @variable_names = Variable.where('(model_id = ?) AND (name LIKE ?)', model_id, "#{params[:term]}%").order(:name)
     respond_to do |format|
       format.js { render :layout => false }
     end

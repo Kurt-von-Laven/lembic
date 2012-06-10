@@ -2,171 +2,176 @@
 
 <h1>Edit Blocks</h1>
 
-<%= render "current_model" %>
+<%= render :partial => "current_model" %>
 <%= render(:partial => 'flash_message', :locals => {:flash_symbol => :block_failed, :tag => 'div', :class_name => 'error'}) %>
 
-<div style="width: 100%; height: 700px;">
-	<div class="left_column">
-        <%= render "current_workflows_truncated" %>
-        <br/>
-		<%= render "current_variables_truncated" %>
-		<%= render "current_blocks_truncated" %>
-	</div>
-	
-	<div class="right_column">
-    
-            <div class="tabs">
-                <ul>
-                    <li><a href="#tabs-1">Create Workflow</a></li>
-                    <li><a href="#tabs-2">Edit Workflow</a></li>
-                </ul>
-                
-                <!-- CREATE WORKFLOW -->
-                <div id="tabs-1">
-                    <%=form_for(:create_workflow, :html => {:class => "input_formB"}) do |f| %>
-                        <div class="var_input_block">
-                            <div>
-                                <%= f.label(:name, "Name of Workflow: ") %>
-                                <%= f.text_field :name %>
-                            </div>
-                            <br />
-                            <div>
-                                <%= f.label(:description, "Description of Workflow: ") %>
-                                <%= f.text_area :description %>
-                            </div>
-                            
-                            <div id="input_button">
-                                <%= f.submit("Create Workflow", :class => "button") %>
-                            </div>
-                        </div>
-                    <% end %>  
-                </div>
-                
-                <!-- EDIT WORKFLOW -->
-                <div id="tabs-2">
-                    <%=form_for(:update_workflow, :html => {:id => "update_workflow_form"}) do |f| %>
-                        <%= hidden_field_tag(:update_workflow_list) %>
-                        <ul id="sortable_blocks">
-                            <% workflow = Workflow.find(session[:workflow_id])
-                                for block in workflow.blocks %>
-                                    <li class="ui-state-default"><%= block.name %></li>
-                                <% end %>
-                            
-                        </ul>
-                        <div id="input_button">
-                                <%= f.submit("Update Workflow", :class => "button") %>
-                            </div>
-                    <% end %>
-                </div>
-                
-            </div>
-            
-            <br />
-            
-			<div class="tabs">
-			  <ul>
-				<li><a href="#tabs-1">Create Block</a></li>
-                <li><a href="#tabs-2">Add Inputs</a></li>
-                <li><a href="#tabs-3">Add Outputs</a></li>
-				<li><a href="#tabs-4">Add Connections</a></li>
-			  </ul>
-                <!-- CREATE BLOCK -->
-				<div id="tabs-1">
-                    <%= form_for(:create_block, :html => {:class => "input_formB"}) do |f| %>
-					 <div class="var_input_block">
-						<div>
-							<%= f.label(:name, "Name of Block: ") %>
-							<%= f.text_field :name %>
-						</div>
-					 </div>
-					 <div id="input_button">
-                        <%= f.submit("Create Block", :class => "button") %>
-					 </div>
-                    <% end %>
-                </div>
-                
-                 <!-- ASSIGN VARIABLES -->
-                <div id="tabs-2">
-                    Please enter one per line. <br />
-                    <%= form_for(:create_block_inputs, :html => {:class => "input_formB"}) do |f| %>
-					<div class="var_input_block">
-						<div>
-							<%= f.label(:name, "Name of Block: ") %>
-							<%= f.text_field :name, :class => "auto_complete_blocks" %>
-						</div>
-						<div>
-							<%= f.label(:variables_string, "Input Variables: ") %>
-							<%= f.text_area :variables_string, :id =>"drop_var" %>
-						</div>
-						<div>
-							<%= f.label(:formatting, "Format:") %>
-							<%= f.select(:formatting, [ ['Integer', 'integer']]) %>
-						</div>
-                    </div>
-					<div id="input_button">
-                        <%= f.submit("Create Input Variables", :class => "button") %>
-					</div>
-                    <% end %>
-                </div>
 
-                <!--ADD OUTPUTS -->      
-				<div id="tabs-3">
-                <%= form_for(:create_block_outputs, :html => {:class => "input_formB"}) do |f| %>
-					<div class="var_input_block">
-						<div>
-							<%= f.label(:name, "Name of Block: ") %>
-							<%= f.text_field :name, :class => "auto_complete_blocks" %>
-						</div>
-						<div>
-							<%= f.label(:variables_string, "Output Variables: ") %>
-							<%= f.text_area :variables_string, :id =>"drop_var_output" %>
-						</div>
-						<div>
-							<%= f.label(:formatting, "Format:") %>
-							<%= f.select(:formatting, [['Integer', 'integer'], ['Percentage', 'percent']]) %>
-						</div>
-					</div>
-					<div id="input_button">
-						<%= f.submit('Add Output', :class => "button") %>
-					</div>
-                <% end %>
-                </div>
-                
-                <!-- ADD CONNECTIONS -->
-				<div id="tabs-4">
+<div style="width: 100%;">
+	<div style="height: 500px">
+		<div class="left_column">
+			<%= render "current_workflows_truncated" %>
+		</div>
+		
+		<div class="right_column">
+			<div class="tabs">
+				<ul>
+					<li><a href="#tabs-1">Create Workflow</a></li>
+					<li><a href="#tabs-2">Edit Workflow</a></li>
+				</ul>
 					
-					Example of Logic for Transition: 'has_ac == true => AC_Block'
-                    <%= form_for(:create_block_connections, :html => {:class => "input_formB"}) do |f| %>
-					<div class="var_input_block">
-						<div>
-							<%= f.label(:name, "From Block: ") %>
-							<%= f.text_field :from_name, :class => "auto_complete_blocks" %>
+				<!-- CREATE WORKFLOW -->
+				<div id="tabs-1">
+					<%=form_for(:create_workflow, :html => {:class => "input_formB"}) do |f| %>
+						<div class="var_input_block">
+							<div>
+								<%= f.label(:name, "Name of Workflow: ") %>
+								<%= f.text_field :name %>
+							</div>
+							<br />
+							<div>
+								<%= f.label(:description, "Description of Workflow: ") %>
+								<%= f.text_area :description %>
+							</div>
 						</div>
-                        <div>
-                            <%= f.label(:name, "To Block: ") %>
-							<%= f.text_field :to_name, :class => "auto_complete_blocks" %>
-                        
-                        </div>
-                        
-						<div>
-							<%= f.label(:expression_string, "Logic for Transition: ") %>
-							<%= f.text_field :expression_string %>
+						<div class="input_button">
+							<%= f.submit("Create Workflow", :class => "button") %>
 						</div>
-					</div>
-					<div id="input_button">
-                        <%= f.submit("Create Block", :class => "button") %>
-					</div>
-                    <% end %>
-                </div>
-                
-             </div>
-			   </br>
-			 <div id="display_workflow">
-				<h3> Check out the Workflow </h3>
-				</br></br>
-				<%= button_to "View Expert Workflow", "/run/#{session[:workflow_id]}",
-				    {:method => :post, :class => "button"} %>
-			 </div>  
+					<% end %>  
+				</div>
+					
+				<!-- EDIT WORKFLOW -->
+				<div id="tabs-2">
+					<%=form_for(:update_workflow, :html => {:id => "update_workflow_form"}) do |f| %>
+                                          <div>
+							<%= hidden_field_tag(:update_workflow_list) %>
+						<ul id="sortable_blocks">
+							<% workflow = Workflow.find(session[:workflow_id])
+							for block in workflow.blocks %>
+								<li class="ui-state-default"><%= block.name %></li>
+							<% end %>
+						</ul>
+						<div class="input_button">
+							<%= f.submit("Update Workflow", :class => "button") %>
+						</div>
+                                          </div>
+					<% end %>
+				</div>
+			</div>
 		</div>
 	</div>
+	<div style="height: 700px">
+		<div class="left_column">
+			<%= render "current_variables_truncated" %>
+			<%= render "current_blocks_truncated" %>
+		</div>
+		
+		<div class="right_column">
+			<div class="tabs">
+				<ul>
+					<li><a href="#tabs-1">Create Block</a></li>
+					<li><a href="#tabs-2">Add Inputs</a></li>
+					<li><a href="#tabs-3">Add Outputs</a></li>
+					<li><a href="#tabs-4">Add Connections</a></li>
+				</ul>
+				<!-- CREATE BLOCK -->
+				<div id="tabs-1">
+					<%= form_for(:create_block, :html => {:class => "input_formB"}) do |f| %>
+						 <div class="var_input_block">
+							<div>
+								<%= f.label(:name, "Name of Block: ") %>
+								<%= f.text_field :name %>
+							</div>
+						 </div>
+						 <div class="input_button">
+							<%= f.submit("Create Block", :class => "button") %>
+						 </div>
+						<% end %>
+				</div>
+					
+				<!-- ASSIGN VARIABLES -->
+				<div id="tabs-2">
+					<div class="comment" style="margin-left:80px;">
+						Please enter one per line. 
+					</div>
+					<%= form_for(:create_block_inputs, :html => {:class => "input_formB"}) do |f| %>
+						<div class="var_input_block">
+							<div>
+								<%= f.label(:name, "Name of Block: ") %>
+								<%= f.text_field :name, :class => "auto_complete_blocks" %>
+							</div>
+							<div>
+							
+								<%= f.label(:variables_string, "Input Variables: ") %>
+								<%= f.text_area :variables_string, :id =>"drop_var" %>
+							</div>
+							<div>
+								<%= f.label(:formatting, "Format:") %>
+								<%= f.select(:formatting, [ ['Integer', 'integer']]) %>
+							</div>
+						</div>
+						<div class="input_button">
+							<%= f.submit("Create Input Variables", :class => "button") %>
+						</div>
+					<% end %>
+				</div>
+
+				<!--ADD OUTPUTS -->      
+				<div id="tabs-3">
+					<%= form_for(:create_block_outputs, :html => {:class => "input_formB"}) do |f| %>
+						<div class="var_input_block">
+							<div>
+								<%= f.label(:name, "Name of Block: ") %>
+								<%= f.text_field :name, :class => "auto_complete_blocks" %>
+							</div>
+							<div>
+								<%= f.label(:variables_string, "Output Variables: ") %>
+								<%= f.text_area :variables_string, :id =>"drop_var_output" %>
+							</div>
+							<div>
+								<%= f.label(:formatting, "Format:") %>
+								<%= f.select(:formatting, [['Integer', 'integer'], ['Percentage', 'percent']]) %>
+							</div>
+						</div>
+						<div class="input_button">
+							<%= f.submit('Add Output', :class => "button") %>
+						</div>
+					<% end %>
+				</div>
+					
+				<!-- ADD CONNECTIONS -->
+				<div id="tabs-4">
+					<div class="comment" style="margin-left:80px">
+						Example of Logic for Transition: 'has_ac == true => AC_Block'
+					</div>
+					<%= form_for(:create_block_connections, :html => {:class => "input_formB"}) do |f| %>
+						<div class="var_input_block">
+							<div>
+								<%= f.label(:name, "From Block: ") %>
+								<%= f.text_field :from_name, :class => "auto_complete_blocks" %>
+							</div>
+							<div>
+								<%= f.label(:name, "To Block: ") %>
+								<%= f.text_field :to_name, :class => "auto_complete_blocks" %>
+							</div>
+							<div>
+								<%= f.label(:expression_string, "Logic for Transition: ") %>
+								<%= f.text_field :expression_string %>
+							</div>
+						</div>
+						<div class="input_button">
+							<%= f.submit("Create Block", :class => "button") %>
+						</div>
+					<% end %>
+				</div>
+			</div>
+			<br />
+			<div id="display_workflow">
+				<h3> Check out the Workflow </h3>
+					<br /><br />
+				<%= button_to "View Expert Workflow", "/run/#{session[:workflow_id]}",
+						{:method => :post, :class => "button"} %>
+			</div>  
+		</div>
+	</div>
+</div>
 

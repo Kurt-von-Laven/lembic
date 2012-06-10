@@ -16,4 +16,9 @@ class Workflow < ActiveRecord::Base
   
   belongs_to :model
   
+  def blocks_as_string
+    sorted_block_names = blocks.order(:sort_index).pluck(:name)
+    return sorted_block_names.join("\n")
+  end
+  
 end

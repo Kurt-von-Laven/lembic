@@ -17,22 +17,26 @@
   <tbody>
     <% if @variables.empty? %>
       <tr>
-        <td>You currently have no equations defined.</td>
+        <td>You currently have no variables defined.</td>
         <td />
         <td />
       </tr>
     <% else %>
+      <% i = 0 %>
       <% for variable in @variables %>
         <tr>
           <%= form_for(variable) do |f| %>
-            <%= f.hidden_field(:id) %>
-            <td class="preserve_whitespace"><%= f.text_field(:name_with_indices) %> = <%= f.text_field(:expression_string) %></td>
+            <%= f.hidden_field(:id, :id => "variable_id_#{i}") %>
+            <td class="preserve_whitespace"><%= f.text_field(:name_with_indices,
+            :id => "variable_name_with_indices_#{i}") %> =
+            <%= f.text_field(:expression_string, :id => "variable_expression_string_#{i}") %></td>
             <td><%= f.submit('Save Changes for this Variable Only') %></td>
           <% end %>
           <td class="delete"><%= button_to "x",
                                                   delete_relationship_path(variable.id),
                                                   {:confirm => "Are you sure you want to delete the equation for the variable named #{variable.name}?"} %></td>
         </tr>
+        <% i += 1 %>
       <% end %>
     <% end %>
   </tbody>

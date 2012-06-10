@@ -16,6 +16,7 @@
 			<li><a href="#tabs-1">Create Variable</a></li>
 			<li><a href="#tabs-2">Create Event</a></li>
 			<li><a href="#tabs-3">Upload Array</a></li>
+			<li><a href="#tabs-4">Edit Variables</a></li>
 		  </ul>
 	      <div id="equation_editor_tab_body">
 			  <!--- CREATE VARIABLE -->
@@ -36,7 +37,7 @@
 							  <%= f.text_field(:name) %> = 
 							  <%= f.text_area(:expression_string, :class =>'auto_complete_variables') %>
 						</div>
-						<div id="input_button">
+						<div class="input_button">
 							<%= f.submit("Create Equation", :class => "button") %>
 						</div>
 					<% end %>
@@ -56,17 +57,17 @@
 									<%= f.select(:day_week, [['Weekday', '0'], ['Weekend',
 									'1'], ['Holiday', '2'], ['Monday-Sunday', '3'], ['Other', '4']]) %>
 								</div>
-						  
+							
 								<!-- Slider -->
 								<div>
 									<label for="time">Time range (in military time):</label>
 									<input type="text" id="time" />
 								</div>
-								</br>
+								
 								<div id="slider-style">
 									<div id="slider-range"></div>
 								</div>
-							
+								
 								<!-- Repeating -->
 								<div> Does this event repeat? </div> 
 								<div>
@@ -85,7 +86,7 @@
 									</div>
 								</div>
 						  
-								<div id="repeating"> 
+								<div> 
 									Repeat every
 								</div>
 								<div id="date_range">
@@ -118,11 +119,12 @@
 										<%= label_tag(:sun, "Sunday") %>
 									</div>  
 								</div>
+								<br />
 						</div> 
-		  
+						
 						<!--Submit-->
 						<div>
-							<div id="input_button">
+							<div class="input_button">
 								<%= f.submit("Upload Event", :id => "event_submit", :class => "button") %>
 							</div>
 						</div>
@@ -158,15 +160,19 @@
 						  <%= f.label(:data_file, "Select a CSV file.") %>
 						  <%= f.file_field(:data_file, :class => "choose_file") %>
 						</div>
+						<br />
 				  </div>
-				  <div id="input_button">
+				 
+				  <div class="input_button">
 					  <%= f.submit("Upload Array", :id => "file_upload_submit", :class => "button") %>
 				  </div>
 				<% end %>
+			 </div>
+			 <div id="tabs-4">
+				<%= render "current_equations" %>
 			 </div>
 		 </div>
 	</div>
 
 	<%= render "current_variables" %>
-	<%= render "current_equations" %>
 </div>

@@ -1,26 +1,20 @@
-<div id="current_model">	
-	<%= form_for(:model, :url => set_current_model_path) do |f| %>
-            <div>
-		<%= f.select(:id,
-		    options_from_collection_for_select(@models, 'id', 'name',
+<div id="current_model_header">	
+	<div>
+	<%= form_for(:model, :url => set_current_model_path, :html => {:id => "current_model"}) do |f| %>
+		<%= f.label(:id, "Current Model:") %> 
+		<%= f.select(:id,options_from_collection_for_select(@models, 'id', 'name',
 		    :selected => session[:model_id]), :prompt => 'Select Model') %>
 		<%= f.submit %>
-             </div>
 	<% end %>
-
-	Current Model: <span style="font-weight: bold"> <%= Model.find(session[:model_id]).name %> </span>
-
-
-	
-	<%= form_for(:workflow, :url => set_current_workflow_path) do |f| %>
-            <div>
-		<%= f.select(:id,
-		    options_from_collection_for_select(@workflows, 'id', 'name',
-		    :selected => session[:workflow_id]), :prompt => 'Select Workflow') %>
-		<%= f.submit %>
-             </div>
+    </div>
+	<div>
+	<%= form_for(:workflow, :url => set_current_workflow_path, :html => {:id => "current_model"}) do |f| %>
+		<%= f.label(:id, "Current Workflow:") %>
+		<%= f.select(:id, options_from_collection_for_select(@workflows, 'id', 'name',
+		  :selected => session[:workflow_id]), :prompt => 'Select Workflow') %>
+	    <%= f.submit %>
 	<% end %>
-
-	Current Workflow: <span style="font-weight: bold"> <%= Workflow.find(session[:workflow_id]).name %> </span>
+	</div>
+	<!--Current Workflow: <span style="font-weight: bold"> <%= Workflow.find(session[:workflow_id]).name %> </span>-->
 </div>
 

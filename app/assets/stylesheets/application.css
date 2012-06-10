@@ -104,6 +104,14 @@ body {
 	display: block;
 	float: left;
 	margin-right: 20px;
+	background-color: #dee6ed;
+	padding: 2px;
+	border-radius: 6px;
+	font-family: Garamond, Baskerville, "Times New Roman", serif;
+	font-size: 1em;
+}
+#current_model_button{
+	font-size: .7em;
 }
 #current_model_header{
 	margin: 0 50px 20px 50px

@@ -208,12 +208,13 @@ class WorkflowController < ApplicationController
       if v.index_values
         #variable is an array
         variables_hash[varname][:values] ||= {}
-        variables_hash[varname][:values][v.index_values] = value.to_f
+        variables_hash[varname][:values][v.index_values.collect{|i| i.to_f}] = value.to_f
       else
         #variable is a scalar
         variables_hash[varname] = {:value => value.to_f}
       end
     end
+    puts "\n\n================\nVARIABLES HASH = "+variables_hash.inspect
     return variables_hash
   end
   

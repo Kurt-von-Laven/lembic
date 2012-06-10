@@ -343,6 +343,7 @@ h3 {
 .input_button {
 	text-align: center !important;
 }
+
 .left_column{
 	width: 180px;
 	float: left;
@@ -611,7 +612,9 @@ ul {
     text-align: center;
 }
 
-
+.user_defined_var{
+	color: #b9d987;
+}
 .var_input_block{
 	margin: auto;
 	width: 80%;

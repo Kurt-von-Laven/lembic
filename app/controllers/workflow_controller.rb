@@ -1,6 +1,7 @@
 require Rails.root.join('app/helpers/expression')
 require Rails.root.join('app/helpers/evaluator')
 require Rails.root.join('app/helpers/parser')
+require 'csv_importer'
 
 
 class WorkflowController < ApplicationController
@@ -77,30 +78,39 @@ class WorkflowController < ApplicationController
     render 'evaluator'
   end
   
-  def run
-    #get blocks for this workflow
-    #find first block in workflow
-    #
-  end
-  
   # params[:id] is the id of the block being submitted
   # get the run id from a hidden field
   # store the user-entered values in run_values
   # build a hash of variable names to values and formulas to be run through the evaluator
   # display the next block based on transition logic
   def expert_workflow
-    curr_block = Block.where(:id => params[:input_values][:id]).first
-    run_id = params[:run_id] 
-    run_id = params[:input_values]["run_id"] if run_id.nil?
+    curr_block = Block.where(:id => params[:block_id]).first
+    if !curr_block
+      raise "Couldn't find block with id #{params[:block_id]}"
+    end
+    run_id = params[:run_id]
     @run = Run.where(:id => run_id).first
     input_values = params[:input_values]
     if !input_values.nil?
-      for var_id, val in input_values do
-        next if var_id == "run_id" || var_id == "id" #THIS IS SO GROSS EWWWW EW EW EW
-        RunValue.create({:run_id => @run.id, :variable_id => var_id, :value => val})
+      for block_var_id, block_var_params in input_values do
+        #next if block_var_id == "run_id" || block_var_id == "id" #THIS IS SO GROSS EWWWW EW EW EW
+        variable_id = block_var_params[:variable_id]
+        if block_var_params[:data_file]
+          #variable is an array
+          csv_data = block_var_params[:data_file].read
+          start_row = block_var_params[:start_row]
+          start_col = block_var_params[:start_col]
+          raise csv_data.inspect
+        else
+          #variable is a scalar
+          value = block_var_params[:value]
+          RunValue.create({:run_id => @run.id, :variable_id => variable_id, :value => value})
+        end
       end
     end
     @variables_hash = variables_hash_for_run(@run)
+    
+    @evaluator = Evaluator.new
     
     if params[:first_block]
       @block = curr_block
@@ -112,7 +122,6 @@ class WorkflowController < ApplicationController
     # figure out which block to display next
     block_connections = curr_block.block_connections.order(:sort_index)
     next_block = nil
-    @evaluator = Evaluator.new
     for b in block_connections
       if @evaluator.eval_expression(b.expression_object, @variables_hash, nil) != 0
         # expression evaluates to true
@@ -136,12 +145,14 @@ class WorkflowController < ApplicationController
   # sets the run's current block to the start block of the workflow
   # redirects to show the first block
   def start_run
-    start_block = Block.where('workflow_id = ? and sort_index = 0', workflow.id).first
+    workflow_id = params[:id]
+    start_block = Block.where('workflow_id = ? and sort_index = 0', workflow_id).first
     new_run = Run.create({:user_id => session[:user_id],
-                          :workflow_id => workflow.id,
+                          :workflow_id => workflow_id,
                           :block_id => start_block.id
                         })
-    redirect_to :action => 'expert_workflow', :input_values => {:id => start_block.id, :run_id => new_run.id}, :first_block => true # TODO: This should be a POST request, but all redirects are GET requests.
+    
+    redirect_to :action => 'expert_workflow', :block_id => start_block.id, :run_id => new_run.id, :first_block => true # TODO: This should be a POST request, but all redirects are GET requests.
   end
     
   def create_workflow
@@ -184,7 +195,14 @@ class WorkflowController < ApplicationController
     for v in run_values do
       varname = v.variable.name
       value = v.value
-      variables_hash[varname] = {:value => value.to_f}
+      if v.index_values
+        #variable is an array
+        variables_hash[varname][:values] ||= {}
+        variables_hash[varname][:values][v.index_values] = value.to_f
+      else
+        #variable is a scalar
+        variables_hash[varname] = {:value => value.to_f}
+      end
     end
     return variables_hash
   end

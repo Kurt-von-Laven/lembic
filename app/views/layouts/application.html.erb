@@ -192,7 +192,7 @@
                     multiple: true,
                     multipleSeparator: " ", 
                     source : function (request, response){
-                        $.getJSON('/editor/find_variablenames', {
+                        $.getJSON('/editor/find_variable_names', {
                             term:extractLast(request.term)
                         }, response);
                     },

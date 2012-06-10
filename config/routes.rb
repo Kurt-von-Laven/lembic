@@ -30,7 +30,7 @@ Lembic::Application.routes.draw do
 
   resources :editor do
     collection do
-      get :find_variablenames
+      get :find_variable_names
     end
   end
 

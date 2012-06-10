@@ -61,7 +61,7 @@ class ApplicationController < ActionController::Base
   def model_workflows
     model = Model.where(:id => session[:model_id]).first
     if !model.nil?
-      @workflows = .workflows.order(:sort_index)
+      @workflows = model.workflows.order(:sort_index)
     end
   end
   

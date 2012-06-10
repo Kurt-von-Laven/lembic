@@ -121,7 +121,7 @@ class ViewEditorController < ApplicationController
   def delete_block
     block = Block.find(params[:id])
     block.destroy
-    render 'edit_block'
+    render :text => "Block with ID #{params[:id]} was successfully destroyed."
   end
   
   def delete_block_connection

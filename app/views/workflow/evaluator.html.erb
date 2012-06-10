@@ -6,7 +6,7 @@
   <h2>Output Values</h2>
     <ul class="output_values">
       <% if @output_variables.empty? %>
-        <li>There are currently no output values to display. Run the evaluator to generate output values.</li>
+        <li><p id="evaluator_no_output">There are currently no output values to display. Run the evaluator to generate output values. </p></li>
       <% else %>
 		  <% i = 0 %>
 		  <% for output_variable_name, output_variable_value in @output_variables %>

@@ -88,7 +88,9 @@
 					
 				<!-- ASSIGN VARIABLES -->
 				<div id="tabs-2">
-					Please enter one per line. <br />
+					<div class="comment" style="margin-left:80px;">
+						Please enter one per line. 
+					</div>
 					<%= form_for(:create_block_inputs, :html => {:class => "input_formB"}) do |f| %>
 						<div class="var_input_block">
 							<div>
@@ -96,6 +98,7 @@
 								<%= f.text_field :name, :class => "auto_complete_blocks" %>
 							</div>
 							<div>
+							
 								<%= f.label(:variables_string, "Input Variables: ") %>
 								<%= f.text_area :variables_string, :id =>"drop_var" %>
 							</div>
@@ -135,7 +138,9 @@
 					
 				<!-- ADD CONNECTIONS -->
 				<div id="tabs-4">
-					Example of Logic for Transition: 'has_ac == true => AC_Block'
+					<div class="comment" style="margin-left:80px">
+						Example of Logic for Transition: 'has_ac == true => AC_Block'
+					</div>
 					<%= form_for(:create_block_connections, :html => {:class => "input_formB"}) do |f| %>
 						<div class="var_input_block">
 							<div>

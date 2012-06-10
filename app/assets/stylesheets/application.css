@@ -156,7 +156,7 @@ body {
 }
 #evaluator_output {
 	width: 450px;
-	margin: 0px 0px 10px 150px;
+	margin: auto;
 	padding: 0px 0px 5px 0px;
 	background-color: #b9d987;
 	border-radius:6px;
@@ -175,8 +175,12 @@ body {
 	color: #1e3652;
 	font-size: 1.2em;
 }
+#evaluator_no_output{
+	font-size: .8em;
+}
 .evaluator {
-	margin: 10px 0px 10px 150px;
+	margin: auto;
+	
 	width: 450px;
 }
 .evaluator div {

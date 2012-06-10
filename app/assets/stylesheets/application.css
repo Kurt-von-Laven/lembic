@@ -40,7 +40,7 @@ body {
 .button {
     font-size: 1em !important;
 }
-#centered {
+.centered {
 	text-align: center;
 	margin: 0 150px 0 120px;
 	padding: 10px;

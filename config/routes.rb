@@ -36,7 +36,7 @@ Lembic::Application.routes.draw do
 
   resources :view_editor do
     collection do
-      get :find_blocknames
+      get :find_block_names
     end
   end
     

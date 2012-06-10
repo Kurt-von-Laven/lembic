@@ -66,12 +66,12 @@ class ViewEditorController < ApplicationController
     @variables = Variable.where(:model_id => session[:model_id]).order(:name)
   end
   
-  def find_blocknames
-    @blocknames = Block.where('(workflow_id = ?) AND (name LIKE ?)', session[:workflow_id], "#{params[:term]}%").order(:name)
+  def find_block_names
+    @block_names = Block.where('(workflow_id = ?) AND (name LIKE ?)', session[:workflow_id], "#{params[:term]}%").order(:name)
     respond_to do |format|
       format.js { render :layout => false }
     end
-  end #find_blocknames
+  end #find_block_names
   
   # Check for form data for creating a block_variable
   def create_block_variables(form_hash, display_type)

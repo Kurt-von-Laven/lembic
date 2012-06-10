@@ -2,8 +2,9 @@
 
 <h1>Edit Blocks</h1>
 
-<%= render "current_model" %>
+<%= render :partial => "current_model" %>
 <%= render(:partial => 'flash_message', :locals => {:flash_symbol => :block_failed, :tag => 'div', :class_name => 'error'}) %>
+
 
 <div style="width: 100%;">
 	<div style="height: 500px">

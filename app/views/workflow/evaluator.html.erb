@@ -3,13 +3,17 @@
 <h1>Evaluate</h1>
 <%= render "current_model" %>
 <div id="evaluator_output">
-		<h2>Output Values</h2>
-		<ul class="output_values">
+  <h2>Output Values</h2>
+    <ul class="output_values">
+      <% if @output_variables.empty? %>
+        <li>There are currently no output values to display. Run the evaluator to generate output values.</li>
+      <% else %>
 		  <% i = 0 %>
 		  <% for output_variable_name, output_variable_value in @output_variables %>
 			<li><%= output_variable_name%> = <span style="font-weight: bold"> <%=output_variable_value.to_s %></span></li>
 		  <% end %>
-		</ul>
+      <% end %>
+    </ul>
   </div>
 <%= form_for(:evaluator, :html => {:class => "evaluator"}) do |f| %>
   <div>
@@ -18,17 +22,21 @@
 	</div>
 	
 	<div class="evaluator_block">
-		<h2>Input Values</h2>
-		<ul class="input_values">
-		  <% i = 0 %>
-		  <% for input_variable in @input_variables %>
+          <h2>Input Values</h2>
+            <ul class="input_values">
+              <% if @input_variables.empty? %>
+                <li>There are currently no input values to display. You can create input values using the equation editor by creating variables without equations.</li>
+              <% else %>
+                 <% i = 0 %>
+                 <% for input_variable in @input_variables %>
 			<li>
 			  <%= f.label(:input_values, input_variable.name + ' = ', :for => "evaluator_input_value_#{i}") %>
 			  <%= f.text_field(:input_values, :id => "evaluator_input_value_#{i}", :name => 'evaluator[input_values][]') %>
 			</li>
 			<% i += 1 %>
-		  <% end %>
-		</ul>
+                <% end %>
+              <% end %>
+              </ul>
 	</div>
     
     <div class="evaluator_block">

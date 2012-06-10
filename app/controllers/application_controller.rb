@@ -2,7 +2,6 @@ require 'cgi'
 
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  layout "application"
   
   before_filter :prevent_caching, :verify_login, :verify_model, :verify_workflow, :authenticity_token, :user_models, :model_workflows
   

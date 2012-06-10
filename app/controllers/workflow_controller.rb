@@ -4,7 +4,6 @@ require Rails.root.join('app/helpers/parser')
 
 
 class WorkflowController < ApplicationController
-  layout "workflow"
   def evaluate
     @variables = Variable.where(:model_id => session[:model_id]).order(:name)
     @input_variables = Variable.where(:model_id => session[:model_id], :expression_string => nil).order(:name)

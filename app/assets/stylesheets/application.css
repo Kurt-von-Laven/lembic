@@ -150,7 +150,7 @@ body {
 	height: 200px;
 }
 
-#evaluator_block {
+.evaluator_block {
 	background-color: #dee6ed;
 	border-radius:6px;
     -moz-border-radius:6px; /* Firefox 3.6 and earlier */

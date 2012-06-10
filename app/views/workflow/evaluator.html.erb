@@ -17,7 +17,7 @@
 		<%= render(:partial => 'flash_message', :locals => {:flash_symbol => :evaluator_error, :tag => 'p', :class_name => 'error'}) %>
 	</div>
 	
-	<div id="evaluator_block">
+	<div class="evaluator_block">
 		<h2>Input Values</h2>
 		<ul class="input_values">
 		  <% i = 0 %>
@@ -31,7 +31,7 @@
 		</ul>
 	</div>
     
-    <div id="evaluator_block">
+    <div class="evaluator_block">
 		<h2>Variable to Solve For</h2>
 		<div>
 		  <%= f.label(:variable_to_solve_for, 'Variable to solve for: ') %>

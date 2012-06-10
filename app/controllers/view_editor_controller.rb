@@ -3,7 +3,7 @@ class ViewEditorController < ApplicationController
     
     ## Set variables used by views for rendering
     @variables = Variable.where(:model_id => session[:model_id]).order(:name)
-    @blocks = Block.where(:workflow_id => session[:user_id]).order(:sort_index) # TODO: workflow_id should eventually be set correctly.
+    @blocks = Block.where(:workflow_id => session[:workflow_id]).order(:sort_index)
     
     # Create block to be used by form_for
     @block = Block.new
@@ -15,7 +15,7 @@ class ViewEditorController < ApplicationController
       #### BUG: this code for creating blocks doesn't work right now
       # Create a block with the specified name and workflow_id
       name = form_hash[:name]
-      workflow_id = session[:user_id]
+      workflow_id = session[:workflow_id]
       sort_index = Block.where(:workflow_id => workflow_id).size
       Block.create({:name => name, :workflow_id => workflow_id, :sort_index => sort_index})
     end
@@ -68,7 +68,7 @@ class ViewEditorController < ApplicationController
   end
   
   def find_blocknames
-    @blocknames = Block.where('(workflow_id = ?) AND (name LIKE ?)', session[:user_id], "#{params[:term]}%").order(:name)
+    @blocknames = Block.where('(workflow_id = ?) AND (name LIKE ?)', session[:workflow_id], "#{params[:term]}%").order(:name)
     respond_to do |format|
       format.js { render :layout => false }
     end

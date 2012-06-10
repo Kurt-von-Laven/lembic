@@ -22,9 +22,10 @@ Lembic::Application.routes.draw do
   match '/run/:id', to: 'workflow#start_run', as: 'run'
   match '/workflow', to: 'workflow#expert_workflow', as: 'workflow'
   match '/workflow/post_block_input', to: 'workflow#expert_workflow', as: 'post_block_input'
+  match '/workflow/set_current', to: 'workflow#set_current', as: 'set_current_workflow'
   match '/models/create', to:'models#create', as: 'create'
   match '/models/show', to:'models#show', as: 'show'
-  match '/models/set_current_model', to: 'models#set_current_model', as: 'set_current_model'
+  match '/models/set_current', to: 'models#set_current', as: 'set_current_model'
   match '/fullvariable', to: 'editor#full_variable', as: 'fullvariable'
 
   resources :editor do

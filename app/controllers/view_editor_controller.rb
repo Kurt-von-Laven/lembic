@@ -125,7 +125,7 @@ class ViewEditorController < ApplicationController
     #rescue RecordNotFound => e
     #  logger.debug "Block not found by id"
     #end
-    redirect_to :back
+    render 'edit_block'
   end
   
   def delete_block_connection

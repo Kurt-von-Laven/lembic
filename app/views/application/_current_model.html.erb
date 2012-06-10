@@ -21,6 +21,6 @@
              </div>
 	<% end %>
 
-	Current Workflow: <span style="font-weight: bold"> <%= Model.find(session[:workflow_id]).name %> </span>
+	Current Workflow: <span style="font-weight: bold"> <%= Workflow.find(session[:workflow_id]).name %> </span>
 </div>
 

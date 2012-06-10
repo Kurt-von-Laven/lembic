@@ -30,7 +30,7 @@ module CsvImporter
       #convert to Lembic datetime
       desired_column_with_nans = desired_column_with_nans.collect{|i| date_convert(i)}
     end
-    return desired_column_with_nans()
+    return desired_column_with_nans
   end
     
   def CsvImporter.parse_csv_expression(csv_data, start_row_one_indexed, column_number_one_indexed, variable_type)

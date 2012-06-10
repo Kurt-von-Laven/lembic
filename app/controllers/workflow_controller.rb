@@ -98,9 +98,19 @@ class WorkflowController < ApplicationController
         if block_var_params[:data_file]
           #variable is an array
           csv_data = block_var_params[:data_file].read
-          start_row = block_var_params[:start_row]
-          start_col = block_var_params[:start_col]
-          raise csv_data.inspect
+          start_row = CsvImporter.convert_letter_column_labels_to_numbers(block_var_params[:start_row])
+          start_col = CsvImporter.convert_letter_column_labels_to_numbers(block_var_params[:start_col])
+          variable = Variable.find(variable_id)
+          index_names = variable.index_names
+          if index_names.length != 1
+            raise "Uploading of multidimensional arrays is not yet supported."
+          end
+          array_data = CsvImporter.parse_csv_to_array(csv_data, start_row, start_col, variable.variable_type)
+          index = 1
+          for elem in array_data
+            RunValue.create({:run_id => @run.id, :variable_id => variable_id, :index_values => [index], :value => elem})
+            index += 1
+          end
         else
           #variable is a scalar
           value = block_var_params[:value]

@@ -14,13 +14,12 @@
             <div>
             <% if v.variable.index_names.length > 0 %>
                 <%= v.variable.name %>
-                <%= f.text_field "start_row" %>
                 <div>
-                    <%= f.label(:column_number, "Column of array ") %>
+                    <%= f.label(:column_number, "Column of array (e.g. 1 for top row)") %>
                     <%= f.text_field(:column_number, :name=>"input_values[#{v.id}][start_col]", :class => "numeric_input") %>
                 </div>
                 <div>
-                    <%= f.label(:start_row, "First row of array ") %>
+                    <%= f.label(:start_row, "First row of array (e.g. A or 1 for leftmost row)") %>
                     <%= f.text_field(:start_row, :name=>"input_values[#{v.id}][start_row]", :class => "numeric_input") %> 
                 </div>
                 <div id="choose_file">

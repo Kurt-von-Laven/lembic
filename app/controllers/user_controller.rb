@@ -21,7 +21,7 @@ class UserController < ApplicationController
   end
   
   def logout
-    session.clear
+    reset_session
     redirect_to login_path
   end
   

@@ -8,15 +8,15 @@ class User < ActiveRecord::Base
   has_many :workflow_permissions
   has_many :workflows, :through => :workflow_permissions
   has_many :runs
-  has_many :model_permissions
+  has_many :model_permissions, :dependent => :destroy
   has_many :models, :through => :model_permissions, :dependent => :destroy #TODO: we'd like the behavior to be that models are destroyed if the last user with permissions for the model is deleted.
   
-  validates_associated :runs
+  validates_associated :runs, :model_permissions
   
   SHA512_REGEX = Regexp.new('[a-f0-9]{128}')
   SALT_LENGTH = 128
-  SALT_BASE = 16 # If SALT_REGEX changes, then SALT_BASE must be updated accordingly.
-  SALT_REGEX = Regexp.new("[a-f0-9]{#{SALT_LENGTH}}") # If SALT_BASE changes, then SALT_REGEX must be updated accordingly.
+  SALT_BASE = 16 # If SALT_BASE changes, then SALT_REGEX must be updated accordingly.
+  SALT_REGEX = Regexp.new("[a-f0-9]{#{SALT_LENGTH}}") # If SALT_REGEX changes, then SALT_BASE must be updated accordingly.
   MINIMUM_PASSWORD_LENGTH = 8
   
   validates_each :pwd_hash, :salt do |user, attribute, value|

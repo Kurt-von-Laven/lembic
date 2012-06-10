@@ -14,9 +14,9 @@ class ModelsController < ApplicationController
     save_successful = false
     ActiveRecord::Base.transaction do
       save_successful = @model.save
-      model_permissions = ModelPermission.new({:user_id => session[:user_id],
-                                                :model_id => @model.id, :sort_index => User.find(session[:user_id]).models.length, :permissions => 0})
-      save_successful &&= model_permissions.save
+      model_permission = ModelPermission.new({:user_id => session[:user_id],
+                                               :model_id => @model.id, :sort_index => User.find(session[:user_id]).models.length, :permissions => 0})
+      save_successful &&= model_permission.save
     end
     if save_successful
       session[:model_id] = @model.id
@@ -47,7 +47,9 @@ class ModelsController < ApplicationController
   def destroy
     @model = Model.find(params[:id])
     @model.destroy
-    
+    if session[:model_id] == params[:id].to_i
+      session[:model_id] = nil
+    end
     redirect_to models_path
   end
   

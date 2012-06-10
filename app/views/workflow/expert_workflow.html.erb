@@ -3,37 +3,35 @@
 <% id = @run.id %>
 <% block_variables = @block.block_variables().order(:sort_index) %>
 <%= form_for :input_values, :url => "/workflow/post_block_input" do |f| %>
-    <%= f.hidden_field :run_id, :value=>id %>
-    <%= f.hidden_field :id, :value=>@block.id %>
+    <%= f.hidden_field :run_id, :value=>id, :name=>"run_id" %>
+    <%= f.hidden_field :id, :value=>@block.id, :name=>"block_id" %>
     <% for v in block_variables %>
         
    
         <% if v.display_type == :input %>
         <div>
-            <% fields_for "input_values[input_vars][]" do |input_var| %>
-                <%= f.hidden_field :variable_id, :value => v.variable_id %>
+            <%= f.hidden_field :variable_id, :name=>"input_values[#{v.id}][variable_id]", :value => v.variable_id %>
+            <div>
+            <% if v.variable.index_names.length > 0 %>
+                <%= v.variable.name %>
+                <%= f.text_field "start_row" %>
                 <div>
-                <% if v.variable.index_names.length > 0 %>
-                    <%= v.variable.name %>
-                    <%= input_var.text_field "start_row" %>
-                    <div>
-                        <%= f.label(:column_number, "Column of array ") %>
-                        <%= f.text_field(:column_number, :class => "numeric_input") %>
-                    </div>
-                    <div>
-                        <%= f.label(:start_row, "First row of array ") %>
-                        <%= f.text_field(:start_row, :class => "numeric_input") %> 
-                    </div>
-                    <div id="choose_file">
-                        <%= f.label(:data_file, "Select a CSV file.") %>
-                        <%= f.file_field(:data_file, :class => "choose_file") %>
-                    </div>
-                <% else %>
-                    <%= v.variable.name %>: 
-                    <%= input_var.text_field "value" %>
-                <% end %>
+                    <%= f.label(:column_number, "Column of array ") %>
+                    <%= f.text_field(:column_number, :name=>"input_values[#{v.id}][start_col]", :class => "numeric_input") %>
                 </div>
+                <div>
+                    <%= f.label(:start_row, "First row of array ") %>
+                    <%= f.text_field(:start_row, :name=>"input_values[#{v.id}][start_row]", :class => "numeric_input") %> 
+                </div>
+                <div id="choose_file">
+                    <%= f.label(:data_file, "Select a CSV file.") %>
+                    <%= f.file_field(:data_file, :name=>"input_values[#{v.id}][data_file]", :class => "choose_file") %>
+                </div>
+            <% else %>
+                <%= v.variable.name %>: 
+                <%= f.text_field "value", :name=>"input_values[#{v.id}][value]" %>
             <% end %>
+            </div>
         </div>
         <% else %>
         <div class="centered">

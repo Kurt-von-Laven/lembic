@@ -204,6 +204,10 @@ body {
 .error {
     color: red;
 }
+#equation_editor_tab_body{
+	height: 550px;
+	margin: auto;
+}
 
 #expression { 
 	border-radius:10px;
@@ -307,6 +311,10 @@ h3 {
 }
 
 .input_form textarea{
+	width:35%;
+	height: 300px;
+}
+.input_form file_field {
 	width:35%;
 	height: 300px;
 }
@@ -530,6 +538,7 @@ border-radius:10px;
 .tabs {
     font-size: .99em !important;
 }
+
 
 /* tables */
 

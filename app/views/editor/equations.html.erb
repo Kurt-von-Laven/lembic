@@ -17,7 +17,7 @@
 			<li><a href="#tabs-2">Create Event</a></li>
 			<li><a href="#tabs-3">Upload Array</a></li>
 		  </ul>
-	      <div style="height: 550px">
+	      <div id="equation_editor_tab_body">
 			  <!--- CREATE VARIABLE -->
 			  <div id="tabs-1">
 					<%= form_for(:new_equation, :html => {:class => "input_form"}) do |f| %>
@@ -62,7 +62,7 @@
 									<label for="time">Time range (in military time):</label>
 									<input type="text" id="time" />
 								</div>
-								
+								</br>
 								<div id="slider-style">
 									<div id="slider-range"></div>
 								</div>
@@ -122,9 +122,9 @@
 		  
 						<!--Submit-->
 						<div>
-							<p class="submit_paragraph">
+							<div id="input_button">
 								<%= f.submit("Upload Event", :id => "event_submit", :class => "button") %>
-							</p>
+							</div>
 						</div>
 					<% end %>
 			  </div>
@@ -154,13 +154,12 @@
 						  <%= f.label(:start_row, "First row of array ") %>
 						  <%= f.text_field(:start_row, :class => "numeric_input") %>  <span class="comment">e.g., 1 for the top-most row </span>
 						</div>
-						<br />
-						<div id="choose_file">
+						<div>
 						  <%= f.label(:data_file, "Select a CSV file.") %>
 						  <%= f.file_field(:data_file, :class => "choose_file") %>
 						</div>
 				  </div>
-				  <div id="upload">
+				  <div id="input_button">
 					  <%= f.submit("Upload Array", :id => "file_upload_submit", :class => "button") %>
 				  </div>
 				<% end %>

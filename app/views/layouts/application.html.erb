@@ -69,6 +69,12 @@
 					return false;
 				});
                 
+                $('.dialog_link_workflow').live("click", function(){
+					var i = this.getAttribute("index");
+					$('#dialog_workflow_'+i).dialog().dialog('open');
+					return false;
+				});
+                
                 $('.dialog_link_block').live("click", function(){
 		  var i = this.getAttribute("index");
                   var block_id = this.getAttribute("block_id");

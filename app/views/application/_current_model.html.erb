@@ -1,18 +1,29 @@
 <div id="current_model_header">	
 	<div>
-	<%= form_for(:model, :url => set_current_model_path, :html => {:id => "current_model"}) do |f| %>
+	<%= form_for(:model, :url => set_current_model_path) do |f| %>
+          <div>
 		<%= f.label(:id, "Current Model:") %> 
 		<%= f.select(:id,options_from_collection_for_select(@models, 'id', 'name',
 		    :selected => session[:model_id]), :prompt => 'Select Model') %>
-		<%= f.submit %>
+		<div id="current_model_button">
+			<%= f.submit("Save", :class => "button") %>
+		</div>
+          </div>
 	<% end %>
     </div>
+	
+
 	<div>
-	<%= form_for(:workflow, :url => set_current_workflow_path, :html => {:id => "current_model"}) do |f| %>
+	<%= form_for(:workflow, :url => set_current_workflow_path) do |f| %>
+          <div>
 		<%= f.label(:id, "Current Workflow:") %>
 		<%= f.select(:id, options_from_collection_for_select(@workflows, 'id', 'name',
 		  :selected => session[:workflow_id]), :prompt => 'Select Workflow') %>
-	    <%= f.submit %>
+		
+		<div id="current_workflow_button">
+			<%= f.submit("Save", :class => "button") %>
+		</div>
+          </div>
 	<% end %>
 	</div>
 	<!--Current Workflow: <span style="font-weight: bold"> <%= Workflow.find(session[:workflow_id]).name %> </span>-->

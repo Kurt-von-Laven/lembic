@@ -8,166 +8,166 @@
 </script>
 
 <h1>Equation Editor</h1>
-<%= render "current_model" %>
-<%= render(:partial => 'flash_message', :locals => {:flash_symbol => :variable_not_saved, :tag => 'div', :class_name => 'error'}) %>
-<div id="tabs">
-  <ul>
-    <li><a href="#tabs-1">Create Variable</a></li>
-    <li><a href="#tabs-2">Create Event</a></li>
-    <li><a href="#tabs-3">Upload Array</a></li>
-  </ul>
-  
-  <!--- CREATE VARIABLE -->
-  <div id="tabs-1">
-    <%= form_for(:new_equation, :html => {:class => "input_form"}) do |f| %>
-    <div class="var_input_block">
-      <div>
-        <%= f.label(:variable_type, "Variable Type:") %>
-        <%= f.select(:variable_type, [['Categorical', '0'], ['Integer',
-            '1'], ['Real', '2'], ['Date and Time', '3']]) %>
-      </div>
-      <div>
-        <%= f.label(:description, "Description:") %>
-        <%= f.text_field(:description, :size => 20) %>
-      </div>
-    </div>
-    <div id="expression">
-      <%= f.text_field(:name) %> = 
-      <%= f.text_area(:expression_string, :class =>'auto_complete_variables') %>
-    </div>
-    <div id="input_button">
-      <%= f.submit("Create Equation", :class => "button") %>
-    </div>
-<% end %>
-
-</div>
-            
-     <!-- CREATE EVENT -->       
-			<div id="tabs-2">
-            <%= form_for(:event, :html => {:class => "input_form"}) do |f| %>
-    <div class="var_input_block">
-        <div>
-            <%= f.label(:name, "Name: ") %>
-            <%= f.text_field :name %>
-        </div>
-        <!-- Type of day -->
-        <div>
-            <%= f.label(:day_week, "Type of Day:") %>
-            <%= f.select(:day_week, [['Weekday', '0'], ['Weekend',
-            '1'], ['Holiday', '2'], ['Monday-Sunday', '3'], ['Other', '4']]) %>
-        </div>
-  
-        <!-- Slider -->
-        <div>
-            <label for="time">Time range (in military time):</label>
-            <input type="text" id="time" />
-        </div>
-        <br />
-		<div id="slider-style">
-			<div id="slider-range"></div>
-        </div>
-		<br />
-        <!-- Repeating -->
-          <div> Does this event repeat? </div> 
-		  <div>
-				<%= label_tag(:from_date, "From: ")%>
-				<!-- Datepicker -->       
-				<div><input id="from_date" type="text" class="datepicker"></input></div>
-          </div>
-            
-          <div>
-				<%= label_tag(:to_date, "To: ")%>
-				<!-- Datepicker -->       
-				<div><input id="to_date" type="text" class="datepicker"></input></div>
-          </div>
-		  <br />
-		  <div id="repeating"> 
-			Repeat every
-		  </div>
-		  <div id="date_range">
-			<div>
-				<%= check_box_tag(:mon) %>
-				<%= label_tag(:mon, "Monday") %>
-			</div>
-            <div>
-				<%= check_box_tag(:tues) %>
-				<%= label_tag(:tues, "Tuesday") %>
-            </div>
-            <div>
-				<%= check_box_tag(:wed) %>
-				<%= label_tag(:wed, "Wednesday") %>
-            </div>
-            <div>
-				<%= check_box_tag(:thurs) %>
-				<%= label_tag(:thurs, "Thursday") %>
-            </div>
-            <div>
-				<%= check_box_tag(:fri) %>
-				<%= label_tag(:fri, "Friday") %>
-            </div>
-            <div>
-				<%= check_box_tag(:sat) %>
-				<%= label_tag(:sat, "Saturday") %>
-            </div>
-            <div>
-				<%= check_box_tag(:sun) %>
-				<%= label_tag(:sun, "Sunday") %>
-            </div>  
-		</div>
-    </div> 
-  
-    <!--Submit-->
-    <div>
-    
-        <p class="submit_paragraph">
-            <%= f.submit("Upload Event", :id => "event_submit", :class => "button") %>
-        </p>
-    </div>
-<% end %>
-
-
-            </div>
-            
-            
-        <!--CREATE ARRAY -->
-			<div id="tabs-3">
-            <%= form_for(:new_constant_array, :html => {:multipart => true, :class => "input_form"}) do |f| %>
-  <div class="var_input_block">
-		<div>
-		  <%= f.label(:name, "Variable Name:") %>
-		  <%= f.text_field(:name) %>
-		</div>
-		<div>
-		  <%= f.label(:variable_type, "Variable Type:") %>
-		  <%= f.select(:variable_type, [['Categorical', '0'], ['Integer',
-		  '1'], ['Real', '2'], ['Date and Time', '3']]) %>
-		</div>
-		<div>
-		  <%= f.label(:description, "Description:") %>
-		  <%= f.text_field(:description) %>
-		</div>
-		<div>
-		  <%= f.label(:column_number, "Column of array ") %>
-		  <%= f.text_field(:column_number, :class => "numeric_input") %>  <span class="comment">e.g., 1 or A for the left-most column </span>
-		</div>
-		<div>
-		  <%= f.label(:start_row, "First row of array ") %>
-		  <%= f.text_field(:start_row, :class => "numeric_input") %>  <span class="comment">e.g., 1 for the top-most row </span>
-		</div>
-        <br />
-		<div id="choose_file">
-		  <%= f.label(:data_file, "Select a CSV file.") %>
-		  <%= f.file_field(:data_file, :class => "choose_file") %>
-		</div>
+<div style="width: 100%;">
+	<%= render "current_model" %>
+	<%= render(:partial => 'flash_message', :locals => {:flash_symbol => :variable_not_saved, :tag => 'div', :class_name => 'error'}) %>
+	<div id="tabs">
+		  <ul>
+			<li><a href="#tabs-1">Create Variable</a></li>
+			<li><a href="#tabs-2">Create Event</a></li>
+			<li><a href="#tabs-3">Upload Array</a></li>
+		  </ul>
+	      <div style="height: 550px">
+			  <!--- CREATE VARIABLE -->
+			  <div id="tabs-1">
+					<%= form_for(:new_equation, :html => {:class => "input_form"}) do |f| %>
+						<div class="var_input_block">
+							  <div>
+								<%= f.label(:variable_type, "Variable Type:") %>
+								<%= f.select(:variable_type, [['Categorical', '0'], ['Integer',
+									'1'], ['Real', '2'], ['Date and Time', '3']]) %>
+							  </div>
+							  <div>
+								<%= f.label(:description, "Description:") %>
+								<%= f.text_field(:description, :size => 20) %>
+							  </div>
+						</div>
+						<div id="expression">
+							  <%= f.text_field(:name) %> = 
+							  <%= f.text_area(:expression_string, :class =>'auto_complete_variables') %>
+						</div>
+						<div id="input_button">
+							<%= f.submit("Create Equation", :class => "button") %>
+						</div>
+					<% end %>
+			  </div>
+				
+			 <!-- CREATE EVENT -->       
+			  <div id="tabs-2">
+				   <%= form_for(:event, :html => {:class => "input_form"}) do |f| %>
+						<div class="var_input_block">
+								<div>
+									<%= f.label(:name, "Name: ") %>
+									<%= f.text_field :name %>
+								</div>
+								<!-- Type of day -->
+								<div>
+									<%= f.label(:day_week, "Type of Day:") %>
+									<%= f.select(:day_week, [['Weekday', '0'], ['Weekend',
+									'1'], ['Holiday', '2'], ['Monday-Sunday', '3'], ['Other', '4']]) %>
+								</div>
+						  
+								<!-- Slider -->
+								<div>
+									<label for="time">Time range (in military time):</label>
+									<input type="text" id="time" />
+								</div>
+								
+								<div id="slider-style">
+									<div id="slider-range"></div>
+								</div>
+							
+								<!-- Repeating -->
+								<div> Does this event repeat? </div> 
+								<div>
+									<%= label_tag(:from_date, "From: ")%>
+									<!-- Datepicker -->       
+									<div>
+										<input id="from_date" type="text" class="datepicker"></input>
+									</div>
+								</div>
+							
+								<div>
+									<%= label_tag(:to_date, "To: ")%>
+									<!-- Datepicker -->       
+									<div>
+										<input id="to_date" type="text" class="datepicker"></input>
+									</div>
+								</div>
+						  
+								<div id="repeating"> 
+									Repeat every
+								</div>
+								<div id="date_range">
+									<div>
+										<%= check_box_tag(:mon) %>
+										<%= label_tag(:mon, "Monday") %>
+									</div>
+									<div>
+										<%= check_box_tag(:tues) %>
+										<%= label_tag(:tues, "Tuesday") %>
+									</div>
+									<div>
+										<%= check_box_tag(:wed) %>
+										<%= label_tag(:wed, "Wednesday") %>
+									</div>
+									<div>
+										<%= check_box_tag(:thurs) %>
+										<%= label_tag(:thurs, "Thursday") %>
+									</div>
+									<div>
+										<%= check_box_tag(:fri) %>
+										<%= label_tag(:fri, "Friday") %>
+									</div>
+									<div>
+										<%= check_box_tag(:sat) %>
+										<%= label_tag(:sat, "Saturday") %>
+									</div>
+									<div>
+										<%= check_box_tag(:sun) %>
+										<%= label_tag(:sun, "Sunday") %>
+									</div>  
+								</div>
+						</div> 
+		  
+						<!--Submit-->
+						<div>
+							<p class="submit_paragraph">
+								<%= f.submit("Upload Event", :id => "event_submit", :class => "button") %>
+							</p>
+						</div>
+					<% end %>
+			  </div>
+				
+				<!--CREATE ARRAY -->
+				<div id="tabs-3">
+				<%= form_for(:new_constant_array, :html => {:multipart => true, :class => "input_form"}) do |f| %>
+				  <div class="var_input_block">
+						<div>
+						  <%= f.label(:name, "Variable Name:") %>
+						  <%= f.text_field(:name) %>
+						</div>
+						<div>
+						  <%= f.label(:variable_type, "Variable Type:") %>
+						  <%= f.select(:variable_type, [['Categorical', '0'], ['Integer',
+						  '1'], ['Real', '2'], ['Date and Time', '3']]) %>
+						</div>
+						<div>
+						  <%= f.label(:description, "Description:") %>
+						  <%= f.text_field(:description) %>
+						</div>
+						<div>
+						  <%= f.label(:column_number, "Column of array ") %>
+						  <%= f.text_field(:column_number, :class => "numeric_input") %>  <span class="comment">e.g., 1 or A for the left-most column </span>
+						</div>
+						<div>
+						  <%= f.label(:start_row, "First row of array ") %>
+						  <%= f.text_field(:start_row, :class => "numeric_input") %>  <span class="comment">e.g., 1 for the top-most row </span>
+						</div>
+						<br />
+						<div id="choose_file">
+						  <%= f.label(:data_file, "Select a CSV file.") %>
+						  <%= f.file_field(:data_file, :class => "choose_file") %>
+						</div>
+				  </div>
+				  <div id="upload">
+					  <%= f.submit("Upload Array", :id => "file_upload_submit", :class => "button") %>
+				  </div>
+				<% end %>
+			 </div>
+		 </div>
 	</div>
-    <div id="upload">
-      <%= f.submit("Upload Array", :id => "file_upload_submit", :class => "button") %>
-    </div>
 
-<% end %>
-
-            </div>
-		</div>
-
-<%= render "current_variables" %>
-<%= render "current_equations" %>
+	<%= render "current_variables" %>
+	<%= render "current_equations" %>
+</div>

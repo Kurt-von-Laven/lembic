@@ -36,7 +36,7 @@
 							  <%= f.text_field(:name) %> = 
 							  <%= f.text_area(:expression_string, :class =>'auto_complete_variables') %>
 						</div>
-						<div id="input_button">
+						<div class="input_button">
 							<%= f.submit("Create Equation", :class => "button") %>
 						</div>
 					<% end %>
@@ -118,11 +118,12 @@
 										<%= label_tag(:sun, "Sunday") %>
 									</div>  
 								</div>
+								<br />
 						</div> 
-						</br>
+						
 						<!--Submit-->
 						<div>
-							<div id="input_button">
+							<div class="input_button">
 								<%= f.submit("Upload Event", :id => "event_submit", :class => "button") %>
 							</div>
 						</div>
@@ -158,9 +159,10 @@
 						  <%= f.label(:data_file, "Select a CSV file.") %>
 						  <%= f.file_field(:data_file, :class => "choose_file") %>
 						</div>
+						<br />
 				  </div>
-				  </br>
-				  <div id="input_button">
+				 
+				  <div class="input_button">
 					  <%= f.submit("Upload Array", :id => "file_upload_submit", :class => "button") %>
 				  </div>
 				<% end %>

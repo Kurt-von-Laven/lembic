@@ -338,8 +338,8 @@ h3 {
 }
 
 
-#input_button {
-	text-align: center;
+.input_button {
+	text-align: center !important;
 }
 .left_column{
 	width: 180px;

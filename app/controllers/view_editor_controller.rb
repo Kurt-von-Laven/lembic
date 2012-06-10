@@ -1,63 +1,64 @@
 class ViewEditorController < ApplicationController
   def edit_block
-    
+    ActiveRecord::Base.transaction do
     ## Set variables used by views for rendering
-    @variables = Variable.where(:model_id => session[:model_id]).order(:name)
-    @blocks = Block.where(:workflow_id => session[:workflow_id]).order(:sort_index)
-    
-    # Create block to be used by form_for
-    @block = Block.new
-    
-    ## Check for form data for creating new block
-    form_hash = params[:create_block]
-    if !form_hash.nil?
-
-      #### BUG: this code for creating blocks doesn't work right now
-      # Create a block with the specified name and workflow_id
-      name = form_hash[:name]
-      workflow_id = session[:workflow_id]
-      sort_index = Block.where(:workflow_id => workflow_id).size
-      Block.create({:name => name, :workflow_id => workflow_id, :sort_index => sort_index})
-    end
-    
-    form_hash = params[:create_block_inputs]
-    create_block_variables(form_hash, :input)
-    
-    form_hash = params[:create_block_outputs]
-    create_block_variables(form_hash, :output)
-    
-    
-
-    ## Check for form data for creating a block_connection
-    form_hash = params[:create_block_connections]
-    if !form_hash.nil?
-
-      from_block_name = form_hash[:from_name]
-      from_block = Block.find_by_name(from_block_name)
-      if from_block.nil?
+      @variables = Variable.where(:model_id => session[:model_id]).order(:name)
+      @blocks = Block.where(:workflow_id => session[:workflow_id]).order(:sort_index)
+      
+      # Create block to be used by form_for
+      @block = Block.new
+      
+      ## Check for form data for creating new block
+      form_hash = params[:create_block]
+      if !form_hash.nil?
+        logger.debug("CARRIER HAS ARRIVED: #{form_hash}")
+        # Create a block with the specified name and workflow_id
+        name = form_hash[:name]
+        workflow_id = session[:workflow_id]
+        sort_index = Block.where(:workflow_id => workflow_id).size
+        logger.debug("This is my name: #{name}. This is my number: #{workflow_id}. So call me maybe? #{sort_index}")
+        Block.create({:name => name, :workflow_id => workflow_id, :sort_index => sort_index})
+      end
+      
+      form_hash = params[:create_block_inputs]
+      create_block_variables(form_hash, :input)
+      
+      form_hash = params[:create_block_outputs]
+      create_block_variables(form_hash, :output)
+      
+      
+      
+      ## Check for form data for creating a block_connection
+      form_hash = params[:create_block_connections]
+      if !form_hash.nil?
+        
+        from_block_name = form_hash[:from_name]
+        from_block = Block.find_by_name(from_block_name)
+        if from_block.nil?
           flash[:block_failed] = "Could not find block named #{from_block_name}."
           return
-      end
-      
-      to_block_name = form_hash[:to_name]
-      to_block = Block.find_by_name(to_block_name)
-      if to_block.nil?
+        end
+        
+        to_block_name = form_hash[:to_name]
+        to_block = Block.find_by_name(to_block_name)
+        if to_block.nil?
           flash[:block_failed] = "Could not find block named #{to_block_name}."
           return
-      end
-      
-      #parser = Parser.new
-      
-      expression_string = form_hash[:expression_string]
+        end
         
-      # Determine the sort_index
-      sort_index = from_block.block_connections.size
+        #parser = Parser.new
+        
+        expression_string = form_hash[:expression_string]
+        
+        # Determine the sort_index
+        sort_index = from_block.block_connections.size
 
-      # Create a block connection with the specified next_block and expression
-      block_connection_hash = {:next_block_id => to_block.id, :expression_string => expression_string, :sort_index => sort_index}
-      bc = from_block.block_connections.create(block_connection_hash)
-      if bc.nil?
-        flash[:block_failed] = "Failed to create block_connection from hash => #{block_connection_hash}"
+        # Create a block connection with the specified next_block and expression
+        block_connection_hash = {:next_block_id => to_block.id, :expression_string => expression_string, :sort_index => sort_index}
+        bc = from_block.block_connections.create(block_connection_hash)
+        if bc.nil?
+          flash[:block_failed] = "Failed to create block_connection from hash => #{block_connection_hash}"
+        end
       end
     end
     

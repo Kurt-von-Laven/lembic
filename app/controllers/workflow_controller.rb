@@ -164,12 +164,6 @@ class WorkflowController < ApplicationController
     WorkflowBlock.create(params[:workflow_block])
   end
   
-  def connect_blocks
-    connection_hash = params[:block_connection]
-    connection_hash[:expression_object] = Parser.new.parse(connection_hash[:expression_string])
-    BlockConnections.create(connection_hash)
-  end
-  
   private
   
   def to_i_safely(str)

@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   layout "application"
   
-  before_filter :prevent_caching, :verify_login, :verify_model, :user_models, :model_workflows
+  before_filter :prevent_caching, :verify_login, :verify_model, :verify_workflow, :user_models, :model_workflows
   
   def prevent_caching
     response.headers['Cache-Control'] = 'no-cache, no-store, max-age=0, must-revalidate'
@@ -35,7 +35,7 @@ class ApplicationController < ActionController::Base
           if session[:workflow_id].nil?
             session[:workflow_id] = Workflow.create(:name => 'Default Workflow',
                                                     :description => 'This workflow should eventually be removed.',
-                                                    :model_id => session[:model_id]).id
+                                                    :model_id => session[:model_id], :sort_index => 0).id
           end
         end
       end

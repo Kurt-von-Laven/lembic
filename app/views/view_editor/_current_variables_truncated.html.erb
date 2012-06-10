@@ -36,8 +36,9 @@
 			</span>
 		 </td>
          <td style="text-align: left;"> 
-			<a class="dialog_link" index="<%=num%>">more</a></h3>
+			<a class="dialog_link" index="<%=num%>">more</a>
 		 </td>
+                 <td>
 		 <% d_id = "dialog_#{num}"%>
 			 <div id = "<%=d_id%>" style="display: none">
              				<h1><%= variable.name_with_indices %></h1>
@@ -45,6 +46,7 @@
 					<%=myString %>
 				</p>
 			 </div>
+                 </td>
 		 
         <!-- <td onClick="alert('<%= myString %>')"><%= variable.name_with_indices %> <button class="opener">expand </button></td> -->
       </tr>

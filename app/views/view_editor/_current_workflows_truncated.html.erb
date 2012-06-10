@@ -1,5 +1,5 @@
-<h3>Current Blocks</h3>
-<div id="truncated_blocks">
+<h3>Current Workflows</h3>
+<div id="truncated blocks">
 <table cellpadding="0" cellspacing="0" class="tablesorter">
 
 <!--Table Headers -->
@@ -11,34 +11,34 @@
 
 <!--Table Body -->
 <tbody>
-  <% if @blocks.empty? %>
+  <% if @workflows.empty? %>
     <tr>
-      <td>You currently have no blocks defined.</td>
+      <td>You currently have no workflows defined.</td>
     </tr>
   <% else %>
-
 	<!--Each Block on a row, with all its connections put together into a string -->
 	<!--TODO: Come up with a better way to display the blocks -->
 	<% num = 0
-    for block in @blocks %>
+    for workflow in @workflows %>
         <tr>
 	
 	  <!--Prepare strings to be displayed in HTML for this block -->
-	  <% name = block.name %>
-	
+	  <% name = workflow.name %>
+        <% myString = ""
+        for block in workflow.blocks 
+           myString = myString + block.name + " \n" 
+        end %>
 	
 	  <!--Render this block in HTML -->
       <td><%= name %></td>
       <td style="text-align: left;">
-        <a class="dialog_link_block" index="<%= num%>" block_id="<%= block.id %>">more</a>
+        <a class="dialog_link_workflow" index="<%= num%>">more</a>
         </td>
-      <% d_id = "dialog_block_#{num}"%>
+      <% d_id = "dialog_workflow_#{num}"%>
 			 <div id="<%=d_id%>" style="display: none">
              				<h1><%=name %></h1>
-				<p>Input Variables: <%= block.input_variables_as_string %></p>
-				<p>Output Variables: <%= block.output_variables_as_string %></p>
-				<p>Connections: <%= block.connections_as_string %></p>
-			 </div>
+				<p>Blocks: <%= myString %></p>
+            </div>
       </tr>
       <% num += 1
         end %>

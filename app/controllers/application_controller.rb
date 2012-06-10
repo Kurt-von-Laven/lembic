@@ -1,8 +1,10 @@
+require 'cgi'
+
 class ApplicationController < ActionController::Base
   protect_from_forgery
   layout "application"
   
-  before_filter :prevent_caching, :verify_login, :verify_model, :user_models, :model_workflows
+  before_filter :prevent_caching, :verify_login, :verify_model, :verify_workflow, :authenticity_token, :user_models, :model_workflows
   
   def prevent_caching
     response.headers['Cache-Control'] = 'no-cache, no-store, max-age=0, must-revalidate'
@@ -35,7 +37,7 @@ class ApplicationController < ActionController::Base
           if session[:workflow_id].nil?
             session[:workflow_id] = Workflow.create(:name => 'Default Workflow',
                                                     :description => 'This workflow should eventually be removed.',
-                                                    :model_id => session[:model_id]).id
+                                                    :model_id => session[:model_id], :sort_index => 0).id
           end
         end
       end
@@ -48,13 +50,19 @@ class ApplicationController < ActionController::Base
     end
   end
   
+  def authenticity_token
+    @authenticity_token = (session[:_csrf_token].nil?) ? '' : CGI::escape(session[:_csrf_token])
+  end
+  
   def user_models
     @models = Model.joins(:model_permissions).where('model_permissions.user_id = ?', session[:user_id]).order(:sort_index)
   end
   
   def model_workflows
-    @workflows = Model.find(session[:model_id]).workflows.order(:sort_index)
-    logger.debug("POCAHONTAS: #{@workflows.inspect}")
+    model = Model.where(:id => session[:model_id]).first
+    if !model.nil?
+      @workflows = model.workflows.order(:sort_index)
+    end
   end
   
 end

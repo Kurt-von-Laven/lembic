@@ -31,7 +31,7 @@
         <%= f.text_field(:description, :size => 20) %>
       </div>
     </div>
-    <div id = "expression">
+    <div id="expression">
       <%= f.text_field(:name) %> = 
       <%= f.text_area(:expression_string, :class =>'auto_complete_variables') %>
     </div>
@@ -84,7 +84,7 @@
 		  <div id="repeating"> 
 			Repeat every
 		  </div>
-		  <div id = "date_range">
+		  <div id="date_range">
 			<div>
 				<%= check_box_tag(:mon) %>
 				<%= label_tag(:mon, "Monday") %>
@@ -152,7 +152,7 @@
 		</div>
 		<div>
 		  <%= f.label(:start_row, "First row of array ") %>
-		  <%= f.text_field(:start_row, :class => "numeric_input") %>  <span class = "comment">e.g., 1 for the top-most row </span>
+		  <%= f.text_field(:start_row, :class => "numeric_input") %>  <span class="comment">e.g., 1 for the top-most row </span>
 		</div>
         <br />
 		<div id="choose_file">

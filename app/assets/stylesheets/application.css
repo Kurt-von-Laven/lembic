@@ -88,11 +88,27 @@ body {
    -moz-border-radius: 6px;
     border-radius: 6px;
 	background-color:  #fff8cb;
-	margin: 5px 5px 20px 5px;
-	text-align: center;
+	margin: 0px 5px 0px 5px;
+	text-align: left;
 	font-size: 1.4em;
 	color: #113855;
 }
+
+#current_model label {
+	width: 200px;
+	display: block;
+	float: left;
+}
+#current_model select {
+	width: 200px;
+	display: block;
+	float: left;
+	margin-right: 20px;
+}
+#current_model_header{
+	margin: 0 50px 20px 50px
+}
+
 #date_range {
 	margin-left: 50px;
 }
@@ -478,6 +494,11 @@ border-radius:10px;
 
 .sortable li{
     display: list-item;
+}
+
+#sortable_blocks ul{
+    padding-left:50px;
+    margin-right:5px;
 }
 
 #slider-style {

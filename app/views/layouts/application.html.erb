@@ -69,17 +69,24 @@
 					return false;
 				});
                 
+                $('.dialog_link_workflow').live("click", function(){
+					var i = this.getAttribute("index");
+					$('#dialog_workflow_'+i).dialog().dialog('open');
+					return false;
+				});
+                
                 $('.dialog_link_block').live("click", function(){
 		  var i = this.getAttribute("index");
+                  var block_id = this.getAttribute("block_id");
 		  $('#dialog_block_'+i).dialog({
 		      buttons: {
 			    "Delete": function() {
 			      $.ajax({
-				url: '/view_editor/delete_block?id='+i,
-                type: 'delete'
+				url: '/view_editor/delete_block',
+		  data: 'id='+block_id+'&authenticity_token=<%= @authenticity_token %>', type: 'delete'
 			      });		      
 			    },                                       
-			    Cancel: function() {
+			    "Cancel": function() {
 			      $( this ).dialog( "close" );
 			    }
 		      }
@@ -154,6 +161,25 @@
 					function() { $(this).removeClass('ui-state-hover'); }
 				);
                 
+                $( "#sortable_blocks" ).sortable({
+                    revert: true, 
+                    scrollSpeed: 40, 
+                    forcePlaceholderSize: true, 
+                    forceHelperSize: true 
+                });
+                
+                $( "#draggable_blocks" ).draggable({
+                    connectToSortable: "#sortable_blocks",
+                    helper: "clone",
+                    revert: "invalid"
+                });
+                $( "ul, li" ).disableSelection();
+                
+                $('#update_workflow_form').submit(function(){
+     
+                    $('#update_workflow_list').val($( "#sortable_blocks" ).sortable("serialize"));
+                    return false;
+                });
                 
                 $('.auto_complete_variables')
                 .bind( "keydown", function( event ) {

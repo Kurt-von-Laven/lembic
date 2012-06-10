@@ -83,7 +83,7 @@ body {
     font-family: Garamond, Baskerville, "Times New Roman", serif;
 }
 
-#current_model {
+#current_model_header form {
 	padding: 10px;
    -moz-border-radius: 6px;
     border-radius: 6px;
@@ -94,12 +94,12 @@ body {
 	color: #113855;
 }
 
-#current_model label {
+#current_model_header label {
 	width: 200px;
 	display: block;
 	float: left;
 }
-#current_model select {
+#current_model_header select {
 	width: 200px;
 	display: block;
 	float: left;
@@ -140,7 +140,7 @@ body {
 #current_model_button{
 	font-size: .7em;
 }
-#current_model_header{
+#current_model_header {
 	margin: 0 50px 20px 50px
 }
 

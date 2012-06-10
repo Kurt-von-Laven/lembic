@@ -1,0 +1,5 @@
+[
+<% @block_names.each do |b| %>
+ {"value":"<%= b.name %>","id":<%= b.id %><% if b == @block_names.last %>}<% else %>},<% end %>
+<% end %>
+]

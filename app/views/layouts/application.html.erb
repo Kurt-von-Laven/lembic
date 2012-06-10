@@ -75,8 +75,8 @@
 		      buttons: {
 			    "Delete": function() {
 			      $.ajax({
-				url: '/view_editor/delete_block/'+i,
-				type: 'DELETE'
+				url: '/view_editor/delete_block?id='+i,
+                type: 'delete'
 			      });		      
 			    },                                       
 			    Cancel: function() {

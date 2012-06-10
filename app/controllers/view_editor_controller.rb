@@ -72,7 +72,7 @@ class ViewEditorController < ApplicationController
     respond_to do |format|
       format.js { render :layout => false }
     end
-  end
+  end #find_blocknames
   
   # Check for form data for creating a block_variable
   def create_block_variables(form_hash, display_type)
@@ -85,7 +85,7 @@ class ViewEditorController < ApplicationController
       if block.nil?
         flash[:block_failed] = "We couldn't find that block! Oops! Please try again."
         return
-      end
+      end #end if
       
       
       # Iterate through lines in the input string
@@ -96,14 +96,14 @@ class ViewEditorController < ApplicationController
         if variable_name.empty? # TODO: get better input validation
           flash[:block_failed] = 'Your variable name was empty. Please try again.'
           next
-        end
+        end #end if
         
         # Find the variable
         variable = Variable.find_by_name(variable_name)
         if variable.nil?
           flash[:block_failed] = "Sorry, we couldn't find that variable! Please try again"
           next
-        end
+        end # end if
         
         # Determine sort_index
         sort_index = block.block_variables.size
@@ -113,10 +113,10 @@ class ViewEditorController < ApplicationController
         bv = block.block_variables.create({:display_type => display_type, :variable_id => variable.id, :sort_index => sort_index})
         if bv.nil?
           flash[:block_failed] = "Failed to create block_variable with variable_id => #{variable.id} and sort_index => #{sort_index}"
-        end
-      end
-    end
-  end
+        end #end if
+      end #end form
+    end # end if
+  end # end create_block_variables
     
   # Delete a block by id
   def delete_block

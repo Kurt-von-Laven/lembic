@@ -18,7 +18,7 @@
 		<%= f.select(:id, options_from_collection_for_select(@workflows, 'id', 'name',
 		  :selected => session[:workflow_id]), :prompt => 'Select Workflow') %>
 		
-		<div id="current_model_button">
+		<div id="current_workflow_button">
 			<%= f.submit("Save", :class => "button") %>
 		</div>
           </div>

@@ -76,22 +76,23 @@
 				});
                 
                 $('.dialog_link_block').live("click", function(){
-                    var i = this.getAttribute("index");
-                    $('#dialog_block_'+i).dialog({
-                      buttons: {
-                        "Delete": function() {
-                          $.ajax({
-                        url: '/view_editor/delete_block?id='+i,
-                        type: 'delete'
-                          });		      
-                        },                                       
-                        Cancel: function() {
-                          $( this ).dialog( "close" );
-                        }
-                          }
-                      });
-                      return false;
-                    });
+		  var i = this.getAttribute("index");
+                  var block_id = this.getAttribute("block_id");
+		  $('#dialog_block_'+i).dialog({
+		      buttons: {
+			    "Delete": function() {
+			      $.ajax({
+				url: '/view_editor/delete_block',
+		  data: 'id='+block_id+'&authenticity_token=<%= @authenticity_token %>', type: 'delete'
+			      });		      
+			    },                                       
+			    "Cancel": function() {
+			      $( this ).dialog( "close" );
+			    }
+		      }
+		  });
+		  return false;
+		});
 
 
                 $( ".opener" ).click(function() {

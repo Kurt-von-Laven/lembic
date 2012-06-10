@@ -25,7 +25,7 @@
 	  <!--Render this block in HTML -->
       <td><%= name %></td>
       <td style="text-align: left;">
-        <a class = "dialog_link_block" index=<%= num%>> more </a>
+        <a class = "dialog_link_block" index="<%= num%>" block_id="<%= block.id %>">more</a>
         </td>
       <% d_id = "dialog_block_#{num}"%>
 			 <div id = "<%=d_id%>" style="display: none">

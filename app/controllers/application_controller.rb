@@ -1,8 +1,10 @@
+require 'cgi'
+
 class ApplicationController < ActionController::Base
   protect_from_forgery
   layout "application"
   
-  before_filter :prevent_caching, :verify_login, :verify_model, :verify_workflow, :user_models, :model_workflows
+  before_filter :prevent_caching, :verify_login, :verify_model, :verify_workflow, :authenticity_token, :user_models, :model_workflows
   
   def prevent_caching
     response.headers['Cache-Control'] = 'no-cache, no-store, max-age=0, must-revalidate'
@@ -46,6 +48,10 @@ class ApplicationController < ActionController::Base
     if !User.where(:id => session[:user_id]).empty?
       redirect_to home_path
     end
+  end
+  
+  def authenticity_token
+    @authenticity_token = CGI::escape(session[:_csrf_token])
   end
   
   def user_models

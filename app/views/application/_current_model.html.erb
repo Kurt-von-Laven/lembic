@@ -1,0 +1,12 @@
+<div id="current_model">	
+	<%= form_for(:model, :url => set_current_model_path) do |f| %>
+            <div>
+		<%= f.select(:id,
+		    options_from_collection_for_select(@models, 'id', 'name',
+		    :selected => session[:model_id]), :prompt => 'Select Model') %>
+		<%= f.submit %>
+             </div>
+	<% end %>
+
+	Current Model: <span style="font-weight: bold"> <%= Model.find(session[:model_id]).name %> </span>
+</div>

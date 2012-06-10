@@ -3,9 +3,7 @@
 
 
 <h1>Evaluate</h1>
-<div id="current_model">
-	Current Model: <span style="font-weight: bold"> <%= Model.find(session[:model_id]).name %> </span>
-</div>
+<%= render "current_model" %>
 <div id="evaluator_output">
 		<h2>Output Values</h2>
 		<ul class="output_values">

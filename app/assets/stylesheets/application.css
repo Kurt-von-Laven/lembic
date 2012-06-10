@@ -97,13 +97,13 @@ body {
 #current_model_header form{
 	margin-bottom: 10px;
 }
-#current_model label {
+#current_model_header label {
 	width: 200px;
 	display: block;
 	float: left;
 	margin-left: 60px;
 }
-#current_model select {
+#current_model_header select {
 	width: 200px;
 	display: block;
 	float: left;
@@ -115,25 +115,7 @@ body {
 	font-size: .8em;
 }
 
-
-#current_workflow label {
-	width: 200px;
-	display: block;
-	float: left;
-	margin-left: 60px;
-}
-#current_workflow select {
-	width: 200px;
-	display: block;
-	float: left;
-	margin-right: 20px;
-	background-color: #dee6ed;
-	padding: 2px;
-	border-radius: 6px;
-	font-family: Garamond, Baskerville, "Times New Roman", serif;
-	font-size: .8em;
-}
-#current_model_button{
+#current_model_button, #current_workflow_button {
 	font-size: .7em;
 }
 #current_model_header {

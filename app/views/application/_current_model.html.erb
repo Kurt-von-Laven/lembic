@@ -1,6 +1,6 @@
 <div id="current_model_header">	
 	<div>
-	<%= form_for(:model, :url => set_current_model_path, :html => {:id => "current_model"}) do |f| %>
+	<%= form_for(:model, :url => set_current_model_path) do |f| %>
           <div>
 		<%= f.label(:id, "Current Model:") %> 
 		<%= f.select(:id,options_from_collection_for_select(@models, 'id', 'name',
@@ -14,7 +14,7 @@
 	
 
 	<div>
-	<%= form_for(:workflow, :url => set_current_workflow_path, :html => {:id => "current_workflow"}) do |f| %>
+	<%= form_for(:workflow, :url => set_current_workflow_path) do |f| %>
           <div>
 		<%= f.label(:id, "Current Workflow:") %>
 		<%= f.select(:id, options_from_collection_for_select(@workflows, 'id', 'name',

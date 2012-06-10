@@ -162,8 +162,12 @@
 				);
                 
                 $( "#sortable_blocks" ).sortable({
-                    revert: true
+                    revert: true, 
+                    scrollSpeed: 40, 
+                    forcePlaceholderSize: true, 
+                    forceHelperSize: true 
                 });
+                
                 $( "#draggable_blocks" ).draggable({
                     connectToSortable: "#sortable_blocks",
                     helper: "clone",

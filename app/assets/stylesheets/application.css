@@ -480,6 +480,11 @@ border-radius:10px;
     display: list-item;
 }
 
+#sortable_blocks ul{
+    padding-left:50px;
+    margin-right:5px;
+}
+
 #slider-style {
     width: 70%; 
     margin-left: 40px

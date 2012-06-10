@@ -155,7 +155,7 @@
                 
                 $('.auto_complete_variables')
                 .bind( "keydown", function( event ) {
-                    if ( event.keyCode === $.ui.keyCode.TAB &&
+                    if ( event.keyCode === $.ui.keyCode.TAB &amp;&amp;
 						$( this ).data( "autocomplete" ).menu.active ) {
 					event.preventDefault();
 				}
@@ -193,7 +193,7 @@
                     
                     $('.auto_complete_blocks')
                         .bind( "keydown", function( event ) {
-                            if ( event.keyCode === $.ui.keyCode.TAB &&
+                            if ( event.keyCode === $.ui.keyCode.TAB &amp;&amp;
                                 $( this ).data( "autocomplete" ).menu.active ) {
                                 event.preventDefault();
                     }
@@ -270,10 +270,6 @@
 			
 
 	</script>
-
-		</script>
-      
-
          
     <%= csrf_meta_tags %>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />

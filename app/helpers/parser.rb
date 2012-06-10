@@ -303,24 +303,30 @@ class Parser
       precedence = (precedence + 1) % @@operators.length
 
       if loops_since_made_progress > @@operators.length then
-        
-        remaining_tokens_string = error_inspect(tokens)
-        analysis = get_error_analysis(remaining_tokens_string)
-        if !analysis
-          raise ArgumentError, "Syntax error!  I've replaced the parts I could understand with dots: #{remaining_tokens_string}." 
-        else
-          raise ArgumentError, "Syntax error! #{analysis}." 
-        end
-        return nil
+        raise_parser_error_for_tokens(tokens)
       end
       
       loops_since_made_progress += 1
       
     end
     if tokens[0].instance_of?(String)
-      tokens[0] = Expression.new(nil, [tokens[0]])
+      if Parser.token_type(tokens[0]) == :expression
+        tokens[0] = Expression.new(nil, [tokens[0]])
+      else
+        raise_parser_error_for_tokens(tokens)
+      end
     end
     return tokens[0]
+  end
+  
+  def raise_parser_error_for_tokens(tokens)
+    remaining_tokens_string = error_inspect(tokens)
+    analysis = get_error_analysis(remaining_tokens_string)
+    if !analysis
+      raise ArgumentError, "Syntax error!  I've replaced the parts I could understand with dots: #{remaining_tokens_string}." 
+    else
+      raise ArgumentError, "Syntax error! #{analysis}." 
+    end
   end
   
   def prefix_form(s)

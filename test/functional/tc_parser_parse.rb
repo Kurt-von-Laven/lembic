@@ -40,6 +40,11 @@ class TestParserParse < Test::Unit::TestCase
     rescue ArgumentError => e
       assert_equal("Syntax error! expected `)`.", e.message)
     end
+    begin
+      puts @p.prefix_form("+")
+    rescue ArgumentError => e
+      assert_equal("Syntax error! operator `+` expects an expression on either side.", e.message)
+    end
   end
   
   # 1+1

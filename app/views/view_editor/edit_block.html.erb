@@ -68,13 +68,13 @@
 		<div class="right_column">
 			<div class="tabs">
 				<ul>
-					<li><a href="#tabs-1">Create Block</a></li>
-					<li><a href="#tabs-2">Add Inputs</a></li>
-					<li><a href="#tabs-3">Add Outputs</a></li>
-					<li><a href="#tabs-4">Add Connections</a></li>
+					<li><a href="#tabs-3">Create Block</a></li>
+					<li><a href="#tabs-4">Add Inputs</a></li>
+					<li><a href="#tabs-5">Add Outputs</a></li>
+					<li><a href="#tabs-6">Add Connections</a></li>
 				</ul>
 				<!-- CREATE BLOCK -->
-				<div id="tabs-1">
+				<div id="tabs-3">
 					<%= form_for(:create_block, :html => {:class => "input_formB"}) do |f| %>
 						 <div class="var_input_block">
 							<div>
@@ -89,7 +89,7 @@
 				</div>
 					
 				<!-- ASSIGN VARIABLES -->
-				<div id="tabs-2">
+				<div id="tabs-4">
 					<div class="comment" style="margin-left:80px;">
 						Please enter one per line. 
 					</div>
@@ -116,7 +116,7 @@
 				</div>
 
 				<!--ADD OUTPUTS -->      
-				<div id="tabs-3">
+				<div id="tabs-5">
 					<%= form_for(:create_block_outputs, :html => {:class => "input_formB"}) do |f| %>
 						<div class="var_input_block">
 							<div>
@@ -139,7 +139,7 @@
 				</div>
 					
 				<!-- ADD CONNECTIONS -->
-				<div id="tabs-4">
+				<div id="tabs-6">
 					<div class="comment" style="margin-left:80px">
 						Example of Logic for Transition: 'has_ac == true => AC_Block'
 					</div>

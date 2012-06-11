@@ -36,6 +36,8 @@ class Evaluator
       sum = 0
       i = min_i
       while i <= max_i
+        puts "PARAMS = "+params.inspect
+        puts "ARRAY NAME = "+array_name.inspect
         inc = eval_variable(array_name, globals, [i])
         sum += inc
         i += 1
@@ -266,7 +268,7 @@ class Evaluator
   
   def error_check_eval_variable_params(varname, globals, index_values)
     if !varname.instance_of?(String)
-      raise ArgumentError, "Internal Error: Variable name must be specified as a string, but was a #{varname.class}.  Please notify Lembic of this error."
+      raise ArgumentError, "Internal Error: Variable name must be specified as a string, but was a #{varname.class}, #{varname.inspect}.  Please notify Lembic of this error."
     end
     raise ArgumentError, "Error: second parameter to eval_variable cannot be nil." if globals.nil?
     raise ArgumentError, "Error: variable #{varname} doesn't exist." if globals[varname].nil?
@@ -291,25 +293,31 @@ class Evaluator
   # globals format: { "varname1" => { :formula => <Expression> :value => <Numeric> }, "varname2" => ... , ... "varnameN" => ... }
   #
   def eval_variable (varname, globals, index_values)
+    puts "IN EVAL_VARIABLE: INDEX_VALUES = "+index_values.inspect
+    puts "VARNAME = "+varname.inspect
+    puts "GLOBALS = "+globals.inspect
     error_check_eval_variable_params(varname, globals, index_values)
     #  if variable value was cached previously, return the cached value
     if !globals[varname][:value].nil?
       return globals[varname][:value]
     end
+    if !globals[varname][:values].nil? && !globals[varname][:values][index_values].nil?
+      return globals[varname][:values][index_values]
+    end
 
     formula = globals[varname][:formula]
     
-    if formula.nil?
+    if formula.nil? && globals[varname][:value].nil? && globals[varname][:values].nil?
       if index_values
-        globals[varname][:values][index_values] = 0.0/0.0 #NaN
+        globals[varname][:values][index_values] = Float::NAN
       else
         #scalar
-        globals[varname][:value] = 0.0/0.0
+        globals[varname][:value] = Float::NAN
       end
-      return 0.0/0.0
+      return Float::NAN 
     end
     
-    raise ArgumentError, "Error: formula for variable `#{varname}` must be an expression object.  Was #{formula.class}" if !formula.instance_of?(Expression)
+    raise ArgumentError, "Error: formula for variable `#{varname}` must be an expression object.  Was #{formula.class}" if !formula.nil? && !formula.instance_of?(Expression)
     
     # check if variable is an array or a singleton, and evaluate accordingly
     index_names = globals[varname][:index_names]
@@ -328,6 +336,7 @@ class Evaluator
       if index_names.length != index_values.length
         raise ArgumentError, "Wrong number of indices for array #{varname}: expected #{index_names.length} but was #{index_values.length}."
       end
+      return globals[varname][:values][index_values] if globals[varname][:values] && globals[varname][:values][index_values]
       index_names.each_with_index do |index_name, i|
         indices[index_name] = index_values[i]
       end

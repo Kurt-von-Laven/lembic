@@ -1,4 +1,4 @@
-<% if !variable.expression_string.nil?
+<% if !variable.input?
         truncated_array = variable.expression_string.split(/\|\s*/)[1]
     else 
         truncated_array = ""

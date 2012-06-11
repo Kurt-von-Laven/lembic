@@ -1,3 +1,5 @@
+require 'csv_importer'
+
 class EditorController < ApplicationController
   autocomplete :variable, :name
   
@@ -64,11 +66,15 @@ class EditorController < ApplicationController
             end
             from_expression_string = '[i | ' + from_dates.join(', ') + ']'
             to_expression_string = '[i | ' + to_dates.join(', ') + ']'
+            from_variable = Variable.new(:name => event_name + '_from', :array => 1, :description => description, :model_id => session[:model_id],
+                                         :variable_type => 3, :expression_string => from_expression_string)
+            to_variable = Variable.new(:name => event_name + '_to', :array => 1, :description => description, :model_id => session[:model_id],
+                                       :variable_type => 3, :expression_string => to_expression_string)
             Variable.transaction do
-              Variable.create(:name_with_indices => event_name + '_from[i]', :description => description, :model_id => session[:model_id],
-                              :variable_type => 3, :expression_string => from_expression_string)
-              Variable.create(:name_with_indices => event_name + '_to[i]', :description => description, :model_id => session[:model_id],
-                              :variable_type => 3, :expression_string => to_expression_string)
+              from_variable.save!
+              to_variable.save!
+              IndexName.create_from_declaration("#{from_variable.name}[#{CsvImporter::INDEX}]", from_variable.id)
+              IndexName.create_from_declaration("#{to_variable.name}[#{CsvImporter::INDEX}]", to_variable.id)
             end
           end
         end

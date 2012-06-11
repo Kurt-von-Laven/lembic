@@ -126,7 +126,7 @@
                     max: 24,
                     values: [ 9, 17 ],
                     slide: function( event, ui ) {
-                        $( "#time" ).val( ui.values[ 0 ] + " - " + ui.values[ 1 ]);
+                        $( "#create_events_time_range" ).val( ui.values[ 0 ] + " - " + ui.values[ 1 ]);
                     }
                 });
                 
@@ -147,7 +147,7 @@
                 $("#sortable").sortable();
                 $("#sortable").disableSelection();
                 
-                $( "#time" ).val( $( "#slider-range" ).slider( "values", 0 ) +
+                $( "#create_events_time_range" ).val( $( "#slider-range" ).slider( "values", 0 ) +
                     " - " + $( "#slider-range" ).slider( "values", 1 ));
 
 				// Progressbar

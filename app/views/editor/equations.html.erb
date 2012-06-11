@@ -59,8 +59,8 @@
 							
 								<!-- Slider -->
 								<div>
-									<label for="time">Time range (in military time):</label>
-									<input type="text" id="time" />
+                                                                  <%= f.label(:time_range, "Time range (in military time):") %>
+                                                                  <%= f.text_field(:time_range) %>
 								</div>
 								
 								<div id="slider-style">
@@ -73,7 +73,7 @@
 									<%= f.label(:from_date, "From: ")%>
 									<!-- Datepicker -->       
 									<div>
-										<input id="from_date" type="text" class="datepicker"></input>
+										<%= f.text_field(:from_date, :class => 'datepicker') %>
 									</div>
 								</div>
 							
@@ -81,7 +81,7 @@
 									<%= f.label(:to_date, "To: ")%>
 									<!-- Datepicker -->       
 									<div>
-										<input id="to_date" type="text" class="datepicker"></input>
+										<%= f.text_field(:to_date, :class => 'datepicker') %>
 									</div>
 								</div>
 						  

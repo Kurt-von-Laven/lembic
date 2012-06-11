@@ -1,14 +1,13 @@
+<% truncated_array = '' %>
 <% if !variable.input?
-        truncated_array = variable.expression_string.split(/\|\s*/)[1]
-    else 
-        truncated_array = ""
+        match_object = /\|\s*(.*)\s*\]/.match(variable.expression_string)
+        if !match_object.nil?
+          truncated_array = match_object[1]
+        end
     end %>
-<%	if variable.array? and !variable.input? and !truncated_array.nil?
-                logger.debug("BEFORE: #{truncated_array.inspect}")
-		truncated_array = truncated_array[0..-2]
-                logger.debug("AFTER: #{truncated_array.inspect}")
+<%	if variable.array? and !variable.input? and !truncated_array.empty?
 		comma_separated_array = truncated_array.split(/\s*,\s*/)
-		num = comma_separated_array.size()
+		num = comma_separated_array.size
 %>
 	<div id="full_array">
 	<h1><% if variable.input? %>
@@ -30,7 +29,7 @@
 			while i < num %>
 			<tr>
 				<td class ="col_header"><%= i %></td>
-			<% for j in 1..10 %>
+			<% for j in 0..9 %>
 				<td>
 				<%= comma_separated_array[i+j] %>
 				</td>

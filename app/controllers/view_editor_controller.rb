@@ -92,7 +92,7 @@ class ViewEditorController < ApplicationController
         
         workflow_id = session[:workflow_id]
         
-        block = Block.find_by_name(block_name)
+        block = Block.where(:name => block_name, :workflow_id => session[:workflow_id]).first
         if block.nil?
           block = Block.create({:name => block_name, :workflow_id => workflow_id, :sort_index => Block.where(:workflow_id => workflow_id).size})
         end

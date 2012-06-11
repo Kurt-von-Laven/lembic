@@ -72,7 +72,6 @@ class EditorController < ApplicationController
   def delete_relationship
     variable = Variable.where(:id => params[:id]).first
     if !variable.nil?
-      logger.debug "+++++++++++Set expression string to nil"
       variable.expression_string = nil
       variable.save
     end

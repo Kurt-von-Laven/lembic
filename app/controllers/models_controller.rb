@@ -37,9 +37,11 @@ class ModelsController < ApplicationController
   end
 
   def update
-    @model = Model.find(params[:id])
-    
-    if @model.update_attributes(params[:model])
+    Model.transaction do
+      @model = Model.find(params[:id])
+      update_successful = @model.update_attributes!(params[:model])
+    end
+    if update_successful
       redirect_to @model, :notice => 'Model was successfully updated.'
     else
       render :action => "edit"

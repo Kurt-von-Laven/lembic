@@ -64,7 +64,7 @@ class ViewEditorController < ApplicationController
         block_connection_hash = {:next_block_id => to_block.id, :expression_string => expression_string, :sort_index => sort_index}
         bc = from_block.block_connections.create(block_connection_hash)
         if bc.nil?
-          flash[:block_failed] = "Failed to create block_connection from hash => #{block_connection_hash}"
+          flash[:block_failed] = "Failed to create block_connection from hash => #{block_connection_hash.inspect}"
         end
       end
     end

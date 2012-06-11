@@ -95,7 +95,7 @@ body {
    -moz-border-radius: 6px;
     border-radius: 6px;
 	background-color:  #fff8cb;
-	margin: -20px 5px 0px 5px;
+	margin: -20px 5px 0px 0px;
 	text-align: left;
 	font-size: 1.4em;
 	color: #113855;
@@ -108,7 +108,7 @@ body {
 	width: 200px;
 	display: block;
 	float: left;
-	margin-left: 60px;
+	margin-left: 100px;
 }
 #current_model_header select {
 	width: 300px;

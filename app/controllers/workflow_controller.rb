@@ -6,6 +6,8 @@ require 'csv_importer'
 
 class WorkflowController < ApplicationController
   def evaluate
+    puts "\n\n========================"
+    puts "PARAMS = "+params.inspect
     @variables = Variable.where(:model_id => session[:model_id]).order(:name)
     @input_variables = Variable.where(:model_id => session[:model_id], :expression_string => nil).order(:name)
     vars = params[:evaluator]
@@ -13,12 +15,28 @@ class WorkflowController < ApplicationController
       input_values = (vars['input_values'].nil?) ? [] : vars['input_values']
       input_values_hash = {}
       i = 0
+      
+      # put input values into a hash to be passed to the evaluator
       for input_value in input_values
-        input_value_as_integer = to_i_safely(input_value)
-        input_value = (input_value_as_integer.nil?) ? input_value : input_value_as_integer
-        input_values_hash[@input_variables[i].name] = {:value => input_value}
+        if !input_value.instance_of?(String)
+          # variable is an array
+          input_array = CsvImporter.parse_csv_to_array(input_value[:data_file].read, CsvImporter.convert_letter_column_labels_to_numbers(input_value[:start_row]), input_value[:start_col].to_i, @input_variables[i].variable_type)
+          input_array_values_hash = {}
+          input_array.each_with_index do |value, i|
+            input_array_values_hash[[i + 1.0]] = value
+          end
+          input_values_hash[@input_variables[i].name] = {:values => input_array_values_hash}
+        else
+          # variable is a scalar
+          input_value_as_integer = to_i_safely(input_value)
+          input_value = (input_value_as_integer.nil?) ? input_value : input_value_as_integer
+          input_values_hash[@input_variables[i].name] = {:value => input_value}
+        end
         i += 1
       end
+      
+      puts "INPUT_VALUES_HASH = "+input_values_hash.inspect
+      
       variable_to_solve_for = Variable.where(:name => vars['variable_to_solve_for'], :model_id => session[:model_id]).first
       Variable.where(:model_id => session[:model_id]).each do |variable|
         expression_object = variable.expression_object
@@ -73,6 +91,7 @@ class WorkflowController < ApplicationController
         end
       end
     else
+      # vars is nil
       @output_variables = []
     end
     render 'evaluator'

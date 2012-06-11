@@ -143,6 +143,7 @@ class ViewEditorController < ApplicationController
         save_successful &&= permission.save!
       end
       if save_successful
+        session[:workflow_id] = new_workflow.id
         flash[:workflow_created] = 'Workflow successfully created.'
       else
         flash[:workflow_creation_failed] = new_workflow.errors.full_messages.join(' ')

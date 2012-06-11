@@ -46,15 +46,17 @@ class EditorController < ApplicationController
     if !variable_form.nil?
       variable_name_with_indices = variable_form[:name_with_indices]
       expression_string = variable_form[:expression_string]
-      variable_record = Variable.where(:id => variable_form[:id]).first
-      if variable_record.nil?
-        flash[:unrecognized_variable] = "The variable you tried to edit, #{variable_name}, was probably recently" +
-          " deleted by a member of your team. Your equation, #{expression_string}, was not saved."
-      else
-        variable_record.name_with_indices = variable_name_with_indices
-        variable_record.expression_string = expression_string
-        if !variable_record.save
-          flash[:variable_message] = variable_record.errors.full_messages
+      Variable.transaction do
+        variable_record = Variable.where(:id => variable_form[:id]).first
+        if variable_record.nil?
+          flash[:unrecognized_variable] = "The variable you tried to edit, #{variable_name}, was probably recently" +
+            " deleted by a member of your team. Your equation, #{expression_string}, was not saved."
+        else
+          variable_record.name_with_indices = variable_name_with_indices
+          variable_record.expression_string = expression_string
+          if !variable_record.save!
+            flash[:variable_message] = variable_record.errors.full_messages
+          end
         end
       end
     end
@@ -62,18 +64,22 @@ class EditorController < ApplicationController
   end
   
   def delete_variable
-    variable = Variable.where(:id => params[:id], :model_id => params[:model_id]).first
-    if !variable.nil?
-      variable.destroy
+    Variable.transaction do
+      variable = Variable.where(:id => params[:id], :model_id => params[:model_id]).first
+      if !variable.nil?
+        variable.destroy
+      end
     end
     redirect_to :back
   end
   
   def delete_relationship
-    variable = Variable.where(:id => params[:id]).first
-    if !variable.nil?
-      variable.expression_string = nil
-      variable.save
+    Variable.transaction do
+      variable = Variable.where(:id => params[:id]).first
+      if !variable.nil?
+        variable.expression_string = nil
+        variable.save!
+      end
     end
     redirect_to :back
   end

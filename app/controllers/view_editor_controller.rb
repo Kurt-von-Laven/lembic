@@ -154,32 +154,30 @@ class ViewEditorController < ApplicationController
   
   # Delete a block by id
   def delete_block
-    block = Block.find(params[:id])
-    block.destroy
+    Block.destroy(params[:id])
     render :text => "Block with ID #{params[:id]} was successfully destroyed."
   end
   
   def delete_block_connection
-    block_connection = BlockConnection.find(params[:id])
-    block_connection.destroy
+    BlockConnection.destroy(params[:id])
     redirect_to :back
   end
   
   def delete_block_variable
-    block_variable = BlockVariable.find(params[:id])
-    block_variable.destroy
+    BlockVariable.destroy(params[:id])
     redirect_to :back
   end
   
   #params[:id] is the id of the block to move
   #params[:sort_index] is the new sort index for the block.  The other blocks are moved to accomodate the new position of the block.
   def reorder_block
-    moved_block = Block.find(params[:id])
-    old_sort_index = moved_block.sort_index
-    new_sort_index = params[:sort_index]
-    
-    #shift the sort_indices of the blocks between the old and new sort_index up or down
     Block.transaction do
+      moved_block = Block.find(params[:id])
+      old_sort_index = moved_block.sort_index
+      new_sort_index = params[:sort_index]
+      
+      #shift the sort_indices of the blocks between the old and new sort_index up or down
+      
       if new_sort_index < old_sort_index
         blocks_to_shift = Block.where("sort_index < ? and sort_index >= ? and workflow_id = ? ", old_sort_index, new_sort_index, block.workflow_id)
         blocks_to_shift.each do |b|
@@ -194,7 +192,7 @@ class ViewEditorController < ApplicationController
         end
       end
       block.sort_index = new_sort_index
-      block.save
+      block.save!
     end
     
   end

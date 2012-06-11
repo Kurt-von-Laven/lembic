@@ -28,7 +28,7 @@
         end
 		myString = 
 		variable.name_with_indices + 
-		 " | " + description + " | " + type	+  " | " +
+		 " | " + description + " | " + type +  " | " +
 		 truncate(expression, :length =>17, :omission => '...(continued)')
 	%>
 		 <td>
@@ -55,7 +55,6 @@
 			 </div>
                  </td>
 		 
-        <!-- <td onClick="alert('<%= myString %>')"><%= variable.name_with_indices %> <button class="opener">expand </button></td> -->
       </tr>
     <% num += 1
     end %>

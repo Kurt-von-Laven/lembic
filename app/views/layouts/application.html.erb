@@ -21,13 +21,13 @@
             
                 String.prototype.trim = function() {
                     return this.replace(/^\s+|\s+$/g,"");
-                }
+                };
                 String.prototype.ltrim = function() {
                     return this.replace(/^\s+/,"");
-                }
+                };
                 String.prototype.rtrim = function() {
                     return this.replace(/\s+$/,"");
-                }
+                };
             
                 function split( val ) {
                     return val.split(" ");
@@ -60,7 +60,7 @@
                     autoOpen: false,
                     show: "blind",
                     hide: "explode",
-                    modal: true,
+                    modal: true
                 });
 				
 				  $('.dialog_link').live("click", function(){
@@ -181,14 +181,12 @@
                     return false;
                 });
                 
-                $('.auto_complete_variables')
-                .bind( "keydown", function( event ) {
+                $('.auto_complete_variables').bind( "keydown", function( event ) {
                     if ( event.keyCode === $.ui.keyCode.TAB &&
 						$( this ).data( "autocomplete" ).menu.active ) {
 					event.preventDefault();
 				}
-                })
-                .autocomplete({ 
+                }).autocomplete({ 
                     multiple: true,
                     multipleSeparator: " ", 
                     source : function (request, response){
@@ -219,14 +217,12 @@
                         
                     });
                     
-                    $('.auto_complete_blocks')
-                        .bind( "keydown", function( event ) {
+                    $('.auto_complete_blocks').bind( "keydown", function( event ) {
                             if ( event.keyCode === $.ui.keyCode.TAB &&
                                 $( this ).data( "autocomplete" ).menu.active ) {
                                 event.preventDefault();
                     }
-                    })
-                        .autocomplete({ 
+                    }).autocomplete({ 
                             multiple: true,
                             multipleSeparator: " ", 
                             source : function (request, response){

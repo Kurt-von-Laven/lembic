@@ -1,5 +1,5 @@
 <% @title = 'New Model' %>
 <h1>New Model</h1>
 
-<%= render :partial => 'form' %>
+<%= render :partial => 'form', :locals => {:url => "/models/create"} %>
 <%= link_to '< Back', models_path %>

@@ -29,9 +29,9 @@ class ApplicationController < ActionController::Base
   
   def verify_workflow
     if session[:workflow_id].nil?
-      model = Model.where(:id => session[:model_id]).first
-      if !model.nil?
-        Workflow.transaction do
+      ActiveRecord::Base.transaction do
+        model = Model.where(:id => session[:model_id]).first
+        if !model.nil?
           session[:workflow_id] = model.workflows.where(:sort_index => 0).pluck(:id).first
           if session[:workflow_id].nil?
             redirect_to :controller => 'view_editor', :action => 'edit_block'
@@ -56,11 +56,13 @@ class ApplicationController < ActionController::Base
   end
   
   def model_workflows
-    model = Model.where(:id => session[:model_id]).first
-    if model.nil?
-      @workflows = []
-    else
-      @workflows = model.workflows.order(:sort_index)
+    ActiveRecord::Base.transaction do
+      model = Model.where(:id => session[:model_id]).first
+      if model.nil?
+        @workflows = []
+      else
+        @workflows = model.workflows.order(:sort_index)
+      end
     end
   end
   

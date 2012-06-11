@@ -1,7 +1,7 @@
 <% @title = 'Edit Model' %>
 <h1>Edit Model</h1>
 
-<%= render :partial => 'form' %>
+<%= render :partial => 'form', :locals => {:url => "/models/#{@model.id}"} %>
 
 <%= link_to 'Show', @model %> |
 <%= link_to 'Back', models_path %>

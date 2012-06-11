@@ -616,6 +616,13 @@ ul {
 	color: #83025a;
 	font-weight: bold;
 }
+#user_defined_var_comment{
+	color: #83025a;
+	margin-bottom: 10px;
+	margin-bottom: 10px;
+	width: 80%;
+	text-align: center;
+}
 .var_input_block{
 	margin: auto;
 	width: 80%;

@@ -62,7 +62,8 @@
 			</div>
 		</div>
 	</div>
-	<div style="height: 700px">
+        <% if !workflow.nil? %>
+	  <div style="height: 700px">
 		<div class="left_column">
 			<%= render "current_variables_truncated" %>
 			<%= render "current_blocks_truncated" %>
@@ -175,5 +176,5 @@
 			</div>  
 		</div>
 	</div>
+  <% end %>
 </div>
-

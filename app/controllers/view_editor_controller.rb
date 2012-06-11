@@ -101,14 +101,14 @@ class ViewEditorController < ApplicationController
           # Trim the line to get a variable name
           variable_name = line.strip
           if variable_name.empty? # TODO: get better input validation
-            flash[:block_failed] = 'Your variable name was empty. Please try again.'
+            flash.now[:block_failed] = 'Your variable name was empty. Please try again.'
             next
           end
           
           # Find the variable
           variable = Variable.find_by_name(variable_name)
           if variable.nil?
-            flash[:block_failed] = "Sorry, we couldn't find a variable named #{variable_name}! Please try again"
+            flash.now[:block_failed] = "Sorry, we couldn't find a variable named #{variable_name}! Please try again"
             next
           end
           
@@ -119,7 +119,7 @@ class ViewEditorController < ApplicationController
           # NOTE: this may fail for various reasons (i.e. sort_index collision from race condition)
           bv = block.block_variables.create({:display_type => display_type, :variable_id => variable.id, :sort_index => sort_index})
           if bv.nil?
-            flash[:block_failed] = "Failed to create block_variable with variable_id => #{variable.id} and sort_index => #{sort_index}"
+            flash.now[:block_failed] = "Failed to create block_variable with variable_id => #{variable.id} and sort_index => #{sort_index}"
           end #end if
         end #end form
       end # end if

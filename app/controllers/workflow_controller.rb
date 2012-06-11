@@ -48,9 +48,9 @@ class WorkflowController < ApplicationController
       end
       if variable_to_solve_for.nil?
         if vars['variable_to_solve_for'].nil?
-          flash[:evaluator_error] = 'Variable to solve for can\'t be blank.' # TODO: Check for this case at the beginning of the function.
+          flash.now[:evaluator_error] = 'Variable to solve for can\'t be blank.' # TODO: Check for this case at the beginning of the function.
         else
-          flash[:evaluator_error] = "You tried to solve for the variable #{vars['variable_to_solve_for']}, but that variable doesn't exist."
+          flash.now[:evaluator_error] = "You tried to solve for the variable #{vars['variable_to_solve_for']}, but that variable doesn't exist."
         end
         @output_variables = []
       else

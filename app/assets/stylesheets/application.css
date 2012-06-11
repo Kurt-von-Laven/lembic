@@ -519,14 +519,6 @@ border-radius:10px;
     border-radius: 6px;
 	background-color: #fff8cb;
 }
-.sortable ul{
-    list-style-type: cicle !important;
-    padding-left:2px;
-}
-
-.sortable li{
-    display: list-item;
-}
 
 #sortable_blocks ul{
     padding-left:50px;

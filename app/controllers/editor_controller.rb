@@ -59,9 +59,11 @@ class EditorController < ApplicationController
             to_dates = []
             while curr_date <= to_date
               curr_from = curr_date + from_hour.hours
-              from_dates << curr_from.strftime('%Y_%m_%d_%H_%M_%S')
               curr_to = curr_date + to_hour.hours
-              to_dates << curr_to.strftime('%Y_%m_%d_%H_%M_%S')
+              if week[curr_date.wday]
+                from_dates << curr_from.strftime('%Y_%m_%d_%H_%M_%S')
+                to_dates << curr_to.strftime('%Y_%m_%d_%H_%M_%S')
+              end
               curr_date += 1.day
             end
             from_expression_string = '[i | ' + from_dates.join(', ') + ']'

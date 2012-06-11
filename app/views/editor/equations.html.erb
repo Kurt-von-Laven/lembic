@@ -94,6 +94,10 @@
 								</div>
 								<div id="date_range">
 									<div>
+										<%= f.check_box(:sunday, :name => "create_events[week][]") %>
+										<%= f.label(:sunday, :name => "create_events[week][]") %>
+									</div>
+									<div>
 										<%= f.check_box(:monday, :name => "create_events[week][]") %>
                                                                                 <%= f.label(:monday, :name => "create_events[week][]") %>
 									</div>
@@ -117,10 +121,6 @@
 										<%= f.check_box(:saturday, :name => "create_events[week][]") %>
 										<%= f.label(:saturday, :name => "create_events[week][]") %>
 									</div>
-									<div>
-										<%= f.check_box(:sunday, :name => "create_events[week][]") %>
-										<%= f.label(:sunday, :name => "create_events[week][]") %>
-									</div>  
 								</div>
 								<br />
 						</div> 

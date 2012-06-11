@@ -37,8 +37,13 @@ class Parser
       #token is a math operator
       return :operator
     end
-    raise ArgumentError, "Error: Unrecognized token `#{token}`"
+    raise_error "Error: Unrecognized token `#{token}`"
     return nil
+  end
+  
+  def raise_error(msg)
+    msg_start_delimiter = "^^^"
+    raise ArgumentError, msg_start_delimiter+msg
   end
   
   def error_inspect (array)
@@ -323,9 +328,9 @@ class Parser
     remaining_tokens_string = error_inspect(tokens)
     analysis = get_error_analysis(remaining_tokens_string)
     if !analysis
-      raise ArgumentError, "Syntax error!  I've replaced the parts I could understand with dots: #{remaining_tokens_string}." 
+      raise_error "Syntax error!  I've replaced the parts I could understand with dots: #{remaining_tokens_string}." 
     else
-      raise ArgumentError, "Syntax error! #{analysis}." 
+      raise_error "Syntax error! #{analysis}." 
     end
   end
   

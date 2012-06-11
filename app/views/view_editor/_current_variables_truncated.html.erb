@@ -16,21 +16,6 @@
     <% num = 0
     for variable in @variables %>
       <tr>
-		<% 
-		description = variable.description
-        type = variable.variable_type_string
-        expression = variable.expression_string
-        if expression == nil
-            expression = ""
-        end
-        if type == nil
-            type = ""
-        end
-		myString = 
-		variable.name_with_indices + 
-		 " | " + description + " | " + type +  " | " +
-		 truncate(expression, :length =>17, :omission => '...(continued)')
-	%>
 		 <td>
 			<span style="width: 50px">
 			<% if variable.input? %>
@@ -48,10 +33,10 @@
                  <td>
 		 <% d_id = "dialog_#{num}"%>
 			 <div id = "<%=d_id%>" style="display: none">
-             				<h1><%= variable.name_with_indices %></h1>
-				<p>
-					<%=myString %>
-				</p>
+             			<h1><%= variable.name_with_indices %></h1>
+				<p>Description: <%= variable.description %></p>
+                                <p>Variable Type: <%= variable.variable_type_string  %></p>
+                                <p><%= variable.name_with_indices %> = <%= truncate(variable.expression_string, :length =>17, :omission => '...(continued)') %></p>
 			 </div>
                  </td>
 		 

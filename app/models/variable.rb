@@ -13,7 +13,7 @@ class Variable < ActiveRecord::Base
   validates_numericality_of :variable_type, :only_integer => true, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 3
   validates_numericality_of :array, :only_integer => true, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 1
   
-  validates_uniqueness_of :name, :scope => :model_id, :message => "must be unique; delete the existing variable first."
+  validates_uniqueness_of :name, :scope => :model_id, :message => "must be unique; delete the existing variable first"
   
   serialize :expression_object
   

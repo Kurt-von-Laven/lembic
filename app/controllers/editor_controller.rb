@@ -12,9 +12,9 @@ class EditorController < ApplicationController
       begin
         Variable.create_from_form(new_equation, model_id)
       rescue Exception => e
-        flash.now[:variable_message] = e.message.split("^^^")[1] || e.message
+        flash.now[:variable_error] = e.message.split("^^^")[1] || e.message
       else
-        flash.now[:variable_message] = 'Your variable was successfully saved.'
+        flash.now[:variable_success] = 'Your variable was successfully saved.'
       end
     else
       new_constant_array = params[:new_constant_array]
@@ -22,9 +22,9 @@ class EditorController < ApplicationController
         begin
           Variable.create_constant_array(new_constant_array, model_id)
         rescue Exception => e
-          flash.now[:variable_message] = e.message.split("^^^")[1] || e.message
+          flash.now[:variable_error] = e.message.split("^^^")[1] || e.message
         else
-          flash.now[:variable_message] = 'Your variable was successfully saved.'
+          flash.now[:variable_success] = 'Your variable was successfully saved.'
         end
       end
     end
@@ -55,7 +55,7 @@ class EditorController < ApplicationController
           variable_record.name_with_indices = variable_name_with_indices
           variable_record.expression_string = expression_string
           if !variable_record.save!
-            flash[:variable_message] = variable_record.errors.full_messages
+            flash[:variable_error] = variable_record.errors.full_messages
           end
         end
       end

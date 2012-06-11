@@ -10,7 +10,8 @@
 <h1>Equation Editor</h1>
 <div style="width: 100%;">
 	<%= render "current_model" %>
-	<%= render(:partial => 'flash_message', :locals => {:flash_symbol => :variable_message, :tag => 'div', :class_name => 'error'}) %>
+        <%= render(:partial => 'flash_message', :locals => {:flash_symbol => :variable_success, :tag => 'div', :class_name => 'success'}) %>
+	<%= render(:partial => 'flash_message', :locals => {:flash_symbol => :variable_error, :tag => 'div', :class_name => 'error'}) %>
 	<div id="tabs">
 		  <ul>
 			<li><a href="#tabs-1">Create Variable</a></li>

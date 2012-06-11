@@ -5,13 +5,11 @@ class User < ActiveRecord::Base
   
   validates_uniqueness_of :email
   
-  has_many :workflow_permissions, :dependent => :destroy
   has_many :workflows, :through => :workflow_permissions
   has_many :runs
-  has_many :model_permissions, :dependent => :destroy
   has_many :models, :through => :model_permissions, :dependent => :destroy #TODO: we'd like the behavior to be that models are destroyed if the last user with permissions for the model is deleted.
   
-  validates_associated :workflow_permissions, :runs, :model_permissions
+  validates_associated :runs
   
   SHA512_REGEX = Regexp.new('[a-f0-9]{128}')
   SALT_LENGTH = 128

@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
       session[:model_id] = Model.joins(:model_permissions).where('(model_permissions.user_id = ?) AND (model_permissions.sort_index = 0)',
                                                                  session[:user_id]).pluck(:model_id).first
       if session[:model_id].nil?
-        redirect_to :controller => "models", :action => "new"
+        redirect_to :controller => 'models', :action => 'new'
       end
     end
   end
@@ -34,9 +34,7 @@ class ApplicationController < ActionController::Base
         Workflow.transaction do
           session[:workflow_id] = model.workflows.where(:sort_index => 0).pluck(:id).first
           if session[:workflow_id].nil?
-            session[:workflow_id] = Workflow.create(:name => 'Default Workflow',
-                                                    :description => 'This workflow should eventually be removed.',
-                                                    :model_id => session[:model_id], :sort_index => 0).id
+            redirect_to :controller => 'view_editor', :action => 'edit_block'
           end
         end
       end

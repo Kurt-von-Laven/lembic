@@ -31,15 +31,15 @@
                 <% for input_variable in @input_variables %>
                   <% if input_variable.index_names.length == 0 %>
                       <li>
-                        <%= f.label(:input_values, input_variable.name + ' = ', :for => "evaluator_input_value_#{i}") %>
+                        <%= f.label(:input_values, input_variable.name + ' = ', :for => "evaluator_input_value_#{i}", :id => "evaluator_input_label_#{i}") %>
                         <%= f.text_field(:input_values, :id => "evaluator_input_value_#{i}", :name => 'evaluator[input_values][]') %>
                       </li>
                   <% else %>
                       <li>
-                        <%= f.label(:input_values, input_variable.name + ' = ', :for => "evaluator_input_value_#{i}") %><br/>
-                        <label class="subfield">Upload a CSV file:</label><%= f.file_field(:input_values, :name=>"evaluator[input_values][][data_file]", :class => "choose_file evaluator_array_upload") %><br/>
-                        <label class="subfield">column:</label> <%= f.text_field(:input_values, :name => 'evaluator[input_values][][start_col]', :class => "evaluator_array_upload") %><br/>
-                        <label class="subfield">start row:</label> <%= f.text_field(:input_values, :name => 'evaluator[input_values][][start_row]', :class => "evaluator_array_upload") %>
+                        <%= f.label(:input_values, input_variable.name + ' = ', :for => "evaluator_input_value_#{i}", :id => "evaluator_input_label_#{i}") %><br/>
+                        <label class="subfield">Upload a CSV file:</label><%= f.file_field(:input_values, :name=>"evaluator[input_values][][data_file]", :class => "choose_file evaluator_array_upload", :id => "evaluator_input_value_#{i}") %><br/>
+                        <label class="subfield">column:</label> <%= f.text_field(:input_values, :name => 'evaluator[input_values][][start_col]', :class => "evaluator_array_upload", :id=>"evaluator_array_column_field_#{i}") %><br/>
+                        <label class="subfield">start row:</label> <%= f.text_field(:input_values, :name => 'evaluator[input_values][][start_row]', :class => "evaluator_array_upload", :id=>"evaluator_array_row_field_#{i}") %>
                       </li>
                   <% end %>
                     

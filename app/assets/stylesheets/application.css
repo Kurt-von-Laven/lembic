@@ -631,3 +631,30 @@ ul {
 	padding: 0px 20px 10px 20px;
 }
 
+#workflow_form div{
+	margin: 0 0 5px 200px;
+}
+#workflow_form submit{
+	text-align: center;
+}
+
+#workflow_input_var_list{
+	width: 30%;
+	padding: 10px;
+	background-color: #dee6ed;
+	border-radius:6px;
+    -moz-border-radius:6px; /* Firefox 3.6 and earlier */
+	text-align: left;
+}
+#workflow_input_var_list h2 {
+	width: 100%;
+	text-align: center;
+	padding: 4px;
+	background-color: #5c7e99;
+	color: #dee6ed;
+	border-radius:6px;
+    -moz-border-radius:6px; /* Firefox 3.6 and earlier */
+}
+#workflow_input_var div{
+	padding: 5px;
+}

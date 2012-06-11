@@ -3,14 +3,11 @@
 
 <% id = @run.id %>
 <% block_variables = @block.block_variables().order(:sort_index) %>
-<%= form_for :input_values, :url => "/workflow/post_block_input" do |f| %>
+<%= form_for :input_values, :url => "/workflow/post_block_input" , :html => {:id =>"workflow_form"} do |f| %>
     <%= f.hidden_field :run_id, :value=>id, :name=>"run_id" %>
     <%= f.hidden_field :id, :value=>@block.id, :name=>"block_id" %>
     <% for v in block_variables %>
-        
-   
         <% if v.display_type == :input %>
-        <div>
             <%= f.hidden_field :variable_id, :name=>"input_values[#{v.id}][variable_id]", :value => v.variable_id %>
             <div>
             <% if v.variable.index_names.length > 0 %>
@@ -32,17 +29,16 @@
                 <%= f.text_field "value", :name=>"input_values[#{v.id}][value]" %>
             <% end %>
             </div>
-        </div>
         <% else %>
-        <div class="centered">
-          <p>
-            <%= v.variable().name %> =
-            <%= @evaluator.eval_variable(v.variable().name, @variables_hash, nil) %>
-          </p>
+        <div id="workflow_input_var_list">
+				<%= v.variable().name %> =
+				<%= @evaluator.eval_variable(v.variable().name, @variables_hash, nil) %>
         </div>
          
         <% end %>
     <% end %>
-    <%= f.submit "Next", :class =>"button" %>
+	<div style="width: 70%; text-align: right">
+		<%= f.submit "Next", :class =>"button" %>
+	</div>
 <% end %>
 

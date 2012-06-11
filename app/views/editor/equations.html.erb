@@ -35,7 +35,7 @@
 							  </div>
 						</div>
 						<div id="expression">
-							  <%= f.text_field(:name) %> = 
+							  <%= f.text_field(:name_with_indices) %> = 
 							  <%= f.text_area(:expression_string, :class =>'auto_complete_variables') %>
 						</div>
 						<div id="user_defined_var_comment"> 
@@ -56,10 +56,14 @@
 									<%= f.label(:name, "Name: ") %>
 									<%= f.text_field :name %>
 								</div>
+								<div>
+									<%= f.label(:description, "Description: ") %>
+									<%= f.text_field :description %>
+								</div>
 							
 								<!-- Slider -->
 								<div>
-                                                                  <%= f.label(:time_range, "Time range (in military time):") %>
+                                                                  <%= f.label(:time_range, "Time range (in military time): ") %>
                                                                   <%= f.text_field(:time_range) %>
 								</div>
 								

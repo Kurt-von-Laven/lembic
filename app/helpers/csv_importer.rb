@@ -2,7 +2,7 @@ require 'csv'
 
 module CsvImporter
     
-  CsvImporter::INDEX = 'i' # The index used for constant arrays.
+  INDEX = 'i' # The index used for constant arrays.
   
   def CsvImporter.parse_csv_to_array(csv_data, start_row_one_indexed, column_number_one_indexed, variable_type)
     start_row = start_row_one_indexed - 1

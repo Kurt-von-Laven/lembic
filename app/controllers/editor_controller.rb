@@ -1,6 +1,9 @@
 class EditorController < ApplicationController
   autocomplete :variable, :name
   
+  TIME_EXTRACTOR = /(?<from_hour>\d{1,2})\s*-\s*(?<to_hour>\d{1,2})/
+  DATE_EXTRACTOR = /(?<month>\d{2})\/(?<day>\d{2})\/(?<year>\d+)/
+  
   def select
     @models = Model.find(session[:model_id])
   end
@@ -33,11 +36,56 @@ class EditorController < ApplicationController
   end
   
   def create_events
-    logger.debug('bang: ' + params[:create_events].inspect)
-    Time.new(year, month, day, hour)
-    (year, month=nil, day=nil, hour=nil, min=nil, sec=nil) 
-    YYYY_MM_DD_HH_MM_SS
+    create_events_hash = params[:create_events]
+    if !create_events_hash.nil?
+      event_name = create_events_hash[:name]
+      if !event_name.nil?
+        description = create_events_hash[:description]
+        time_range = create_events_hash[:time_range]
+        time_range_match = TIME_EXTRACTOR.match(time_range)
+        if !time_range_match.nil?
+          from_hour = time_range_match[:from_hour].to_i
+          to_hour = time_range_match[:to_hour].to_i
+          if from_hour <= to_hour
+            from_date_string = create_events_hash[:from_date]
+            from_date = parse_date_string(from_date_string)
+            to_date_string = create_events_hash[:to_date]
+            to_date = parse_date_string(to_date_string)
+            week = create_events_hash[:week].collect {|repeats_on| repeats_on == '1'}
+            curr_date = from_date
+            from_dates = []
+            to_dates = []
+            while curr_date <= to_date
+              curr_from = curr_date + from_hour.hours
+              from_dates << curr_from.strftime('%Y_%m_%d_%H_%M_%S')
+              curr_to = curr_date + to_hour.hours
+              to_dates << curr_to.strftime('%Y_%m_%d_%H_%M_%S')
+              curr_date += 1.day
+            end
+            from_expression_string = '[i | ' + from_dates.join(', ') + ']'
+            to_expression_string = '[i | ' + to_dates.join(', ') + ']'
+            Variable.transaction do
+              Variable.create(:name_with_indices => event_name + '_from[i]', :description => description, :model_id => session[:model_id],
+                              :variable_type => 3, :expression_string => from_expression_string)
+              Variable.create(:name_with_indices => event_name + '_to[i]', :description => description, :model_id => session[:model_id],
+                              :variable_type => 3, :expression_string => to_expression_string)
+            end
+          end
+        end
+      end
+    end
     redirect_to :back
+  end
+  
+  def parse_date_string(date_string)
+    date_match = DATE_EXTRACTOR.match(date_string)
+    if date_match.nil?
+      return nil
+    end
+    year = date_match[:year].to_i
+    month = date_match[:month].to_i
+    day = date_match[:day].to_i
+    return Time.new(year, month, day)
   end
   
   def find_variable_names

@@ -4,7 +4,7 @@ require Rails.root.join('app/helpers/expression')
 require Rails.root.join('app/models/index_name')
 
 class Variable < ActiveRecord::Base
-  attr_accessible :id, :name, :description, :model_id, :variable_type, :array, :created_at, :updated_at, :expression_string, :expression_object
+  attr_accessible :id, :name, :description, :model_id, :variable_type, :array, :created_at, :updated_at, :expression_string, :expression_object, :name_with_indices
   
   include PersistableExpressions
   
@@ -59,9 +59,12 @@ class Variable < ActiveRecord::Base
   
   def name_with_indices=(new_name)
     self.name = new_name.split(/\s*\[\s*/)[0]
+    IndexName.delete_all(["variable_id = ?", self.id])
     if new_name.match(/\[.+\]/)
-      IndexName.delete_all(["variable_id = ?", self.id])
       IndexName.create_from_declaration(new_name, self.id)
+      self.array = 1
+    else
+      self.array = 0
     end
   end
   
@@ -74,27 +77,23 @@ class Variable < ActiveRecord::Base
   end
 
   def self.create_from_form(form_hash, model_id)
-    merged_var = {'array' => 0}.merge(form_hash)
+    merged_var = form_hash
     merged_var['model_id'] = model_id
     merged_var['variable_type'] = merged_var['variable_type'].to_i
-    merged_var['array'] = merged_var['name'].match(/\[.+\]/) ? 1 : 0
-    merged_var['name'] = merged_var['name'].split(/\s*\[/)[0]
     if merged_var['expression_string'].empty?
       merged_var['expression_string'] = nil
     end
     new_var = Variable.new(merged_var)
     save_succeeded = new_var.save!
-    IndexName.create_from_declaration(form_hash['name'], new_var.id)
+    IndexName.create_from_declaration(form_hash['name_with_indices'], new_var.id)
     return save_succeeded
   end
   
   def self.create_constant_array(form_hash, model_id)
-    merged_array = {'array' => 0, 'start_row' => 1, 'column_number' => 1}.merge(form_hash)
+    merged_array = {'array' => 1, 'start_row' => 1, 'column_number' => 1}.merge(form_hash)
     merged_array['model_id'] = model_id
     merged_array['variable_type'] = merged_array['variable_type'].to_i
-    merged_array['array'] = 1
     data = merged_array['data_file'].read
-    #raise CSVImporter.instance_methods.inspect
     merged_array['expression_string'] = CsvImporter.parse_csv_expression(data,
                                                                   merged_array['start_row'].to_i,
                                                                   CsvImporter.convert_letter_column_labels_to_numbers(merged_array['column_number']),
@@ -102,7 +101,8 @@ class Variable < ActiveRecord::Base
     merged_array.delete('data_file')
     merged_array.delete('start_row')
     merged_array.delete('column_number')
-    newvar = Variable.create(merged_array)
-    IndexName.create_from_declaration("[#{CsvImporter::INDEX}]", newvar.id)
+    new_var = Variable.create(merged_array)
+    logger.debug("NEW VAR: #{new_var.errors.full_messages.inspect}")
+    IndexName.create_from_declaration("#{new_var.name}[#{CsvImporter::INDEX}]", new_var.id)
   end
 end

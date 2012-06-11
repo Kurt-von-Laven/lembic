@@ -4,21 +4,21 @@
 	<h3> Basic Expressions </h3>
 	<div>
 		<div id="serial">
-			<p>Math operators: + - * / ^ % (% is modulo)</p>
-			<p>Boolean operators: &amp;&amp; (boolean and), || (boolean or).</p>
+			<p>Math operators: <code>+ - * / ^ %</code> (<code>%</code> is modulo)</p>
+			<p>Boolean operators: <code>&amp;&amp;</code> (boolean and), <code>||</code> (boolean or).</p>
 		</div>
-		<p>Boolean operators consider 0 to be false, and everything else to be true.</p>
+		<p>Boolean operators consider 0 to be false, and everything else to be true.  The symbols <code>true</code> and <code>false</code> (not case-sensitive) can also be used in Boolean expressions.</p>
 
-		<p>Comparison operators (return 1 if the comparison is true, 0 if false): == &lt; &gt; &lt;= &gt;=</p>
+		<p>Comparison operators (return 1 if the comparison is true, 0 if false): <code>== &lt; &gt; &lt;= &gt;=</code></p>
 
 		<p>You can group parts of expressions with parentheses.</p>
 	</div>
-	<h3> Variables Names </h3>
+	<h3> Variable Names </h3>
 	<div>
 		<p>You can include variables as well as raw numbers in formulas.</p>
 		<p>Variable names must start with a letter or underscore, and can contain letters, numbers, and underscores.</p>
 
-		<p>foo, x31, and number_of_hats are all valid variable names</p>
+		<p><code>foo</code>, <code>x31</code>, and <code>number_of_hats</code> are all valid variable names</p>
 	</div>
 	<h3> Whitespace </h3>
 	<div>
@@ -29,23 +29,35 @@
 		<p>Lembic's equivalent of if-else statements.  They can consist of any number of condition-result pairs, surrounded by curly braces.</p>
 		<p>Condition-result pairs have the following format: </p>
 		<div class="centered">
-			condition : result ; 
+			<code>condition : result ;</code>
 		</div>
 			<p>For example: </p>
 		<div class="centered">
-			{ a &gt; b: 3; else: 2; }
+			<code>{ a &gt; b: 3; else: 2; }</code>
 		</div>
 		<p>will be 3 if a > b, and 2 otherwise.  You can include as many condition-result pairs as you want:</p>
 
 		<div class="centered">
-		{ a &gt; b: 3; a &lt; b: 2; a == b: 1; }
+			<code>{ a &gt; b: 3; a &lt; b: 2; a == b: 1; }</code>
 		</div>
 	
 		<p>Note that these will be evaluated in the order they're listed.  For example, the following expression will always return 5:</p>
 		<div class="centered">
-		{ a == a : 5; b == b : 0; } 
+			<code>{ a == a : 5; b == b : 0; }</code> 
 		</div>
 		<p>If you don't have an "else" condition and all the conditions are false, the case statement will return 0.</p>
+	</div>
+	<h3>Categorical Values </h3>
+	<div>
+		<p>Categorical values are symbols that have no numerical value, but can still be compared to one another for equality.  They consist of an <code>@</code> sign followed by any number of letters and underscores.</p>
+
+		<p>Categorical values are most useful for conditions in case statements, and for user-readable input and output.</p>
+		<div class="centered">
+			<code>{ air_conditioner_present == @yes: 10; else: 0; }</code>
+		</div>
+		<p>The above formula will output 10 iff the variable <code>air_conditioner_present</code> has the value <code>@yes</code>.</p>
+
+		<p>You can use a categorical value in multiple places and all instances of it will be equal.  If you set variables <code>a</code> and <code>b</code> to both be <code>@toothpaste</code>, then <code>a == b</code> will be true.</p>
 	</div>
 	<h3> Arrays </h3>
 	<div>
@@ -53,20 +65,20 @@
 		<p>The name of an array (used in the left-hand side of the equation definition) consists of a variable name followed by an index name in square brackets.
 		The index is used inside the array variable's formula to determine what value to return when the array is accessed by another formula.</p>
 
-		<p>Arrays can be explicit or implicit.  The following formula defines an explicit array.  The value of myarray[i] will be the ith element of the list in brackets (indexed from 0):</p>
+		<p>Arrays can be explicit or implicit.  The following formula defines an explicit array.  The value of <code>myarray[i]</code> will be the ith element of the list in brackets (indexed from 0):</p>
 		<div class="centered">
-			myarray[i] = [i|1,2,3,4,5]
+			<code>myarray[i] = [i|1,2,3,4,5]</code>
 		</div>
 		
 		<p>The following formula defines an implicit array:</p>
 		<div class="centered">
-			myarray[i] = i % 2
+			<code>myarray[i] = i % 2</code>
 		</div>
-		<p>The value of myarray[i] will be 0 if i is even and 1 if i is odd.</p>
+		<p>The value of <code>myarray[i]</code> will be 0 if <code>i</code> is even and 1 if <code>i</code> is odd.</p>
 
-		<p>The explict array notation can be combined with other operations.  For example, the following formula returns the ith element of the explicit array, multiplied by 5.</p>
+		<p>The explict array notation is simply a mathematical expression whose value depends on the value of the index variable.  As such, it can be combined with other operations.  For example, the following formula returns the ith element of the explicit array, multiplied by 5.</p>
 		<div class="centered">
-			myarray_times_5[i] = 5 * [i|1,2,3,4,5]
+			<code>myarray_times_5[i] = 5 * [i|1,2,3,4,5]</code>
 		</div>
 	</div>
 	<h3> Aggregate Functions </h3>
@@ -75,56 +87,45 @@
 		<p>Aggregate functions consist of an all-caps function name, followed by several comma-separated arguments surrounded by square brackets.
 		The following formula sums the elements of myarray from index 0 to index 4:</p>
 		<div class="centered">
-			SUM[myarray, 0, 4]
+			<code>SUM[myarray, 0, 4]</code>
 		</div>
-		<p>As of May 16th, 2012, only the SUM aggregator is supported.  The MAX and MIN functions will be added very soon.  They will have the same syntax as SUM (array name, min index, and max index arguments).</p>
+		<p>Currently, the <code>SUM</code>, <code>MAX</code>, and <code>MIN</code> aggregators are supported.  The <code>MAX</code> and <code>MIN</code> functions have the same syntax as <code>SUM</code> (array name, min index, and max index arguments).</p>
 	</div>
 	<h3> Date and Time </h3>
 	<div>
 		<p>	You can express a date and time using the format YYYY_MM_DD_HH_MM_SS (24 hour time).</p>
 
-		<p>For example, 2010_10_08_21_45_00 would be 9:45 PM, October 8th 2010.</p>
+		<p>For example, <code>2010_10_08_21_45_00</code> would be 9:45 PM, October 8th 2010.</p>
 
 		<p>Note that you cannot put whitespace between the numbers and the underscores in the date format.</p>
 
 		<p>You can express a time of day in the format HH_MM_SS.  To specify a date without specifying a time, use the format YYYY_MM_DD.</p>
 
-		<p>You can compare dates and times with the &lt;, &gt;, &lt;=, &gt;=, ==, and != operators.</p>
+		<p>You can compare dates and times with the <code>&lt;, &gt;, &lt;=, &gt;=, ==,</code> and <code>!=</code> operators.</p>
 
-		<p>Don't try to compare datetimes in YYYY_MM_DD_HH_MM_SS to times in the HH_MM_SS format.  It most likely won't do what you want.  Also, beware of doing arithmetic that combines numbers with dates and times.  You won't get an error if, for example, you try to multiply 10_37_00 * 5.  Instead, you'll get a nonsensical answer.</p>
+		<p>Don't try to compare datetimes in YYYY_MM_DD_HH_MM_SS to times in the HH_MM_SS format.  It most likely won't do what you want.  Also, beware of doing arithmetic that combines numbers with dates and times.  You won't get an error if, for example, you try to multiply <code>10_37_00 * 5</code>.  Instead, you'll get a nonsensical answer.</p>
 
-		<p>If you want to convert a time to a datetime, you can simply add: 2012_12_21 + 23_59_59 is the same as 2012_12_21_23_59_59.  Similarly, you can subtract a date from a datetime to get just the time.</p>
+		<p>If you want to convert a time to a datetime, you can simply add: <code>2012_12_21 + 23_59_59</code> is the same as <code>2012_12_21_23_59_59</code>.  Similarly, you can subtract a date from a datetime to get just the time.</p>
 
 		<p>Currently, dates and times will output as (probably very large) numbers if you run them through the evaluator.  This is just a display bug; if you want to see human-readable values you can use http://www.epochconverter.com/ until we can get the frontend to display different variable types properly.</p>
 
-		<p>The built-in functions DAY and MONTH can be used to extract the day of the week or the month from a date.  DAY returns one of @Monday, @Tuesday, @Wednesday, @Thursday, @Friday, @Saturday, @Sunday.  MONTH returns a number in the range 1-12. </p>
+		<p>The built-in functions <code>DAY</code> and <code>MONTH</code> can be used to extract the day of the week or the month from a date.  <code>DAY</code> returns one of <code>@Monday</code>, <code>@Tuesday</code>, <code>@Wednesday</code>, <code>@Thursday</code>, <code>@Friday</code>, <code>@Saturday</code>, <code>@Sunday</code>.  <code>MONTH</code> returns a number in the range 1-12. </p>
 
-		<p>For example, DAY[2012_05_23] returns @Wednesday.  MONTH[2012_05_23] returns 5.</p>
+		<p>For example, <code>DAY[2012_05_23]</code> returns <code>@Wednesday</code>.  <code>MONTH[2012_05_23]</code> returns 5.</p>
 
-		<p>The built-in function HOUR gets the hour of the day (0-23).</p>
+		<p>The built-in function <code>HOUR</code> gets the hour of the day (0-23).</p>
 
-		<p>The built-in function DAYNUM gets the day of the week as a number.  It defaults to 1=Sunday, 7=Saturday.  You can pass it an additional argument to specify which day the week should start on.  For example:</p>
+		<p>The built-in function <code>DAYNUM</code> gets the day of the week as a number.  It defaults to 1=Sunday, 7=Saturday.  You can pass it an additional argument to specify which day the week should start on.  For example:</p>
 		<div class="centered">
-			<p>DAYNUM[2012_05_28] returns 2 (note that 5/28/2012 is a Monday).</p>
-			<p> DAYNUM[2012_05_28, @Monday] returns 1.</p>
+			<p><code>DAYNUM[2012_05_28]</code> returns 2 (note that 5/28/2012 is a Monday).</p>
+			<p><code>DAYNUM[2012_05_28, @Monday]</code> returns 1.</p>
 		</div>
 		<p>You can change the number that represents the first day of the week by passing it as a third parameter.  For example, to make 0=Sunday and 6=Saturday, you can use:</p>
 		<div class="centered">
-			DAYNUM[2012_05_28, @Sunday, 0]
+			<code>DAYNUM[2012_05_28, @Sunday, 0]</code>
 		</div>
 	</div>
-	<h3>Categorical Values </h3>
-	<div>
-		<p>Categorical values are symbols that have no numerical value, but can still be compared to one another for equality.  They consist of an @ sign followed by any number of letters and underscores.</p>
-
-		<p>Categorical values are most useful for conditions in case statements, and for user-readable input and output.</p>
-		<div class="centered">
-			{ air_conditioner_present == @yes: 10; else: 0; }
-		</div>
-		<p>The above formula will output 10 iff the variable air_conditioner_present has the value @yes.</p>
-
-		<p>You can use a categorical value in multiple places and all instances of it will be equal.  If you set variables a and b to both be @toothpaste, then a == b will be true.</p>
-	</div>
+	
     
     <h3> Have Additional Questions or Comments? </h3>
     <div>

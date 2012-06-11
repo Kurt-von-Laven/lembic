@@ -120,6 +120,9 @@
 
 				<!--ADD OUTPUTS -->      
 				<div id="tabs-5">
+                                        <div class="comment" style="margin-left:80px;">
+						Please enter one per line. 
+					</div>
 					<%= form_for(:create_block_outputs, :html => {:class => "input_formB"}) do |f| %>
 						<div class="var_input_block">
 							<div>
@@ -136,7 +139,7 @@
 							</div>
 						</div>
 						<div class="input_button">
-							<%= f.submit('Add Output', :class => "button") %>
+							<%= f.submit('Create Output Variables', :class => "button") %>
 						</div>
 					<% end %>
 				</div>
@@ -144,7 +147,7 @@
 				<!-- ADD CONNECTIONS -->
 				<div id="tabs-6">
 					<div class="comment" style="margin-left:80px">
-						Example of Logic for Transition: 'has_ac == true => AC_Block'
+						Example of Logic for Transition: 'foo == 3'
 					</div>
 					<%= form_for(:create_block_connections, :html => {:class => "input_formB"}) do |f| %>
 						<div class="var_input_block">

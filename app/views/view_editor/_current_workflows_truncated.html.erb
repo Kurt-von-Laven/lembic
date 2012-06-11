@@ -24,10 +24,6 @@
 	
 	  <!--Prepare strings to be displayed in HTML for this block -->
 	  <% name = workflow.name %>
-        <% myString = ""
-        for block in workflow.blocks 
-           myString = myString + block.name + " \n" 
-        end %>
 	
 	  <!--Render this block in HTML -->
       <td><%= name %></td>
@@ -38,7 +34,7 @@
       <% d_id = "dialog_workflow_#{num}"%>
 			 <div id="<%=d_id%>" style="display: none">
              				<h1><%=name %></h1>
-				<p>Blocks: <%= myString %></p>
+				<p>Blocks: <%= workflow.blocks_as_string %></p>
             </div>
        </td>
       </tr>

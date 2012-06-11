@@ -631,3 +631,9 @@ ul {
 	padding: 0px 20px 10px 20px;
 }
 
+#workflow_form div{
+	margin: 0 0 5px 200px;
+}
+#workflow_form submit{
+	text-align: center;
+}

@@ -5,12 +5,6 @@ module CsvImporter
   CsvImporter::INDEX = 'i' # The index used for constant arrays.
   
   def CsvImporter.parse_csv_to_array(csv_data, start_row_one_indexed, column_number_one_indexed, variable_type)
-    puts "\n\n=================================="
-    puts "IN CSV IMPORTER PARSE CSV TO ARRAY: "
-    puts "CSV_DATA = "+csv_data.inspect
-    puts "START_ROW = "+start_row_one_indexed.inspect
-    puts "COLUMN_NUMBER_ONE_INDEXED = "+column_number_one_indexed.inspect
-    puts "VARIABLE TYPE = "+variable_type.inspect
     start_row = start_row_one_indexed - 1
     column_number = column_number_one_indexed - 1
     converter = case variable_type

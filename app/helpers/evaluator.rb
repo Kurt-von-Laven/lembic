@@ -1,4 +1,3 @@
-
 require './app/helpers/expression'
 require './app/helpers/parser'
 require "date"
@@ -36,8 +35,6 @@ class Evaluator
       sum = 0
       i = min_i
       while i <= max_i
-        puts "PARAMS = "+params.inspect
-        puts "ARRAY NAME = "+array_name.inspect
         inc = eval_variable(array_name, globals, [i])
         sum += inc
         i += 1
@@ -293,9 +290,6 @@ class Evaluator
   # globals format: { "varname1" => { :formula => <Expression> :value => <Numeric> }, "varname2" => ... , ... "varnameN" => ... }
   #
   def eval_variable (varname, globals, index_values)
-    puts "IN EVAL_VARIABLE: INDEX_VALUES = "+index_values.inspect
-    puts "VARNAME = "+varname.inspect
-    puts "GLOBALS = "+globals.inspect
     error_check_eval_variable_params(varname, globals, index_values)
     #  if variable value was cached previously, return the cached value
     if !globals[varname][:value].nil?

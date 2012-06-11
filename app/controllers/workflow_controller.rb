@@ -6,8 +6,6 @@ require 'csv_importer'
 
 class WorkflowController < ApplicationController
   def evaluate
-    puts "\n\n========================"
-    puts "PARAMS = "+params.inspect
     @variables = Variable.where(:model_id => session[:model_id]).order(:name)
     @input_variables = Variable.where(:model_id => session[:model_id], :expression_string => nil).order(:name)
     vars = params[:evaluator]
@@ -34,8 +32,6 @@ class WorkflowController < ApplicationController
         end
         i += 1
       end
-      
-      puts "INPUT_VALUES_HASH = "+input_values_hash.inspect
       
       variable_to_solve_for = Variable.where(:name => vars['variable_to_solve_for'], :model_id => session[:model_id]).first
       Variable.where(:model_id => session[:model_id]).each do |variable|
@@ -233,7 +229,6 @@ class WorkflowController < ApplicationController
         variables_hash[varname] = {:value => value.to_f}
       end
     end
-    puts "\n\n================\nVARIABLES HASH = "+variables_hash.inspect
     return variables_hash
   end
   

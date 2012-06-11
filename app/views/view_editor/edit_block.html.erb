@@ -100,9 +100,8 @@
 								<%= f.text_field :name, :class => "auto_complete_blocks" %>
 							</div>
 							<div>
-							
-								<%= f.label(:variables_string, "Input Variables: ") %>
-								<%= f.text_area :variables_string, :id =>"drop_var" %>
+								<%= f.label(:variables_string, "Input Variables: ", :for  => "drop_var") %>
+								<%= f.text_area(:variables_string, :id =>"drop_var") %>
 							</div>
 							<div>
 								<%= f.label(:formatting, "Format:") %>
@@ -124,7 +123,7 @@
 								<%= f.text_field :name, :class => "auto_complete_blocks" %>
 							</div>
 							<div>
-								<%= f.label(:variables_string, "Output Variables: ") %>
+								<%= f.label(:variables_string, "Output Variables: ", :for  => "drop_var_output") %>
 								<%= f.text_area :variables_string, :id =>"drop_var_output" %>
 							</div>
 							<div>

@@ -50,17 +50,11 @@
 				
 			 <!-- CREATE EVENT -->       
 			  <div id="tabs-2">
-				   <%= form_for(:event, :html => {:class => "input_form"}) do |f| %>
+				   <%= form_for(:create_events, :url => create_events_path, :html => {:class => "input_form"}) do |f| %>
 						<div class="var_input_block">
 								<div>
 									<%= f.label(:name, "Name: ") %>
 									<%= f.text_field :name %>
-								</div>
-								<!-- Type of day -->
-								<div>
-									<%= f.label(:day_week, "Type of Day:") %>
-									<%= f.select(:day_week, [['Weekday', '0'], ['Weekend',
-									'1'], ['Holiday', '2'], ['Monday-Sunday', '3'], ['Other', '4']]) %>
 								</div>
 							
 								<!-- Slider -->
@@ -76,7 +70,7 @@
 								<!-- Repeating -->
 								<div> Does this event repeat? </div> 
 								<div>
-									<%= label_tag(:from_date, "From: ")%>
+									<%= f.label(:from_date, "From: ")%>
 									<!-- Datepicker -->       
 									<div>
 										<input id="from_date" type="text" class="datepicker"></input>
@@ -84,7 +78,7 @@
 								</div>
 							
 								<div>
-									<%= label_tag(:to_date, "To: ")%>
+									<%= f.label(:to_date, "To: ")%>
 									<!-- Datepicker -->       
 									<div>
 										<input id="to_date" type="text" class="datepicker"></input>
@@ -96,32 +90,32 @@
 								</div>
 								<div id="date_range">
 									<div>
-										<%= check_box_tag(:mon) %>
-										<%= label_tag(:mon, "Monday") %>
+										<%= f.check_box(:mon) %>
+										<%= f.label(:mon, "Monday") %>
 									</div>
 									<div>
-										<%= check_box_tag(:tues) %>
-										<%= label_tag(:tues, "Tuesday") %>
+										<%= f.check_box(:tues) %>
+										<%= f.label(:tues, "Tuesday") %>
 									</div>
 									<div>
-										<%= check_box_tag(:wed) %>
-										<%= label_tag(:wed, "Wednesday") %>
+										<%= f.check_box(:wed) %>
+										<%= f.label(:wed, "Wednesday") %>
 									</div>
 									<div>
-										<%= check_box_tag(:thurs) %>
-										<%= label_tag(:thurs, "Thursday") %>
+										<%= f.check_box(:thurs) %>
+										<%= f.label(:thurs, "Thursday") %>
 									</div>
 									<div>
-										<%= check_box_tag(:fri) %>
-										<%= label_tag(:fri, "Friday") %>
+										<%= f.check_box(:fri) %>
+										<%= f.label(:fri, "Friday") %>
 									</div>
 									<div>
-										<%= check_box_tag(:sat) %>
-										<%= label_tag(:sat, "Saturday") %>
+										<%= f.check_box(:sat) %>
+										<%= f.label(:sat, "Saturday") %>
 									</div>
 									<div>
-										<%= check_box_tag(:sun) %>
-										<%= label_tag(:sun, "Sunday") %>
+										<%= f.check_box(:sun) %>
+										<%= f.label(:sun, "Sunday") %>
 									</div>  
 								</div>
 								<br />
@@ -130,7 +124,7 @@
 						<!--Submit-->
 						<div>
 							<div class="input_button">
-								<%= f.submit("Upload Event", :id => "event_submit", :class => "button") %>
+								<%= f.submit("Create Event", :id => "event_submit", :class => "button") %>
 							</div>
 						</div>
 					<% end %>

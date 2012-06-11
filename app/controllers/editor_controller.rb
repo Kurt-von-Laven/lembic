@@ -32,6 +32,11 @@ class EditorController < ApplicationController
     render 'equations'
   end
   
+  def create_events
+    logger.debug('bang: ' + params[:create_events].inspect)
+    redirect_to :back
+  end
+  
   def find_variable_names
     # TODO: This will break if params[:term] contains a percent symbol. It needs to use escaping.
     model_id = session[:model_id]

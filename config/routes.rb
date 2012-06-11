@@ -17,6 +17,7 @@ Lembic::Application.routes.draw do
   match '/help', to: 'help#help', as: 'help'
   match '/equation_editor/equations', to: 'editor#equations', as: 'equations'
   match '/equation_editor/variable', to: 'editor#variable', as: 'variable'
+  match '/equation_editor/create_events', to: 'editor#create_events', as: 'create_events'
   match '/equation_editor/delete_variable', to: 'editor#delete_variable', as: 'delete_variable'
   match '/equation_editor/delete_relationship/:id', to: 'editor#delete_relationship', as: 'delete_relationship'
   match '/evaluator', to: 'workflow#evaluate', as: 'evaluator'

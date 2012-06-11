@@ -26,13 +26,20 @@
         if type == nil
             type = ""
         end
-		myString = variable.name_with_indices + 
+		myString = 
+		variable.name_with_indices + 
 		 " | " + description + " | " + type	+  " | " +
 		 truncate(expression, :length =>17, :omission => '...(continued)')
 	%>
 		 <td>
 			<span style="width: 50px">
-			<%= truncate(variable.name_with_indices, :length =>20, :omission => '...') %>
+			<% if variable.input? %>
+				<span class="user_defined_var">
+				 <%= truncate(variable.name_with_indices, :length =>20, :omission => '...') %>
+				</span>
+		    <% else %>
+				<%= truncate(variable.name_with_indices, :length =>20, :omission => '...') %>
+			<% end %> 
 			</span>
 		 </td>
          <td style="text-align: left;"> 

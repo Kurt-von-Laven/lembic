@@ -13,10 +13,13 @@
 		</div>
 		
 		<div class="right_column">
+                    <% workflow = Workflow.where(:id => session[:workflow_id]).first %>
 			<div class="tabs">
 				<ul>
 					<li><a href="#tabs-1">Create Workflow</a></li>
+                                    <% if !workflow.nil? %>
 					<li><a href="#tabs-2">Edit Workflow</a></li>
+                                    <% end %>
 				</ul>
 					
 				<!-- CREATE WORKFLOW -->
@@ -38,24 +41,24 @@
 						</div>
 					<% end %>  
 				</div>
-					
-				<!-- EDIT WORKFLOW -->
-				<div id="tabs-2">
+                                <% if !workflow.nil? %>
+				  <!-- EDIT WORKFLOW -->
+				  <div id="tabs-2">
 					<%=form_for(:update_workflow, :html => {:id => "update_workflow_form"}) do |f| %>
                                           <div>
 							<%= hidden_field_tag(:update_workflow_list) %>
 						<ul id="sortable_blocks">
-							<% workflow = Workflow.find(session[:workflow_id])
-							for block in workflow.blocks %>
-								<li class="ui-state-default"><%= block.name %></li>
-							<% end %>
+							  <% for block in workflow.blocks %>
+								  <li class="ui-state-default"><%= block.name %></li>
+							  <% end %>
 						</ul>
 						<div class="input_button">
 							<%= f.submit("Update Workflow", :class => "button") %>
 						</div>
                                           </div>
-					<% end %>
-				</div>
+					  <% end %>
+				  </div>
+                                <% end %>
 			</div>
 		</div>
 	</div>
@@ -85,7 +88,7 @@
 						 <div class="input_button">
 							<%= f.submit("Create Block", :class => "button") %>
 						 </div>
-						<% end %>
+					<% end %>
 				</div>
 					
 				<!-- ASSIGN VARIABLES -->

@@ -21,10 +21,10 @@
 			<span style="width: 50px">
 			<% if variable.input? %>
 				<span class="user_defined_var">
-				 <%= truncate(variable.name_with_indices, :length =>20, :omission => '...') %>
+				 <%= truncate(variable.name, :length =>20, :omission => '...') %>
 				</span>
 		    <% else %>
-				<%= truncate(variable.name_with_indices, :length =>20, :omission => '...') %>
+				<%= truncate(variable.name, :length =>20, :omission => '...') %>
 			<% end %> 
 			</span>
 		 </td>
@@ -34,10 +34,10 @@
                  <td>
 		 <% d_id = "dialog_#{num}"%>
 			 <div id = "<%=d_id%>" style="display: none">
-             			<h1><%= variable.name_with_indices %></h1>
+             			<h1><%= variable.name %></h1>
 				<p>Description: <%= variable.description %></p>
                                 <p>Variable Type: <%= variable.variable_type_string  %></p>
-                                <p><%= variable.name_with_indices %> = <%= truncate(variable.expression_string, :length =>17, :omission => '...(continued)') %></p>
+                                <p><%= variable.name %> = <%= truncate(variable.expression_string, :length =>17, :omission => '...(continued)') %></p>
 			 </div>
                  </td>
 		 

@@ -103,7 +103,7 @@ class Variable < ActiveRecord::Base
     merged_array.delete('start_row')
     merged_array.delete('column_number')
     newvar = Variable.create(merged_array)
-    IndexName.create_from_declaration("[#{INDEX}]", newvar.id)
+    IndexName.create_from_declaration("[#{CsvImporter::INDEX}]", newvar.id)
   end
   
 =begin

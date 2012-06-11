@@ -11,7 +11,8 @@
             <%= f.hidden_field :variable_id, :name=>"input_values[#{v.id}][variable_id]", :value => v.variable_id %>
             <div>
             <% if v.variable.index_names.length > 0 %>
-                <%= v.variable.name %>
+                <%= v.variable.name %>:
+				</div>
                 <div>
                     <%= f.label(:column_number, "Column of array (e.g. 1 for top row)") %>
                     <%= f.text_field(:column_number, :name=>"input_values[#{v.id}][start_col]", :class => "numeric_input") %>
@@ -20,15 +21,16 @@
                     <%= f.label(:start_row, "First row of array (e.g. A or 1 for leftmost row)") %>
                     <%= f.text_field(:start_row, :name=>"input_values[#{v.id}][start_row]", :class => "numeric_input") %> 
                 </div>
-                <div id="choose_file">
+                <div>
                     <%= f.label(:data_file, "Select a CSV file.") %>
                     <%= f.file_field(:data_file, :name=>"input_values[#{v.id}][data_file]", :class => "choose_file") %>
                 </div>
             <% else %>
                 <%= v.variable.name %>: 
                 <%= f.text_field "value", :name=>"input_values[#{v.id}][value]" %>
+				</div>
             <% end %>
-            </div>
+            
         <% else %>
         <div id="workflow_input_var_list">
 				<%= v.variable().name %> =

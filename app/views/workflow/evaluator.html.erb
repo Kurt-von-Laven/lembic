@@ -15,7 +15,7 @@
       <% end %>
     </ul>
   </div>
-<%= form_for(:evaluator, :html => {:class => "evaluator"}) do |f| %>
+<%= form_for(:evaluator, :html => {:class => "evaluator", :multipart => true}) do |f| %>
   <div>
 	<div style="text-align: center">
 		<%= render(:partial => 'flash_message', :locals => {:flash_symbol => :evaluator_error, :tag => 'p', :class_name => 'error'}) %>
@@ -37,7 +37,9 @@
                   <% else %>
                       <li>
                         <%= f.label(:input_values, input_variable.name + ' = ', :for => "evaluator_input_value_#{i}") %>
-                        <%= f.text_field(:input_values, :name => 'evaluator[input_values][][name]') %>
+                        Upload a CSV file: <%= f.file_field(:input_values, :name=>"evaluator[input_values][][data_file]", :class => "choose_file evaluator_array_upload") %><br/>
+                        column: <%= f.text_field(:input_values, :name => 'evaluator[input_values][][start_col]') %><br/>
+                        start row: <%= f.text_field(:input_values, :name => 'evaluator[input_values][][start_row]') %>
                       </li>
                   <% end %>
                     

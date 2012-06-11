@@ -11,6 +11,7 @@ class Workflow < ActiveRecord::Base
   validates_numericality_of :sort_index, :only_integer => true, :greater_than_or_equal_to => 0
   validates_associated :blocks, :runs
   
+  has_many :workflow_permissions
   has_many :users, :through => :workflow_permissions
   has_many :blocks, :dependent => :destroy
   has_many :runs

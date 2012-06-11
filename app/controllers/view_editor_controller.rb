@@ -1,4 +1,7 @@
 class ViewEditorController < ApplicationController
+  
+  skip_before_filter :verify_workflow, :only => [:edit_block, :create_workflow]
+  
   def edit_block
     ActiveRecord::Base.transaction do
     ## Set variables used by views for rendering

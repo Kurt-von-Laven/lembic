@@ -3,7 +3,7 @@
 	<%= form_for(:model, :url => set_current_model_path) do |f| %>
           <div>
 		<%= f.label(:id, "Current Model:") %> 
-		<%= f.select(:id,options_from_collection_for_select(@models, 'id', 'name',
+		<%= f.select(:id, options_from_collection_for_select(@models, 'id', 'name',
 		    :selected => session[:model_id]), :prompt => 'Select Model') %>
 		<div id="current_model_button">
 			<%= f.submit("Save", :class => "button") %>

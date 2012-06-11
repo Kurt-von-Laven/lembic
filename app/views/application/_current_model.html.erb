@@ -12,7 +12,7 @@
 	<% end %>
     </div>
 	
-
+    <% if !@workflows.empty? %>
 	<div>
 	<%= form_for(:workflow, :url => set_current_workflow_path) do |f| %>
           <div>
@@ -26,6 +26,7 @@
           </div>
 	<% end %>
 	</div>
+    <% end %>
 </div>
 <br />
 

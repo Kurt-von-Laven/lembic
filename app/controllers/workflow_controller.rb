@@ -175,6 +175,7 @@ class WorkflowController < ApplicationController
   # redirects to show the first block
   def start_run
     workflow_id = params[:id]
+    start_block = Block.new
     ActiveRecord::Base.transaction do
       start_block = Block.where('workflow_id = ? and sort_index = 0', workflow_id).first
       new_run = Run.create({:user_id => session[:user_id],

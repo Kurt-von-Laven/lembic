@@ -199,6 +199,9 @@ class WorkflowController < ApplicationController
   end
   
   def variables_hash_for_run(run)
+    workflow = Workflow.new
+    model = Model.new
+    run_values = RunValue.new
     ActiveRecord::Base.transaction do
       workflow = run.workflow
       model = Model.find(session[:model_id])

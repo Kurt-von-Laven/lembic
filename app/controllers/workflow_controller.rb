@@ -27,7 +27,7 @@ class WorkflowController < ApplicationController
             input_values_hash[@input_variables[i].name] = {:values => input_array_values_hash}
           else
             # variable is a scalar
-          input_value_as_integer = to_i_safely(input_value)
+            input_value_as_integer = to_i_safely(input_value)
             input_value = (input_value_as_integer.nil?) ? input_value : input_value_as_integer
             input_values_hash[@input_variables[i].name] = {:value => input_value}
           end
@@ -43,54 +43,54 @@ class WorkflowController < ApplicationController
           input_values_hash[varname][:formula] = expression_object unless expression_object.nil? # This unless just saves some space in the Hash.
           input_values_hash[varname][:index_names] = index_names unless index_names.nil? # This unless just saves some space in the Hash.
         end
-      end
-      if variable_to_solve_for.nil?
-        if vars['variable_to_solve_for'].nil?
-          flash.now[:evaluator_error] = 'Variable to solve for can\'t be blank.' # TODO: Check for this case at the beginning of the function.
+        if variable_to_solve_for.nil?
+          if vars['variable_to_solve_for'].nil?
+            flash.now[:evaluator_error] = 'Variable to solve for can\'t be blank.' # TODO: Check for this case at the beginning of the function.
+          else
+            flash.now[:evaluator_error] = "You tried to solve for the variable #{vars['variable_to_solve_for']}, but that variable doesn't exist."
+          end
+          @output_variables = []
         else
-          flash.now[:evaluator_error] = "You tried to solve for the variable #{vars['variable_to_solve_for']}, but that variable doesn't exist."
-        end
-        @output_variables = []
-      else
-        name_of_variable_to_solve_for = vars['variable_to_solve_for'].split(/\s*\[/)[0]
-        if variable_to_solve_for.array?
-          min_index = vars['min_index'].to_i
-          max_index = vars['max_index'].to_i
-          variables_to_solve_for = [{:name => name_of_variable_to_solve_for, :indices => {:min => min_index, :max => max_index}}]
-        else
-          variables_to_solve_for = [{:name => name_of_variable_to_solve_for}]
-        end
-        evaluator = Evaluator.new
-        evaluator.eval_all(variables_to_solve_for, input_values_hash)
-        
-        #get evaluator output
-        @output_variables = {}
-        for variable_name, variable_properties in input_values_hash
-          scalar_value = variable_properties[:value]
-          if scalar_value.nil?
-            #variable is an array
-            array_value = variable_properties[:values]
-            array = []
-            if !array_value.nil?
-              #populate array with the output values
-              for indices, value in array_value
-                if indices.length == 1
-                  array[indices[0] - 1] = value # TODO: Handle multi-dimensional arrays.
-                else
-                  raise "multidimensional variable output not supported"
+          name_of_variable_to_solve_for = vars['variable_to_solve_for'].split(/\s*\[/)[0]
+          if variable_to_solve_for.array?
+            min_index = vars['min_index'].to_i
+            max_index = vars['max_index'].to_i
+            variables_to_solve_for = [{:name => name_of_variable_to_solve_for, :indices => {:min => min_index, :max => max_index}}]
+          else
+            variables_to_solve_for = [{:name => name_of_variable_to_solve_for}]
+          end
+          evaluator = Evaluator.new
+          evaluator.eval_all(variables_to_solve_for, input_values_hash)
+          
+          #get evaluator output
+          @output_variables = {}
+          for variable_name, variable_properties in input_values_hash
+            scalar_value = variable_properties[:value]
+            if scalar_value.nil?
+              #variable is an array
+              array_value = variable_properties[:values]
+              array = []
+              if !array_value.nil?
+                #populate array with the output values
+                for indices, value in array_value
+                  if indices.length == 1
+                    array[indices[0] - 1] = value # TODO: Handle multi-dimensional arrays.
+                  else
+                    raise "multidimensional variable output not supported"
+                  end
                 end
+                @output_variables[variable_name] = array.inspect
               end
-              @output_variables[variable_name] = array.inspect
+            elsif scalar_value != ''
+              #variable is a scalar
+              @output_variables[variable_name] = scalar_value
             end
-          elsif scalar_value != ''
-            #variable is a scalar
-            @output_variables[variable_name] = scalar_value
           end
         end
+      else
+        # vars is nil
+        @output_variables = []
       end
-    else
-      # vars is nil
-      @output_variables = []
     end
     render 'evaluator'
   end

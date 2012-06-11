@@ -4,7 +4,9 @@
         truncated_array = ""
     end %>
 <%	if variable.array? and !variable.input? and !truncated_array.nil?
+                logger.debug("BEFORE: #{truncated_array.inspect}")
 		truncated_array = truncated_array[0..-2]
+                logger.debug("AFTER: #{truncated_array.inspect}")
 		comma_separated_array = truncated_array.split(/\s*,\s*/)
 		num = comma_separated_array.size()
 %>

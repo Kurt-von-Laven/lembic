@@ -146,11 +146,11 @@
 					<%= form_for(:create_block_connections, :html => {:class => "input_formB"}) do |f| %>
 						<div class="var_input_block">
 							<div>
-								<%= f.label(:name, "From Block: ") %>
+								<%= f.label(:from_name, "From Block: ") %>
 								<%= f.text_field :from_name, :class => "auto_complete_blocks" %>
 							</div>
 							<div>
-								<%= f.label(:name, "To Block: ") %>
+								<%= f.label(:to_name, "To Block: ") %>
 								<%= f.text_field :to_name, :class => "auto_complete_blocks" %>
 							</div>
 							<div>

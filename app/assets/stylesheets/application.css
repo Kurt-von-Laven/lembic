@@ -51,6 +51,14 @@ body {
     text-align: center;
 }
 
+.choose_file {
+    width: 200px;
+}
+
+.evaluator .subfield {
+    padding-left: 30px;
+}
+
 .col_header {
 	text-align: center;
 	background-color: #fff;
@@ -611,6 +619,7 @@ ul {
 #upload{
     text-align: center;
 }
+
 
 .user_defined_var{
 	color: #83025a;

@@ -226,7 +226,8 @@ class WorkflowController < ApplicationController
     end
     return variables_hash
   end
-  
+
+  public
   def set_current
     workflow_hash = params[:workflow]
     if !workflow_hash.nil?

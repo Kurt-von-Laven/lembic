@@ -19,7 +19,6 @@ class IndexName < ActiveRecord::Base
       indices.each_with_index do |index, i|
         new_index_name = IndexName.new({:name => index, :sort_index => i, :variable_id => variable_id})
         new_index_name.save
-        logger.debug("This really is funny: #{new_index_name.errors.full_messages.inspect}")
       end
     end
   end

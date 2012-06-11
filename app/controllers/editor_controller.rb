@@ -34,6 +34,9 @@ class EditorController < ApplicationController
   
   def create_events
     logger.debug('bang: ' + params[:create_events].inspect)
+    Time.new(year, month, day, hour)
+    (year, month=nil, day=nil, hour=nil, min=nil, sec=nil) 
+    YYYY_MM_DD_HH_MM_SS
     redirect_to :back
   end
   

@@ -8,12 +8,14 @@ class ViewEditorController < ApplicationController
       # Create block to be used by form_for
       @block = Block.new
       
+      # Get data from the session
+      workflow_id = session[:workflow_id]
+      
       ## Check for form data for creating new block
       form_hash = params[:create_block]
       if !form_hash.nil?
         # Create a block with the specified name and workflow_id
         name = form_hash[:name]
-        workflow_id = session[:workflow_id]
         sort_index = Block.where(:workflow_id => workflow_id).size
         Block.create({:name => name, :workflow_id => workflow_id, :sort_index => sort_index})
       end
@@ -33,15 +35,19 @@ class ViewEditorController < ApplicationController
         from_block_name = form_hash[:from_name]
         from_block = Block.find_by_name(from_block_name)
         if from_block.nil?
-          flash[:block_failed] = "Could not find block named #{from_block_name}."
-          return
+          #create the block if it doesn't already exist
+          
+          from_block = Block.create({:name => from_block_name, :workflow_id => workflow_id, :sort_index => Block.where(:workflow_id => workflow_id).size})
+          #flash[:block_failed] = "Could not find block named #{from_block_name}."
+          #return
         end
         
         to_block_name = form_hash[:to_name]
         to_block = Block.find_by_name(to_block_name)
         if to_block.nil?
-          flash[:block_failed] = "Could not find block named #{to_block_name}."
-          return
+          to_block = Block.create({:name => to_block_name, :workflow_id => workflow_id, :sort_index => Block.where(:workflow_id => workflow_id).size})
+          #flash[:block_failed] = "Could not find block named #{to_block_name}."
+          #return
         end
         
         #parser = Parser.new
@@ -75,46 +81,49 @@ class ViewEditorController < ApplicationController
   
   # Check for form data for creating a block_variable
   def create_block_variables(form_hash, display_type)
-    if !form_hash.nil?
-      
-      # Find the block these variables are for
-      block_name = form_hash[:name]
-      
-      block = Block.find_by_name(block_name)
-      if block.nil?
-        flash[:block_failed] = "We couldn't find that block! Oops! Please try again."
-        return
-      end #end if
-      
-      
-      # Iterate through lines in the input string
-      form_hash[:variables_string].lines do |line|
+    ActiveRecord::Base.transaction do
+      if !form_hash.nil?
         
-        # Trim the line to get a variable name
-        variable_name = line.strip
-        if variable_name.empty? # TODO: get better input validation
-          flash[:block_failed] = 'Your variable name was empty. Please try again.'
-          next
-        end #end if
+        # Find the block these variables are for
+        block_name = form_hash[:name]
         
-        # Find the variable
-        variable = Variable.find_by_name(variable_name)
-        if variable.nil?
-          flash[:block_failed] = "Sorry, we couldn't find that variable! Please try again"
-          next
-        end # end if
+        workflow_id = session[:workflow_id]
         
-        # Determine sort_index
-        sort_index = block.block_variables.size
+        block = Block.find_by_name(block_name)
+        if block.nil?
+          block = Block.create({:name => block_name, :workflow_id => workflow_id, :sort_index => Block.where(:workflow_id => workflow_id).size})
+        end
         
-        # Create a block variable
-        # NOTE: this may fail for various reasons (i.e. sort_index collision from race condition)
-        bv = block.block_variables.create({:display_type => display_type, :variable_id => variable.id, :sort_index => sort_index})
-        if bv.nil?
-          flash[:block_failed] = "Failed to create block_variable with variable_id => #{variable.id} and sort_index => #{sort_index}"
-        end #end if
-      end #end form
-    end # end if
+        
+        # Iterate through lines in the input string
+        form_hash[:variables_string].lines do |line|
+          
+          # Trim the line to get a variable name
+          variable_name = line.strip
+          if variable_name.empty? # TODO: get better input validation
+            flash[:block_failed] = 'Your variable name was empty. Please try again.'
+            next
+          end
+          
+          # Find the variable
+          variable = Variable.find_by_name(variable_name)
+          if variable.nil?
+            flash[:block_failed] = "Sorry, we couldn't find a variable named #{variable_name}! Please try again"
+            next
+          end
+          
+          # Determine sort_index
+          sort_index = block.block_variables.size
+          
+          # Create a block variable
+          # NOTE: this may fail for various reasons (i.e. sort_index collision from race condition)
+          bv = block.block_variables.create({:display_type => display_type, :variable_id => variable.id, :sort_index => sort_index})
+          if bv.nil?
+            flash[:block_failed] = "Failed to create block_variable with variable_id => #{variable.id} and sort_index => #{sort_index}"
+          end #end if
+        end #end form
+      end # end if
+    end # end transaction
   end # end create_block_variables
     
   # Delete a block by id

@@ -11,6 +11,8 @@ class BlockVariable < ActiveRecord::Base
   validates_uniqueness_of :sort_index, :scope => :block_id
   
   validates_numericality_of :block_id, :only_integer => true, :greater_than => 0
+  validates_numericality_of :variable_id, :only_integer => true, :greater_than => 0
+  validates_numericality_of :display_type, :only_integer => true, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 1
   validates_numericality_of :sort_index, :only_integer => true, :greater_than_or_equal_to => 0
   
   belongs_to :block

@@ -8,6 +8,8 @@ class IndexName < ActiveRecord::Base
   belongs_to :variable
   validates_uniqueness_of :name, :scope => :variable_id
   validates_uniqueness_of :sort_index, :scope => :variable_id
+  validates_numericality_of :variable_id, :only_integer => true, :greater_than => 0
+  validates_numericality_of :sort_index, :only_integer => true, :greater_than_or_equal_to => 0
   
   def self.create_from_declaration(dec, variable_id)
     #dec is a string like myvar[i, j, k]

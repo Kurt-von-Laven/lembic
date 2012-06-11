@@ -7,6 +7,8 @@ class Workflow < ActiveRecord::Base
   
   validates_presence_of :name
   validates_uniqueness_of :name, :scope => :model_id
+  validates_numericality_of :model_id, :only_integer => true, :greater_than => 0
+  validates_numericality_of :sort_index, :only_integer => true, :greater_than_or_equal_to => 0
   validates_associated :workflow_permissions, :blocks, :runs
   
   has_many :workflow_permissions, :dependent => :destroy

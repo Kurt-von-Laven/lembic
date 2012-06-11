@@ -12,6 +12,7 @@ class BlockConnection < ActiveRecord::Base
   validates_uniqueness_of :sort_index, :scope => :block_id
   
   validates_numericality_of :block_id, :only_integer => true, :greater_than => 0
+  validates_numericality_of :next_block_id, :only_integer => true, :greater_than => 0
   validates_numericality_of :sort_index, :only_integer => true, :greater_than_or_equal_to => 0
   
   serialize :expression_object

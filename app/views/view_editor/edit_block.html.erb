@@ -21,7 +21,7 @@
 					
 				<!-- CREATE WORKFLOW -->
 				<div id="tabs-1">
-					<%=form_for(:create_workflow, :html => {:class => "input_formB"}) do |f| %>
+					<%=form_for(:create_workflow, :url  => create_workflow_path, :html => {:class => "input_formB"}) do |f| %>
 						<div class="var_input_block">
 							<div>
 								<%= f.label(:name, "Name of Workflow: ") %>

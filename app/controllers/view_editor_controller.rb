@@ -125,7 +125,29 @@ class ViewEditorController < ApplicationController
       end # end if
     end # end transaction
   end # end create_block_variables
-    
+  
+  def create_workflow
+    workflow_hash = params[:create_workflow]
+    if !workflow_hash.nil?
+      name = workflow_hash[:name]
+      description = workflow_hash[:description]
+      new_workflow = Workflow.new(:name => name, :description => description, :model_id => session[:model_id])
+      save_successful = false
+      ActiveRecord::Base.transaction do
+        new_workflow.sort_index = Model.find(session[:model_id]).workflows.length
+        save_successful = new_workflow.save!
+        permission = WorkflowPermission.new(:user_id => session[:user_id], :workflow_id => new_workflow.id, :permissions => 0)
+        save_successful &&= permission.save!
+      end
+      if save_successful
+        flash[:workflow_created] = 'Workflow successfully created.'
+      else
+        flash[:workflow_creation_failed] = new_workflow.errors.full_messages.join(' ')
+      end
+    end
+    redirect_to :back
+  end
+  
   # Delete a block by id
   def delete_block
     block = Block.find(params[:id])

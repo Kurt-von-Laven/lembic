@@ -4,7 +4,7 @@ class WorkflowPermission < ActiveRecord::Base
   validates_presence_of :user_id, :workflow_id, :permissions
   validates_numericality_of :user_id, :only_integer => true, :greater_than => 0
   validates_numericality_of :workflow_id, :only_integer => true, :greater_than => 0
-  validates_numericality_of :permissions, :only_integer => true, :greater_than => 0
+  validates_numericality_of :permissions, :only_integer => true, :greater_than_or_equal_to => 0
   
   validates_uniqueness_of :user_id, :scope => :workflow_id
   

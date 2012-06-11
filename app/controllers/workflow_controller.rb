@@ -179,21 +179,6 @@ class WorkflowController < ApplicationController
     
     redirect_to :action => 'expert_workflow', :block_id => start_block.id, :run_id => new_run.id, :first_block => true # TODO: This should be a POST request, but all redirects are GET requests.
   end
-    
-  def create_workflow
-    save_successful = false
-    ActiveRecord::Base.transaction do
-      new_workflow = Workflow.new(params[:workflow])
-      save_successful = new_workflow.save
-      permission = WorkflowPermission.new(:user_id => session[:user_id], :workflow_id => new_workflow.id, :permissions => 0)
-      save_successful &&= permission.save
-    end
-    if save_successful
-      flash[:workflow_created] = 'Workflow successfully created.'
-    else
-      flash[:workflow_creation_failed] = new_workflow.errors.full_messages.join(' ')
-    end
-  end
   
   def add_block_to_workflow
     WorkflowBlock.create(params[:workflow_block])

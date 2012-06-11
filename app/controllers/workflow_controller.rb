@@ -176,12 +176,11 @@ class WorkflowController < ApplicationController
   def start_run
     workflow_id = params[:id]
     start_block = Block.new
+    new_run = Run.new({:user_id => session[:user_id], :workflow_id => workflow_id})
     ActiveRecord::Base.transaction do
       start_block = Block.where('workflow_id = ? and sort_index = 0', workflow_id).first
-      new_run = Run.create({:user_id => session[:user_id],
-                             :workflow_id => workflow_id,
-                             :block_id => start_block.id
-                           })
+      new_run.block_id = start_block.id
+      new_run.save!
     end
     redirect_to :action => 'expert_workflow', :block_id => start_block.id, :run_id => new_run.id, :first_block => true # TODO: This should be a POST request, but all redirects are GET requests.
   end

@@ -19,8 +19,8 @@ class WorkflowController < ApplicationController
         input_values_hash[@input_variables[i].name] = {:value => input_value}
         i += 1
       end
-      variable_to_solve_for = Variable.where(:name => vars['variable_to_solve_for']).first
-      Variable.all.each do |variable|
+      variable_to_solve_for = Variable.where(:name => vars['variable_to_solve_for'], :model_id => session[:model_id]).first
+      Variable.where(:model_id => session[:model_id]).each do |variable|
         expression_object = variable.expression_object
         varname = variable.name.split(/\s*\[/)[0]
         index_names = variable.index_name_strings

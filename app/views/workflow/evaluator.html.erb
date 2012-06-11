@@ -27,13 +27,21 @@
               <% if @input_variables.empty? %>
                 <li>There are currently no input values to display. You can create input values using the equation editor by creating variables without equations.</li>
               <% else %>
-                 <% i = 0 %>
-                 <% for input_variable in @input_variables %>
-			<li>
-			  <%= f.label(:input_values, input_variable.name + ' = ', :for => "evaluator_input_value_#{i}") %>
-			  <%= f.text_field(:input_values, :id => "evaluator_input_value_#{i}", :name => 'evaluator[input_values][]') %>
-			</li>
-			<% i += 1 %>
+                <% i = 0 %>
+                <% for input_variable in @input_variables %>
+                  <% if input_variable.index_names.length == 0 %>
+                      <li>
+                        <%= f.label(:input_values, input_variable.name + ' = ', :for => "evaluator_input_value_#{i}") %>
+                        <%= f.text_field(:input_values, :id => "evaluator_input_value_#{i}", :name => 'evaluator[input_values][]') %>
+                      </li>
+                  <% else %>
+                      <li>
+                        <%= f.label(:input_values, input_variable.name + ' = ', :for => "evaluator_input_value_#{i}") %>
+                        <%= f.text_field(:input_values, :name => 'evaluator[input_values][][name]') %>
+                      </li>
+                  <% end %>
+                    
+		  <% i += 1 %>
                 <% end %>
               <% end %>
               </ul>

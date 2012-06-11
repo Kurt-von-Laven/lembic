@@ -1,6 +1,8 @@
 class ModelsController < ApplicationController
   
   skip_before_filter :verify_model, :only => ["create", "new"]
+  skip_before_filter :verify_workflow
+  
   def index
     @models = User.find(session[:user_id]).models
   end

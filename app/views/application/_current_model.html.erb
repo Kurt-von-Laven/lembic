@@ -1,5 +1,7 @@
-<div id="current_model_header">
-	<div>
+<% if !@models.empty? or !@workflows.empty? %>
+  <div id="current_model_header">
+    <% if !@models.empty? %>
+      <div>
 	<%= form_for(:model, :url => set_current_model_path) do |f| %>
           <div>
 		<%= f.label(:id, "Current Model:") %> 
@@ -10,8 +12,8 @@
 		</div>
           </div>
 	<% end %>
-    </div>
-	
+      </div>
+    <% end %>
     <% if !@workflows.empty? %>
 	<div>
 	<%= form_for(:workflow, :url => set_current_workflow_path) do |f| %>
@@ -27,7 +29,7 @@
 	<% end %>
 	</div>
     <% end %>
-</div>
-<br />
-
+    </div>
+  <br />
+<% end %>
 

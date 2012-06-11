@@ -193,9 +193,9 @@ body {
 .evaluator div {
 	padding-bottom: 10px;
 }
-.evaluator label{
+.evaluator label {
 	width: 200px;
-	diplay: block;
+	display: block;
 	float: left;
 	margin-left: 20px;
 }
@@ -293,7 +293,7 @@ h3 {
     font-family: Garamond, Baskerville, "Times New Roman", serif;
     text-align:center;
     margin-left:auto;
-    margin-right:6uto;
+    margin-right:auto;
 	padding-top: 10px;
 	padding-bottom: 10px;
     border-radius:10px;

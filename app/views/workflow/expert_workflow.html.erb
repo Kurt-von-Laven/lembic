@@ -30,14 +30,14 @@
             <% end %>
             </div>
         <% else %>
-        <div>
-            <%= v.variable().name %> =
-            <%= @evaluator.eval_variable(v.variable().name, @variables_hash, nil) %>
+        <div id="workflow_input_var_list">
+				<%= v.variable().name %> =
+				<%= @evaluator.eval_variable(v.variable().name, @variables_hash, nil) %>
         </div>
          
         <% end %>
     <% end %>
-	<div style="width: 400px; text-align: center">
+	<div style="width: 70%; text-align: right">
 		<%= f.submit "Next", :class =>"button" %>
 	</div>
 <% end %>

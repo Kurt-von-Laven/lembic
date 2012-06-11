@@ -1,4 +1,4 @@
-<% message = flash[flash_symbol] %>
+<% message = flash.now[flash_symbol] %>
 <% if !message.nil? %>
       <<%= tag %> class="<%= class_name %>"><%= message %></<%= tag %>>
 <% end %>

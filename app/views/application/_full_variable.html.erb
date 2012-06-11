@@ -3,7 +3,7 @@
     else 
         truncated_array = ""
     end %>
-<%	if variable.array? and !truncated_array.nil?
+<%	if variable.array? and !variable.input? and !truncated_array.nil?
 		truncated_array = truncated_array[0..-2]
 		comma_separated_array = truncated_array.split(/\s*,\s*/)
 		num = comma_separated_array.size()
@@ -19,18 +19,18 @@
 	</h1>
 		<table>
             <tr>
-				<th> index </th>
+				<th>index</th>
 				<% for k in 1..10 %>
-				<th> <%= k %> </th>
+				<th><%= k %></th>
 				<% end %>
             </tr>
 		<% i = 0
 			while i < num %>
 			<tr>
-				<td class ="col_header"> <%= i %> </td>
+				<td class ="col_header"><%= i %></td>
 			<% for j in 1..10 %>
 				<td>
-				<%=comma_separated_array[i+j] %>
+				<%= comma_separated_array[i+j] %>
 				</td>
 			<% end %>
 			</tr>

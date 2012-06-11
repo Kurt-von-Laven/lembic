@@ -41,13 +41,7 @@ Lembic::Application.routes.draw do
     end
   end
   
-  resources :view_editor  
-  
-  # Block controller routes
-  match '/block/show.:id', to: 'block#show', as:'block_show'
-  match '/block/variable', to:'block#variable', as:'block_variable'
-  
-  
+  resources :view_editor
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
